@@ -9,11 +9,11 @@ import Foundation
 
 struct Balance: Sendable, Equatable, Hashable {
 
-    let valueMinorUnits: Int
+    let minorUnits: Int
     let currency: String
 
     var formattedValue: String {
-        let balanceAmount = Double(valueMinorUnits) / 100
+        let balanceAmount = Double(minorUnits) / 100
         return balanceAmount.formatted(.currency(code: currency))
     }
 

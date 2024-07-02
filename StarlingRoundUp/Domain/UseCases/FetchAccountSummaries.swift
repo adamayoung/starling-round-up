@@ -51,7 +51,7 @@ extension FetchAccountSummaries {
 
             var accountSummaries = [AccountSummary]()
             while let (account, balance) = try await taskGroup.next() {
-                let balance = balance ?? Balance(valueMinorUnits: 0, currency: account.currency)
+                let balance = balance ?? Balance(minorUnits: 0, currency: account.currency)
                 accountSummaries.append(AccountSummary(account: account, balance: balance))
             }
 

@@ -57,7 +57,7 @@ final class FetchAccountSummariesTests: XCTestCase {
         XCTAssertEqual(accountSummaries.count, 1)
         let accountSummary = accountSummaries[0]
 
-        XCTAssertEqual(accountSummary.balance.valueMinorUnits, 0)
+        XCTAssertEqual(accountSummary.balance.minorUnits, 0)
         XCTAssertEqual(accountSummary.balance.currency, "GBP")
     }
 
@@ -72,7 +72,7 @@ final class FetchAccountSummariesTests: XCTestCase {
         XCTAssertEqual(accountSummaries.count, 1)
         let accountSummary = accountSummaries[0]
 
-        XCTAssertEqual(accountSummary.balance.valueMinorUnits, 1234)
+        XCTAssertEqual(accountSummary.balance.minorUnits, 1234)
         XCTAssertEqual(accountSummary.balance.currency, "GBP")
     }
 

@@ -15,7 +15,7 @@ final class BalanceMapperTests: XCTestCase {
 
         let balance = BalanceMapper.map(dataModel)
 
-        XCTAssertEqual(balance.valueMinorUnits, 1234)
+        XCTAssertEqual(balance.minorUnits, 1234)
     }
 
     func testMapCurrency() {

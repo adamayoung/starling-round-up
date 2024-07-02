@@ -13,7 +13,7 @@ struct BalanceMapper {
 
     static func map(_ dataModel: BalanceDataModel) -> Balance {
         Balance(
-            valueMinorUnits: dataModel.minorUnits,
+            minorUnits: dataModel.minorUnits,
             currency: dataModel.currency
         )
     }
