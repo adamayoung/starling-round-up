@@ -63,7 +63,7 @@ final class FetchAccountSummariesTests: XCTestCase {
 
     func testExecuteWhenOneAccountAndBalanceReturnsAccountSummaryWithBalance() async throws {
         let account = Account(id: "1", name: "Test", type: .primary, currency: "GBP")
-        let balance = Balance(valueMinorUnits: 1234, currency: "GBP")
+        let balance = Balance(minorUnits: 1234, currency: "GBP")
         accountRepository.accountsResult = .success([account])
         accountRepository.balanceResult = .success([account.id: balance])
 
