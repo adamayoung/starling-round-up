@@ -21,7 +21,7 @@ jobs:
     name: SwiftLint
     runs-on: ubuntu-latest
     container:
-      image: docker://ghcr.io/realm/swiftlint:latest
+      image: docker://ghcr.io/realm/swiftlint:0.55.1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
     name: SwiftFormat
     runs-on: ubuntu-latest
     container:
-      image: docker://ghcr.io/nicklockwood/swiftformat:latest
+      image: docker://ghcr.io/nicklockwood/swiftformat:0.54.0
     steps:
       - name: Checkout
         uses: actions/checkout@v4
