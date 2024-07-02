@@ -10,6 +10,6 @@ import XCTest
 
 final class StarlingRoundUpTests: XCTestCase {
 
-    func testExample() { }
+    func testExample() {}
 
 }
