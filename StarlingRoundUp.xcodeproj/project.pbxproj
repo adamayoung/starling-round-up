@@ -14,7 +14,6 @@
 		66B8993A2C3414320056F308 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 66B899392C3414320056F308 /* Base */; };
 		66B899452C3414320056F308 /* StarlingRoundUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899442C3414320056F308 /* StarlingRoundUpTests.swift */; };
 		66B8994F2C3414320056F308 /* StarlingRoundUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */; };
-		66B899512C3414320056F308 /* StarlingRoundUpUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899502C3414320056F308 /* StarlingRoundUpUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +45,6 @@
 		66B899442C3414320056F308 /* StarlingRoundUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlingRoundUpTests.swift; sourceTree = "<group>"; };
 		66B8994A2C3414320056F308 /* StarlingRoundUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarlingRoundUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlingRoundUpUITests.swift; sourceTree = "<group>"; };
-		66B899502C3414320056F308 /* StarlingRoundUpUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlingRoundUpUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */,
-				66B899502C3414320056F308 /* StarlingRoundUpUITestsLaunchTests.swift */,
 			);
 			path = StarlingRoundUpUITests;
 			sourceTree = "<group>";
@@ -272,7 +269,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66B899512C3414320056F308 /* StarlingRoundUpUITestsLaunchTests.swift in Sources */,
 				66B8994F2C3414320056F308 /* StarlingRoundUpUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
