@@ -1,0 +1,33 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/lint.yml"
+      - "**/*.swift"
+  workflow_dispatch:
+
+concurrency:
+  group: "lint-${{ github.head_ref || github.run_id }}"
+  cancel-in-progress: true
+
+jobs:
+  swiftLint:
+    name: SwiftLint
+    runs-on: macos-14
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_15.4.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Install swiftlint
+        run: brew install swiftlint
+
+      - name: Swiftlint
+        run: swiftlint --strict --reporter github-actions-logging
