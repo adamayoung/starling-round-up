@@ -7,11 +7,17 @@
 
 import UIKit
 
-protocol AccountListView: AnyObject {}
+protocol AccountListView: AnyObject {
+
+    var delegate: (any AccountListViewControllerDelegate)? { get set }
+
+}
 
 protocol AccountListViewControlling: AccountListView, UIViewController {}
 
 final class AccountListViewController: UITableViewController, AccountListViewControlling {
+
+    weak var delegate: (any AccountListViewControllerDelegate)?
 
     private let viewModel: any AccountListViewModeling
     private lazy var dataSource = makeDataSource()
@@ -55,6 +61,15 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
         tableBackgroundLoadingIndicator.startAnimating()
 
         refreshData()
+    }
+
+}
+
+extension AccountListViewController {
+
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let accountSummary = viewModel.accountSummaries[indexPath.section]
+        delegate?.viewController(self, didSelectAccount: accountSummary.id)
     }
 
 }

@@ -59,6 +59,7 @@
 		66EA3A912C3492BD00649A13 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A902C3492BD00649A13 /* AppCoordinator.swift */; };
 		66EA3A952C34A47200649A13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A942C34A47200649A13 /* Environment.swift */; };
 		66EA3A972C34A98C00649A13 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A962C34A98C00649A13 /* MainNavigationController.swift */; };
+		66EA3A992C34B02100649A13 /* AccountListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A982C34B02100649A13 /* AccountListViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		66EA3A932C349F5500649A13 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		66EA3A942C34A47200649A13 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		66EA3A962C34A98C00649A13 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		66EA3A982C34B02100649A13 /* AccountListViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				66B899312C3414310056F308 /* AccountListViewController.swift */,
+				66EA3A982C34B02100649A13 /* AccountListViewControllerDelegate.swift */,
 				66EA3A3D2C34759500649A13 /* AccountListViewModeling.swift */,
 				66EA3A412C34766C00649A13 /* ViewModels */,
 			);
@@ -635,6 +638,7 @@
 				66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */,
 				66EA3A952C34A47200649A13 /* Environment.swift in Sources */,
 				66EA3A7A2C3481E900649A13 /* DecodableAPIRequest.swift in Sources */,
+				66EA3A992C34B02100649A13 /* AccountListViewControllerDelegate.swift in Sources */,
 				66EA3A652C347B0C00649A13 /* BalanceMapper.swift in Sources */,
 				66EA3A5F2C347AE500649A13 /* AccountAPIRepository.swift in Sources */,
 				66EA3A7D2C3482A000649A13 /* AccountsRequest.swift in Sources */,

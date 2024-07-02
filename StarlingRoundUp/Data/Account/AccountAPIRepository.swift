@@ -22,9 +22,9 @@ final class AccountAPIRepository: AccountRepository {
         return accounts
     }
 
-    func balance(for accountID: String) async throws -> Balance? {
+    func balance(for accountID: Account.ID) async throws -> Balance? {
         let request = BalanceRequest(accountID: accountID)
-        let balanceResponse: BalanceResponseDataModel = try await apiClient.perform(request)
+        let balanceResponse = try await apiClient.perform(request)
         let balance = BalanceMapper.map(balanceResponse.amount)
         return balance
     }

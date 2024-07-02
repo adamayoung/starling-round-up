@@ -11,6 +11,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private var appCoordinator: (any Coordinator)?
     private let factory = AppFactory()
 
     func scene(
@@ -28,6 +29,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
 
         self.window = window
+        self.appCoordinator = appCoordinator
     }
 
     func sceneDidDisconnect(_: UIScene) {}
