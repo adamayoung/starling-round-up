@@ -19,15 +19,24 @@ concurrency:
 jobs:
   swiftLint:
     name: SwiftLint
-    runs-on: macos-14
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_15.4.app/Contents/Developer
+    runs-on: ubuntu-latest
+    container:
+      image: docker://ghcr.io/realm/swiftlint:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Swiftlint
+        run: swiftlint --strict --reporter github-actions-logging
+
+  swiftFormat:
+    name: SwiftFormat
+    runs-on: ubuntu-latest
+    container:
+      image: docker://ghcr.io/nicklockwood/swiftformat:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Install swiftlint
-        run: brew install swiftlint
-
-      - name: Swiftlint
-        run: swiftlint --strict --reporter github-actions-logging
+      - name: SwiftFormat
+        run: swiftformat --lint --reporter github-actions-log .
