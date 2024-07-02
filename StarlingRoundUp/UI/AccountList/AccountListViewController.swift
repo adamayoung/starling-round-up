@@ -104,24 +104,33 @@ extension AccountListViewController {
     private func makeDataSource() -> UITableViewDiffableDataSource<Int, AccountSummary> {
         UITableViewDiffableDataSource(
             tableView: tableView,
-            cellProvider: { tableView, indexPath, accountSummary in
+            cellProvider: { [weak self] tableView, indexPath, accountSummary in
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "cell",
                     for: indexPath
                 )
 
-                var content = cell.defaultContentConfiguration()
-                content.text = accountSummary.name
-                content.textProperties.font = .preferredFont(forTextStyle: .headline)
-                content.secondaryText = accountSummary.balance.formattedValue
-                content.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
-                content.secondaryTextProperties.color = .secondaryLabel
-                content.image = UIImage(systemName: "creditcard.fill")
-                cell.contentConfiguration = content
-                cell.accessoryType = .disclosureIndicator
+                self?.configureCell(cell, with: accountSummary)
+
                 return cell
             }
         )
+    }
+
+    private func configureCell(_ cell: UITableViewCell, with accountSummary: AccountSummary) {
+        var content = cell.defaultContentConfiguration()
+
+        content.text = accountSummary.name
+        content.textProperties.font = .preferredFont(forTextStyle: .headline)
+
+        content.secondaryText = accountSummary.balance.formattedValue
+        content.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
+        content.secondaryTextProperties.color = .secondaryLabel
+
+        content.image = UIImage(systemName: "creditcard.fill")
+
+        cell.contentConfiguration = content
+        cell.accessoryType = .disclosureIndicator
     }
 
     private func update(with accountSummaries: [AccountSummary], animate: Bool = true) {

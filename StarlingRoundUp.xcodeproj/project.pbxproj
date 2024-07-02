@@ -250,9 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				66D876C92C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift */,
+				66EA3A312C34689F00649A13 /* UseCases */,
 				66D876CB2C3466100012CA55 /* Models */,
 				66EA3A352C34690200649A13 /* Repositories */,
-				66EA3A312C34689F00649A13 /* UseCases */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -338,8 +338,8 @@
 		66EA3A462C34774300649A13 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				66EA3A742C34818000649A13 /* APIClient */,
 				66EA3A472C34775900649A13 /* Account */,
+				66EA3A742C34818000649A13 /* APIClient */,
 			);
 			path = Data;
 			sourceTree = "<group>";
