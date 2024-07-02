@@ -9,11 +9,56 @@
 /* Begin PBXBuildFile section */
 		66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992D2C3414310056F308 /* AppDelegate.swift */; };
 		66B899302C3414310056F308 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992F2C3414310056F308 /* SceneDelegate.swift */; };
-		66B899322C3414310056F308 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899312C3414310056F308 /* ViewController.swift */; };
+		66B899322C3414310056F308 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899312C3414310056F308 /* AccountListViewController.swift */; };
 		66B899372C3414320056F308 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66B899362C3414320056F308 /* Assets.xcassets */; };
 		66B8993A2C3414320056F308 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 66B899392C3414320056F308 /* Base */; };
-		66B899452C3414320056F308 /* StarlingRoundUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899442C3414320056F308 /* StarlingRoundUpTests.swift */; };
 		66B8994F2C3414320056F308 /* StarlingRoundUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */; };
+		66D876CA2C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876C92C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift */; };
+		66D876CD2C34661C0012CA55 /* AccountSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876CC2C34661C0012CA55 /* AccountSummary.swift */; };
+		66D876CF2C3466490012CA55 /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876CE2C3466490012CA55 /* AccountType.swift */; };
+		66D876D12C3466860012CA55 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876D02C3466860012CA55 /* Balance.swift */; };
+		66D876D32C3466F30012CA55 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876D22C3466F30012CA55 /* Account.swift */; };
+		66D876D72C34675F0012CA55 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876D62C34675F0012CA55 /* BalanceTests.swift */; };
+		66EA3A332C3468BA00649A13 /* FetchAccountSummaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A322C3468BA00649A13 /* FetchAccountSummaries.swift */; };
+		66EA3A372C34691400649A13 /* AccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A362C34691400649A13 /* AccountRepository.swift */; };
+		66EA3A392C346A5D00649A13 /* FetchAccountSummariesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A382C346A5D00649A13 /* FetchAccountSummariesTests.swift */; };
+		66EA3A3C2C346A9E00649A13 /* AccountStubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A3B2C346A9E00649A13 /* AccountStubRepository.swift */; };
+		66EA3A3E2C34759500649A13 /* AccountListViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A3D2C34759500649A13 /* AccountListViewModeling.swift */; };
+		66EA3A402C34765900649A13 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 66EA3A3F2C34765900649A13 /* Localizable.xcstrings */; };
+		66EA3A432C34768E00649A13 /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A422C34768E00649A13 /* AccountListViewModel.swift */; };
+		66EA3A452C3476F000649A13 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A442C3476F000649A13 /* AppFactory.swift */; };
+		66EA3A4E2C34784500649A13 /* AccountListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A4D2C34784500649A13 /* AccountListViewModelTests.swift */; };
+		66EA3A502C34788100649A13 /* FetchAccountSummariesStubUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A4F2C34788100649A13 /* FetchAccountSummariesStubUseCase.swift */; };
+		66EA3A522C347A2500649A13 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A512C347A2500649A13 /* APIClient.swift */; };
+		66EA3A592C347A5500649A13 /* BalanceResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A542C347A5500649A13 /* BalanceResponseDataModel.swift */; };
+		66EA3A5A2C347A5500649A13 /* AccountDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A552C347A5500649A13 /* AccountDataModel.swift */; };
+		66EA3A5B2C347A5500649A13 /* BalanceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A562C347A5500649A13 /* BalanceDataModel.swift */; };
+		66EA3A5C2C347A5500649A13 /* AccountsResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A572C347A5500649A13 /* AccountsResponseDataModel.swift */; };
+		66EA3A5D2C347A5500649A13 /* AccountTypeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A582C347A5500649A13 /* AccountTypeDataModel.swift */; };
+		66EA3A5F2C347AE500649A13 /* AccountAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A5E2C347AE500649A13 /* AccountAPIRepository.swift */; };
+		66EA3A642C347B0C00649A13 /* AccountTypeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A612C347B0B00649A13 /* AccountTypeMapper.swift */; };
+		66EA3A652C347B0C00649A13 /* BalanceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A622C347B0B00649A13 /* BalanceMapper.swift */; };
+		66EA3A662C347B0C00649A13 /* AccountMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A632C347B0C00649A13 /* AccountMapper.swift */; };
+		66EA3A6B2C347BD200649A13 /* AccountTypeMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A6A2C347BD200649A13 /* AccountTypeMapperTests.swift */; };
+		66EA3A6D2C347C6C00649A13 /* BalanceMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A6C2C347C6C00649A13 /* BalanceMapperTests.swift */; };
+		66EA3A6F2C347CEC00649A13 /* AccountMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A6E2C347CEC00649A13 /* AccountMapperTests.swift */; };
+		66EA3A712C347E5100649A13 /* AccountAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A702C347E5100649A13 /* AccountAPIRepository.swift */; };
+		66EA3A732C347E8100649A13 /* APIStubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A722C347E8100649A13 /* APIStubClient.swift */; };
+		66EA3A762C34819B00649A13 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A752C34819B00649A13 /* APIRequest.swift */; };
+		66EA3A782C3481B600649A13 /* APIRequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A772C3481B600649A13 /* APIRequestMethod.swift */; };
+		66EA3A7A2C3481E900649A13 /* DecodableAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A792C3481E900649A13 /* DecodableAPIRequest.swift */; };
+		66EA3A7D2C3482A000649A13 /* AccountsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A7C2C3482A000649A13 /* AccountsRequest.swift */; };
+		66EA3A7F2C34831400649A13 /* BalanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A7E2C34831400649A13 /* BalanceRequest.swift */; };
+		66EA3A822C348E9F00649A13 /* APIHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A812C348E9F00649A13 /* APIHTTPClient.swift */; };
+		66EA3A842C348EE200649A13 /* AuthorizationProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A832C348EE200649A13 /* AuthorizationProviding.swift */; };
+		66EA3A862C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A852C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift */; };
+		66EA3A882C3490C800649A13 /* AuthorizationMockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A872C3490C800649A13 /* AuthorizationMockProvider.swift */; };
+		66EA3A8B2C3491D200649A13 /* AccountsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A8A2C3491D200649A13 /* AccountsRequestTests.swift */; };
+		66EA3A8D2C34924400649A13 /* BalanceRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A8C2C34924400649A13 /* BalanceRequestTests.swift */; };
+		66EA3A8F2C3492A400649A13 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A8E2C3492A400649A13 /* Coordinator.swift */; };
+		66EA3A912C3492BD00649A13 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A902C3492BD00649A13 /* AppCoordinator.swift */; };
+		66EA3A952C34A47200649A13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A942C34A47200649A13 /* Environment.swift */; };
+		66EA3A972C34A98C00649A13 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A962C34A98C00649A13 /* MainNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,14 +82,61 @@
 		66B8992A2C3414310056F308 /* StarlingRoundUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarlingRoundUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8992D2C3414310056F308 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66B8992F2C3414310056F308 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		66B899312C3414310056F308 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		66B899312C3414310056F308 /* AccountListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewController.swift; sourceTree = "<group>"; };
 		66B899362C3414320056F308 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66B899392C3414320056F308 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66B8993B2C3414320056F308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66B899402C3414320056F308 /* StarlingRoundUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarlingRoundUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		66B899442C3414320056F308 /* StarlingRoundUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlingRoundUpTests.swift; sourceTree = "<group>"; };
 		66B8994A2C3414320056F308 /* StarlingRoundUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarlingRoundUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlingRoundUpUITests.swift; sourceTree = "<group>"; };
+		66D876C92C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAccountSummariesUseCase.swift; sourceTree = "<group>"; };
+		66D876CC2C34661C0012CA55 /* AccountSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummary.swift; sourceTree = "<group>"; };
+		66D876CE2C3466490012CA55 /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
+		66D876D02C3466860012CA55 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		66D876D22C3466F30012CA55 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		66D876D62C34675F0012CA55 /* BalanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTests.swift; sourceTree = "<group>"; };
+		66D876D92C3467F50012CA55 /* StarlingRoundUp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = StarlingRoundUp.xctestplan; sourceTree = "<group>"; };
+		66EA3A322C3468BA00649A13 /* FetchAccountSummaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAccountSummaries.swift; sourceTree = "<group>"; };
+		66EA3A362C34691400649A13 /* AccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRepository.swift; sourceTree = "<group>"; };
+		66EA3A382C346A5D00649A13 /* FetchAccountSummariesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAccountSummariesTests.swift; sourceTree = "<group>"; };
+		66EA3A3B2C346A9E00649A13 /* AccountStubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStubRepository.swift; sourceTree = "<group>"; };
+		66EA3A3D2C34759500649A13 /* AccountListViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewModeling.swift; sourceTree = "<group>"; };
+		66EA3A3F2C34765900649A13 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		66EA3A422C34768E00649A13 /* AccountListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewModel.swift; sourceTree = "<group>"; };
+		66EA3A442C3476F000649A13 /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
+		66EA3A4D2C34784500649A13 /* AccountListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewModelTests.swift; sourceTree = "<group>"; };
+		66EA3A4F2C34788100649A13 /* FetchAccountSummariesStubUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAccountSummariesStubUseCase.swift; sourceTree = "<group>"; };
+		66EA3A512C347A2500649A13 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		66EA3A542C347A5500649A13 /* BalanceResponseDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceResponseDataModel.swift; sourceTree = "<group>"; };
+		66EA3A552C347A5500649A13 /* AccountDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDataModel.swift; sourceTree = "<group>"; };
+		66EA3A562C347A5500649A13 /* BalanceDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDataModel.swift; sourceTree = "<group>"; };
+		66EA3A572C347A5500649A13 /* AccountsResponseDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsResponseDataModel.swift; sourceTree = "<group>"; };
+		66EA3A582C347A5500649A13 /* AccountTypeDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTypeDataModel.swift; sourceTree = "<group>"; };
+		66EA3A5E2C347AE500649A13 /* AccountAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPIRepository.swift; sourceTree = "<group>"; };
+		66EA3A612C347B0B00649A13 /* AccountTypeMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTypeMapper.swift; sourceTree = "<group>"; };
+		66EA3A622C347B0B00649A13 /* BalanceMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceMapper.swift; sourceTree = "<group>"; };
+		66EA3A632C347B0C00649A13 /* AccountMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountMapper.swift; sourceTree = "<group>"; };
+		66EA3A6A2C347BD200649A13 /* AccountTypeMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTypeMapperTests.swift; sourceTree = "<group>"; };
+		66EA3A6C2C347C6C00649A13 /* BalanceMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceMapperTests.swift; sourceTree = "<group>"; };
+		66EA3A6E2C347CEC00649A13 /* AccountMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMapperTests.swift; sourceTree = "<group>"; };
+		66EA3A702C347E5100649A13 /* AccountAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPIRepository.swift; sourceTree = "<group>"; };
+		66EA3A722C347E8100649A13 /* APIStubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStubClient.swift; sourceTree = "<group>"; };
+		66EA3A752C34819B00649A13 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		66EA3A772C3481B600649A13 /* APIRequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestMethod.swift; sourceTree = "<group>"; };
+		66EA3A792C3481E900649A13 /* DecodableAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableAPIRequest.swift; sourceTree = "<group>"; };
+		66EA3A7C2C3482A000649A13 /* AccountsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsRequest.swift; sourceTree = "<group>"; };
+		66EA3A7E2C34831400649A13 /* BalanceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceRequest.swift; sourceTree = "<group>"; };
+		66EA3A812C348E9F00649A13 /* APIHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHTTPClient.swift; sourceTree = "<group>"; };
+		66EA3A832C348EE200649A13 /* AuthorizationProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationProviding.swift; sourceTree = "<group>"; };
+		66EA3A852C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDeocder+StarlingAPI.swift"; sourceTree = "<group>"; };
+		66EA3A872C3490C800649A13 /* AuthorizationMockProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationMockProvider.swift; sourceTree = "<group>"; };
+		66EA3A8A2C3491D200649A13 /* AccountsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsRequestTests.swift; sourceTree = "<group>"; };
+		66EA3A8C2C34924400649A13 /* BalanceRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceRequestTests.swift; sourceTree = "<group>"; };
+		66EA3A8E2C3492A400649A13 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		66EA3A902C3492BD00649A13 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		66EA3A932C349F5500649A13 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		66EA3A942C34A47200649A13 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		66EA3A962C34A98C00649A13 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +170,8 @@
 				66B8992C2C3414310056F308 /* StarlingRoundUp */,
 				66B899432C3414320056F308 /* StarlingRoundUpTests */,
 				66B8994D2C3414320056F308 /* StarlingRoundUpUITests */,
+				66D876D82C3467DB0012CA55 /* TestPlans */,
+				66EA3A932C349F5500649A13 /* Development.xcconfig */,
 				66B8992B2C3414310056F308 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -97,8 +191,15 @@
 			children = (
 				66B8992D2C3414310056F308 /* AppDelegate.swift */,
 				66B8992F2C3414310056F308 /* SceneDelegate.swift */,
-				66B899312C3414310056F308 /* ViewController.swift */,
+				66EA3A942C34A47200649A13 /* Environment.swift */,
+				66EA3A442C3476F000649A13 /* AppFactory.swift */,
+				66EA3A872C3490C800649A13 /* AuthorizationMockProvider.swift */,
+				66D876C62C3465650012CA55 /* UI */,
+				66D876C82C3465BB0012CA55 /* Domain */,
+				66EA3A462C34774300649A13 /* Data */,
+				66EA3A802C348E8300649A13 /* Networking */,
 				66B899362C3414320056F308 /* Assets.xcassets */,
+				66EA3A3F2C34765900649A13 /* Localizable.xcstrings */,
 				66B899382C3414320056F308 /* LaunchScreen.storyboard */,
 				66B8993B2C3414320056F308 /* Info.plist */,
 			);
@@ -108,7 +209,10 @@
 		66B899432C3414320056F308 /* StarlingRoundUpTests */ = {
 			isa = PBXGroup;
 			children = (
-				66B899442C3414320056F308 /* StarlingRoundUpTests.swift */,
+				66EA3A4A2C34780D00649A13 /* UI */,
+				66D876D42C3467370012CA55 /* Domain */,
+				66EA3A672C347BAC00649A13 /* Data */,
+				66EA3A922C3495B200649A13 /* Networking */,
 			);
 			path = StarlingRoundUpTests;
 			sourceTree = "<group>";
@@ -119,6 +223,257 @@
 				66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */,
 			);
 			path = StarlingRoundUpUITests;
+			sourceTree = "<group>";
+		};
+		66D876C62C3465650012CA55 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A8E2C3492A400649A13 /* Coordinator.swift */,
+				66EA3A902C3492BD00649A13 /* AppCoordinator.swift */,
+				66EA3A962C34A98C00649A13 /* MainNavigationController.swift */,
+				66D876C72C3465860012CA55 /* AccountList */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		66D876C72C3465860012CA55 /* AccountList */ = {
+			isa = PBXGroup;
+			children = (
+				66B899312C3414310056F308 /* AccountListViewController.swift */,
+				66EA3A3D2C34759500649A13 /* AccountListViewModeling.swift */,
+				66EA3A412C34766C00649A13 /* ViewModels */,
+			);
+			path = AccountList;
+			sourceTree = "<group>";
+		};
+		66D876C82C3465BB0012CA55 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				66D876C92C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift */,
+				66D876CB2C3466100012CA55 /* Models */,
+				66EA3A352C34690200649A13 /* Repositories */,
+				66EA3A312C34689F00649A13 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		66D876CB2C3466100012CA55 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				66D876D22C3466F30012CA55 /* Account.swift */,
+				66D876CC2C34661C0012CA55 /* AccountSummary.swift */,
+				66D876CE2C3466490012CA55 /* AccountType.swift */,
+				66D876D02C3466860012CA55 /* Balance.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		66D876D42C3467370012CA55 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A4F2C34788100649A13 /* FetchAccountSummariesStubUseCase.swift */,
+				66EA3A3A2C346A9000649A13 /* Repositories */,
+				66D876D52C3467420012CA55 /* Models */,
+				66EA3A342C3468F100649A13 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		66D876D52C3467420012CA55 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				66D876D62C34675F0012CA55 /* BalanceTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		66D876D82C3467DB0012CA55 /* TestPlans */ = {
+			isa = PBXGroup;
+			children = (
+				66D876D92C3467F50012CA55 /* StarlingRoundUp.xctestplan */,
+			);
+			path = TestPlans;
+			sourceTree = "<group>";
+		};
+		66EA3A312C34689F00649A13 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A322C3468BA00649A13 /* FetchAccountSummaries.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		66EA3A342C3468F100649A13 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A382C346A5D00649A13 /* FetchAccountSummariesTests.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		66EA3A352C34690200649A13 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A362C34691400649A13 /* AccountRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		66EA3A3A2C346A9000649A13 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A3B2C346A9E00649A13 /* AccountStubRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		66EA3A412C34766C00649A13 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A422C34768E00649A13 /* AccountListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		66EA3A462C34774300649A13 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A742C34818000649A13 /* APIClient */,
+				66EA3A472C34775900649A13 /* Account */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		66EA3A472C34775900649A13 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A5E2C347AE500649A13 /* AccountAPIRepository.swift */,
+				66EA3A7B2C34828400649A13 /* Requests */,
+				66EA3A602C347AF700649A13 /* Mappers */,
+				66EA3A532C347A3A00649A13 /* Models */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		66EA3A4A2C34780D00649A13 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A4B2C34781300649A13 /* AccountList */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		66EA3A4B2C34781300649A13 /* AccountList */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A4C2C34782100649A13 /* ViewModels */,
+			);
+			path = AccountList;
+			sourceTree = "<group>";
+		};
+		66EA3A4C2C34782100649A13 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A4D2C34784500649A13 /* AccountListViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		66EA3A532C347A3A00649A13 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A552C347A5500649A13 /* AccountDataModel.swift */,
+				66EA3A572C347A5500649A13 /* AccountsResponseDataModel.swift */,
+				66EA3A582C347A5500649A13 /* AccountTypeDataModel.swift */,
+				66EA3A562C347A5500649A13 /* BalanceDataModel.swift */,
+				66EA3A542C347A5500649A13 /* BalanceResponseDataModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		66EA3A602C347AF700649A13 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A632C347B0C00649A13 /* AccountMapper.swift */,
+				66EA3A622C347B0B00649A13 /* BalanceMapper.swift */,
+				66EA3A612C347B0B00649A13 /* AccountTypeMapper.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		66EA3A672C347BAC00649A13 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A722C347E8100649A13 /* APIStubClient.swift */,
+				66EA3A682C347BB900649A13 /* Account */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		66EA3A682C347BB900649A13 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A702C347E5100649A13 /* AccountAPIRepository.swift */,
+				66EA3A892C3491BC00649A13 /* Requests */,
+				66EA3A692C347BC300649A13 /* Mappers */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		66EA3A692C347BC300649A13 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A6E2C347CEC00649A13 /* AccountMapperTests.swift */,
+				66EA3A6A2C347BD200649A13 /* AccountTypeMapperTests.swift */,
+				66EA3A6C2C347C6C00649A13 /* BalanceMapperTests.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		66EA3A742C34818000649A13 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A512C347A2500649A13 /* APIClient.swift */,
+				66EA3A752C34819B00649A13 /* APIRequest.swift */,
+				66EA3A772C3481B600649A13 /* APIRequestMethod.swift */,
+				66EA3A792C3481E900649A13 /* DecodableAPIRequest.swift */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
+		66EA3A7B2C34828400649A13 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A7C2C3482A000649A13 /* AccountsRequest.swift */,
+				66EA3A7E2C34831400649A13 /* BalanceRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		66EA3A802C348E8300649A13 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A812C348E9F00649A13 /* APIHTTPClient.swift */,
+				66EA3A832C348EE200649A13 /* AuthorizationProviding.swift */,
+				66EA3A852C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		66EA3A892C3491BC00649A13 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A8A2C3491D200649A13 /* AccountsRequestTests.swift */,
+				66EA3A8C2C34924400649A13 /* BalanceRequestTests.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		66EA3A922C3495B200649A13 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +547,7 @@
 					};
 					66B8993F2C3414320056F308 = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
 						TestTargetID = 66B899292C3414310056F308;
 					};
 					66B899492C3414320056F308 = {
@@ -227,6 +583,7 @@
 			files = (
 				66B899372C3414320056F308 /* Assets.xcassets in Resources */,
 				66B8993A2C3414320056F308 /* Base in Resources */,
+				66EA3A402C34765900649A13 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,8 +608,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66B899322C3414310056F308 /* ViewController.swift in Sources */,
+				66EA3A662C347B0C00649A13 /* AccountMapper.swift in Sources */,
+				66D876CA2C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift in Sources */,
+				66EA3A912C3492BD00649A13 /* AppCoordinator.swift in Sources */,
+				66D876CF2C3466490012CA55 /* AccountType.swift in Sources */,
+				66EA3A762C34819B00649A13 /* APIRequest.swift in Sources */,
+				66EA3A642C347B0C00649A13 /* AccountTypeMapper.swift in Sources */,
+				66EA3A5B2C347A5500649A13 /* BalanceDataModel.swift in Sources */,
+				66D876CD2C34661C0012CA55 /* AccountSummary.swift in Sources */,
+				66EA3A372C34691400649A13 /* AccountRepository.swift in Sources */,
+				66EA3A882C3490C800649A13 /* AuthorizationMockProvider.swift in Sources */,
+				66B899322C3414310056F308 /* AccountListViewController.swift in Sources */,
+				66EA3A822C348E9F00649A13 /* APIHTTPClient.swift in Sources */,
+				66EA3A782C3481B600649A13 /* APIRequestMethod.swift in Sources */,
+				66EA3A842C348EE200649A13 /* AuthorizationProviding.swift in Sources */,
+				66EA3A3E2C34759500649A13 /* AccountListViewModeling.swift in Sources */,
+				66EA3A452C3476F000649A13 /* AppFactory.swift in Sources */,
+				66EA3A7F2C34831400649A13 /* BalanceRequest.swift in Sources */,
+				66EA3A5C2C347A5500649A13 /* AccountsResponseDataModel.swift in Sources */,
+				66EA3A972C34A98C00649A13 /* MainNavigationController.swift in Sources */,
+				66EA3A8F2C3492A400649A13 /* Coordinator.swift in Sources */,
+				66EA3A862C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift in Sources */,
+				66EA3A522C347A2500649A13 /* APIClient.swift in Sources */,
+				66EA3A5D2C347A5500649A13 /* AccountTypeDataModel.swift in Sources */,
+				66EA3A592C347A5500649A13 /* BalanceResponseDataModel.swift in Sources */,
 				66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */,
+				66EA3A952C34A47200649A13 /* Environment.swift in Sources */,
+				66EA3A7A2C3481E900649A13 /* DecodableAPIRequest.swift in Sources */,
+				66EA3A652C347B0C00649A13 /* BalanceMapper.swift in Sources */,
+				66EA3A5F2C347AE500649A13 /* AccountAPIRepository.swift in Sources */,
+				66EA3A7D2C3482A000649A13 /* AccountsRequest.swift in Sources */,
+				66D876D32C3466F30012CA55 /* Account.swift in Sources */,
+				66EA3A332C3468BA00649A13 /* FetchAccountSummaries.swift in Sources */,
+				66D876D12C3466860012CA55 /* Balance.swift in Sources */,
+				66EA3A5A2C347A5500649A13 /* AccountDataModel.swift in Sources */,
+				66EA3A432C34768E00649A13 /* AccountListViewModel.swift in Sources */,
 				66B899302C3414310056F308 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,7 +651,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66B899452C3414320056F308 /* StarlingRoundUpTests.swift in Sources */,
+				66EA3A6F2C347CEC00649A13 /* AccountMapperTests.swift in Sources */,
+				66EA3A6D2C347C6C00649A13 /* BalanceMapperTests.swift in Sources */,
+				66EA3A8D2C34924400649A13 /* BalanceRequestTests.swift in Sources */,
+				66EA3A6B2C347BD200649A13 /* AccountTypeMapperTests.swift in Sources */,
+				66EA3A732C347E8100649A13 /* APIStubClient.swift in Sources */,
+				66EA3A392C346A5D00649A13 /* FetchAccountSummariesTests.swift in Sources */,
+				66EA3A502C34788100649A13 /* FetchAccountSummariesStubUseCase.swift in Sources */,
+				66EA3A8B2C3491D200649A13 /* AccountsRequestTests.swift in Sources */,
+				66EA3A712C347E5100649A13 /* AccountAPIRepository.swift in Sources */,
+				66D876D72C34675F0012CA55 /* BalanceTests.swift in Sources */,
+				66EA3A4E2C34784500649A13 /* AccountListViewModelTests.swift in Sources */,
+				66EA3A3C2C346A9E00649A13 /* AccountStubRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +822,7 @@
 		};
 		66B899552C3414320056F308 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66EA3A932C349F5500649A13 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -482,6 +884,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B43ZJ6HHUE;
@@ -491,6 +894,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.adam-young.StarlingRoundUpTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StarlingRoundUp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StarlingRoundUp";
@@ -502,6 +906,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B43ZJ6HHUE;

@@ -11,6 +11,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private let factory = AppFactory()
+
     func scene(
         _ scene: UIScene,
         willConnectTo _: UISceneSession,
@@ -21,8 +23,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let window = UIWindow(windowScene: scene)
-        let rootViewController = ViewController()
-        window.rootViewController = rootViewController
+        let appCoordinator = AppCoordinator(window: window, factory: factory)
+        appCoordinator.start()
         window.makeKeyAndVisible()
 
         self.window = window
