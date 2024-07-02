@@ -31,8 +31,8 @@ final class AccountListViewModelTests: XCTestCase {
 
     func testFetchAccountSummariesSetsAccountSummaries() async throws {
         let accountSummaries = [
-            AccountSummary(id: "1", name: "Test 1", balance: Balance(valueMinorUnits: 1234, currency: "GBP")),
-            AccountSummary(id: "2", name: "Test 2", balance: Balance(valueMinorUnits: 5678, currency: "GBP"))
+            AccountSummary(id: "1", name: "Test 1", balance: Balance(minorUnits: 1234, currency: "GBP")),
+            AccountSummary(id: "2", name: "Test 2", balance: Balance(minorUnits: 5678, currency: "GBP"))
         ]
         fetchAccountSummariesUseCase.result = .success(accountSummaries)
 

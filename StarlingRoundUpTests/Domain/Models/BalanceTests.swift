@@ -11,7 +11,7 @@ import XCTest
 final class BalanceTests: XCTestCase {
 
     func testFormattedValueWhenGBPCurrencyReturnsValue() {
-        let balance = Balance(valueMinorUnits: 1234, currency: "GBP")
+        let balance = Balance(minorUnits: 1234, currency: "GBP")
 
         let formattedValue = balance.formattedValue
 
@@ -19,7 +19,7 @@ final class BalanceTests: XCTestCase {
     }
 
     func testFormattedValueWhenEURCurrencyReturnsValue() {
-        let balance = Balance(valueMinorUnits: 5678, currency: "EUR")
+        let balance = Balance(minorUnits: 5678, currency: "EUR")
 
         let formattedValue = balance.formattedValue
 
