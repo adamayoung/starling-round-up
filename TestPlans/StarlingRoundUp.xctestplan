@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "014959CF-2DB0-473B-8730-302F188E1999",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:StarlingRoundUp.xcodeproj",
+      "identifier" : "66B899292C3414310056F308",
+      "name" : "StarlingRoundUp"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:StarlingRoundUp.xcodeproj",
+        "identifier" : "66B8993F2C3414320056F308",
+        "name" : "StarlingRoundUpTests"
+      }
+    }
+  ],
+  "version" : 1
+}

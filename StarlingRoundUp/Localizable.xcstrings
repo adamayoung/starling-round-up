@@ -1,0 +1,50 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "ACCOUNTS" : {
+      "comment" : "Accounts",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accounts"
+          }
+        }
+      }
+    },
+    "CANNOT_GET_ACCOUNTS" : {
+      "comment" : "Cannot Load Accounts",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot Load Accounts"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "comment" : "OK",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNTS" : {
+      "comment" : "There was an error loading your accounts.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error loading your accounts."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
