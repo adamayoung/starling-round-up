@@ -11,7 +11,7 @@ struct MoneyMapper {
 
     private init() {}
 
-    static func map(_ dataModel: BalanceDataModel) -> Money {
+    static func map(_ dataModel: MoneyDataModel) -> Money {
         Money(
             minorUnits: dataModel.minorUnits,
             currency: dataModel.currency

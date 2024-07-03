@@ -72,7 +72,7 @@ final class AccountAPIRepositoryTests: XCTestCase {
     }
 
     func testBalanceReturnsBalance() async throws {
-        let balanceDataModel = BalanceDataModel(minorUnits: 1234, currency: "GBP")
+        let balanceDataModel = MoneyDataModel(minorUnits: 1234, currency: "GBP")
         let responseDataModel = BalanceResponseDataModel(amount: balanceDataModel)
         apiClient.responseResult = .success(responseDataModel)
 

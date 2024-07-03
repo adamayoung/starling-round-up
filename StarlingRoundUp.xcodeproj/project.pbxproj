@@ -32,7 +32,7 @@
 		66EA3A522C347A2500649A13 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A512C347A2500649A13 /* APIClient.swift */; };
 		66EA3A592C347A5500649A13 /* BalanceResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A542C347A5500649A13 /* BalanceResponseDataModel.swift */; };
 		66EA3A5A2C347A5500649A13 /* AccountDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A552C347A5500649A13 /* AccountDataModel.swift */; };
-		66EA3A5B2C347A5500649A13 /* BalanceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A562C347A5500649A13 /* BalanceDataModel.swift */; };
+		66EA3A5B2C347A5500649A13 /* MoneyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A562C347A5500649A13 /* MoneyDataModel.swift */; };
 		66EA3A5C2C347A5500649A13 /* AccountsResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A572C347A5500649A13 /* AccountsResponseDataModel.swift */; };
 		66EA3A5D2C347A5500649A13 /* AccountTypeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A582C347A5500649A13 /* AccountTypeDataModel.swift */; };
 		66EA3A5F2C347AE500649A13 /* AccountAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A5E2C347AE500649A13 /* AccountAPIRepository.swift */; };
@@ -120,7 +120,7 @@
 		66EA3A512C347A2500649A13 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		66EA3A542C347A5500649A13 /* BalanceResponseDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceResponseDataModel.swift; sourceTree = "<group>"; };
 		66EA3A552C347A5500649A13 /* AccountDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDataModel.swift; sourceTree = "<group>"; };
-		66EA3A562C347A5500649A13 /* BalanceDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDataModel.swift; sourceTree = "<group>"; };
+		66EA3A562C347A5500649A13 /* MoneyDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyDataModel.swift; sourceTree = "<group>"; };
 		66EA3A572C347A5500649A13 /* AccountsResponseDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsResponseDataModel.swift; sourceTree = "<group>"; };
 		66EA3A582C347A5500649A13 /* AccountTypeDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTypeDataModel.swift; sourceTree = "<group>"; };
 		66EA3A5E2C347AE500649A13 /* AccountAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPIRepository.swift; sourceTree = "<group>"; };
@@ -407,7 +407,7 @@
 				66EA3A552C347A5500649A13 /* AccountDataModel.swift */,
 				66EA3A572C347A5500649A13 /* AccountsResponseDataModel.swift */,
 				66EA3A582C347A5500649A13 /* AccountTypeDataModel.swift */,
-				66EA3A562C347A5500649A13 /* BalanceDataModel.swift */,
+				66EA3A562C347A5500649A13 /* MoneyDataModel.swift */,
 				66EA3A542C347A5500649A13 /* BalanceResponseDataModel.swift */,
 			);
 			path = Models;
@@ -691,7 +691,7 @@
 				66D876CF2C3466490012CA55 /* AccountType.swift in Sources */,
 				66EA3A762C34819B00649A13 /* APIRequest.swift in Sources */,
 				66EA3A642C347B0C00649A13 /* AccountTypeMapper.swift in Sources */,
-				66EA3A5B2C347A5500649A13 /* BalanceDataModel.swift in Sources */,
+				66EA3A5B2C347A5500649A13 /* MoneyDataModel.swift in Sources */,
 				66EA3A9D2C34B3F000649A13 /* FetchAccountSummary.swift in Sources */,
 				66D876CD2C34661C0012CA55 /* AccountSummary.swift in Sources */,
 				66EA3A372C34691400649A13 /* AccountRepository.swift in Sources */,

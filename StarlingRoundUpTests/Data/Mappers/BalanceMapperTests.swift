@@ -11,7 +11,7 @@ import XCTest
 final class BalanceMapperTests: XCTestCase {
 
     func testMapMinorUnits() {
-        let dataModel = BalanceDataModel(minorUnits: 1234, currency: "GBP")
+        let dataModel = MoneyDataModel(minorUnits: 1234, currency: "GBP")
 
         let balance = MoneyMapper.map(dataModel)
 
@@ -19,7 +19,7 @@ final class BalanceMapperTests: XCTestCase {
     }
 
     func testMapCurrency() {
-        let dataModel = BalanceDataModel(minorUnits: 1234, currency: "GBP")
+        let dataModel = MoneyDataModel(minorUnits: 1234, currency: "GBP")
 
         let balance = MoneyMapper.map(dataModel)
 
