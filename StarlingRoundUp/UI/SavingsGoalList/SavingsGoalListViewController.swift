@@ -22,6 +22,8 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
         return view
     }()
 
+    private lazy var emptySavingsGoalsView = EmptySavingsGoalView()
+
     init(viewModel: some SavingsGoalsListViewModeling) {
         self.viewModel = viewModel
         super.init(style: .insetGrouped)
@@ -50,6 +52,14 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
             tableBackgroundLoadingIndicator.centerXAnchor.constraint(equalTo: tableBackgroundView.centerXAnchor),
             tableBackgroundLoadingIndicator.centerYAnchor.constraint(equalTo: tableBackgroundView.centerYAnchor)
         ])
+
+        tableBackgroundView.addSubview(emptySavingsGoalsView)
+        emptySavingsGoalsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptySavingsGoalsView.centerXAnchor.constraint(equalTo: tableBackgroundView.centerXAnchor),
+            emptySavingsGoalsView.centerYAnchor.constraint(equalTo: tableBackgroundView.centerYAnchor)
+        ])
+        emptySavingsGoalsView.isHidden = true
 
         tableView.backgroundView = tableBackgroundView
         tableBackgroundLoadingIndicator.startAnimating()
@@ -137,6 +147,8 @@ extension SavingsGoalListViewController {
     }
 
     private func update(with savingsGoals: [SavingsGoal], animate: Bool = true) {
+        emptySavingsGoalsView.isHidden = !savingsGoals.isEmpty
+
         var snapshot = NSDiffableDataSourceSnapshot<Int, SavingsGoal>()
         snapshot.appendSections([0])
         snapshot.appendItems(savingsGoals, toSection: 0)

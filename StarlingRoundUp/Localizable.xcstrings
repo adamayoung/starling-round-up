@@ -56,6 +56,17 @@
         }
       }
     },
+    "NO_SAVINGS_GOALS" : {
+      "comment" : "No Savings Goals",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Savings Goals"
+          }
+        }
+      }
+    },
     "OK" : {
       "comment" : "OK",
       "localizations" : {

@@ -94,6 +94,7 @@
 		66EA3AEA2C35C28700649A13 /* SavingsGoalsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AE92C35C28700649A13 /* SavingsGoalsListViewModel.swift */; };
 		66EA3AEF2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AEE2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift */; };
 		66EA3AF12C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AF02C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift */; };
+		66EA3AF42C35CBD200649A13 /* EmptySavingsGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AF32C35CBD200649A13 /* EmptySavingsGoalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +208,7 @@
 		66EA3AE92C35C28700649A13 /* SavingsGoalsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsListViewModel.swift; sourceTree = "<group>"; };
 		66EA3AEE2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsListViewModelTests.swift; sourceTree = "<group>"; };
 		66EA3AF02C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSavingsGoalsStubUseCase.swift; sourceTree = "<group>"; };
+		66EA3AF32C35CBD200649A13 /* EmptySavingsGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySavingsGoalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -625,6 +627,7 @@
 				66EA3AE22C35C07100649A13 /* SavingsGoalListViewController.swift */,
 				66EA3AE62C35C24800649A13 /* SavingsGoalsListViewModeling.swift */,
 				66EA3AE82C35C27300649A13 /* ViewModels */,
+				66EA3AF22C35CBB200649A13 /* Views */,
 			);
 			path = SavingsGoalList;
 			sourceTree = "<group>";
@@ -651,6 +654,14 @@
 				66EA3AEE2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		66EA3AF22C35CBB200649A13 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3AF32C35CBD200649A13 /* EmptySavingsGoalView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -832,6 +843,7 @@
 				66EA3A7A2C3481E900649A13 /* DecodableAPIRequest.swift in Sources */,
 				66EA3A992C34B02100649A13 /* AccountListViewControllerDelegate.swift in Sources */,
 				66EA3AE72C35C24800649A13 /* SavingsGoalsListViewModeling.swift in Sources */,
+				66EA3AF42C35CBD200649A13 /* EmptySavingsGoalView.swift in Sources */,
 				66EA3AEA2C35C28700649A13 /* SavingsGoalsListViewModel.swift in Sources */,
 				66EA3ACF2C3587B500649A13 /* SavingsGoalDataModel.swift in Sources */,
 				66EA3A652C347B0C00649A13 /* MoneyMapper.swift in Sources */,
