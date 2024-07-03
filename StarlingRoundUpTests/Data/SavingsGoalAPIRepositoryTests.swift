@@ -25,6 +25,4 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    
-
 }

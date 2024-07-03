@@ -14,25 +14,25 @@ struct SavingsGoalStateMapper {
     static func map(_ dataModel: SavingsGoalStateDataModel) -> SavingsGoalState {
         switch dataModel {
         case .creating:
-            return .creating
+            .creating
 
         case .active:
-            return .active
+            .active
 
         case .archiving:
-            return .archiving
+            .archiving
 
         case .archived:
-            return .archived
+            .archived
 
         case .restoring:
-            return .restoring
+            .restoring
 
         case .pending:
-            return .pending
+            .pending
 
         case .unknown:
-            return .unknown
+            .unknown
         }
     }
 
