@@ -8,7 +8,7 @@
 import Foundation
 @testable import StarlingRoundUp
 
-final class FetchAccountSummariesStub: FetchAccountSummariesUseCase {
+final class FetchAccountSummariesStubUseCase: FetchAccountSummariesUseCase {
 
     var result: Result<[AccountSummary], FetchAccountSummariesError> = .failure(.unknown)
 

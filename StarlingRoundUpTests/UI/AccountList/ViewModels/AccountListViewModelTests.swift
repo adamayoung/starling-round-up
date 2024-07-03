@@ -11,11 +11,11 @@ import XCTest
 final class AccountListViewModelTests: XCTestCase {
 
     var viewModel: AccountListViewModel!
-    var fetchAccountSummariesUseCase: FetchAccountSummariesStub!
+    var fetchAccountSummariesUseCase: FetchAccountSummariesStubUseCase!
 
     override func setUp() {
         super.setUp()
-        fetchAccountSummariesUseCase = FetchAccountSummariesStub()
+        fetchAccountSummariesUseCase = FetchAccountSummariesStubUseCase()
         viewModel = AccountListViewModel(fetchAccountSummariesUseCase: fetchAccountSummariesUseCase)
     }
 
@@ -39,6 +39,19 @@ final class AccountListViewModelTests: XCTestCase {
         try await viewModel.fetchAccountSummaries()
 
         XCTAssertEqual(viewModel.accountSummaries, accountSummaries)
+    }
+
+    func testFetchAccountSummariesWhenErrorsThrowsError() async throws {
+        fetchAccountSummariesUseCase.result = .failure(.unknown)
+
+        var fetchAccountSummariesError: FetchAccountSummariesError?
+        do {
+            try await viewModel.fetchAccountSummaries()
+        } catch let error {
+            fetchAccountSummariesError = error as? FetchAccountSummariesError
+        }
+
+        XCTAssertEqual(fetchAccountSummariesError, .unknown)
     }
 
 }

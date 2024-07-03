@@ -33,8 +33,9 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator: AccountListViewControllerDelegate {
 
-    func viewController(_: some AccountListViewControlling, didSelectAccount accountID: Account.ID) {
-        print("Account \(accountID) selected")
+    func viewController(_: some AccountListViewControlling, didSelectAccount accountSummary: AccountSummary) {
+        let accountDetailsViewController = factory.accountDetailsViewController(accountSummary: accountSummary)
+        navigationController.pushViewController(accountDetailsViewController, animated: true)
     }
 
 }

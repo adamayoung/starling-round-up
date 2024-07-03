@@ -12,7 +12,29 @@
         }
       }
     },
-    "CANNOT_GET_ACCOUNTS" : {
+    "BALANCE" : {
+      "comment" : "Balance",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balance"
+          }
+        }
+      }
+    },
+    "CANNOT_LOAD_ACCOUNT_DETAILS" : {
+      "comment" : "Cannot Load Account Details",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot Load Account Details"
+          }
+        }
+      }
+    },
+    "CANNOT_LOAD_ACCOUNTS" : {
       "comment" : "Cannot Load Accounts",
       "localizations" : {
         "en" : {
@@ -30,6 +52,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        }
+      }
+    },
+    "SAVINGS_GOALS" : {
+      "comment" : "Savings Goals",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Savings Goals"
+          }
+        }
+      }
+    },
+    "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNT_DETAILS" : {
+      "comment" : "There was an error loading your account details.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error loading your account details."
           }
         }
       }

@@ -9,6 +9,9 @@ import Foundation
 
 protocol AccountListViewControllerDelegate: AnyObject {
 
-    func viewController(_ viewController: some AccountListViewControlling, didSelectAccount accountID: Account.ID)
+    func viewController(
+        _ viewController: some AccountListViewControlling,
+        didSelectAccount accountSummary: AccountSummary
+    )
 
 }
