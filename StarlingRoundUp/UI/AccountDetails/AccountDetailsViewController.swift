@@ -7,11 +7,17 @@
 
 import UIKit
 
-protocol AccountDetailsView: AnyObject {}
+protocol AccountDetailsView: AnyObject {
+
+    var delegate: (any AccountDetailsViewControllerDelegate)? { get set }
+
+}
 
 protocol AccountDetailsViewControlling: AccountDetailsView, UIViewController {}
 
 final class AccountDetailsViewController: UITableViewController, AccountDetailsViewControlling {
+
+    weak var delegate: (any AccountDetailsViewControllerDelegate)?
 
     private let viewModel: any AccountDetailsViewModeling
 
@@ -108,6 +114,16 @@ extension AccountDetailsViewController {
         ])
 
         return tableHeaderView
+    }
+
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath {
+        case IndexPath(row: 0, section: 0):
+            delegate?.viewController(self, didSelectSavingsGoalsForAccount: viewModel.accountID)
+
+        default:
+            break
+        }
     }
 
 }

@@ -61,6 +61,20 @@ extension AppFactory {
 
 extension AppFactory {
 
+    func savingsGoalListViewController(accountID: Account.ID) -> some SavingsGoalListViewControlling {
+        let viewModel = savingsGoalListViewModel(accountID: accountID)
+        return SavingsGoalListViewController(viewModel: viewModel)
+    }
+
+    private func savingsGoalListViewModel(accountID: Account.ID) -> some SavingsGoalsListViewModeling {
+        let useCase = fetchSavingsGoalsUseCase()
+        return SavingsGoalsListViewModel(accountID: accountID, fetchSavingsGoalsUseCase: useCase)
+    }
+
+}
+
+extension AppFactory {
+
     private func fetchAccountSummariesUseCase() -> some FetchAccountSummariesUseCase {
         let accountRepository = accountRepository()
         return FetchAccountSummaries(accountRepository: accountRepository)

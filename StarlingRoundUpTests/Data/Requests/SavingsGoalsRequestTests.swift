@@ -13,7 +13,7 @@ final class SavingsGoalsRequestTests: XCTestCase {
     func testPath() {
         let request = SavingsGoalsRequest(accountID: "123")
 
-        XCTAssertEqual(request.path, "/accounts/123/savings-goals")
+        XCTAssertEqual(request.path, "/account/123/savings-goals")
     }
 
     func testMethod() {
