@@ -1,5 +1,5 @@
 //
-//  EmptySavingsGoalView.swift
+//  SavingsGoalsUnavailableView.swift
 //  StarlingRoundUp
 //
 //  Created by Adam Young on 03/07/2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EmptySavingsGoalView: UIView {
+final class SavingsGoalsUnavailableView: UIView {
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
