@@ -27,6 +27,7 @@ final class CreateSavingsGoalTests: XCTestCase {
 
     func testExecuteWhenValidInputCreatesSavingsGoal() async throws {
         let input = SavingsGoalInput(
+            accountID: "1",
             name: "SG 1",
             currency: "GBP",
             targetMinorUnits: 100
@@ -40,6 +41,7 @@ final class CreateSavingsGoalTests: XCTestCase {
 
     func testExecuteWhenInvalidInputThrowsError() async {
         let input = SavingsGoalInput(
+            accountID: "1",
             name: "",
             currency: "GBP",
             targetMinorUnits: 1
@@ -58,6 +60,7 @@ final class CreateSavingsGoalTests: XCTestCase {
 
     func testExecuteWhenCreateErrorsThrowsError() async {
         let input = SavingsGoalInput(
+            accountID: "1",
             name: "SG 1",
             currency: "GBP",
             targetMinorUnits: 1

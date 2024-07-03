@@ -15,6 +15,7 @@ protocol APIClient {
 
 enum APIClientError: Error {
 
+    case encode(Error)
     case client
     case server
     case unknown

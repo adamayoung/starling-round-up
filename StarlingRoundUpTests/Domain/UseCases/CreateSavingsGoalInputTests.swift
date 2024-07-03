@@ -39,11 +39,13 @@ final class CreateSavingsGoalInputTests: XCTestCase {
 extension CreateSavingsGoalInputTests {
 
     private static func createSavingsGoalInput(
+        accountID: String = "1",
         name: String = "Test 1",
         currency: String = "GBP",
         targetMinorUnits: Int = 100
     ) -> SavingsGoalInput {
         SavingsGoalInput(
+            accountID: "1",
             name: name,
             currency: currency,
             targetMinorUnits: targetMinorUnits

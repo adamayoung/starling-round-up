@@ -10,15 +10,23 @@ import XCTest
 
 final class BalanceRequestTests: XCTestCase {
 
-    func testPath() {
-        let request = BalanceRequest(accountID: "123")
+    var request: BalanceRequest!
 
+    override func setUp() {
+        super.setUp()
+        request = BalanceRequest(accountID: "123")
+    }
+
+    override func tearDown() {
+        request = nil
+        super.tearDown()
+    }
+
+    func testPath() {
         XCTAssertEqual(request.path, "/accounts/123/balance")
     }
 
     func testMethod() {
-        let request = BalanceRequest(accountID: "123")
-
         XCTAssertEqual(request.method, .get)
     }
 

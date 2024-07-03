@@ -13,6 +13,7 @@ protocol CreateSavingsGoalUseCase {
 
 struct SavingsGoalInput: Equatable {
 
+    let accountID: Account.ID
     let name: String
     let currency: String
     let targetMinorUnits: Int

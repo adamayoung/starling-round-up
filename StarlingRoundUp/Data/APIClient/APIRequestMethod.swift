@@ -10,5 +10,7 @@ import Foundation
 enum APIRequestMethod: Sendable {
 
     case get
+    case post
+    case put
 
 }

@@ -29,10 +29,16 @@ final class APIHTTPClient: APIClient {
         }
 
         var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = Self.httpMethodName(from: request.method)
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
 
         if let authorizationHeaderValue = await makeAuthorizationHeader() {
             urlRequest.addValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
+        }
+
+        if let bodyData = try Self.bodyData(from: request) {
+            urlRequest.httpBody = bodyData
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
         let (data, _) = try await urlSession.data(for: urlRequest)
@@ -51,6 +57,35 @@ final class APIHTTPClient: APIClient {
 }
 
 extension APIHTTPClient {
+
+    private static func httpMethodName(from method: APIRequestMethod) -> String {
+        switch method {
+        case .get:
+            "GET"
+
+        case .post:
+            "POST"
+
+        case .put:
+            "PUT"
+        }
+    }
+
+    private static func bodyData(from request: some APIRequest) throws -> Data? {
+        guard let body = request.body else {
+            return nil
+        }
+
+        let jsonEncoder = JSONEncoder.starlingAPI
+        let data: Data
+        do {
+            data = try jsonEncoder.encode(body)
+        } catch let error {
+            throw APIClientError.encode(error)
+        }
+
+        return data
+    }
 
     private func makeAuthorizationHeader() async -> String? {
         guard let token = await authorizationProvider.accessToken() else {

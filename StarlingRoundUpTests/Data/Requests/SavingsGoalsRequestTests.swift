@@ -10,15 +10,23 @@ import XCTest
 
 final class SavingsGoalsRequestTests: XCTestCase {
 
-    func testPath() {
-        let request = SavingsGoalsRequest(accountID: "123")
+    var request: SavingsGoalsRequest!
 
+    override func setUp() {
+        super.setUp()
+        request = SavingsGoalsRequest(accountID: "123")
+    }
+
+    override func tearDown() {
+        request = nil
+        super.tearDown()
+    }
+
+    func testPath() {
         XCTAssertEqual(request.path, "/account/123/savings-goals")
     }
 
     func testMethod() {
-        let request = SavingsGoalsRequest(accountID: "123")
-
         XCTAssertEqual(request.method, .get)
     }
 

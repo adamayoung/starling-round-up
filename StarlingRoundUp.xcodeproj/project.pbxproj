@@ -99,6 +99,11 @@
 		66EA3AFA2C35DCFB00649A13 /* CreateSavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AF92C35DCFB00649A13 /* CreateSavingsGoal.swift */; };
 		66EA3AFC2C35DFAC00649A13 /* CreateSavingsGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AFB2C35DFAC00649A13 /* CreateSavingsGoalTests.swift */; };
 		66EA3AFE2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AFD2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift */; };
+		66EA3B002C35E52500649A13 /* CodableAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AFF2C35E52500649A13 /* CodableAPIRequest.swift */; };
+		66EA3B022C35E6EF00649A13 /* JSONEncoder+StarlingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B012C35E6EF00649A13 /* JSONEncoder+StarlingAPI.swift */; };
+		66EA3B042C35E80800649A13 /* CreateSavingsGoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B032C35E80800649A13 /* CreateSavingsGoalRequest.swift */; };
+		66EA3B082C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B072C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift */; };
+		66EA3B0A2C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B092C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +222,11 @@
 		66EA3AF92C35DCFB00649A13 /* CreateSavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoal.swift; sourceTree = "<group>"; };
 		66EA3AFB2C35DFAC00649A13 /* CreateSavingsGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalTests.swift; sourceTree = "<group>"; };
 		66EA3AFD2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalInputTests.swift; sourceTree = "<group>"; };
+		66EA3AFF2C35E52500649A13 /* CodableAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableAPIRequest.swift; sourceTree = "<group>"; };
+		66EA3B012C35E6EF00649A13 /* JSONEncoder+StarlingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONEncoder+StarlingAPI.swift"; sourceTree = "<group>"; };
+		66EA3B032C35E80800649A13 /* CreateSavingsGoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalRequest.swift; sourceTree = "<group>"; };
+		66EA3B072C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalsRequestTests.swift; sourceTree = "<group>"; };
+		66EA3B092C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalResponseDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -481,6 +491,7 @@
 				66EA3A572C347A5500649A13 /* AccountsResponseDataModel.swift */,
 				66EA3A582C347A5500649A13 /* AccountTypeDataModel.swift */,
 				66EA3A542C347A5500649A13 /* BalanceResponseDataModel.swift */,
+				66EA3B092C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift */,
 				66EA3A562C347A5500649A13 /* MoneyDataModel.swift */,
 				66EA3ACC2C3587B500649A13 /* SavingsGoalDataModel.swift */,
 				66EA3ACD2C3587B500649A13 /* SavingsGoalsResponseDataModel.swift */,
@@ -531,6 +542,7 @@
 				66EA3A512C347A2500649A13 /* APIClient.swift */,
 				66EA3A752C34819B00649A13 /* APIRequest.swift */,
 				66EA3A772C3481B600649A13 /* APIRequestMethod.swift */,
+				66EA3AFF2C35E52500649A13 /* CodableAPIRequest.swift */,
 				66EA3A792C3481E900649A13 /* DecodableAPIRequest.swift */,
 			);
 			path = APIClient;
@@ -542,6 +554,7 @@
 				66EA3A7C2C3482A000649A13 /* AccountsRequest.swift */,
 				66EA3A7E2C34831400649A13 /* BalanceRequest.swift */,
 				66EA3AD12C3587D400649A13 /* SavingsGoalsRequest.swift */,
+				66EA3B032C35E80800649A13 /* CreateSavingsGoalRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -552,6 +565,7 @@
 				66EA3A812C348E9F00649A13 /* APIHTTPClient.swift */,
 				66EA3A832C348EE200649A13 /* AuthorizationProviding.swift */,
 				66EA3A852C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift */,
+				66EA3B012C35E6EF00649A13 /* JSONEncoder+StarlingAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -562,6 +576,7 @@
 				66EA3A8A2C3491D200649A13 /* AccountsRequestTests.swift */,
 				66EA3A8C2C34924400649A13 /* BalanceRequestTests.swift */,
 				66EA3AD32C35882B00649A13 /* SavingsGoalsRequestTests.swift */,
+				66EA3B072C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -821,6 +836,7 @@
 				66EA3A642C347B0C00649A13 /* AccountTypeMapper.swift in Sources */,
 				66EA3ABA2C3580FC00649A13 /* SavingsGoal.swift in Sources */,
 				66EA3AE52C35C10D00649A13 /* AccountDetailsViewControllerDelegate.swift in Sources */,
+				66EA3B0A2C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift in Sources */,
 				66EA3AE32C35C07100649A13 /* SavingsGoalListViewController.swift in Sources */,
 				66EA3A5B2C347A5500649A13 /* MoneyDataModel.swift in Sources */,
 				66EA3A9D2C34B3F000649A13 /* FetchAccountSummary.swift in Sources */,
@@ -839,10 +855,12 @@
 				66EA3ADE2C358BB400649A13 /* SavingsGoalAPIRepository.swift in Sources */,
 				66EA3A452C3476F000649A13 /* AppFactory.swift in Sources */,
 				66EA3ADA2C35890D00649A13 /* SavingsGoalStateMapper.swift in Sources */,
+				66EA3B002C35E52500649A13 /* CodableAPIRequest.swift in Sources */,
 				66EA3A7F2C34831400649A13 /* BalanceRequest.swift in Sources */,
 				66EA3ABC2C35817F00649A13 /* SavingsGoalState.swift in Sources */,
 				66EA3A5C2C347A5500649A13 /* AccountsResponseDataModel.swift in Sources */,
 				66EA3A972C34A98C00649A13 /* MainNavigationController.swift in Sources */,
+				66EA3B042C35E80800649A13 /* CreateSavingsGoalRequest.swift in Sources */,
 				66EA3A8F2C3492A400649A13 /* Coordinator.swift in Sources */,
 				66EA3A862C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift in Sources */,
 				66EA3A522C347A2500649A13 /* APIClient.swift in Sources */,
@@ -865,6 +883,7 @@
 				66EA3A7D2C3482A000649A13 /* AccountsRequest.swift in Sources */,
 				66EA3AD02C3587B500649A13 /* SavingsGoalsResponseDataModel.swift in Sources */,
 				66D876D32C3466F30012CA55 /* Account.swift in Sources */,
+				66EA3B022C35E6EF00649A13 /* JSONEncoder+StarlingAPI.swift in Sources */,
 				66EA3A332C3468BA00649A13 /* FetchAccountSummaries.swift in Sources */,
 				66D876D12C3466860012CA55 /* Money.swift in Sources */,
 				66EA3A5A2C347A5500649A13 /* AccountDataModel.swift in Sources */,
@@ -892,6 +911,7 @@
 				66EA3A712C347E5100649A13 /* AccountAPIRepositoryTests.swift in Sources */,
 				66EA3AF12C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift in Sources */,
 				66D876D72C34675F0012CA55 /* MoneyTests.swift in Sources */,
+				66EA3B082C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift in Sources */,
 				66EA3AD62C35885900649A13 /* SavingsGoalMapperTests.swift in Sources */,
 				66EA3AB02C356CEF00649A13 /* FetchAccountSummaryTests.swift in Sources */,
 				66EA3A4E2C34784500649A13 /* AccountListViewModelTests.swift in Sources */,
