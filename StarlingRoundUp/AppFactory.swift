@@ -71,6 +71,11 @@ extension AppFactory {
         return FetchAccountSummary(accountRepository: accountRepository)
     }
 
+    private func fetchSavingsGoalsUseCase() -> some FetchSavingsGoalsUseCase {
+        let savingsGoalRepository = savingsGoalRepository()
+        return FetchSavingsGoals(savingsGoalRepository: savingsGoalRepository)
+    }
+
 }
 
 extension AppFactory {
@@ -78,6 +83,11 @@ extension AppFactory {
     private func accountRepository() -> some AccountRepository {
         let apiClient = apiClient()
         return AccountAPIRepository(apiClient: apiClient)
+    }
+
+    private func savingsGoalRepository() -> some SavingsGoalRepository {
+        let apiClient = apiClient()
+        return SavingsGoalAPIRepository(apiClient: apiClient)
     }
 
 }

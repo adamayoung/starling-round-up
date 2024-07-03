@@ -291,6 +291,7 @@
 				66EA3A962C34A98C00649A13 /* MainNavigationController.swift */,
 				66D876C72C3465860012CA55 /* AccountList */,
 				66EA3A9F2C355D9F00649A13 /* AccountDetails */,
+				66EA3AE12C358F0100649A13 /* SavingsGoalList */,
 				66EA3AAC2C356C3000649A13 /* Shared */,
 			);
 			path = UI;
@@ -601,6 +602,13 @@
 				66EA3AB32C356FB200649A13 /* AccountDetailsViewModelTests.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		66EA3AE12C358F0100649A13 /* SavingsGoalList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SavingsGoalList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
