@@ -22,6 +22,12 @@ final class AccountAPIRepository: AccountRepository {
         return accounts
     }
 
+    func account(withID id: Account.ID) async throws -> Account? {
+        let accounts = try await accounts()
+        let matchingAccount = accounts.first(where: { $0.id == id })
+        return matchingAccount
+    }
+
     func balance(for accountID: Account.ID) async throws -> Balance? {
         let request = BalanceRequest(accountID: accountID)
         let balanceResponse = try await apiClient.perform(request)

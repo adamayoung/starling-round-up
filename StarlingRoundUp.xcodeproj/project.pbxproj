@@ -42,7 +42,7 @@
 		66EA3A6B2C347BD200649A13 /* AccountTypeMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A6A2C347BD200649A13 /* AccountTypeMapperTests.swift */; };
 		66EA3A6D2C347C6C00649A13 /* BalanceMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A6C2C347C6C00649A13 /* BalanceMapperTests.swift */; };
 		66EA3A6F2C347CEC00649A13 /* AccountMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A6E2C347CEC00649A13 /* AccountMapperTests.swift */; };
-		66EA3A712C347E5100649A13 /* AccountAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A702C347E5100649A13 /* AccountAPIRepository.swift */; };
+		66EA3A712C347E5100649A13 /* AccountAPIRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A702C347E5100649A13 /* AccountAPIRepositoryTests.swift */; };
 		66EA3A732C347E8100649A13 /* APIStubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A722C347E8100649A13 /* APIStubClient.swift */; };
 		66EA3A762C34819B00649A13 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A752C34819B00649A13 /* APIRequest.swift */; };
 		66EA3A782C3481B600649A13 /* APIRequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A772C3481B600649A13 /* APIRequestMethod.swift */; };
@@ -60,6 +60,8 @@
 		66EA3A952C34A47200649A13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A942C34A47200649A13 /* Environment.swift */; };
 		66EA3A972C34A98C00649A13 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A962C34A98C00649A13 /* MainNavigationController.swift */; };
 		66EA3A992C34B02100649A13 /* AccountListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A982C34B02100649A13 /* AccountListViewControllerDelegate.swift */; };
+		66EA3A9B2C34B3C600649A13 /* FetchAccountSummaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A9A2C34B3C600649A13 /* FetchAccountSummaryUseCase.swift */; };
+		66EA3A9D2C34B3F000649A13 /* FetchAccountSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3A9C2C34B3F000649A13 /* FetchAccountSummary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,7 +122,7 @@
 		66EA3A6A2C347BD200649A13 /* AccountTypeMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTypeMapperTests.swift; sourceTree = "<group>"; };
 		66EA3A6C2C347C6C00649A13 /* BalanceMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceMapperTests.swift; sourceTree = "<group>"; };
 		66EA3A6E2C347CEC00649A13 /* AccountMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountMapperTests.swift; sourceTree = "<group>"; };
-		66EA3A702C347E5100649A13 /* AccountAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPIRepository.swift; sourceTree = "<group>"; };
+		66EA3A702C347E5100649A13 /* AccountAPIRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPIRepositoryTests.swift; sourceTree = "<group>"; };
 		66EA3A722C347E8100649A13 /* APIStubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStubClient.swift; sourceTree = "<group>"; };
 		66EA3A752C34819B00649A13 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		66EA3A772C3481B600649A13 /* APIRequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestMethod.swift; sourceTree = "<group>"; };
@@ -139,6 +141,8 @@
 		66EA3A942C34A47200649A13 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		66EA3A962C34A98C00649A13 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		66EA3A982C34B02100649A13 /* AccountListViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewControllerDelegate.swift; sourceTree = "<group>"; };
+		66EA3A9A2C34B3C600649A13 /* FetchAccountSummaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAccountSummaryUseCase.swift; sourceTree = "<group>"; };
+		66EA3A9C2C34B3F000649A13 /* FetchAccountSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAccountSummary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				66D876C92C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift */,
+				66EA3A9A2C34B3C600649A13 /* FetchAccountSummaryUseCase.swift */,
 				66EA3A312C34689F00649A13 /* UseCases */,
 				66D876CB2C3466100012CA55 /* Models */,
 				66EA3A352C34690200649A13 /* Repositories */,
@@ -275,9 +280,9 @@
 			isa = PBXGroup;
 			children = (
 				66EA3A4F2C34788100649A13 /* FetchAccountSummariesStubUseCase.swift */,
-				66EA3A3A2C346A9000649A13 /* Repositories */,
-				66D876D52C3467420012CA55 /* Models */,
 				66EA3A342C3468F100649A13 /* UseCases */,
+				66D876D52C3467420012CA55 /* Models */,
+				66EA3A3A2C346A9000649A13 /* Repositories */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				66EA3A322C3468BA00649A13 /* FetchAccountSummaries.swift */,
+				66EA3A9C2C34B3F000649A13 /* FetchAccountSummary.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -341,21 +347,13 @@
 		66EA3A462C34774300649A13 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				66EA3A472C34775900649A13 /* Account */,
-				66EA3A742C34818000649A13 /* APIClient */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		66EA3A472C34775900649A13 /* Account */ = {
-			isa = PBXGroup;
-			children = (
 				66EA3A5E2C347AE500649A13 /* AccountAPIRepository.swift */,
 				66EA3A7B2C34828400649A13 /* Requests */,
 				66EA3A602C347AF700649A13 /* Mappers */,
 				66EA3A532C347A3A00649A13 /* Models */,
+				66EA3A742C34818000649A13 /* APIClient */,
 			);
-			path = Account;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		66EA3A4A2C34780D00649A13 /* UI */ = {
@@ -407,20 +405,12 @@
 		66EA3A672C347BAC00649A13 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				66EA3A722C347E8100649A13 /* APIStubClient.swift */,
-				66EA3A682C347BB900649A13 /* Account */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		66EA3A682C347BB900649A13 /* Account */ = {
-			isa = PBXGroup;
-			children = (
-				66EA3A702C347E5100649A13 /* AccountAPIRepository.swift */,
+				66EA3A702C347E5100649A13 /* AccountAPIRepositoryTests.swift */,
 				66EA3A892C3491BC00649A13 /* Requests */,
 				66EA3A692C347BC300649A13 /* Mappers */,
+				66EA3A9E2C355D2A00649A13 /* APIClient */,
 			);
-			path = Account;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		66EA3A692C347BC300649A13 /* Mappers */ = {
@@ -477,6 +467,14 @@
 			children = (
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		66EA3A9E2C355D2A00649A13 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3A722C347E8100649A13 /* APIStubClient.swift */,
+			);
+			path = APIClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -613,11 +611,13 @@
 			files = (
 				66EA3A662C347B0C00649A13 /* AccountMapper.swift in Sources */,
 				66D876CA2C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift in Sources */,
+				66EA3A9B2C34B3C600649A13 /* FetchAccountSummaryUseCase.swift in Sources */,
 				66EA3A912C3492BD00649A13 /* AppCoordinator.swift in Sources */,
 				66D876CF2C3466490012CA55 /* AccountType.swift in Sources */,
 				66EA3A762C34819B00649A13 /* APIRequest.swift in Sources */,
 				66EA3A642C347B0C00649A13 /* AccountTypeMapper.swift in Sources */,
 				66EA3A5B2C347A5500649A13 /* BalanceDataModel.swift in Sources */,
+				66EA3A9D2C34B3F000649A13 /* FetchAccountSummary.swift in Sources */,
 				66D876CD2C34661C0012CA55 /* AccountSummary.swift in Sources */,
 				66EA3A372C34691400649A13 /* AccountRepository.swift in Sources */,
 				66EA3A882C3490C800649A13 /* AuthorizationMockProvider.swift in Sources */,
@@ -663,7 +663,7 @@
 				66EA3A392C346A5D00649A13 /* FetchAccountSummariesTests.swift in Sources */,
 				66EA3A502C34788100649A13 /* FetchAccountSummariesStubUseCase.swift in Sources */,
 				66EA3A8B2C3491D200649A13 /* AccountsRequestTests.swift in Sources */,
-				66EA3A712C347E5100649A13 /* AccountAPIRepository.swift in Sources */,
+				66EA3A712C347E5100649A13 /* AccountAPIRepositoryTests.swift in Sources */,
 				66D876D72C34675F0012CA55 /* BalanceTests.swift in Sources */,
 				66EA3A4E2C34784500649A13 /* AccountListViewModelTests.swift in Sources */,
 				66EA3A3C2C346A9E00649A13 /* AccountStubRepository.swift in Sources */,
