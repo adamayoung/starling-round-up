@@ -141,7 +141,7 @@ extension AccountListViewController {
         content.text = accountSummary.name
         content.textProperties.font = .preferredFont(forTextStyle: .headline)
 
-        content.secondaryText = accountSummary.balance.formattedValue
+        content.secondaryText = accountSummary.balance.formatted()
         content.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
         content.secondaryTextProperties.color = .secondaryLabel
 

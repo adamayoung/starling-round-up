@@ -51,7 +51,7 @@ final class AccountDetailsSummaryView: UIView {
     }
 
     func configure(with accountSummary: AccountSummary?) {
-        balanceLabel.text = accountSummary?.balance.formattedValue ?? "-"
+        balanceLabel.text = accountSummary?.balance.formatted() ?? "-"
     }
 
 }

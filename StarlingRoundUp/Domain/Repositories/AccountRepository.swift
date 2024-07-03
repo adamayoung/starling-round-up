@@ -13,7 +13,7 @@ protocol AccountRepository {
 
     func account(withID id: Account.ID) async throws -> Account?
 
-    func balance(for accountID: Account.ID) async throws -> Balance?
+    func balance(for accountID: Account.ID) async throws -> Money?
 
 }
 

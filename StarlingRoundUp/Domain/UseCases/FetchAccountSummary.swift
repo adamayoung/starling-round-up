@@ -27,7 +27,7 @@ final class FetchAccountSummary: FetchAccountSummaryUseCase {
             return nil
         }
 
-        let balance: Balance?
+        let balance: Money?
         do {
             balance = try await accountRepository.balance(for: matchingAccount.id)
         } catch let error {
@@ -36,7 +36,7 @@ final class FetchAccountSummary: FetchAccountSummaryUseCase {
 
         let accountSummary = AccountSummary(
             account: matchingAccount,
-            balance: balance ?? Balance(minorUnits: 0, currency: matchingAccount.currency)
+            balance: balance ?? Money(minorUnits: 0, currency: matchingAccount.currency)
         )
 
         return accountSummary

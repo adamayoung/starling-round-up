@@ -28,10 +28,10 @@ final class AccountAPIRepository: AccountRepository {
         return matchingAccount
     }
 
-    func balance(for accountID: Account.ID) async throws -> Balance? {
+    func balance(for accountID: Account.ID) async throws -> Money? {
         let request = BalanceRequest(accountID: accountID)
         let balanceResponse = try await apiClient.perform(request)
-        let balance = BalanceMapper.map(balanceResponse.amount)
+        let balance = MoneyMapper.map(balanceResponse.amount)
         return balance
     }
 

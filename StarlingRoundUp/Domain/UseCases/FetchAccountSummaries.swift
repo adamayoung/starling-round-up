@@ -42,7 +42,7 @@ final class FetchAccountSummaries: FetchAccountSummariesUseCase {
 extension FetchAccountSummaries {
 
     private func accountSummaries(for accounts: [Account]) async throws -> [AccountSummary] {
-        try await withThrowingTaskGroup(of: (Account, Balance?).self, returning: [AccountSummary].self) { taskGroup in
+        try await withThrowingTaskGroup(of: (Account, Money?).self, returning: [AccountSummary].self) { taskGroup in
             for account in accounts {
                 taskGroup.addTask {
                     try await (account, self.accountRepository.balance(for: account.id))
@@ -51,7 +51,7 @@ extension FetchAccountSummaries {
 
             var accountSummaries = [AccountSummary]()
             while let (account, balance) = try await taskGroup.next() {
-                let balance = balance ?? Balance(minorUnits: 0, currency: account.currency)
+                let balance = balance ?? Money(minorUnits: 0, currency: account.currency)
                 accountSummaries.append(AccountSummary(account: account, balance: balance))
             }
 

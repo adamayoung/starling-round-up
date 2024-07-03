@@ -11,13 +11,13 @@ struct AccountSummary: Identifiable, Sendable, Hashable {
 
     let id: String
     let name: String
-    let balance: Balance
+    let balance: Money
 
 }
 
 extension AccountSummary {
 
-    init(account: Account, balance: Balance) {
+    init(account: Account, balance: Money) {
         self.init(
             id: account.id,
             name: account.name,
