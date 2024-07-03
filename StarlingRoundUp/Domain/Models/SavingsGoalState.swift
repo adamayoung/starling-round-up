@@ -15,5 +15,6 @@ enum SavingsGoalState {
     case archived
     case restoring
     case pending
+    case unknown
 
 }

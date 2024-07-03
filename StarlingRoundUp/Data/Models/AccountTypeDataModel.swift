@@ -13,7 +13,7 @@ enum AccountTypeDataModel: String, Decodable {
     case additional = "ADDITIONAL"
     case loan = "LOAN"
     case fixTermDeposit = "FIXED_TERM_DEPOSIT"
-    case unknown
+    case unknown = "UNKNOWN"
 
     init(from decoder: Decoder) throws {
         self = try AccountTypeDataModel(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
