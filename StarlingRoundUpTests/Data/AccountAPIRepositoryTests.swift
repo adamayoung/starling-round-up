@@ -25,7 +25,7 @@ final class AccountAPIRepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testAccountsMakeCorrectAPIRequest() async throws {
+    func testAccountsMakesCorrectAPIRequest() async throws {
         let expectedAPIRequest = AccountsRequest()
 
         _ = try? await repository.accounts()
