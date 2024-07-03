@@ -35,7 +35,7 @@ final class APIHTTPClient: APIClient {
             urlRequest.addValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
         }
 
-        let (data, response) = try await urlSession.data(for: urlRequest)
+        let (data, _) = try await urlSession.data(for: urlRequest)
 
         let jsonDecoder = JSONDecoder.starlingAPI
         let responseObject: Request.Response
