@@ -33,7 +33,7 @@ final class AccountDetailsViewModelTests: XCTestCase {
     }
 
     func testInitWithAccountSummarySetsAccountID() {
-        let accountSummary = AccountSummary(id: "1", name: "Test 1", balance: Balance(minorUnits: 0, currency: "GBP"))
+        let accountSummary = AccountSummary(id: "1", name: "Test 1", balance: Money(minorUnits: 0, currency: "GBP"))
 
         let viewModel = AccountDetailsViewModel(
             accountSummary: accountSummary,
@@ -48,7 +48,7 @@ final class AccountDetailsViewModelTests: XCTestCase {
         let accountSummary = AccountSummary(
             id: accountID,
             name: "Test 1",
-            balance: Balance(minorUnits: 0, currency: "GBP")
+            balance: Money(minorUnits: 0, currency: "GBP")
         )
         fetchAccountSummaryUseCase.result = .success([accountID: accountSummary])
         let viewModel = AccountDetailsViewModel(

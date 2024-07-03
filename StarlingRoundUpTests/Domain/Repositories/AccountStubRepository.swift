@@ -16,7 +16,7 @@ final class AccountStubRepository: AccountRepository {
     var accountResult: Result<Account?, AccountRepositoryError> = .failure(.unknown)
 
     private(set) var lastBalanceAccountID: Account.ID?
-    var balanceResult: Result<[String: Balance], AccountRepositoryError> = .failure(.unknown)
+    var balanceResult: Result<[String: Money], AccountRepositoryError> = .failure(.unknown)
 
     init() {}
 
@@ -30,7 +30,7 @@ final class AccountStubRepository: AccountRepository {
         return try accountResult.get()
     }
 
-    func balance(for accountID: Account.ID) async throws -> Balance? {
+    func balance(for accountID: Account.ID) async throws -> Money? {
         lastBalanceAccountID = accountID
 
         let balanceResults = try balanceResult.get()

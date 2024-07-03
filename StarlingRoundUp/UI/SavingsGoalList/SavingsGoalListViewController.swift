@@ -1,25 +1,19 @@
 //
-//  AccountListViewController.swift
+//  SavingsGoalListViewController.swift
 //  StarlingRoundUp
 //
-//  Created by Adam Young on 02/07/2024.
+//  Created by Adam Young on 03/07/2024.
 //
 
 import UIKit
 
-protocol AccountListView: AnyObject {
+protocol SavingsGoalListView: AnyObject {}
 
-    var delegate: (any AccountListViewControllerDelegate)? { get set }
+protocol SavingsGoalListViewControlling: SavingsGoalListView, UIViewController {}
 
-}
+final class SavingsGoalListViewController: UITableViewController, SavingsGoalListViewControlling {
 
-protocol AccountListViewControlling: AccountListView, UIViewController {}
-
-final class AccountListViewController: UITableViewController, AccountListViewControlling {
-
-    weak var delegate: (any AccountListViewControllerDelegate)?
-
-    private let viewModel: any AccountListViewModeling
+    private let viewModel: any SavingsGoalsListViewModeling
     private lazy var dataSource = makeDataSource()
 
     private lazy var tableBackgroundLoadingIndicator: UIActivityIndicatorView = {
@@ -28,7 +22,9 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
         return view
     }()
 
-    init(viewModel: some AccountListViewModeling) {
+    private lazy var savingsGoalsUnavailableView = SavingsGoalsUnavailableView()
+
+    init(viewModel: some SavingsGoalsListViewModeling) {
         self.viewModel = viewModel
         super.init(style: .insetGrouped)
     }
@@ -40,9 +36,9 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("ACCOUNTS", comment: "Accounts")
+        title = NSLocalizedString("SAVINGS_GOALS", comment: "Savings Goals")
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "accountCellIdentifier")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "savingsGoalCellIdentifier")
         tableView.dataSource = dataSource
 
         let refreshControl = UIRefreshControl()
@@ -57,6 +53,14 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
             tableBackgroundLoadingIndicator.centerYAnchor.constraint(equalTo: tableBackgroundView.centerYAnchor)
         ])
 
+        tableBackgroundView.addSubview(savingsGoalsUnavailableView)
+        savingsGoalsUnavailableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            savingsGoalsUnavailableView.centerXAnchor.constraint(equalTo: tableBackgroundView.centerXAnchor),
+            savingsGoalsUnavailableView.centerYAnchor.constraint(equalTo: tableBackgroundView.centerYAnchor)
+        ])
+        savingsGoalsUnavailableView.isHidden = true
+
         tableView.backgroundView = tableBackgroundView
         tableBackgroundLoadingIndicator.startAnimating()
     }
@@ -68,24 +72,15 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
 
 }
 
-extension AccountListViewController {
-
-    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let accountSummary = viewModel.accountSummaries[indexPath.section]
-        delegate?.viewController(self, didSelectAccount: accountSummary)
-    }
-
-}
-
-extension AccountListViewController {
+extension SavingsGoalListViewController {
 
     @objc
     private func refreshData() {
         Task {
             do {
-                let shouldAnimateUpdate = !viewModel.accountSummaries.isEmpty
-                try await viewModel.fetchAccountSummaries()
-                update(with: viewModel.accountSummaries, animate: shouldAnimateUpdate)
+                let shouldAnimateUpdate = !viewModel.savingsGoals.isEmpty
+                try await viewModel.fetchSavingsGoals()
+                update(with: viewModel.savingsGoals, animate: shouldAnimateUpdate)
             } catch let error {
                 handleError(error)
             }
@@ -97,10 +92,10 @@ extension AccountListViewController {
 
     private func handleError(_: Error) {
         let alertViewController = UIAlertController(
-            title: NSLocalizedString("CANNOT_LOAD_ACCOUNTS", comment: "Cannot Load Accounts"),
+            title: NSLocalizedString("CANNOT_LOAD_SAVINGS_GOALS", comment: "Cannot Load Savings Goals"),
             message: NSLocalizedString(
-                "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNTS",
-                comment: "There was an error loading your accounts."
+                "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS",
+                comment: "There was an error loading your savings goals."
             ),
             preferredStyle: .alert
         )
@@ -117,14 +112,14 @@ extension AccountListViewController {
 
 }
 
-extension AccountListViewController {
+extension SavingsGoalListViewController {
 
-    private func makeDataSource() -> UITableViewDiffableDataSource<Int, AccountSummary> {
+    private func makeDataSource() -> UITableViewDiffableDataSource<Int, SavingsGoal> {
         UITableViewDiffableDataSource(
             tableView: tableView,
             cellProvider: { [weak self] tableView, indexPath, accountSummary in
                 let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "accountCellIdentifier",
+                    withIdentifier: "savingsGoalCellIdentifier",
                     for: indexPath
                 )
 
@@ -135,28 +130,28 @@ extension AccountListViewController {
         )
     }
 
-    private func configureCell(_ cell: UITableViewCell, with accountSummary: AccountSummary) {
+    private func configureCell(_ cell: UITableViewCell, with savingsGoal: SavingsGoal) {
         var content = cell.defaultContentConfiguration()
 
-        content.text = accountSummary.name
+        content.text = savingsGoal.name
         content.textProperties.font = .preferredFont(forTextStyle: .headline)
 
-        content.secondaryText = accountSummary.balance.formatted()
+        content.secondaryText = savingsGoal.totalSaved.formatted() + "/" + savingsGoal.target.formatted()
         content.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
         content.secondaryTextProperties.color = .secondaryLabel
 
-        content.image = UIImage(systemName: ImageName.account)
+        content.image = UIImage(systemName: ImageName.savingsGoal)
 
         cell.contentConfiguration = content
-        cell.accessoryType = .disclosureIndicator
+        cell.selectionStyle = .none
     }
 
-    private func update(with accountSummaries: [AccountSummary], animate: Bool = true) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, AccountSummary>()
-        for (index, accountSummary) in accountSummaries.enumerated() {
-            snapshot.appendSections([index])
-            snapshot.appendItems([accountSummary], toSection: index)
-        }
+    private func update(with savingsGoals: [SavingsGoal], animate: Bool = true) {
+        savingsGoalsUnavailableView.isHidden = !savingsGoals.isEmpty
+
+        var snapshot = NSDiffableDataSourceSnapshot<Int, SavingsGoal>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(savingsGoals, toSection: 0)
 
         dataSource.apply(snapshot, animatingDifferences: animate)
     }

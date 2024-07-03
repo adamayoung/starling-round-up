@@ -45,6 +45,28 @@
         }
       }
     },
+    "CANNOT_LOAD_SAVINGS_GOALS" : {
+      "comment" : "Cannot Load Savings Goals",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot Load Savings Goals"
+          }
+        }
+      }
+    },
+    "NO_SAVINGS_GOALS" : {
+      "comment" : "No Savings Goals",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Savings Goals"
+          }
+        }
+      }
+    },
     "OK" : {
       "comment" : "OK",
       "localizations" : {
@@ -85,6 +107,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "There was an error loading your accounts."
+          }
+        }
+      }
+    },
+    "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS" : {
+      "comment" : "There was an error loading your savings goals.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error loading your savings goals."
           }
         }
       }

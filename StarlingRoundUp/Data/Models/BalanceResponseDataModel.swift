@@ -9,6 +9,6 @@ import Foundation
 
 struct BalanceResponseDataModel: Decodable {
 
-    let amount: BalanceDataModel
+    let amount: MoneyDataModel
 
 }

@@ -1,5 +1,5 @@
 //
-//  AccountDetailsSummaryView.swift
+//  SavingsGoalsUnavailableView.swift
 //  StarlingRoundUp
 //
 //  Created by Adam Young on 03/07/2024.
@@ -7,31 +7,33 @@
 
 import UIKit
 
-final class AccountDetailsSummaryView: UIView {
+final class SavingsGoalsUnavailableView: UIView {
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 8
         return stackView
     }()
 
-    private lazy var balanceLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .largeTitle)
-        return label
+    private lazy var imageView: UIImageView = {
+        let image = UIImage(systemName: ImageName.savingsGoal)
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .secondaryLabel
+        return imageView
     }()
 
-    private lazy var balanceTextLabel: UILabel = {
+    private lazy var messageLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .secondaryLabel
-        label.text = NSLocalizedString("BALANCE", comment: "Balance")
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.textAlignment = .center
+        label.text = NSLocalizedString("NO_SAVINGS_GOALS", comment: "No Savings Goals")
         return label
     }()
 
     init() {
         super.init(frame: .zero)
-
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -41,17 +43,17 @@ final class AccountDetailsSummaryView: UIView {
             stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
         ])
 
-        stackView.addArrangedSubview(balanceLabel)
-        stackView.addArrangedSubview(balanceTextLabel)
+        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(messageLabel)
+
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 100)
+        ])
     }
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    func configure(with accountSummary: AccountSummary?) {
-        balanceLabel.text = accountSummary?.balance.formatted() ?? "-"
     }
 
 }

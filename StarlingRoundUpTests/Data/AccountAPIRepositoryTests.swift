@@ -25,7 +25,7 @@ final class AccountAPIRepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testAccountsMakeCorrectAPIRequest() async throws {
+    func testAccountsMakesCorrectAPIRequest() async throws {
         let expectedAPIRequest = AccountsRequest()
 
         _ = try? await repository.accounts()
@@ -72,7 +72,7 @@ final class AccountAPIRepositoryTests: XCTestCase {
     }
 
     func testBalanceReturnsBalance() async throws {
-        let balanceDataModel = BalanceDataModel(minorUnits: 1234, currency: "GBP")
+        let balanceDataModel = MoneyDataModel(minorUnits: 1234, currency: "GBP")
         let responseDataModel = BalanceResponseDataModel(amount: balanceDataModel)
         apiClient.responseResult = .success(responseDataModel)
 
