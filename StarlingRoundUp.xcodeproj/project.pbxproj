@@ -95,6 +95,10 @@
 		66EA3AEF2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AEE2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift */; };
 		66EA3AF12C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AF02C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift */; };
 		66EA3AF42C35CBD200649A13 /* SavingsGoalsUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AF32C35CBD200649A13 /* SavingsGoalsUnavailableView.swift */; };
+		66EA3AF62C35DB5000649A13 /* CreateSavingsGoalUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AF52C35DB5000649A13 /* CreateSavingsGoalUseCase.swift */; };
+		66EA3AFA2C35DCFB00649A13 /* CreateSavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AF92C35DCFB00649A13 /* CreateSavingsGoal.swift */; };
+		66EA3AFC2C35DFAC00649A13 /* CreateSavingsGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AFB2C35DFAC00649A13 /* CreateSavingsGoalTests.swift */; };
+		66EA3AFE2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AFD2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +213,10 @@
 		66EA3AEE2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsListViewModelTests.swift; sourceTree = "<group>"; };
 		66EA3AF02C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSavingsGoalsStubUseCase.swift; sourceTree = "<group>"; };
 		66EA3AF32C35CBD200649A13 /* SavingsGoalsUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsUnavailableView.swift; sourceTree = "<group>"; };
+		66EA3AF52C35DB5000649A13 /* CreateSavingsGoalUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalUseCase.swift; sourceTree = "<group>"; };
+		66EA3AF92C35DCFB00649A13 /* CreateSavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoal.swift; sourceTree = "<group>"; };
+		66EA3AFB2C35DFAC00649A13 /* CreateSavingsGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalTests.swift; sourceTree = "<group>"; };
+		66EA3AFD2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalInputTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +336,7 @@
 				66D876C92C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift */,
 				66EA3A9A2C34B3C600649A13 /* FetchAccountSummaryUseCase.swift */,
 				66EA3AB72C3580D600649A13 /* FetchSavingsGoalsUseCase.swift */,
+				66EA3AF52C35DB5000649A13 /* CreateSavingsGoalUseCase.swift */,
 				66EA3A312C34689F00649A13 /* UseCases */,
 				66D876CB2C3466100012CA55 /* Models */,
 				66EA3A352C34690200649A13 /* Repositories */,
@@ -383,6 +392,7 @@
 				66EA3A322C3468BA00649A13 /* FetchAccountSummaries.swift */,
 				66EA3A9C2C34B3F000649A13 /* FetchAccountSummary.swift */,
 				66EA3ABD2C3581E500649A13 /* FetchSavingsGoals.swift */,
+				66EA3AF92C35DCFB00649A13 /* CreateSavingsGoal.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -393,6 +403,8 @@
 				66EA3A382C346A5D00649A13 /* FetchAccountSummariesTests.swift */,
 				66EA3AAF2C356CEF00649A13 /* FetchAccountSummaryTests.swift */,
 				66EA3AC12C3582AC00649A13 /* FetchSavingsGoalsTests.swift */,
+				66EA3AFB2C35DFAC00649A13 /* CreateSavingsGoalTests.swift */,
+				66EA3AFD2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -819,6 +831,7 @@
 				66EA3AD22C3587D400649A13 /* SavingsGoalsRequest.swift in Sources */,
 				66B899322C3414310056F308 /* AccountListViewController.swift in Sources */,
 				66EA3A822C348E9F00649A13 /* APIHTTPClient.swift in Sources */,
+				66EA3AFA2C35DCFB00649A13 /* CreateSavingsGoal.swift in Sources */,
 				66EA3AAB2C35684700649A13 /* AccountDetailsSummaryView.swift in Sources */,
 				66EA3A782C3481B600649A13 /* APIRequestMethod.swift in Sources */,
 				66EA3A842C348EE200649A13 /* AuthorizationProviding.swift in Sources */,
@@ -834,6 +847,7 @@
 				66EA3A862C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift in Sources */,
 				66EA3A522C347A2500649A13 /* APIClient.swift in Sources */,
 				66EA3ACE2C3587B500649A13 /* SavingsGoalStateDataModel.swift in Sources */,
+				66EA3AF62C35DB5000649A13 /* CreateSavingsGoalUseCase.swift in Sources */,
 				66EA3A5D2C347A5500649A13 /* AccountTypeDataModel.swift in Sources */,
 				66EA3AB82C3580D600649A13 /* FetchSavingsGoalsUseCase.swift in Sources */,
 				66EA3A592C347A5500649A13 /* BalanceResponseDataModel.swift in Sources */,
@@ -868,6 +882,7 @@
 				66EA3A6D2C347C6C00649A13 /* MoneyMapperTests.swift in Sources */,
 				66EA3A8D2C34924400649A13 /* BalanceRequestTests.swift in Sources */,
 				66EA3A6B2C347BD200649A13 /* AccountTypeMapperTests.swift in Sources */,
+				66EA3AFC2C35DFAC00649A13 /* CreateSavingsGoalTests.swift in Sources */,
 				66EA3AB62C356FEF00649A13 /* FetchAccountSummaryStubUseCase.swift in Sources */,
 				66EA3AC22C3582AC00649A13 /* FetchSavingsGoalsTests.swift in Sources */,
 				66EA3A732C347E8100649A13 /* APIStubClient.swift in Sources */,
@@ -882,6 +897,7 @@
 				66EA3A4E2C34784500649A13 /* AccountListViewModelTests.swift in Sources */,
 				66EA3A3C2C346A9E00649A13 /* AccountStubRepository.swift in Sources */,
 				66EA3AB42C356FB200649A13 /* AccountDetailsViewModelTests.swift in Sources */,
+				66EA3AFE2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift in Sources */,
 				66EA3AE02C358C0F00649A13 /* SavingsGoalAPIRepositoryTests.swift in Sources */,
 				66EA3ADC2C3589BD00649A13 /* SavingsGoalStateMapperTests.swift in Sources */,
 				66EA3AD42C35882B00649A13 /* SavingsGoalsRequestTests.swift in Sources */,

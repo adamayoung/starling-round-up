@@ -22,4 +22,6 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
         return savingsGoals
     }
 
+    func create(savingsGoal _: SavingsGoalInput) async throws {}
+
 }

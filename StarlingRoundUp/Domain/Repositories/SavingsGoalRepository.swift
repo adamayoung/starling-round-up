@@ -11,6 +11,8 @@ protocol SavingsGoalRepository {
 
     func savingsGoals(for accountID: Account.ID) async throws -> [SavingsGoal]
 
+    func create(savingsGoal: SavingsGoalInput) async throws
+
 }
 
 enum SavingsGoalRepositoryError: Error {
