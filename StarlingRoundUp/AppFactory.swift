@@ -37,9 +37,38 @@ extension AppFactory {
 
 extension AppFactory {
 
+    func accountDetailsViewController(accountID: Account.ID) -> some AccountDetailsViewControlling {
+        let viewModel = accountDetailsViewModel(accountID: accountID)
+        return AccountDetailsViewController(viewModel: viewModel)
+    }
+
+    func accountDetailsViewController(accountSummary: AccountSummary) -> some AccountDetailsViewControlling {
+        let viewModel = accountDetailsViewModel(accountSummary: accountSummary)
+        return AccountDetailsViewController(viewModel: viewModel)
+    }
+
+    private func accountDetailsViewModel(accountID: Account.ID) -> some AccountDetailsViewModeling {
+        let useCase = fetchAccountSummaryUseCase()
+        return AccountDetailsViewModel(accountID: accountID, fetchAccountSummaryUseCase: useCase)
+    }
+
+    private func accountDetailsViewModel(accountSummary: AccountSummary) -> some AccountDetailsViewModeling {
+        let useCase = fetchAccountSummaryUseCase()
+        return AccountDetailsViewModel(accountSummary: accountSummary, fetchAccountSummaryUseCase: useCase)
+    }
+
+}
+
+extension AppFactory {
+
     private func fetchAccountSummariesUseCase() -> some FetchAccountSummariesUseCase {
         let accountRepository = accountRepository()
         return FetchAccountSummaries(accountRepository: accountRepository)
+    }
+
+    private func fetchAccountSummaryUseCase() -> some FetchAccountSummaryUseCase {
+        let accountRepository = accountRepository()
+        return FetchAccountSummary(accountRepository: accountRepository)
     }
 
 }

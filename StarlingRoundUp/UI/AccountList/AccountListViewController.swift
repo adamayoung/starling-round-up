@@ -7,11 +7,17 @@
 
 import UIKit
 
-protocol AccountListView: AnyObject {}
+protocol AccountListView: AnyObject {
+
+    var delegate: (any AccountListViewControllerDelegate)? { get set }
+
+}
 
 protocol AccountListViewControlling: AccountListView, UIViewController {}
 
 final class AccountListViewController: UITableViewController, AccountListViewControlling {
+
+    weak var delegate: (any AccountListViewControllerDelegate)?
 
     private let viewModel: any AccountListViewModeling
     private lazy var dataSource = makeDataSource()
@@ -53,8 +59,20 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
 
         tableView.backgroundView = tableBackgroundView
         tableBackgroundLoadingIndicator.startAnimating()
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         refreshData()
+    }
+
+}
+
+extension AccountListViewController {
+
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let accountSummary = viewModel.accountSummaries[indexPath.section]
+        delegate?.viewController(self, didSelectAccount: accountSummary)
     }
 
 }
@@ -79,7 +97,7 @@ extension AccountListViewController {
 
     private func handleError(_: Error) {
         let alertViewController = UIAlertController(
-            title: NSLocalizedString("CANNOT_GET_ACCOUNTS", comment: "Cannot Load Accounts"),
+            title: NSLocalizedString("CANNOT_LOAD_ACCOUNTS", comment: "Cannot Load Accounts"),
             message: NSLocalizedString(
                 "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNTS",
                 comment: "There was an error loading your accounts."
@@ -127,7 +145,7 @@ extension AccountListViewController {
         content.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
         content.secondaryTextProperties.color = .secondaryLabel
 
-        content.image = UIImage(systemName: "creditcard.fill")
+        content.image = UIImage(systemName: ImageName.account)
 
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator

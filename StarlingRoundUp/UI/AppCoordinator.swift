@@ -23,9 +23,19 @@ final class AppCoordinator: Coordinator {
 
         let navigationController = factory.mainNavigationController()
         navigationController.viewControllers = [accountListViewController]
+        accountListViewController.delegate = self
 
         window.rootViewController = navigationController
         self.navigationController = navigationController
+    }
+
+}
+
+extension AppCoordinator: AccountListViewControllerDelegate {
+
+    func viewController(_: some AccountListViewControlling, didSelectAccount accountSummary: AccountSummary) {
+        let accountDetailsViewController = factory.accountDetailsViewController(accountSummary: accountSummary)
+        navigationController.pushViewController(accountDetailsViewController, animated: true)
     }
 
 }
