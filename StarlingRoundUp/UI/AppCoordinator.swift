@@ -48,7 +48,21 @@ extension AppCoordinator: AccountDetailsViewControllerDelegate {
         didSelectSavingsGoalsForAccount accountID: Account.ID
     ) {
         let savingsGoalListViewController = factory.savingsGoalListViewController(accountID: accountID)
+        savingsGoalListViewController.delegate = self
         navigationController.pushViewController(savingsGoalListViewController, animated: true)
+    }
+
+}
+
+extension AppCoordinator: SavingsGoalListViewControllerDelegate {
+
+    func viewController(
+        _: some SavingsGoalListViewControlling,
+        wantsToCreateSavingsGoalForAccount accountID: Account.ID
+    ) {
+        let addSavingsGoalViewController = factory.addSavingsGoalViewController(accountID: accountID)
+        let addNavigationController = UINavigationController(rootViewController: addSavingsGoalViewController)
+        navigationController.topViewController?.present(addNavigationController, animated: true)
     }
 
 }

@@ -75,6 +75,14 @@ extension AppFactory {
 
 extension AppFactory {
 
+    func addSavingsGoalViewController(accountID _: Account.ID) -> some AddSavingsGoalViewControlling {
+        AddSavingsGoalViewController()
+    }
+
+}
+
+extension AppFactory {
+
     private func fetchAccountSummariesUseCase() -> some FetchAccountSummariesUseCase {
         let accountRepository = accountRepository()
         return FetchAccountSummaries(accountRepository: accountRepository)
@@ -88,6 +96,11 @@ extension AppFactory {
     private func fetchSavingsGoalsUseCase() -> some FetchSavingsGoalsUseCase {
         let savingsGoalRepository = savingsGoalRepository()
         return FetchSavingsGoals(savingsGoalRepository: savingsGoalRepository)
+    }
+
+    private func createSavingsGoalUseCase() -> some CreateSavingsGoalUseCase {
+        let savingsGoalRepository = savingsGoalRepository()
+        return CreateSavingsGoal(savingsGoalRepository: savingsGoalRepository)
     }
 
 }

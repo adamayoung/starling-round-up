@@ -56,6 +56,17 @@
         }
       }
     },
+    "CREATE_A_SAVINGS_GOAL" : {
+      "comment" : "Create a Savings Goal",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create a Savings Goal"
+          }
+        }
+      }
+    },
     "NO_SAVINGS_GOALS" : {
       "comment" : "No Savings Goals",
       "localizations" : {

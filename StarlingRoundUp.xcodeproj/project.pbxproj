@@ -104,6 +104,8 @@
 		66EA3B042C35E80800649A13 /* CreateSavingsGoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B032C35E80800649A13 /* CreateSavingsGoalRequest.swift */; };
 		66EA3B082C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B072C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift */; };
 		66EA3B0A2C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B092C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift */; };
+		66EA3B0F2C35F27D00649A13 /* AddSavingsGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B0E2C35F27D00649A13 /* AddSavingsGoalViewController.swift */; };
+		66EA3B112C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B102C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -227,6 +229,8 @@
 		66EA3B032C35E80800649A13 /* CreateSavingsGoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalRequest.swift; sourceTree = "<group>"; };
 		66EA3B072C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalsRequestTests.swift; sourceTree = "<group>"; };
 		66EA3B092C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalResponseDataModel.swift; sourceTree = "<group>"; };
+		66EA3B0E2C35F27D00649A13 /* AddSavingsGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSavingsGoalViewController.swift; sourceTree = "<group>"; };
+		66EA3B102C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalListViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +328,7 @@
 				66D876C72C3465860012CA55 /* AccountList */,
 				66EA3A9F2C355D9F00649A13 /* AccountDetails */,
 				66EA3AE12C358F0100649A13 /* SavingsGoalList */,
+				66EA3B0D2C35F24E00649A13 /* AddSavingsGoal */,
 				66EA3AAC2C356C3000649A13 /* Shared */,
 			);
 			path = UI;
@@ -652,6 +657,7 @@
 			isa = PBXGroup;
 			children = (
 				66EA3AE22C35C07100649A13 /* SavingsGoalListViewController.swift */,
+				66EA3B102C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift */,
 				66EA3AE62C35C24800649A13 /* SavingsGoalsListViewModeling.swift */,
 				66EA3AE82C35C27300649A13 /* ViewModels */,
 				66EA3AF22C35CBB200649A13 /* Views */,
@@ -689,6 +695,14 @@
 				66EA3AF32C35CBD200649A13 /* SavingsGoalsUnavailableView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		66EA3B0D2C35F24E00649A13 /* AddSavingsGoal */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3B0E2C35F27D00649A13 /* AddSavingsGoalViewController.swift */,
+			);
+			path = AddSavingsGoal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -841,6 +855,7 @@
 				66EA3A5B2C347A5500649A13 /* MoneyDataModel.swift in Sources */,
 				66EA3A9D2C34B3F000649A13 /* FetchAccountSummary.swift in Sources */,
 				66EA3ABE2C3581E500649A13 /* FetchSavingsGoals.swift in Sources */,
+				66EA3B112C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift in Sources */,
 				66D876CD2C34661C0012CA55 /* AccountSummary.swift in Sources */,
 				66EA3A372C34691400649A13 /* AccountRepository.swift in Sources */,
 				66EA3A882C3490C800649A13 /* AuthorizationMockProvider.swift in Sources */,
@@ -882,6 +897,7 @@
 				66EA3A5F2C347AE500649A13 /* AccountAPIRepository.swift in Sources */,
 				66EA3A7D2C3482A000649A13 /* AccountsRequest.swift in Sources */,
 				66EA3AD02C3587B500649A13 /* SavingsGoalsResponseDataModel.swift in Sources */,
+				66EA3B0F2C35F27D00649A13 /* AddSavingsGoalViewController.swift in Sources */,
 				66D876D32C3466F30012CA55 /* Account.swift in Sources */,
 				66EA3B022C35E6EF00649A13 /* JSONEncoder+StarlingAPI.swift in Sources */,
 				66EA3A332C3468BA00649A13 /* FetchAccountSummaries.swift in Sources */,
