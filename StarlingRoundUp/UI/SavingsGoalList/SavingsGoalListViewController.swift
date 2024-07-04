@@ -11,6 +11,8 @@ protocol SavingsGoalListView: AnyObject {
 
     var delegate: (any SavingsGoalListViewControllerDelegate)? { get set }
 
+    func refreshData()
+
 }
 
 protocol SavingsGoalListViewControlling: SavingsGoalListView, UIViewController {}
@@ -94,7 +96,7 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
 extension SavingsGoalListViewController {
 
     @objc
-    private func refreshData() {
+    func refreshData() {
         Task {
             do {
                 let shouldAnimateUpdate = !viewModel.savingsGoals.isEmpty

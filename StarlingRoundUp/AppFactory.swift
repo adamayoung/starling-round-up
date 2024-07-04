@@ -75,8 +75,14 @@ extension AppFactory {
 
 extension AppFactory {
 
-    func addSavingsGoalViewController(accountID _: Account.ID) -> some AddSavingsGoalViewControlling {
-        AddSavingsGoalViewController()
+    func addSavingsGoalViewController(accountID: Account.ID) -> some AddSavingsGoalViewControlling {
+        let viewModel = addSavingsGoalViewModel(accountID: accountID)
+        return AddSavingsGoalViewController(viewModel: viewModel)
+    }
+
+    private func addSavingsGoalViewModel(accountID: Account.ID) -> some AddSavingsGoalViewModeling {
+        let useCase = createSavingsGoalUseCase()
+        return AddSavingsGoalViewModel(accountID: accountID, createSavingsGoalUseCase: useCase)
     }
 
 }

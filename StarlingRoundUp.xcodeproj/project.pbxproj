@@ -106,6 +106,13 @@
 		66EA3B0A2C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B092C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift */; };
 		66EA3B0F2C35F27D00649A13 /* AddSavingsGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B0E2C35F27D00649A13 /* AddSavingsGoalViewController.swift */; };
 		66EA3B112C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B102C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift */; };
+		66EA3B142C36048100649A13 /* FormTextFieldContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B132C36048100649A13 /* FormTextFieldContentView.swift */; };
+		66EA3B162C36084A00649A13 /* AddSavingsGoalViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B152C36084A00649A13 /* AddSavingsGoalViewModeling.swift */; };
+		66EA3B192C36086B00649A13 /* AddSavingsGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B182C36086B00649A13 /* AddSavingsGoalViewModel.swift */; };
+		66EA3B1B2C360D8400649A13 /* FormMoneyFieldContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B1A2C360D8400649A13 /* FormMoneyFieldContentView.swift */; };
+		66EA3B1D2C3613EC00649A13 /* AddSavingsGoalViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B1C2C3613EC00649A13 /* AddSavingsGoalViewControllerDelegate.swift */; };
+		66EA3B212C361A0A00649A13 /* AddSavingsGoalViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B202C361A0A00649A13 /* AddSavingsGoalViewModelTests.swift */; };
+		66EA3B232C361A3900649A13 /* CreateSavingsGoalStubUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3B222C361A3900649A13 /* CreateSavingsGoalStubUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +238,13 @@
 		66EA3B092C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalResponseDataModel.swift; sourceTree = "<group>"; };
 		66EA3B0E2C35F27D00649A13 /* AddSavingsGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSavingsGoalViewController.swift; sourceTree = "<group>"; };
 		66EA3B102C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalListViewControllerDelegate.swift; sourceTree = "<group>"; };
+		66EA3B132C36048100649A13 /* FormTextFieldContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextFieldContentView.swift; sourceTree = "<group>"; };
+		66EA3B152C36084A00649A13 /* AddSavingsGoalViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSavingsGoalViewModeling.swift; sourceTree = "<group>"; };
+		66EA3B182C36086B00649A13 /* AddSavingsGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSavingsGoalViewModel.swift; sourceTree = "<group>"; };
+		66EA3B1A2C360D8400649A13 /* FormMoneyFieldContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormMoneyFieldContentView.swift; sourceTree = "<group>"; };
+		66EA3B1C2C3613EC00649A13 /* AddSavingsGoalViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSavingsGoalViewControllerDelegate.swift; sourceTree = "<group>"; };
+		66EA3B202C361A0A00649A13 /* AddSavingsGoalViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSavingsGoalViewModelTests.swift; sourceTree = "<group>"; };
+		66EA3B222C361A3900649A13 /* CreateSavingsGoalStubUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSavingsGoalStubUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,6 +392,7 @@
 				66EA3A4F2C34788100649A13 /* FetchAccountSummariesStubUseCase.swift */,
 				66EA3AB52C356FEF00649A13 /* FetchAccountSummaryStubUseCase.swift */,
 				66EA3AF02C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift */,
+				66EA3B222C361A3900649A13 /* CreateSavingsGoalStubUseCase.swift */,
 				66EA3A342C3468F100649A13 /* UseCases */,
 				66D876D52C3467420012CA55 /* Models */,
 				66EA3A3A2C346A9000649A13 /* Repositories */,
@@ -469,6 +484,7 @@
 				66EA3A4B2C34781300649A13 /* AccountList */,
 				66EA3AB12C356F7700649A13 /* AccountDetails */,
 				66EA3AEC2C35C83900649A13 /* SavingsGoalList */,
+				66EA3B1E2C3619EB00649A13 /* AddSavingsGoal */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -701,8 +717,45 @@
 			isa = PBXGroup;
 			children = (
 				66EA3B0E2C35F27D00649A13 /* AddSavingsGoalViewController.swift */,
+				66EA3B1C2C3613EC00649A13 /* AddSavingsGoalViewControllerDelegate.swift */,
+				66EA3B152C36084A00649A13 /* AddSavingsGoalViewModeling.swift */,
+				66EA3B172C36084D00649A13 /* ViewModels */,
+				66EA3B122C36045C00649A13 /* ContentViews */,
 			);
 			path = AddSavingsGoal;
+			sourceTree = "<group>";
+		};
+		66EA3B122C36045C00649A13 /* ContentViews */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3B132C36048100649A13 /* FormTextFieldContentView.swift */,
+				66EA3B1A2C360D8400649A13 /* FormMoneyFieldContentView.swift */,
+			);
+			path = ContentViews;
+			sourceTree = "<group>";
+		};
+		66EA3B172C36084D00649A13 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3B182C36086B00649A13 /* AddSavingsGoalViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		66EA3B1E2C3619EB00649A13 /* AddSavingsGoal */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3B1F2C3619F300649A13 /* ViewModels */,
+			);
+			path = AddSavingsGoal;
+			sourceTree = "<group>";
+		};
+		66EA3B1F2C3619F300649A13 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				66EA3B202C361A0A00649A13 /* AddSavingsGoalViewModelTests.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -845,8 +898,10 @@
 				66EA3AA12C355DBB00649A13 /* AccountDetailsViewController.swift in Sources */,
 				66EA3A912C3492BD00649A13 /* AppCoordinator.swift in Sources */,
 				66EA3AC02C35820C00649A13 /* SavingsGoalRepository.swift in Sources */,
+				66EA3B142C36048100649A13 /* FormTextFieldContentView.swift in Sources */,
 				66D876CF2C3466490012CA55 /* AccountType.swift in Sources */,
 				66EA3A762C34819B00649A13 /* APIRequest.swift in Sources */,
+				66EA3B1B2C360D8400649A13 /* FormMoneyFieldContentView.swift in Sources */,
 				66EA3A642C347B0C00649A13 /* AccountTypeMapper.swift in Sources */,
 				66EA3ABA2C3580FC00649A13 /* SavingsGoal.swift in Sources */,
 				66EA3AE52C35C10D00649A13 /* AccountDetailsViewControllerDelegate.swift in Sources */,
@@ -863,6 +918,7 @@
 				66B899322C3414310056F308 /* AccountListViewController.swift in Sources */,
 				66EA3A822C348E9F00649A13 /* APIHTTPClient.swift in Sources */,
 				66EA3AFA2C35DCFB00649A13 /* CreateSavingsGoal.swift in Sources */,
+				66EA3B1D2C3613EC00649A13 /* AddSavingsGoalViewControllerDelegate.swift in Sources */,
 				66EA3AAB2C35684700649A13 /* AccountDetailsSummaryView.swift in Sources */,
 				66EA3A782C3481B600649A13 /* APIRequestMethod.swift in Sources */,
 				66EA3A842C348EE200649A13 /* AuthorizationProviding.swift in Sources */,
@@ -888,12 +944,14 @@
 				66EA3AA32C355E0000649A13 /* AccountDetailsViewModeling.swift in Sources */,
 				66EA3A952C34A47200649A13 /* Environment.swift in Sources */,
 				66EA3A7A2C3481E900649A13 /* DecodableAPIRequest.swift in Sources */,
+				66EA3B162C36084A00649A13 /* AddSavingsGoalViewModeling.swift in Sources */,
 				66EA3A992C34B02100649A13 /* AccountListViewControllerDelegate.swift in Sources */,
 				66EA3AE72C35C24800649A13 /* SavingsGoalsListViewModeling.swift in Sources */,
 				66EA3AF42C35CBD200649A13 /* SavingsGoalsUnavailableView.swift in Sources */,
 				66EA3AEA2C35C28700649A13 /* SavingsGoalsListViewModel.swift in Sources */,
 				66EA3ACF2C3587B500649A13 /* SavingsGoalDataModel.swift in Sources */,
 				66EA3A652C347B0C00649A13 /* MoneyMapper.swift in Sources */,
+				66EA3B192C36086B00649A13 /* AddSavingsGoalViewModel.swift in Sources */,
 				66EA3A5F2C347AE500649A13 /* AccountAPIRepository.swift in Sources */,
 				66EA3A7D2C3482A000649A13 /* AccountsRequest.swift in Sources */,
 				66EA3AD02C3587B500649A13 /* SavingsGoalsResponseDataModel.swift in Sources */,
@@ -921,6 +979,7 @@
 				66EA3AB62C356FEF00649A13 /* FetchAccountSummaryStubUseCase.swift in Sources */,
 				66EA3AC22C3582AC00649A13 /* FetchSavingsGoalsTests.swift in Sources */,
 				66EA3A732C347E8100649A13 /* APIStubClient.swift in Sources */,
+				66EA3B212C361A0A00649A13 /* AddSavingsGoalViewModelTests.swift in Sources */,
 				66EA3A392C346A5D00649A13 /* FetchAccountSummariesTests.swift in Sources */,
 				66EA3A502C34788100649A13 /* FetchAccountSummariesStubUseCase.swift in Sources */,
 				66EA3A8B2C3491D200649A13 /* AccountsRequestTests.swift in Sources */,
@@ -938,6 +997,7 @@
 				66EA3ADC2C3589BD00649A13 /* SavingsGoalStateMapperTests.swift in Sources */,
 				66EA3AD42C35882B00649A13 /* SavingsGoalsRequestTests.swift in Sources */,
 				66EA3AC42C3582D800649A13 /* SavingsGoalStubRepository.swift in Sources */,
+				66EA3B232C361A3900649A13 /* CreateSavingsGoalStubUseCase.swift in Sources */,
 				66EA3AEF2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

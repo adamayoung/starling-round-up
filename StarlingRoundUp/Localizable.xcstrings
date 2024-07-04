@@ -12,6 +12,28 @@
         }
       }
     },
+    "ADD" : {
+      "comment" : "Add",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        }
+      }
+    },
+    "ADD_SAVINGS_GOAL" : {
+      "comment" : "Add Savings Goal",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Savings Goal"
+          }
+        }
+      }
+    },
     "BALANCE" : {
       "comment" : "Balance",
       "localizations" : {
@@ -89,6 +111,17 @@
         }
       }
     },
+    "SAVINGS_GOAL_NAME" : {
+      "comment" : "Savings Goal Name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Savings Goal Name"
+          }
+        }
+      }
+    },
     "SAVINGS_GOALS" : {
       "comment" : "Savings Goals",
       "localizations" : {
@@ -96,6 +129,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Savings Goals"
+          }
+        }
+      }
+    },
+    "TARGET" : {
+      "comment" : "Target",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Target"
           }
         }
       }

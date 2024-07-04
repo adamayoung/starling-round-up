@@ -41,16 +41,14 @@ final class APIHTTPClient: APIClient {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
-        let (data, _) = try await urlSession.data(for: urlRequest)
-
-        let jsonDecoder = JSONDecoder.starlingAPI
-        let responseObject: Request.Response
+        let result: (data: Data, response: URLResponse)
         do {
-            responseObject = try jsonDecoder.decode(Request.Response.self, from: data)
-        } catch {
-            throw APIClientError.unknown
+            result = try await urlSession.data(for: urlRequest)
+        } catch let error {
+            throw APIClientError.network(error)
         }
 
+        let responseObject = try Self.decodeResponseObject(Request.Response.self, from: result.data)
         return responseObject
     }
 
@@ -93,6 +91,21 @@ extension APIHTTPClient {
         }
 
         return "Bearer \(token)"
+    }
+
+    private static func decodeResponseObject<ResponseObject: Decodable>(
+        _ type: ResponseObject.Type,
+        from data: Data
+    ) throws -> ResponseObject {
+        let jsonDecoder = JSONDecoder.starlingAPI
+        let responseObject: ResponseObject
+        do {
+            responseObject = try jsonDecoder.decode(type, from: data)
+        } catch let error {
+            throw APIClientError.decode(error)
+        }
+
+        return responseObject
     }
 
 }
