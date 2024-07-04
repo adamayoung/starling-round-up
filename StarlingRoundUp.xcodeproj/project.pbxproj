@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66A6348E2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6348D2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift */; };
+		66A634902C369D9600AB3060 /* RoundUpSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6348F2C369D9600AB3060 /* RoundUpSummary.swift */; };
+		66A634922C369EC700AB3060 /* RoundUpTimeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */; };
+		66A634942C369F2000AB3060 /* RoundUpTimeWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634932C369F2000AB3060 /* RoundUpTimeWindowTests.swift */; };
+		66A634962C36AF1B00AB3060 /* RoundUpSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634952C36AF1B00AB3060 /* RoundUpSummaryTests.swift */; };
 		66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992D2C3414310056F308 /* AppDelegate.swift */; };
 		66B899302C3414310056F308 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992F2C3414310056F308 /* SceneDelegate.swift */; };
 		66B899322C3414310056F308 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899312C3414310056F308 /* AccountListViewController.swift */; };
@@ -133,6 +138,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		66A6348D2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRoundUpSummaryUseCase.swift; sourceTree = "<group>"; };
+		66A6348F2C369D9600AB3060 /* RoundUpSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpSummary.swift; sourceTree = "<group>"; };
+		66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpTimeWindow.swift; sourceTree = "<group>"; };
+		66A634932C369F2000AB3060 /* RoundUpTimeWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpTimeWindowTests.swift; sourceTree = "<group>"; };
+		66A634952C36AF1B00AB3060 /* RoundUpSummaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpSummaryTests.swift; sourceTree = "<group>"; };
 		66B8992A2C3414310056F308 /* StarlingRoundUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarlingRoundUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8992D2C3414310056F308 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66B8992F2C3414310056F308 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -366,6 +376,7 @@
 				66EA3A9A2C34B3C600649A13 /* FetchAccountSummaryUseCase.swift */,
 				66EA3AB72C3580D600649A13 /* FetchSavingsGoalsUseCase.swift */,
 				66EA3AF52C35DB5000649A13 /* CreateSavingsGoalUseCase.swift */,
+				66A6348D2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift */,
 				66EA3A312C34689F00649A13 /* UseCases */,
 				66D876CB2C3466100012CA55 /* Models */,
 				66EA3A352C34690200649A13 /* Repositories */,
@@ -380,6 +391,8 @@
 				66D876CC2C34661C0012CA55 /* AccountSummary.swift */,
 				66D876CE2C3466490012CA55 /* AccountType.swift */,
 				66D876D02C3466860012CA55 /* Money.swift */,
+				66A6348F2C369D9600AB3060 /* RoundUpSummary.swift */,
+				66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */,
 				66EA3AB92C3580FC00649A13 /* SavingsGoal.swift */,
 				66EA3ABB2C35817F00649A13 /* SavingsGoalState.swift */,
 			);
@@ -404,6 +417,8 @@
 			isa = PBXGroup;
 			children = (
 				66D876D62C34675F0012CA55 /* MoneyTests.swift */,
+				66A634952C36AF1B00AB3060 /* RoundUpSummaryTests.swift */,
+				66A634932C369F2000AB3060 /* RoundUpTimeWindowTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -908,6 +923,7 @@
 				66EA3B0A2C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift in Sources */,
 				66EA3AE32C35C07100649A13 /* SavingsGoalListViewController.swift in Sources */,
 				66EA3A5B2C347A5500649A13 /* MoneyDataModel.swift in Sources */,
+				66A634922C369EC700AB3060 /* RoundUpTimeWindow.swift in Sources */,
 				66EA3A9D2C34B3F000649A13 /* FetchAccountSummary.swift in Sources */,
 				66EA3ABE2C3581E500649A13 /* FetchSavingsGoals.swift in Sources */,
 				66EA3B112C35F32A00649A13 /* SavingsGoalListViewControllerDelegate.swift in Sources */,
@@ -933,6 +949,7 @@
 				66EA3A972C34A98C00649A13 /* MainNavigationController.swift in Sources */,
 				66EA3B042C35E80800649A13 /* CreateSavingsGoalRequest.swift in Sources */,
 				66EA3A8F2C3492A400649A13 /* Coordinator.swift in Sources */,
+				66A6348E2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift in Sources */,
 				66EA3A862C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift in Sources */,
 				66EA3A522C347A2500649A13 /* APIClient.swift in Sources */,
 				66EA3ACE2C3587B500649A13 /* SavingsGoalStateDataModel.swift in Sources */,
@@ -959,6 +976,7 @@
 				66D876D32C3466F30012CA55 /* Account.swift in Sources */,
 				66EA3B022C35E6EF00649A13 /* JSONEncoder+StarlingAPI.swift in Sources */,
 				66EA3A332C3468BA00649A13 /* FetchAccountSummaries.swift in Sources */,
+				66A634902C369D9600AB3060 /* RoundUpSummary.swift in Sources */,
 				66D876D12C3466860012CA55 /* Money.swift in Sources */,
 				66EA3A5A2C347A5500649A13 /* AccountDataModel.swift in Sources */,
 				66EA3AD82C35889600649A13 /* SavingsGoalMapper.swift in Sources */,
@@ -987,11 +1005,13 @@
 				66EA3AF12C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift in Sources */,
 				66D876D72C34675F0012CA55 /* MoneyTests.swift in Sources */,
 				66EA3B082C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift in Sources */,
+				66A634942C369F2000AB3060 /* RoundUpTimeWindowTests.swift in Sources */,
 				66EA3AD62C35885900649A13 /* SavingsGoalMapperTests.swift in Sources */,
 				66EA3AB02C356CEF00649A13 /* FetchAccountSummaryTests.swift in Sources */,
 				66EA3A4E2C34784500649A13 /* AccountListViewModelTests.swift in Sources */,
 				66EA3A3C2C346A9E00649A13 /* AccountStubRepository.swift in Sources */,
 				66EA3AB42C356FB200649A13 /* AccountDetailsViewModelTests.swift in Sources */,
+				66A634962C36AF1B00AB3060 /* RoundUpSummaryTests.swift in Sources */,
 				66EA3AFE2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift in Sources */,
 				66EA3AE02C358C0F00649A13 /* SavingsGoalAPIRepositoryTests.swift in Sources */,
 				66EA3ADC2C3589BD00649A13 /* SavingsGoalStateMapperTests.swift in Sources */,
