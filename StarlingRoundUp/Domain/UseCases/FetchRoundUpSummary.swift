@@ -87,11 +87,7 @@ extension FetchRoundUpSummary {
     ) async throws -> [Transaction] {
         let transactions: [Transaction]
         do {
-            transactions = try await transactionRepository.settledTransactions(
-                forAccount: accountID,
-                between: dateRange.lowerBound,
-                and: dateRange.upperBound
-            )
+            transactions = try await transactionRepository.settledTransactions(forAccount: accountID, in: dateRange)
         } catch let error {
             throw Self.mapToFetchRoundUpSummaryError(error)
         }

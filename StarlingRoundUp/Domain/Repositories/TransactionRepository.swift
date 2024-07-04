@@ -9,11 +9,7 @@ import Foundation
 
 protocol TransactionRepository {
 
-    func settledTransactions(
-        forAccount accountID: Account.ID,
-        between fromDate: Date,
-        and toDate: Date
-    ) async throws -> [Transaction]
+    func settledTransactions(forAccount accountID: Account.ID, in dateRange: Range<Date>) async throws -> [Transaction]
 
 }
 

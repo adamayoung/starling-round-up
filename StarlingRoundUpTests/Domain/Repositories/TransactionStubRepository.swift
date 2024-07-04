@@ -19,12 +19,11 @@ final class TransactionStubRepository: TransactionRepository {
 
     func settledTransactions(
         forAccount accountID: Account.ID,
-        between fromDate: Date,
-        and toDate: Date
+        in dateRange: Range<Date>
     ) async throws -> [Transaction] {
         lastSettledTransactionsAccountID = accountID
-        lastSettledTransactionsFromDate = fromDate
-        lastSettledTransactionsToDate = toDate
+        lastSettledTransactionsFromDate = dateRange.lowerBound
+        lastSettledTransactionsToDate = dateRange.upperBound
 
         let transactionsDictionary = try transactionsResult.get()
         return transactionsDictionary[accountID, default: []]

@@ -21,6 +21,7 @@ extension Transaction {
 
         case incoming
         case outgoing
+        case unknown
 
     }
 
