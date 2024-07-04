@@ -22,4 +22,18 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
         return savingsGoals
     }
 
+    func create(savingsGoal: SavingsGoalInput) async throws {
+        let request = CreateSavingsGoalsRequest(
+            accountID: savingsGoal.accountID,
+            name: savingsGoal.name,
+            currency: savingsGoal.currency,
+            targetMinorUnits: savingsGoal.targetMinorUnits
+        )
+
+        let result = try await apiClient.perform(request)
+        guard result.success else {
+            throw SavingsGoalRepositoryError.unknown
+        }
+    }
+
 }

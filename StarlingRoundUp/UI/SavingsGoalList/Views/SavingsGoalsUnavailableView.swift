@@ -9,6 +9,8 @@ import UIKit
 
 final class SavingsGoalsUnavailableView: UIView {
 
+    var onAction: (() -> Void)?
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -32,6 +34,13 @@ final class SavingsGoalsUnavailableView: UIView {
         return label
     }()
 
+    private lazy var actionButton: UIButton = {
+        let button = UIButton(configuration: .borderless())
+        button.setTitle(NSLocalizedString("CREATE_A_SAVINGS_GOAL", comment: "Create a Savings Goal"), for: .normal)
+        button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
     init() {
         super.init(frame: .zero)
         addSubview(stackView)
@@ -45,6 +54,7 @@ final class SavingsGoalsUnavailableView: UIView {
 
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(messageLabel)
+        stackView.addArrangedSubview(actionButton)
 
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 100)
@@ -54,6 +64,15 @@ final class SavingsGoalsUnavailableView: UIView {
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
+extension SavingsGoalsUnavailableView {
+
+    @objc
+    private func actionButtonTapped(_: AnyObject? = nil) {
+        onAction?()
     }
 
 }

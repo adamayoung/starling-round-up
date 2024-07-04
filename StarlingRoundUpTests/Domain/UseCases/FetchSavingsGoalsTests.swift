@@ -70,6 +70,19 @@ final class FetchSavingsGoalsTests: XCTestCase {
         XCTAssertTrue(savingsGoalsResult.allSatisfy { $0.state == .active })
     }
 
+    func testExecuteWhenFetchSavingsGoalsErrorsThrowsError() async {
+        savingsGoalRepository.savingsGoalsResult = .failure(.unknown)
+
+        var useCaseError: FetchSavingsGoalsError?
+        do {
+            _ = try await useCase.execute(accountID: "1")
+        } catch let error {
+            useCaseError = error as? FetchSavingsGoalsError
+        }
+
+        XCTAssertEqual(useCaseError, .unknown)
+    }
+
 }
 
 extension FetchSavingsGoalsTests {

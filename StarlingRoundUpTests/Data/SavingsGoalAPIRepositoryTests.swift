@@ -63,4 +63,63 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
         XCTAssertEqual(savingsGoals[1].id, "2")
     }
 
+    func testCreateSavingsGoalMakesCorrectAPIRequest() async throws {
+        let input = SavingsGoalInput(
+            accountID: "1",
+            name: "SG 1",
+            currency: "GBP",
+            targetMinorUnits: 123
+        )
+        let expectedAPIRequest = CreateSavingsGoalsRequest(
+            accountID: "1",
+            name: "SG 1",
+            currency: "GBP",
+            targetMinorUnits: 123
+        )
+
+        _ = try? await repository.create(savingsGoal: input)
+
+        XCTAssertEqual(apiClient.lastRequest as? CreateSavingsGoalsRequest, expectedAPIRequest)
+    }
+
+    func testCreateSavingsGoalWhenSuccessfulDoesNotThrowError() async throws {
+        let input = SavingsGoalInput(
+            accountID: "1",
+            name: "SG 1",
+            currency: "GBP",
+            targetMinorUnits: 123
+        )
+        let response = CreateSavingsGoalResponseDataModel(success: true, savingsGoalUid: nil)
+        apiClient.responseResult = .success(response)
+
+        var createError: Error?
+        do {
+            try await repository.create(savingsGoal: input)
+        } catch let error {
+            createError = error
+        }
+
+        XCTAssertNil(createError)
+    }
+
+    func testCreateSavingsGoalWhenNotSuccessfulThrowsError() async throws {
+        let input = SavingsGoalInput(
+            accountID: "1",
+            name: "SG 1",
+            currency: "GBP",
+            targetMinorUnits: 123
+        )
+        let response = CreateSavingsGoalResponseDataModel(success: false, savingsGoalUid: nil)
+        apiClient.responseResult = .success(response)
+
+        var createError: SavingsGoalRepositoryError?
+        do {
+            try await repository.create(savingsGoal: input)
+        } catch let error {
+            createError = error as? SavingsGoalRepositoryError
+        }
+
+        XCTAssertEqual(createError, .unknown)
+    }
+
 }

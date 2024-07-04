@@ -7,11 +7,19 @@
 
 import UIKit
 
-protocol SavingsGoalListView: AnyObject {}
+protocol SavingsGoalListView: AnyObject {
+
+    var delegate: (any SavingsGoalListViewControllerDelegate)? { get set }
+
+    func refreshData()
+
+}
 
 protocol SavingsGoalListViewControlling: SavingsGoalListView, UIViewController {}
 
 final class SavingsGoalListViewController: UITableViewController, SavingsGoalListViewControlling {
+
+    weak var delegate: (any SavingsGoalListViewControllerDelegate)?
 
     private let viewModel: any SavingsGoalsListViewModeling
     private lazy var dataSource = makeDataSource()
@@ -22,7 +30,13 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
         return view
     }()
 
-    private lazy var savingsGoalsUnavailableView = SavingsGoalsUnavailableView()
+    private lazy var savingsGoalsUnavailableView: SavingsGoalsUnavailableView = {
+        let view = SavingsGoalsUnavailableView()
+        view.onAction = { [weak self] in
+            self?.addSavingsGoal()
+        }
+        return view
+    }()
 
     init(viewModel: some SavingsGoalsListViewModeling) {
         self.viewModel = viewModel
@@ -37,6 +51,13 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("SAVINGS_GOALS", comment: "Savings Goals")
+
+        let addSavingsGoalButton = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addSavingsGoal)
+        )
+        navigationItem.rightBarButtonItem = addSavingsGoalButton
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "savingsGoalCellIdentifier")
         tableView.dataSource = dataSource
@@ -75,7 +96,7 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
 extension SavingsGoalListViewController {
 
     @objc
-    private func refreshData() {
+    func refreshData() {
         Task {
             do {
                 let shouldAnimateUpdate = !viewModel.savingsGoals.isEmpty
@@ -108,6 +129,15 @@ extension SavingsGoalListViewController {
         alertViewController.addAction(dismissAction)
 
         present(alertViewController, animated: true)
+    }
+
+}
+
+extension SavingsGoalListViewController {
+
+    @objc
+    private func addSavingsGoal(_: AnyObject? = nil) {
+        delegate?.viewController(self, wantsToCreateSavingsGoalForAccount: viewModel.accountID)
     }
 
 }

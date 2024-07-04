@@ -9,10 +9,12 @@ import Foundation
 
 protocol APIRequest: Identifiable, Equatable {
 
+    associatedtype Body: Encodable & Equatable
     associatedtype Response: Decodable
 
     var path: String { get }
     var method: APIRequestMethod { get }
     var headers: [String: String] { get }
+    var body: Body? { get }
 
 }
