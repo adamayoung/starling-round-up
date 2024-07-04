@@ -36,7 +36,7 @@ jobs:
           xcodebuild clean build-for-testing \
             -scheme ${{ env.XCODE_SCHEME }} \
             -destination '${{ env.IOS_DESTINATION }}' \
-            -testPlan '${{ env.TEST_PLAN }}' | xcbeautify
+            -testPlan '${{ env.TEST_PLAN }}' | xcbeautify --renderer github-actions
       
       - name: Test
         run: |
@@ -44,4 +44,4 @@ jobs:
           xcodebuild test-without-building \
             -scheme ${{ env.XCODE_SCHEME }} \
             -destination '${{ env.IOS_DESTINATION }}' \
-            -testPlan '${{ env.TEST_PLAN }}' | xcbeautify
+            -testPlan '${{ env.TEST_PLAN }}' | xcbeautify --renderer github-actions
