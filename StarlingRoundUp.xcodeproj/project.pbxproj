@@ -12,6 +12,11 @@
 		66A634922C369EC700AB3060 /* RoundUpTimeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */; };
 		66A634942C369F2000AB3060 /* RoundUpTimeWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634932C369F2000AB3060 /* RoundUpTimeWindowTests.swift */; };
 		66A634962C36AF1B00AB3060 /* RoundUpSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634952C36AF1B00AB3060 /* RoundUpSummaryTests.swift */; };
+		66A634982C36B2F500AB3060 /* FetchRoundUpSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634972C36B2F500AB3060 /* FetchRoundUpSummary.swift */; };
+		66A6349A2C36B50F00AB3060 /* FetchRoundUpSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634992C36B50F00AB3060 /* FetchRoundUpSummaryTests.swift */; };
+		66A6349C2C36B5CB00AB3060 /* TransactionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6349B2C36B5CB00AB3060 /* TransactionRepository.swift */; };
+		66A6349E2C36B61700AB3060 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6349D2C36B61700AB3060 /* Transaction.swift */; };
+		66A634A02C36C7E300AB3060 /* TransactionStubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6349F2C36C7E300AB3060 /* TransactionStubRepository.swift */; };
 		66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992D2C3414310056F308 /* AppDelegate.swift */; };
 		66B899302C3414310056F308 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992F2C3414310056F308 /* SceneDelegate.swift */; };
 		66B899322C3414310056F308 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899312C3414310056F308 /* AccountListViewController.swift */; };
@@ -143,6 +148,11 @@
 		66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpTimeWindow.swift; sourceTree = "<group>"; };
 		66A634932C369F2000AB3060 /* RoundUpTimeWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpTimeWindowTests.swift; sourceTree = "<group>"; };
 		66A634952C36AF1B00AB3060 /* RoundUpSummaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpSummaryTests.swift; sourceTree = "<group>"; };
+		66A634972C36B2F500AB3060 /* FetchRoundUpSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRoundUpSummary.swift; sourceTree = "<group>"; };
+		66A634992C36B50F00AB3060 /* FetchRoundUpSummaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRoundUpSummaryTests.swift; sourceTree = "<group>"; };
+		66A6349B2C36B5CB00AB3060 /* TransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
+		66A6349D2C36B61700AB3060 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		66A6349F2C36C7E300AB3060 /* TransactionStubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStubRepository.swift; sourceTree = "<group>"; };
 		66B8992A2C3414310056F308 /* StarlingRoundUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarlingRoundUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8992D2C3414310056F308 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66B8992F2C3414310056F308 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -395,6 +405,7 @@
 				66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */,
 				66EA3AB92C3580FC00649A13 /* SavingsGoal.swift */,
 				66EA3ABB2C35817F00649A13 /* SavingsGoalState.swift */,
+				66A6349D2C36B61700AB3060 /* Transaction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -438,6 +449,7 @@
 				66EA3A9C2C34B3F000649A13 /* FetchAccountSummary.swift */,
 				66EA3ABD2C3581E500649A13 /* FetchSavingsGoals.swift */,
 				66EA3AF92C35DCFB00649A13 /* CreateSavingsGoal.swift */,
+				66A634972C36B2F500AB3060 /* FetchRoundUpSummary.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -450,6 +462,7 @@
 				66EA3AC12C3582AC00649A13 /* FetchSavingsGoalsTests.swift */,
 				66EA3AFB2C35DFAC00649A13 /* CreateSavingsGoalTests.swift */,
 				66EA3AFD2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift */,
+				66A634992C36B50F00AB3060 /* FetchRoundUpSummaryTests.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -459,6 +472,7 @@
 			children = (
 				66EA3A362C34691400649A13 /* AccountRepository.swift */,
 				66EA3ABF2C35820C00649A13 /* SavingsGoalRepository.swift */,
+				66A6349B2C36B5CB00AB3060 /* TransactionRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -468,6 +482,7 @@
 			children = (
 				66EA3A3B2C346A9E00649A13 /* AccountStubRepository.swift */,
 				66EA3AC32C3582D800649A13 /* SavingsGoalStubRepository.swift */,
+				66A6349F2C36C7E300AB3060 /* TransactionStubRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -939,6 +954,7 @@
 				66EA3A782C3481B600649A13 /* APIRequestMethod.swift in Sources */,
 				66EA3A842C348EE200649A13 /* AuthorizationProviding.swift in Sources */,
 				66EA3A3E2C34759500649A13 /* AccountListViewModeling.swift in Sources */,
+				66A6349E2C36B61700AB3060 /* Transaction.swift in Sources */,
 				66EA3ADE2C358BB400649A13 /* SavingsGoalAPIRepository.swift in Sources */,
 				66EA3A452C3476F000649A13 /* AppFactory.swift in Sources */,
 				66EA3ADA2C35890D00649A13 /* SavingsGoalStateMapper.swift in Sources */,
@@ -960,12 +976,14 @@
 				66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */,
 				66EA3AA32C355E0000649A13 /* AccountDetailsViewModeling.swift in Sources */,
 				66EA3A952C34A47200649A13 /* Environment.swift in Sources */,
+				66A6349C2C36B5CB00AB3060 /* TransactionRepository.swift in Sources */,
 				66EA3A7A2C3481E900649A13 /* DecodableAPIRequest.swift in Sources */,
 				66EA3B162C36084A00649A13 /* AddSavingsGoalViewModeling.swift in Sources */,
 				66EA3A992C34B02100649A13 /* AccountListViewControllerDelegate.swift in Sources */,
 				66EA3AE72C35C24800649A13 /* SavingsGoalsListViewModeling.swift in Sources */,
 				66EA3AF42C35CBD200649A13 /* SavingsGoalsUnavailableView.swift in Sources */,
 				66EA3AEA2C35C28700649A13 /* SavingsGoalsListViewModel.swift in Sources */,
+				66A634982C36B2F500AB3060 /* FetchRoundUpSummary.swift in Sources */,
 				66EA3ACF2C3587B500649A13 /* SavingsGoalDataModel.swift in Sources */,
 				66EA3A652C347B0C00649A13 /* MoneyMapper.swift in Sources */,
 				66EA3B192C36086B00649A13 /* AddSavingsGoalViewModel.swift in Sources */,
@@ -989,6 +1007,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66A6349A2C36B50F00AB3060 /* FetchRoundUpSummaryTests.swift in Sources */,
 				66EA3A6F2C347CEC00649A13 /* AccountMapperTests.swift in Sources */,
 				66EA3A6D2C347C6C00649A13 /* MoneyMapperTests.swift in Sources */,
 				66EA3A8D2C34924400649A13 /* BalanceRequestTests.swift in Sources */,
@@ -1018,6 +1037,7 @@
 				66EA3AD42C35882B00649A13 /* SavingsGoalsRequestTests.swift in Sources */,
 				66EA3AC42C3582D800649A13 /* SavingsGoalStubRepository.swift in Sources */,
 				66EA3B232C361A3900649A13 /* CreateSavingsGoalStubUseCase.swift in Sources */,
+				66A634A02C36C7E300AB3060 /* TransactionStubRepository.swift in Sources */,
 				66EA3AEF2C35C84D00649A13 /* SavingsGoalsListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

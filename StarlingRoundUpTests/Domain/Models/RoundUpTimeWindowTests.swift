@@ -18,7 +18,7 @@ final class RoundUpTimeWindowTests: XCTestCase {
     }
 
     override func tearDown() {
-        dateFormatter = ISO8601DateFormatter()
+        dateFormatter = nil
         super.tearDown()
     }
 

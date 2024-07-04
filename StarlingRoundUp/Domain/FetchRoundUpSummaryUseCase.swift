@@ -9,8 +9,17 @@ import Foundation
 
 protocol FetchRoundUpSummaryUseCase {
 
-    func execute(accountID: Account.ID) async throws -> RoundUpSummary
+    func execute(
+        accountID: Account.ID,
+        inTimeWindow timeWindow: RoundUpTimeWindow,
+        withDate date: Date
+    ) async throws -> RoundUpSummary
 
-    func execute(accountID: Account.ID, timeWindow: RoundUpTimeWindow) async throws -> RoundUpSummary
+}
+
+enum FetchRoundUpSummaryError: Error {
+
+    case accountNotFound
+    case unknown
 
 }
