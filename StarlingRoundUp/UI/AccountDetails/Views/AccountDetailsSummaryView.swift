@@ -31,7 +31,12 @@ final class AccountDetailsSummaryView: UIView {
 
     private lazy var balanceLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        if let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .largeTitle)
+            .withSymbolicTraits(.traitBold) {
+            label.font = UIFont(descriptor: fontDescriptor, size: 0.0)
+        }
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         return label
     }()
 
