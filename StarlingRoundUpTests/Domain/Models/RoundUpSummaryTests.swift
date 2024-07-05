@@ -30,25 +30,25 @@ final class RoundUpSummaryTests: XCTestCase {
             accountBalance: Money(minorUnits: 0, currency: "GBP")
         )
 
-        XCTAssertFalse(summary.hasAvailableAccountBalance)
+        XCTAssertFalse(summary.hasSufficentFundsForTransfer)
     }
 
-    func testHasAvailableAccountBalanceWhenAccountBalanceIsEqualToAmountReturnsTrue() {
+    func testHasSufficentFundsForTransferWhenAccountBalanceIsEqualToAmountReturnsTrue() {
         let summary = Self.createRoundUpSummary(
             amount: Money(minorUnits: 10, currency: "GBP"),
             accountBalance: Money(minorUnits: 10, currency: "GBP")
         )
 
-        XCTAssertTrue(summary.hasAvailableAccountBalance)
+        XCTAssertTrue(summary.hasSufficentFundsForTransfer)
     }
 
-    func testHasAvailableAccountBalanceWhenAccountBalanceIsGreaterThanAmountReturnsTrue() {
+    func testHasSufficentFundsForTransferWhenAccountBalanceIsGreaterThanAmountReturnsTrue() {
         let summary = Self.createRoundUpSummary(
             amount: Money(minorUnits: 10, currency: "GBP"),
             accountBalance: Money(minorUnits: 100, currency: "GBP")
         )
 
-        XCTAssertTrue(summary.hasAvailableAccountBalance)
+        XCTAssertTrue(summary.hasSufficentFundsForTransfer)
     }
 
     func testIsRoundUpAvailableWhenAmountIsZeroReturnsFalse() {
@@ -63,6 +63,25 @@ final class RoundUpSummaryTests: XCTestCase {
         XCTAssertTrue(summary.isRoundUpAvailable)
     }
 
+    func testIsDateRangeEndInFutureWhenInPastReturnsFalse() {
+        let fromDate = Date(timeIntervalSince1970: 0)
+        let toDate = Date(timeIntervalSince1970: 1000)
+        let dateRange = fromDate ..< toDate
+        let summary = Self.createRoundUpSummary(dateRange: dateRange)
+
+        XCTAssertFalse(summary.isDateRangeEndInFuture)
+    }
+
+    func testIsDateRangeEndInFutureWhenInFutureReturnsTrue() {
+        let toDate = Date.distantFuture
+        let fromDate = toDate.addingTimeInterval(-1000)
+
+        let dateRange = fromDate ..< toDate
+        let summary = Self.createRoundUpSummary(dateRange: dateRange)
+
+        XCTAssertTrue(summary.isDateRangeEndInFuture)
+    }
+
 }
 
 extension RoundUpSummaryTests {
@@ -71,6 +90,7 @@ extension RoundUpSummaryTests {
         accountID: String = "1",
         amount: Money = Money(minorUnits: 0, currency: "GBP"),
         dateRange: Range<Date> = Date(timeIntervalSince1970: 0) ..< Date(timeIntervalSince1970: 1000),
+        timeWindow: RoundUpTimeWindow = .week,
         transactionsCount: Int = 10,
         accountBalance: Money = Money(minorUnits: 0, currency: "GBP")
     ) -> RoundUpSummary {
@@ -78,6 +98,7 @@ extension RoundUpSummaryTests {
             accountID: accountID,
             amount: amount,
             dateRange: dateRange,
+            timeWindow: timeWindow,
             transactionsCount: transactionsCount,
             accountBalance: accountBalance
         )

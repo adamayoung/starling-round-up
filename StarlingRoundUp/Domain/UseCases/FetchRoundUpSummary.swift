@@ -44,6 +44,7 @@ final class FetchRoundUpSummary: FetchRoundUpSummaryUseCase {
             accountID: account.id,
             amount: roundUpAmount,
             dateRange: dateRange,
+            timeWindow: timeWindow,
             transactionsCount: transactions.count,
             accountBalance: accountBalance
         )

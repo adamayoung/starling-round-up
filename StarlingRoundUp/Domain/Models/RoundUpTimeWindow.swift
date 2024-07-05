@@ -35,6 +35,23 @@ extension RoundUpTimeWindow {
 
 }
 
+extension RoundUpTimeWindow {
+
+    func startDateOfPreviousTimeWindow(date: Date, in timeZone: TimeZone = .current) -> Date {
+        let currentDateRange = dateRange(containing: date, in: timeZone)
+        let oneDateTimeInterval: TimeInterval = 60 * 60 * 24
+        let previousDay = currentDateRange.lowerBound.addingTimeInterval(-oneDateTimeInterval)
+        let dateRange = dateRange(containing: previousDay, in: timeZone)
+        return dateRange.lowerBound
+    }
+
+    func startDateOfNextTimeWindow(date: Date, in timeZone: TimeZone = .current) -> Date {
+        let dateRange = dateRange(containing: date, in: timeZone)
+        return dateRange.upperBound
+    }
+
+}
+
 private extension Date {
 
     func startOfWeek(in timeZone: TimeZone) -> Date? {

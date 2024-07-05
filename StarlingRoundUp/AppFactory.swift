@@ -89,6 +89,25 @@ extension AppFactory {
 
 extension AppFactory {
 
+    func roundUpViewController(accountID: Account.ID) -> some RoundUpViewControlling {
+        let viewModel = roundUpViewModel(accountID: accountID)
+        return RoundUpViewController(viewModel: viewModel)
+    }
+
+    private func roundUpViewModel(accountID: Account.ID) -> some RoundUpViewModeling {
+        let fetchRoundUpSummaryUseCase = fetchRoundUpSummaryUseCase()
+        let fetchSavingsGoalsUseCase = fetchSavingsGoalsUseCase()
+        return RoundUpViewModel(
+            accountID: accountID,
+            fetchRoundUpSummaryUseCase: fetchRoundUpSummaryUseCase,
+            fetchSavingsGoalsUseCase: fetchSavingsGoalsUseCase
+        )
+    }
+
+}
+
+extension AppFactory {
+
     private func fetchAccountSummariesUseCase() -> some FetchAccountSummariesUseCase {
         let accountRepository = accountRepository()
         return FetchAccountSummaries(accountRepository: accountRepository)
@@ -109,6 +128,12 @@ extension AppFactory {
         return CreateSavingsGoal(savingsGoalRepository: savingsGoalRepository)
     }
 
+    private func fetchRoundUpSummaryUseCase() -> some FetchRoundUpSummaryUseCase {
+        let accountRepository = accountRepository()
+        let transactionRepository = transactionRepository()
+        return FetchRoundUpSummary(accountRepository: accountRepository, transactionRepository: transactionRepository)
+    }
+
 }
 
 extension AppFactory {
@@ -121,6 +146,11 @@ extension AppFactory {
     private func savingsGoalRepository() -> some SavingsGoalRepository {
         let apiClient = apiClient()
         return SavingsGoalAPIRepository(apiClient: apiClient)
+    }
+
+    private func transactionRepository() -> some TransactionRepository {
+        let apiClient = apiClient()
+        return TransactionAPIRepository(apiClient: apiClient)
     }
 
 }

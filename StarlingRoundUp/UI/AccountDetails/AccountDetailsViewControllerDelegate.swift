@@ -14,4 +14,9 @@ protocol AccountDetailsViewControllerDelegate: AnyObject {
         didSelectSavingsGoalsForAccount accountID: Account.ID
     )
 
+    func viewController(
+        _ viewController: some AccountDetailsViewControlling,
+        wantsToRoundUpForAccount accountID: Account.ID
+    )
+
 }

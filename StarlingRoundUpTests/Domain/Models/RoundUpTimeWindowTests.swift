@@ -24,9 +24,7 @@ final class RoundUpTimeWindowTests: XCTestCase {
 
     func testDateRangeForWeekWhenContainingDateIsMidWeekUsingGMTHasCorrectStartDate() throws {
         let timeWindow = RoundUpTimeWindow.week
-        // Wednesday, 3rd July 2024 10:00:00 UTC
         let date = try XCTUnwrap(dateFormatter.date(from: "2024-07-03T10:00:00Z"))
-        // Monday, 1st July 2024 00:00:00 UTC
         let expectedStartDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-01T00:00:00Z"))
 
         let range = timeWindow.dateRange(containing: date, in: .gmt)
@@ -37,9 +35,7 @@ final class RoundUpTimeWindowTests: XCTestCase {
     func testDateRangeForWeekWhenContainingDateIsMidWeekUsingGMTPlusOneHasCorrectStartDate() throws {
         let timeWindow = RoundUpTimeWindow.week
         let timeZone = try XCTUnwrap(TimeZone(secondsFromGMT: 60 * 60))
-        // Wednesday, 3rd July 2024 10:00:00 UTC
         let date = try XCTUnwrap(dateFormatter.date(from: "2024-07-03T10:00:00Z"))
-        // Monday, 1st July 2024 01:00:00 +01:00
         let expectedStartDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-01T01:00:00Z"))
 
         let range = timeWindow.dateRange(containing: date, in: timeZone)
@@ -49,9 +45,7 @@ final class RoundUpTimeWindowTests: XCTestCase {
 
     func testDateRangeForWeekWhenContainingDateIsMidWeekUsingGMTHasCorrectEndDate() throws {
         let timeWindow = RoundUpTimeWindow.week
-        // Wednesday, 3rd July 2024 10:00:00 UTC
         let date = try XCTUnwrap(dateFormatter.date(from: "2024-07-03T10:00:00Z"))
-        // Monday, 8th July 2024 00:00:00 UTC
         let expectedEndDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-08T00:00:00Z"))
 
         let range = timeWindow.dateRange(containing: date, in: .gmt)
@@ -62,14 +56,56 @@ final class RoundUpTimeWindowTests: XCTestCase {
     func testDateRangeForWeekWhenContainingDateIsMidWeekUsingGMTPlusOneHasCorrectEndDate() throws {
         let timeWindow = RoundUpTimeWindow.week
         let timeZone = try XCTUnwrap(TimeZone(secondsFromGMT: 60 * 60))
-        // Wednesday, 3rd July 2024 00:00:00 UTC
         let date = try XCTUnwrap(dateFormatter.date(from: "2024-07-03T10:00:00Z"))
-        // Monday, 8th July 2024  01:00:00 +01:00
         let expectedEndDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-08T01:00:00Z"))
 
         let range = timeWindow.dateRange(containing: date, in: timeZone)
 
         XCTAssertEqual(range.upperBound, expectedEndDate)
+    }
+
+    func testStartDateOfPreviousTimeWindowForWeekRetunsPreviousWeekStartDate() throws {
+        let timeWindow = RoundUpTimeWindow.week
+        let timeZone = TimeZone.gmt
+        let date = try XCTUnwrap(dateFormatter.date(from: "2024-07-08T00:00:00Z"))
+        let expectedPreviousDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-01T00:00:00Z"))
+
+        let previousDate = timeWindow.startDateOfPreviousTimeWindow(date: date, in: timeZone)
+
+        XCTAssertEqual(previousDate, expectedPreviousDate)
+    }
+
+    func testStartDateOfPreviousTimeWindowForWeekWhenGMTPlusOneRetunsPreviousWeekStartDate() throws {
+        let timeWindow = RoundUpTimeWindow.week
+        let timeZone = try XCTUnwrap(TimeZone(secondsFromGMT: 60 * 60))
+        let date = try XCTUnwrap(dateFormatter.date(from: "2024-07-08T01:00:00Z"))
+        let expectedPreviousDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-01T01:00:00Z"))
+
+        let previousDate = timeWindow.startDateOfPreviousTimeWindow(date: date, in: timeZone)
+
+        XCTAssertEqual(previousDate, expectedPreviousDate)
+    }
+
+    func testStartDateOfNextTimeWindowForWeekRetunsNextWeekStartDate() throws {
+        let timeWindow = RoundUpTimeWindow.week
+        let timeZone = TimeZone.gmt
+        let date = try XCTUnwrap(dateFormatter.date(from: "2024-07-01T00:00:00Z"))
+        let expectedNextDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-08T00:00:00Z"))
+
+        let nextDate = timeWindow.startDateOfNextTimeWindow(date: date, in: timeZone)
+
+        XCTAssertEqual(nextDate, expectedNextDate)
+    }
+
+    func testStartDateOfNextTimeWindowForWeekWhenGMTPlusOneRetunsNextWeekStartDate() throws {
+        let timeWindow = RoundUpTimeWindow.week
+        let timeZone = try XCTUnwrap(TimeZone(secondsFromGMT: 60 * 60))
+        let date = try XCTUnwrap(dateFormatter.date(from: "2024-07-01T01:00:00Z"))
+        let expectedNextDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-08T01:00:00Z"))
+
+        let nextDate = timeWindow.startDateOfNextTimeWindow(date: date, in: timeZone)
+
+        XCTAssertEqual(nextDate, expectedNextDate)
     }
 
 }

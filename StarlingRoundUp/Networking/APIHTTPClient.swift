@@ -24,8 +24,21 @@ final class APIHTTPClient: APIClient {
     }
 
     func perform<Request: APIRequest>(_ request: Request) async throws -> Request.Response {
-        guard let url = URL(string: "\(baseURL)\(request.path)") else {
-            throw APIClientError.unknown
+        guard let initialURL = URL(string: "\(baseURL)\(request.path)") else {
+            throw APIClientError.badURL
+        }
+
+        guard var urlComponents = URLComponents(url: initialURL, resolvingAgainstBaseURL: false) else {
+            throw APIClientError.badURL
+        }
+
+        var queryItems = urlComponents.queryItems ?? []
+        for (name, value) in request.queryItems {
+            queryItems.append(URLQueryItem(name: name, value: value))
+        }
+        urlComponents.queryItems = queryItems
+        guard let url = urlComponents.url else {
+            throw APIClientError.badURL
         }
 
         var urlRequest = URLRequest(url: url)

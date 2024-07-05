@@ -16,15 +16,20 @@ struct RoundUpSummary: Identifiable, Sendable {
     let accountID: Account.ID
     let amount: Money
     let dateRange: Range<Date>
+    let timeWindow: RoundUpTimeWindow
     let transactionsCount: Int
     let accountBalance: Money
 
-    var hasAvailableAccountBalance: Bool {
+    var isRoundUpAvailable: Bool {
+        amount.minorUnits > 0
+    }
+
+    var hasSufficentFundsForTransfer: Bool {
         accountBalance >= amount
     }
 
-    var isRoundUpAvailable: Bool {
-        amount.minorUnits > 0
+    var isDateRangeEndInFuture: Bool {
+        dateRange.upperBound > Date()
     }
 
 }

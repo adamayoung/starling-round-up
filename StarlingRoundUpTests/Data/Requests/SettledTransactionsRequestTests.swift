@@ -33,7 +33,7 @@ final class SettledTransactionsRequestTests: XCTestCase {
     }
 
     func testPath() {
-        XCTAssertEqual(request.path, "/account/123/settled-transactions-between")
+        XCTAssertEqual(request.path, "/feed/account/123/settled-transactions-between")
     }
 
     func testQueryItems() {

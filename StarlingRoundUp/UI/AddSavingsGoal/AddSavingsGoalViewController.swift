@@ -22,7 +22,7 @@ final class AddSavingsGoalViewController: UITableViewController, AddSavingsGoalV
     private let viewModel: any AddSavingsGoalViewModeling
 
     private lazy var addButton = UIBarButtonItem(
-        title: NSLocalizedString("ADD", comment: "Add"),
+        title: String(localized: "ADD", comment: "Add"),
         image: nil,
         target: self,
         action: #selector(save)
@@ -51,7 +51,7 @@ final class AddSavingsGoalViewController: UITableViewController, AddSavingsGoalV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("ADD_SAVINGS_GOAL", comment: "Add Savings Goal")
+        title = String(localized: "ADD_SAVINGS_GOAL", comment: "Add Savings Goal")
 
         updateSaveButtonState()
         navigationItem.leftBarButtonItem = cancelButton
@@ -133,7 +133,7 @@ extension AddSavingsGoalViewController {
 
     private func configureCellForName(_ cell: UITableViewCell) {
         var content = FormTextFieldContentConfiguration()
-        content.placeholder = NSLocalizedString("SAVINGS_GOAL_NAME", comment: "Savings Goal Name")
+        content.placeholder = String(localized: "SAVINGS_GOAL_NAME", comment: "Savings Goal Name")
         content.text = viewModel.savingsGoalName
         content.onChange = { [weak self] text in
             self?.viewModel.savingsGoalName = text
@@ -144,7 +144,7 @@ extension AddSavingsGoalViewController {
 
     private func configureCellForTarget(_ cell: UITableViewCell) {
         var content = FormMoneyFieldContentConfiguration()
-        content.label = NSLocalizedString("TARGET", comment: "Target")
+        content.label = String(localized: "TARGET", comment: "Target")
         content.placeholder = Money(minorUnits: 0, currency: viewModel.currency).formatted()
         content.amount = viewModel.savingsGoalTarget
         content.onChange = { [weak self] value in
