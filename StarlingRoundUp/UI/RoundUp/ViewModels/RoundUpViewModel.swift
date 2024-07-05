@@ -19,6 +19,7 @@ final class RoundUpViewModel: RoundUpViewModeling {
     private let fetchRoundUpSummaryUseCase: any FetchRoundUpSummaryUseCase
     private let fetchSavingsGoalsUseCase: any FetchSavingsGoalsUseCase
     private var currentFromDate = RoundUpViewModel.timeWindow.dateRange(containing: Date()).lowerBound
+    private var isFetchingRoundUpSummary = false
 
     init(
         accountID: Account.ID,
@@ -31,11 +32,17 @@ final class RoundUpViewModel: RoundUpViewModeling {
     }
 
     func fetchRoundUpSummary() async throws {
+        guard !isFetchingRoundUpSummary else {
+            return
+        }
+
+        isFetchingRoundUpSummary = true
         roundUpSummary = try await fetchRoundUpSummaryUseCase.execute(
             accountID: accountID,
             inTimeWindow: Self.timeWindow,
             withDate: currentFromDate
         )
+        isFetchingRoundUpSummary = false
     }
 
     func refreshAvailableSavingsGoals() async throws {

@@ -37,6 +37,14 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
         return button
     }()
 
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.hidesWhenStopped = true
+        view.color = .white
+        view.stopAnimating()
+        return view
+    }()
+
     private lazy var summaryView: RoundUpSummaryView = {
         let view = RoundUpSummaryView()
         view.tintColor = .white
@@ -65,6 +73,13 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = chooseSavingsGoalButton
 
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
         view.addSubview(summaryView)
         summaryView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -74,12 +89,10 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
             summaryView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
 
+        summaryView.isHidden = true
+        activityIndicator.startAnimating()
+        chooseSavingsGoalButton.isEnabled = false
         refreshData()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        refreshSavingsGoals()
     }
 
 }
@@ -87,7 +100,47 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
 extension RoundUpViewController {
 
     private func refreshData() {
-        Task {
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
+            do {
+                try await viewModel.fetchRoundUpSummary()
+            } catch let error {
+                print("Error: \(error.localizedDescription)")
+//                handleError(error)
+            }
+
+            do {
+                try await viewModel.refreshAvailableSavingsGoals()
+            } catch let error {
+                print("Error: \(error.localizedDescription)")
+//                handleError(error)
+                return
+            }
+
+            refreshView()
+            refreshSavingsGoalsMenu()
+            activityIndicator.stopAnimating()
+            chooseSavingsGoalButton.isEnabled = true
+
+            if summaryView.isHidden {
+                summaryView.alpha = 0
+                summaryView.isHidden = false
+                UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
+                    self.summaryView.alpha = 1
+                }, completion: nil)
+            }
+        }
+    }
+
+    private func refreshRoundUpSummary() {
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
             do {
                 try await viewModel.fetchRoundUpSummary()
             } catch let error {
@@ -100,7 +153,11 @@ extension RoundUpViewController {
     }
 
     private func refreshSavingsGoals() {
-        Task {
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
             do {
                 try await viewModel.refreshAvailableSavingsGoals()
             } catch let error {
@@ -173,12 +230,12 @@ extension RoundUpViewController: RoundUpSummaryViewDelegate {
 
     func viewWantsPreviousRoundUp(_: RoundUpSummaryView) {
         viewModel.decrementRoundUpTimeWindowDate()
-        refreshData()
+        refreshRoundUpSummary()
     }
 
     func viewWantsNextRoundUp(_: RoundUpSummaryView) {
         viewModel.incrementRoundUpTimeWindowDate()
-        refreshData()
+        refreshRoundUpSummary()
     }
 
     func viewWantsToPerformTransfer(_: RoundUpSummaryView) {
