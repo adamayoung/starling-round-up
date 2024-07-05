@@ -80,6 +80,8 @@ final class RoundUpSummaryDateView: UIView {
         return button
     }()
 
+    private lazy var changeRoundUpImpactGenerator = UIImpactFeedbackGenerator(style: .medium)
+
     init() {
         super.init(frame: .zero)
 
@@ -107,8 +109,20 @@ final class RoundUpSummaryDateView: UIView {
     func configure(timeWindow: RoundUpTimeWindow, fromDate: Date, hasNextRoundUp: Bool) {
         let timeWindowName = Self.localizedString(for: timeWindow)
         timePeriodLabel.text = String(localized: "FOR_\(timeWindowName)_BEGINNING", comment: "for %@ beginning")
-        dateLabel.text = fromDate.formatted(date: .abbreviated, time: .omitted)
-        nextRoundUpButton.alpha = hasNextRoundUp ? 1 : 0
+
+        showNextRoundUpButton(hasNextRoundUp)
+
+        UIView.transition(with: dateLabel, duration: 0.25, options: .transitionCrossDissolve) { [weak self] in
+            self?.dateLabel.text = fromDate.formatted(date: .abbreviated, time: .omitted)
+        }
+    }
+
+}
+
+extension RoundUpSummaryDateView {
+
+    private func showNextRoundUpButton(_ show: Bool) {
+        nextRoundUpButton.alpha = show ? 1 : 0
     }
 
 }
@@ -116,10 +130,12 @@ final class RoundUpSummaryDateView: UIView {
 extension RoundUpSummaryDateView {
 
     private func previousRoundUp() {
+        changeRoundUpImpactGenerator.impactOccurred()
         delegate?.viewWantsPreviousRoundUp(self)
     }
 
     private func nextRoundUp() {
+        changeRoundUpImpactGenerator.impactOccurred()
         delegate?.viewWantsNextRoundUp(self)
     }
 

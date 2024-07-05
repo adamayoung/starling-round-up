@@ -56,6 +56,17 @@
         }
       }
     },
+    "CANNOT_CALCULATE_ROUND_UP" : {
+      "comment" : "Cannot Calculate Round-Up",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot Calculate Round-Up"
+          }
+        }
+      }
+    },
     "CANNOT_LOAD_ACCOUNT_DETAILS" : {
       "comment" : "Cannot Load Account Details",
       "localizations" : {
@@ -195,6 +206,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Target"
+          }
+        }
+      }
+    },
+    "THERE_WAS_AN_ERROR_CALCULATE_THIS_ROUND_UP" : {
+      "comment" : "There was an error calculating this Round-Up.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error calculating this Round-Up."
           }
         }
       }

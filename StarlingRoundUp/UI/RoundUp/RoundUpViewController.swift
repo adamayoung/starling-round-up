@@ -108,15 +108,20 @@ extension RoundUpViewController {
             do {
                 try await viewModel.fetchRoundUpSummary()
             } catch let error {
-                print("Error: \(error.localizedDescription)")
-//                handleError(error)
+                self.handleFetchRoundUpError(error) {
+                    self.dismiss()
+                }
+
+                return
             }
 
             do {
                 try await viewModel.refreshAvailableSavingsGoals()
             } catch let error {
-                print("Error: \(error.localizedDescription)")
-//                handleError(error)
+                self.handleFetchRoundUpError(error) {
+                    self.dismiss()
+                }
+
                 return
             }
 
@@ -128,9 +133,9 @@ extension RoundUpViewController {
             if summaryView.isHidden {
                 summaryView.alpha = 0
                 summaryView.isHidden = false
-                UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut) {
                     self.summaryView.alpha = 1
-                }, completion: nil)
+                }
             }
         }
     }
@@ -144,8 +149,7 @@ extension RoundUpViewController {
             do {
                 try await viewModel.fetchRoundUpSummary()
             } catch let error {
-                print("Error: \(error.localizedDescription)")
-//                handleError(error)
+                self.handleFetchRoundUpError(error)
             }
 
             refreshView()
@@ -161,8 +165,7 @@ extension RoundUpViewController {
             do {
                 try await viewModel.refreshAvailableSavingsGoals()
             } catch let error {
-                print("Error: \(error.localizedDescription)")
-//                handleError(error)
+                self.handleFetchSavingsGoalsError(error)
                 return
             }
 
@@ -180,11 +183,45 @@ extension RoundUpViewController {
         Task {
             do {
                 try await viewModel.performTransfer()
-            } catch let error {
-                print("Error: \(error.localizedDescription)")
+            } catch {
 //                handleError(error)
             }
         }
+    }
+
+    private func handleFetchRoundUpError(_: Error, completion: (() -> Void)? = nil) {
+        let title = String(localized: "CANNOT_CALCULATE_ROUND_UP", comment: "Cannot Calculate Round-Up")
+        let message = String(
+            localized: "THERE_WAS_AN_ERROR_CALCULATE_THIS_ROUND_UP",
+            comment: "There was an error calculating this Round-Up."
+        )
+
+        showErrorAlert(title: title, message: message, completion: completion)
+    }
+
+    private func handleFetchSavingsGoalsError(_: Error, completion: (() -> Void)? = nil) {
+        let title = String(localized: "CANNOT_LOAD_SAVINGS_GOALS", comment: "Cannot Load Savings Goals")
+        let message = String(
+            localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS",
+            comment: "There was an error loading your savings goals."
+        )
+
+        showErrorAlert(title: title, message: message, completion: completion)
+    }
+
+    private func showErrorAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertViewController.view.tintColor = view.tintColor
+
+        let dismissAction = UIAlertAction(
+            title: String(localized: "OK", comment: "OK"),
+            style: .default
+        ) { _ in
+            completion?()
+        }
+        alertViewController.addAction(dismissAction)
+
+        present(alertViewController, animated: true)
     }
 
 }

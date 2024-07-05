@@ -72,14 +72,12 @@ final class RoundUpSummaryTransferView: UIView {
             return
         }
 
-        transferButton.setTitle(
-            String(localized: "TRANSFER_\(roundUpSummary.amount.formatted())", comment: "Transfer <Money>"),
-            for: .normal
-        )
+        if roundUpSummary.amount.minorUnits > 0 {
+            updateTransferButtonTitle(with: roundUpSummary.amount)
+        }
 
         let hasSufficentFundsForTransfer = roundUpSummary.hasSufficentFundsForTransfer
         let canTransfer = hasSufficentFundsForTransfer && roundUpSummary.isRoundUpAvailable
-
         showTransferButton(canTransfer)
         showInsufficentFundsLabel(!hasSufficentFundsForTransfer)
     }
@@ -88,12 +86,35 @@ final class RoundUpSummaryTransferView: UIView {
 
 extension RoundUpSummaryTransferView {
 
+    private func updateTransferButtonTitle(with amount: Money) {
+        let formattedAmount = amount.formatted()
+        let title = String(
+            localized: "TRANSFER_\(formattedAmount)",
+            comment: "Transfer <Money>"
+        )
+
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        let boldFont = UIFont.preferredFont(forTextStyle: .headline)
+
+        let titleAttributedString = NSMutableAttributedString(string: title, attributes: [.font: font])
+        if let amountRange = title.range(of: formattedAmount) {
+            let nsRange = NSRange(amountRange, in: title)
+            titleAttributedString.addAttribute(.font, value: boldFont, range: nsRange)
+        }
+
+        transferButton.setAttributedTitle(titleAttributedString, for: .normal)
+    }
+
     private func showTransferButton(_ show: Bool) {
-        transferButton.alpha = show ? 1 : 0
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
+            self?.transferButton.alpha = show ? 1 : 0
+        }
     }
 
     private func showInsufficentFundsLabel(_ show: Bool) {
-        insufficentFundsForTransferLabel.alpha = show ? 1 : 0
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
+            self?.insufficentFundsForTransferLabel.alpha = show ? 1 : 0
+        }
     }
 
 }
@@ -101,6 +122,8 @@ extension RoundUpSummaryTransferView {
 extension RoundUpSummaryTransferView {
 
     private func didTapTransfer() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
         delegate?.viewWantsToPerformTransfer(self)
     }
 
