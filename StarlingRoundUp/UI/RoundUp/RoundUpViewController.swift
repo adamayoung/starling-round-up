@@ -27,11 +27,15 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
         return button
     }()
 
-    private lazy var cancelButton = UIBarButtonItem(
-        barButtonSystemItem: .cancel,
-        target: self,
-        action: #selector(dismiss)
-    )
+    private lazy var cancelButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(dismiss)
+        )
+        button.tintColor = .white
+        return button
+    }()
 
     private lazy var summaryView: RoundUpSummaryView = {
         let view = RoundUpSummaryView()
@@ -58,7 +62,6 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
         gradient.colors = [UIColor.tintColor.cgColor, UIColor.tintColor.withAlphaComponent(0.8).cgColor]
         view.layer.insertSublayer(gradient, at: 0)
 
-        cancelButton.tintColor = .white
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = chooseSavingsGoalButton
 
