@@ -39,6 +39,8 @@
 		66A634CF2C3802DA00AB3060 /* RoundUpSummaryAccountBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634CE2C3802DA00AB3060 /* RoundUpSummaryAccountBalanceView.swift */; };
 		66A634D12C38041000AB3060 /* RoundUpSummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634D02C38041000AB3060 /* RoundUpSummaryHeaderView.swift */; };
 		66A634D32C38055400AB3060 /* RoundUpSummaryAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634D22C38055400AB3060 /* RoundUpSummaryAmountView.swift */; };
+		66A634D72C381C2500AB3060 /* RoundUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634D62C381C2500AB3060 /* RoundUpViewModelTests.swift */; };
+		66A634D92C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634D82C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift */; };
 		66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992D2C3414310056F308 /* AppDelegate.swift */; };
 		66B899302C3414310056F308 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992F2C3414310056F308 /* SceneDelegate.swift */; };
 		66B899322C3414310056F308 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899312C3414310056F308 /* AccountListViewController.swift */; };
@@ -197,6 +199,8 @@
 		66A634CE2C3802DA00AB3060 /* RoundUpSummaryAccountBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpSummaryAccountBalanceView.swift; sourceTree = "<group>"; };
 		66A634D02C38041000AB3060 /* RoundUpSummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpSummaryHeaderView.swift; sourceTree = "<group>"; };
 		66A634D22C38055400AB3060 /* RoundUpSummaryAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpSummaryAmountView.swift; sourceTree = "<group>"; };
+		66A634D62C381C2500AB3060 /* RoundUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpViewModelTests.swift; sourceTree = "<group>"; };
+		66A634D82C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRoundUpSummaryStubUseCase.swift; sourceTree = "<group>"; };
 		66B8992A2C3414310056F308 /* StarlingRoundUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarlingRoundUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8992D2C3414310056F308 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66B8992F2C3414310056F308 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -370,6 +374,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		66A634D42C381C0900AB3060 /* RoundUp */ = {
+			isa = PBXGroup;
+			children = (
+				66A634D52C381C1900AB3060 /* ViewModels */,
+			);
+			path = RoundUp;
+			sourceTree = "<group>";
+		};
+		66A634D52C381C1900AB3060 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				66A634D62C381C2500AB3060 /* RoundUpViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		66B899212C3414310056F308 = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +516,7 @@
 				66EA3AB52C356FEF00649A13 /* FetchAccountSummaryStubUseCase.swift */,
 				66EA3AF02C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift */,
 				66EA3B222C361A3900649A13 /* CreateSavingsGoalStubUseCase.swift */,
+				66A634D82C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift */,
 				66EA3A342C3468F100649A13 /* UseCases */,
 				66D876D52C3467420012CA55 /* Models */,
 				66EA3A3A2C346A9000649A13 /* Repositories */,
@@ -595,6 +616,7 @@
 				66EA3AB12C356F7700649A13 /* AccountDetails */,
 				66EA3AEC2C35C83900649A13 /* SavingsGoalList */,
 				66EA3B1E2C3619EB00649A13 /* AddSavingsGoal */,
+				66A634D42C381C0900AB3060 /* RoundUp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1135,6 +1157,8 @@
 				66EA3A712C347E5100649A13 /* AccountAPIRepositoryTests.swift in Sources */,
 				66EA3AF12C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift in Sources */,
 				66D876D72C34675F0012CA55 /* MoneyTests.swift in Sources */,
+				66A634D72C381C2500AB3060 /* RoundUpViewModelTests.swift in Sources */,
+				66A634D92C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift in Sources */,
 				66EA3B082C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift in Sources */,
 				66A634942C369F2000AB3060 /* RoundUpTimeWindowTests.swift in Sources */,
 				66EA3AD62C35885900649A13 /* SavingsGoalMapperTests.swift in Sources */,

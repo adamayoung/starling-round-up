@@ -57,7 +57,12 @@ final class RoundUpViewModel: RoundUpViewModeling {
     }
 
     func incrementRoundUpTimeWindowDate() {
-        currentFromDate = Self.timeWindow.startDateOfNextTimeWindow(date: currentFromDate)
+        let nextDate = Self.timeWindow.startDateOfNextTimeWindow(date: currentFromDate)
+        guard nextDate < Date() else {
+            return
+        }
+
+        currentFromDate = nextDate
     }
 
     func setSelectedSavingsGoal(id: SavingsGoal.ID) {

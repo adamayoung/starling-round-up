@@ -12,6 +12,8 @@ final class FetchSavingsGoalsStubUseCase: FetchSavingsGoalsUseCase {
 
     var result: Result<[Account.ID: [SavingsGoal]], FetchSavingsGoalsError> = .failure(.unknown)
 
+    init() {}
+
     func execute(accountID: Account.ID) async throws -> [SavingsGoal] {
         let savingsGoals = try result.get()
         return savingsGoals[accountID, default: []]
