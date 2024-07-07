@@ -30,14 +30,14 @@ final class AccountListViewModelTests: XCTestCase {
     }
 
     func testFetchAccountSummariesSetsAccountSummaries() async throws {
-        let accountSummaries = [
+        let accountSummaries = try [
             AccountSummary(
-                id: try XCTUnwrap(UUID(uuidString: "E9B485CF-F132-4ADB-8748-93999B257FE1")),
+                id: XCTUnwrap(UUID(uuidString: "E9B485CF-F132-4ADB-8748-93999B257FE1")),
                 name: "Test 1",
                 balance: Money(minorUnits: 1234, currency: "GBP")
             ),
             AccountSummary(
-                id: try XCTUnwrap(UUID(uuidString: "1337CB6B-0DC8-4827-98E4-19C4EFEA9862")),
+                id: XCTUnwrap(UUID(uuidString: "1337CB6B-0DC8-4827-98E4-19C4EFEA9862")),
                 name: "Test 2",
                 balance: Money(minorUnits: 5678, currency: "GBP")
             )

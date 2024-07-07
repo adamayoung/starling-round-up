@@ -295,7 +295,9 @@ extension FetchRoundUpSummaryTests {
 
     func testExecuteReturnsRoundUpSummaryWithAvailableSavingsGoals() async throws {
         let account = Self.createAccount(id: accountID)
-        let savingsGoals = [Self.createSavingsGoal(id: "sg1"), Self.createSavingsGoal(id: "sg2")]
+        let savingsGoal1ID = try XCTUnwrap(UUID(uuidString: "0524257F-DD30-4AB9-AB98-B29F8F8010C8"))
+        let savingsGoal2ID = try XCTUnwrap(UUID(uuidString: "A18696A2-2436-468A-A791-432ECEDCC69B"))
+        let savingsGoals = [Self.createSavingsGoal(id: savingsGoal1ID), Self.createSavingsGoal(id: savingsGoal2ID)]
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([:])
@@ -345,7 +347,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     private static func createSavingsGoal(
-        id: String = "sg1",
+        id: UUID,
         name: String = "Test 1",
         target: Money = Money(minorUnits: 0, currency: "GBP"),
         totalSaved: Money = Money(minorUnits: 0, currency: "GBP"),

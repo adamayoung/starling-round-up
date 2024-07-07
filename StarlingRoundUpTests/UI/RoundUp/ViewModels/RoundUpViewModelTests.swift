@@ -72,11 +72,14 @@ final class RoundUpViewModelTests: XCTestCase {
     }
 
     func testSetSelectedSavingsGoalWhenAvailableSavingsGoalExistsSetsSelectedSavingsGoal() async throws {
-        let expectedSavingsGoal = Self.createSavingsGoal(id: "2")
+        let savingsGoal1ID = try XCTUnwrap(UUID(uuidString: "C524701B-FAD7-455A-9673-27CAB6159FDB"))
+        let savingsGoal2ID = try XCTUnwrap(UUID(uuidString: "109B060F-ECC9-4255-99C7-35CB2B94F3D2"))
+        let savingsGoal3ID = try XCTUnwrap(UUID(uuidString: "9ABCE6AE-6532-43E8-A910-B442C109657D"))
+        let expectedSavingsGoal = Self.createSavingsGoal(id: savingsGoal2ID)
         let savingsGoals = [
-            Self.createSavingsGoal(id: "1"),
+            Self.createSavingsGoal(id: savingsGoal1ID),
             expectedSavingsGoal,
-            Self.createSavingsGoal(id: "3")
+            Self.createSavingsGoal(id: savingsGoal3ID)
         ]
         let roundUpSummary = Self.createRoundUpSummary(accountID: accountID, availableSavingsGoals: savingsGoals)
         fetchRoundUpSummaryUseCase.result = .success(roundUpSummary)
@@ -88,18 +91,22 @@ final class RoundUpViewModelTests: XCTestCase {
     }
 
     func testSetSelectedSavingsGoalWhenSavingsGoalDoesNotExistDoesNotSetSelectedSavingsGoal() async throws {
-        let expectedSavingsGoal = Self.createSavingsGoal(id: "1")
+        let savingsGoal1ID = try XCTUnwrap(UUID(uuidString: "C524701B-FAD7-455A-9673-27CAB6159FDB"))
+        let savingsGoal2ID = try XCTUnwrap(UUID(uuidString: "109B060F-ECC9-4255-99C7-35CB2B94F3D2"))
+        let savingsGoal3ID = try XCTUnwrap(UUID(uuidString: "9ABCE6AE-6532-43E8-A910-B442C109657D"))
+        let expectedSavingsGoal = Self.createSavingsGoal(id: savingsGoal1ID)
         let savingsGoals = [
             expectedSavingsGoal,
-            Self.createSavingsGoal(id: "2"),
-            Self.createSavingsGoal(id: "3")
+            Self.createSavingsGoal(id: savingsGoal2ID),
+            Self.createSavingsGoal(id: savingsGoal3ID)
         ]
         let roundUpSummary = Self.createRoundUpSummary(accountID: accountID, availableSavingsGoals: savingsGoals)
         fetchRoundUpSummaryUseCase.result = .success(roundUpSummary)
         try await viewModel.fetchRoundUpSummary()
         XCTAssertEqual(viewModel.selectedSavingsGoal, expectedSavingsGoal)
 
-        viewModel.setSelectedSavingsGoal(id: "999")
+        let savingsGoalID = try XCTUnwrap(UUID(uuidString: "94F3BD63-CF77-4515-A1DF-E2B51D0BFB53"))
+        viewModel.setSelectedSavingsGoal(id: savingsGoalID)
 
         XCTAssertEqual(viewModel.selectedSavingsGoal, expectedSavingsGoal)
     }
@@ -163,7 +170,8 @@ final class RoundUpViewModelTests: XCTestCase {
     }
 
     func testPerformTransferMakesTransfer() async throws {
-        let savingsGoals = [Self.createSavingsGoal(id: "sg1")]
+        let savingsGoalID = try XCTUnwrap(UUID(uuidString: "C524701B-FAD7-455A-9673-27CAB6159FDB"))
+        let savingsGoals = [Self.createSavingsGoal(id: savingsGoalID)]
         let roundUpSummary = Self.createRoundUpSummary(accountID: accountID, availableSavingsGoals: savingsGoals)
         fetchRoundUpSummaryUseCase.result = .success(roundUpSummary)
         transferToSavingsGoalUseCase.result = .success(())
@@ -172,7 +180,7 @@ final class RoundUpViewModelTests: XCTestCase {
 
         let expectedInput = TransferToSavingsGoalInput(
             accountID: roundUpSummary.accountID,
-            savingsGoalID: "sg1",
+            savingsGoalID: savingsGoalID,
             amount: roundUpSummary.amount
         )
 
@@ -204,7 +212,7 @@ extension RoundUpViewModelTests {
     }
 
     private static func createSavingsGoal(
-        id: String = "1",
+        id: UUID,
         name: String = "SG 1",
         target: Money = Money(minorUnits: 0, currency: "GBP"),
         totalSaved: Money = Money(minorUnits: 0, currency: "GBP"),

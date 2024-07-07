@@ -55,7 +55,6 @@ final class TransactionAPIRepositoryTests: XCTestCase {
 
         XCTAssertEqual(transactions.count, 3)
         XCTAssertEqual(transactions.map(\.id), ["1", "2", "3"])
-
     }
 
     func testSettledTransactionsWhenAPIClientRequestErrorsThrowsError() async throws {

@@ -37,7 +37,8 @@ final class FetchSavingsGoalsTests: XCTestCase {
     }
 
     func testExecuteWhenOneActiveSavingsGoalForAccountReturnsOneSavingsGoal() async throws {
-        let savingsGoal = Self.createSavingsGoal(state: .active)
+        let savingsGoalID = try XCTUnwrap(UUID(uuidString: "B9170EEA-0996-4320-B465-CA6A88657632"))
+        let savingsGoal = Self.createSavingsGoal(id: savingsGoalID, state: .active)
         savingsGoalRepository.savingsGoalsResult = .success([accountID: [savingsGoal]])
 
         let savingsGoals = try await useCase.execute(accountID: accountID)
@@ -47,7 +48,8 @@ final class FetchSavingsGoalsTests: XCTestCase {
     }
 
     func testExecuteWhenOneArchivedSavingsGoalForAccountReturnsEmptyArray() async throws {
-        let savingsGoal = Self.createSavingsGoal(state: .archived)
+        let savingsGoalID = try XCTUnwrap(UUID(uuidString: "B9170EEA-0996-4320-B465-CA6A88657632"))
+        let savingsGoal = Self.createSavingsGoal(id: savingsGoalID, state: .archived)
         savingsGoalRepository.savingsGoalsResult = .success([accountID: [savingsGoal]])
 
         let savingsGoals = try await useCase.execute(accountID: accountID)
@@ -56,11 +58,23 @@ final class FetchSavingsGoalsTests: XCTestCase {
     }
 
     func testExecuteWhenMultipleSavingsGoalsWithDifferentStatesReturnsActiveSavingsGoals() async throws {
-        let savingsGoals = [
-            Self.createSavingsGoal(id: "1", state: .active),
-            Self.createSavingsGoal(id: "2", state: .active),
-            Self.createSavingsGoal(id: "3", state: .archived),
-            Self.createSavingsGoal(id: "4", state: .archived)
+        let savingsGoals = try [
+            Self.createSavingsGoal(
+                id: XCTUnwrap(UUID(uuidString: "B9170EEA-0996-4320-B465-CA6A88657632")),
+                state: .active
+            ),
+            Self.createSavingsGoal(
+                id: XCTUnwrap(UUID(uuidString: "D446C6E5-DD17-48FB-85A5-8F2005166F14")),
+                state: .active
+            ),
+            Self.createSavingsGoal(
+                id: XCTUnwrap(UUID(uuidString: "5DB13E1E-89BB-49D7-A27B-8A8C58487ADA")),
+                state: .archived
+            ),
+            Self.createSavingsGoal(
+                id: XCTUnwrap(UUID(uuidString: "08C03F6B-F147-4782-9296-0E64EEBAB592")),
+                state: .archived
+            )
         ]
         savingsGoalRepository.savingsGoalsResult = .success([accountID: savingsGoals])
 
@@ -88,7 +102,7 @@ final class FetchSavingsGoalsTests: XCTestCase {
 extension FetchSavingsGoalsTests {
 
     private static func createSavingsGoal(
-        id: String = "sg1",
+        id: UUID,
         name: String = "Test 1",
         target: Money = Money(minorUnits: 0, currency: "GBP"),
         totalSaved: Money = Money(minorUnits: 0, currency: "GBP"),

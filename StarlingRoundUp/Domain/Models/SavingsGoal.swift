@@ -9,7 +9,7 @@ import Foundation
 
 struct SavingsGoal: Identifiable, Sendable, Hashable {
 
-    let id: String
+    let id: UUID
     let name: String
     let target: Money
     let totalSaved: Money

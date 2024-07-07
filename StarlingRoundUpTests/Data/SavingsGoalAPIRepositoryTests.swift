@@ -37,9 +37,11 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
     }
 
     func testSavingsGoalsReturnsSavingsGoals() async throws {
+        let savingsGoal1ID = try XCTUnwrap(UUID(uuidString: "324A3226-3E82-4812-BEFE-CF063EC1978E"))
+        let savingsGoal2ID = try XCTUnwrap(UUID(uuidString: "D53666CB-275B-49CE-AFF8-096F52D56025"))
         let savingsGoalDataModels = [
             SavingsGoalDataModel(
-                savingsGoalUid: "1",
+                savingsGoalUid: savingsGoal1ID,
                 name: "Test 1",
                 target: MoneyDataModel(minorUnits: 123, currency: "GBP"),
                 totalSaved: MoneyDataModel(minorUnits: 12, currency: "GBP"),
@@ -47,7 +49,7 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
                 state: .active
             ),
             SavingsGoalDataModel(
-                savingsGoalUid: "2",
+                savingsGoalUid: savingsGoal2ID,
                 name: "Test 2",
                 target: MoneyDataModel(minorUnits: 456, currency: "GBP"),
                 totalSaved: MoneyDataModel(minorUnits: 56, currency: "GBP"),
@@ -61,7 +63,7 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
         let savingsGoals = try await repository.savingsGoals(for: accountID)
 
         XCTAssertEqual(savingsGoals.count, 2)
-        XCTAssertEqual(savingsGoals.map(\.id), ["1", "2"])
+        XCTAssertEqual(savingsGoals.map(\.id), [savingsGoal1ID, savingsGoal2ID])
     }
 
     func testCreateSavingsGoalMakesCorrectAPIRequest() async throws {
@@ -124,10 +126,11 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
     }
 
     func testTransferMakesCorrectAPIRequest() async throws {
+        let savingsGoalID = try XCTUnwrap(UUID(uuidString: "1E1FDE7F-FAB8-4845-AB76-343FB6093A44"))
         let transferID = try XCTUnwrap(UUID(uuidString: "48F855EC-FAEE-4470-B75E-A591F95E353B"))
         let input = TransferToSavingsGoalInput(
             accountID: accountID,
-            savingsGoalID: "sg1",
+            savingsGoalID: savingsGoalID,
             amount: Money(minorUnits: 1000, currency: "GBP")
         )
         let expectedAPIRequest = TransferToSavingsGoalRequest(
@@ -144,10 +147,11 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
     }
 
     func testTransferWhenSuccessfulDoesNotThrowError() async throws {
+        let savingsGoalID = try XCTUnwrap(UUID(uuidString: "1E1FDE7F-FAB8-4845-AB76-343FB6093A44"))
         let transferID = try XCTUnwrap(UUID(uuidString: "48F855EC-FAEE-4470-B75E-A591F95E353B"))
         let input = TransferToSavingsGoalInput(
             accountID: accountID,
-            savingsGoalID: "sg1",
+            savingsGoalID: savingsGoalID,
             amount: Money(minorUnits: 1000, currency: "GBP")
         )
         let response = TransferToSavingsGoalResponseDataModel(

@@ -33,9 +33,9 @@ final class SavingsGoalsListViewModelTests: XCTestCase {
     }
 
     func testFetchSavingsGoalsSetsSavingsGoals() async throws {
-        let savingsGoals = [
+        let savingsGoals = try [
             SavingsGoal(
-                id: "sg1",
+                id: XCTUnwrap(UUID(uuidString: "23BAEC13-86C5-40EE-ABA1-F77EEA243791")),
                 name: "SG 1",
                 target: Money(minorUnits: 1, currency: "GBP"),
                 totalSaved: Money(minorUnits: 0, currency: "GBP"),
@@ -43,7 +43,7 @@ final class SavingsGoalsListViewModelTests: XCTestCase {
                 state: .active
             ),
             SavingsGoal(
-                id: "sg2",
+                id: XCTUnwrap(UUID(uuidString: "D1C0BAE1-53C2-4670-A5A5-2FCC919D9B4B")),
                 name: "SG 2",
                 target: Money(minorUnits: 100, currency: "GBP"),
                 totalSaved: Money(minorUnits: 50, currency: "GBP"),
