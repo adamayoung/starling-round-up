@@ -17,7 +17,14 @@ final class AccountAPIRepository: AccountRepository {
 
     func accounts() async throws -> [Account] {
         let request = AccountsRequest()
-        let accountsResponse = try await apiClient.perform(request)
+
+        let accountsResponse: AccountsResponseDataModel
+        do {
+            accountsResponse = try await apiClient.perform(request)
+        } catch let error {
+            throw Self.mapToFetchAccountRepositoryError(error)
+        }
+
         let accounts = accountsResponse.accounts.map { AccountMapper.map($0) }
         return accounts
     }
@@ -30,9 +37,31 @@ final class AccountAPIRepository: AccountRepository {
 
     func balance(for accountID: Account.ID) async throws -> Money? {
         let request = BalanceRequest(accountID: accountID)
-        let balanceResponse = try await apiClient.perform(request)
+
+        let balanceResponse: BalanceResponseDataModel
+        do {
+            balanceResponse = try await apiClient.perform(request)
+        } catch let error {
+            throw Self.mapToFetchAccountRepositoryError(error)
+        }
+
         let balance = MoneyMapper.map(balanceResponse.amount)
         return balance
+    }
+
+}
+
+extension AccountAPIRepository {
+
+    private static func mapToFetchAccountRepositoryError(_ error: Error) -> AccountRepositoryError {
+        guard let error = error as? APIClientError else {
+            return .unknown
+        }
+
+        switch error {
+        default:
+            return .unknown
+        }
     }
 
 }

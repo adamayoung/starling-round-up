@@ -19,6 +19,10 @@ protocol SavingsGoalRepository {
 
 enum SavingsGoalRepositoryError: Error {
 
+    case unauthorized
+    case forbidden
+    case insufficentFunds
+    case amountMustBePositive
     case unknown
 
 }

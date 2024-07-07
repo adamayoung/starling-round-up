@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		665A212A2C3B3300005E3EDC /* HTTPStatusCodeErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665A21292C3B3300005E3EDC /* HTTPStatusCodeErrorMapper.swift */; };
+		665A212C2C3B3526005E3EDC /* HTTPStatusCodeErrorMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665A212B2C3B3526005E3EDC /* HTTPStatusCodeErrorMapperTests.swift */; };
+		665A212E2C3B3859005E3EDC /* ErrorResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665A212D2C3B3859005E3EDC /* ErrorResponseDataModel.swift */; };
+		665A21302C3B386B005E3EDC /* ErrorDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665A212F2C3B386B005E3EDC /* ErrorDetailDataModel.swift */; };
+		665A21322C3B42A8005E3EDC /* APIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665A21312C3B42A8005E3EDC /* APIClientError.swift */; };
 		66A6348E2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6348D2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift */; };
 		66A634902C369D9600AB3060 /* RoundUpSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6348F2C369D9600AB3060 /* RoundUpSummary.swift */; };
 		66A634922C369EC700AB3060 /* RoundUpTimeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */; };
@@ -173,6 +178,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		665A21292C3B3300005E3EDC /* HTTPStatusCodeErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodeErrorMapper.swift; sourceTree = "<group>"; };
+		665A212B2C3B3526005E3EDC /* HTTPStatusCodeErrorMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodeErrorMapperTests.swift; sourceTree = "<group>"; };
+		665A212D2C3B3859005E3EDC /* ErrorResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponseDataModel.swift; sourceTree = "<group>"; };
+		665A212F2C3B386B005E3EDC /* ErrorDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDetailDataModel.swift; sourceTree = "<group>"; };
+		665A21312C3B42A8005E3EDC /* APIClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientError.swift; sourceTree = "<group>"; };
 		66A6348D2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRoundUpSummaryUseCase.swift; sourceTree = "<group>"; };
 		66A6348F2C369D9600AB3060 /* RoundUpSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpSummary.swift; sourceTree = "<group>"; };
 		66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpTimeWindow.swift; sourceTree = "<group>"; };
@@ -660,6 +670,8 @@
 				66EA3A582C347A5500649A13 /* AccountTypeDataModel.swift */,
 				66EA3A542C347A5500649A13 /* BalanceResponseDataModel.swift */,
 				66EA3B092C35EBBA00649A13 /* CreateSavingsGoalResponseDataModel.swift */,
+				665A212F2C3B386B005E3EDC /* ErrorDetailDataModel.swift */,
+				665A212D2C3B3859005E3EDC /* ErrorResponseDataModel.swift */,
 				66EA3A562C347A5500649A13 /* MoneyDataModel.swift */,
 				66EA3ACC2C3587B500649A13 /* SavingsGoalDataModel.swift */,
 				66EA3ACD2C3587B500649A13 /* SavingsGoalsResponseDataModel.swift */,
@@ -717,6 +729,7 @@
 			isa = PBXGroup;
 			children = (
 				66EA3A512C347A2500649A13 /* APIClient.swift */,
+				665A21312C3B42A8005E3EDC /* APIClientError.swift */,
 				66EA3A752C34819B00649A13 /* APIRequest.swift */,
 				66EA3A772C3481B600649A13 /* APIRequestMethod.swift */,
 				66EA3AFF2C35E52500649A13 /* CodableAPIRequest.swift */,
@@ -743,6 +756,7 @@
 			children = (
 				66EA3A812C348E9F00649A13 /* APIHTTPClient.swift */,
 				66EA3A832C348EE200649A13 /* AuthorizationProviding.swift */,
+				665A21292C3B3300005E3EDC /* HTTPStatusCodeErrorMapper.swift */,
 				66EA3A852C348F9E00649A13 /* JSONDeocder+StarlingAPI.swift */,
 				66EA3B012C35E6EF00649A13 /* JSONEncoder+StarlingAPI.swift */,
 			);
@@ -765,6 +779,7 @@
 		66EA3A922C3495B200649A13 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				665A212B2C3B3526005E3EDC /* HTTPStatusCodeErrorMapperTests.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1063,6 +1078,7 @@
 				66EA3A912C3492BD00649A13 /* AppCoordinator.swift in Sources */,
 				66A634D12C38041000AB3060 /* RoundUpSummaryHeaderView.swift in Sources */,
 				66EA3AC02C35820C00649A13 /* SavingsGoalRepository.swift in Sources */,
+				665A21322C3B42A8005E3EDC /* APIClientError.swift in Sources */,
 				66EA3B142C36048100649A13 /* FormTextFieldContentView.swift in Sources */,
 				66A634A82C36E44100AB3060 /* TransactionDataModel.swift in Sources */,
 				66D876CF2C3466490012CA55 /* AccountType.swift in Sources */,
@@ -1087,6 +1103,7 @@
 				66EA3AD22C3587D400649A13 /* SavingsGoalsRequest.swift in Sources */,
 				66B899322C3414310056F308 /* AccountListViewController.swift in Sources */,
 				66EA3A822C348E9F00649A13 /* APIHTTPClient.swift in Sources */,
+				665A21302C3B386B005E3EDC /* ErrorDetailDataModel.swift in Sources */,
 				66EA3AFA2C35DCFB00649A13 /* CreateSavingsGoal.swift in Sources */,
 				66EA3B1D2C3613EC00649A13 /* AddSavingsGoalViewControllerDelegate.swift in Sources */,
 				66EA3AAB2C35684700649A13 /* AccountDetailsSummaryView.swift in Sources */,
@@ -1098,6 +1115,7 @@
 				66EA3ADE2C358BB400649A13 /* SavingsGoalAPIRepository.swift in Sources */,
 				66EA3A452C3476F000649A13 /* AppFactory.swift in Sources */,
 				66EA3ADA2C35890D00649A13 /* SavingsGoalStateMapper.swift in Sources */,
+				665A212E2C3B3859005E3EDC /* ErrorResponseDataModel.swift in Sources */,
 				66A634BD2C36F03700AB3060 /* RoundUpViewController.swift in Sources */,
 				66EA3B002C35E52500649A13 /* CodableAPIRequest.swift in Sources */,
 				66EA3A7F2C34831400649A13 /* BalanceRequest.swift in Sources */,
@@ -1126,6 +1144,7 @@
 				66EA3B162C36084A00649A13 /* AddSavingsGoalViewModeling.swift in Sources */,
 				66A634D32C38055400AB3060 /* RoundUpSummaryAmountView.swift in Sources */,
 				66EA3A992C34B02100649A13 /* AccountListViewControllerDelegate.swift in Sources */,
+				665A212A2C3B3300005E3EDC /* HTTPStatusCodeErrorMapper.swift in Sources */,
 				66EA3AE72C35C24800649A13 /* SavingsGoalsListViewModeling.swift in Sources */,
 				66EA3AF42C35CBD200649A13 /* SavingsGoalsUnavailableView.swift in Sources */,
 				66A634C22C36F0BD00AB3060 /* RoundUpViewModel.swift in Sources */,
@@ -1188,6 +1207,7 @@
 				66EA3AD62C35885900649A13 /* SavingsGoalMapperTests.swift in Sources */,
 				66EA3AB02C356CEF00649A13 /* FetchAccountSummaryTests.swift in Sources */,
 				66EA3A4E2C34784500649A13 /* AccountListViewModelTests.swift in Sources */,
+				665A212C2C3B3526005E3EDC /* HTTPStatusCodeErrorMapperTests.swift in Sources */,
 				66EA3A3C2C346A9E00649A13 /* AccountStubRepository.swift in Sources */,
 				66EA3AB42C356FB200649A13 /* AccountDetailsViewModelTests.swift in Sources */,
 				66A634962C36AF1B00AB3060 /* RoundUpSummaryTests.swift in Sources */,

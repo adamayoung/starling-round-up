@@ -24,6 +24,27 @@ final class APIHTTPClient: APIClient {
     }
 
     func perform<Request: APIRequest>(_ request: Request) async throws -> Request.Response {
+        let urlRequest = try await buildURLRequest(for: request)
+
+        let result: (data: Data, response: URLResponse)
+        do {
+            result = try await urlSession.data(for: urlRequest)
+        } catch let error {
+            throw APIClientError.network(error)
+        }
+
+        try Self.verifyResponse(result, from: request)
+
+        let responseObject = try Self.decodeResponseObject(Request.Response.self, from: result.data)
+
+        return responseObject
+    }
+
+}
+
+extension APIHTTPClient {
+
+    private func buildURLRequest(for request: some APIRequest) async throws -> URLRequest {
         guard let initialURL = URL(string: "\(baseURL)\(request.path)") else {
             throw APIClientError.badURL
         }
@@ -54,20 +75,8 @@ final class APIHTTPClient: APIClient {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
-        let result: (data: Data, response: URLResponse)
-        do {
-            result = try await urlSession.data(for: urlRequest)
-        } catch let error {
-            throw APIClientError.network(error)
-        }
-
-        let responseObject = try Self.decodeResponseObject(Request.Response.self, from: result.data)
-        return responseObject
+        return urlRequest
     }
-
-}
-
-extension APIHTTPClient {
 
     private static func httpMethodName(from method: APIRequestMethod) -> String {
         switch method {
@@ -104,6 +113,24 @@ extension APIHTTPClient {
         }
 
         return "Bearer \(token)"
+    }
+
+}
+
+extension APIHTTPClient {
+
+    private static func verifyResponse(
+        _ result: (Data, URLResponse),
+        from _: some APIRequest
+    ) throws {
+        guard let response = result.1 as? HTTPURLResponse else {
+            throw APIClientError.unknown
+        }
+
+        let statusCode = response.statusCode
+        if let error = HTTPStatusCodeErrorMapper.map(statusCode) {
+            throw error
+        }
     }
 
     private static func decodeResponseObject<ResponseObject: Decodable>(

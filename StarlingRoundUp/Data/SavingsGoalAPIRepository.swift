@@ -30,7 +30,12 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
             targetMinorUnits: savingsGoal.targetMinorUnits
         )
 
-        let result = try await apiClient.perform(request)
+        let result: CreateSavingsGoalResponseDataModel
+        do {
+            result = try await apiClient.perform(request)
+        } catch let error {
+            throw Self.mapToSavingsGoalRepositoryError(error)
+        }
         guard result.success else {
             throw SavingsGoalRepositoryError.unknown
         }
@@ -48,6 +53,47 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
         let result = try await apiClient.perform(request)
         guard result.success else {
             throw SavingsGoalRepositoryError.unknown
+        }
+    }
+
+}
+
+extension SavingsGoalAPIRepository {
+
+    private static func mapToSavingsGoalRepositoryError(_ error: Error) -> SavingsGoalRepositoryError {
+        guard let error = error as? APIClientError else {
+            return .unknown
+        }
+
+        switch error {
+        case let .badRequest(error as ErrorResponseDataModel):
+            return Self.mapToSavingsGoalRepositoryError(error)
+
+        case .unauthorized:
+            return .unauthorized
+
+        case .forbidden:
+            return .forbidden
+
+        default:
+            return .unknown
+        }
+    }
+
+    private static func mapToSavingsGoalRepositoryError(_ error: ErrorResponseDataModel) -> SavingsGoalRepositoryError {
+        guard let firstError = error.errors.first else {
+            return .unknown
+        }
+
+        switch firstError.message {
+        case "INSUFFICIENT_FUNDS":
+            return .insufficentFunds
+
+        case "AMOUNT_MUST_BE_POSITIVE":
+            return .amountMustBePositive
+
+        default:
+            return .unknown
         }
     }
 
