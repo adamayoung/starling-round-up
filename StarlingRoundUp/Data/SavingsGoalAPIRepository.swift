@@ -36,4 +36,6 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
         }
     }
 
+    func transfer(amount _: Money, from _: Account.ID, to _: SavingsGoal.ID) async throws {}
+
 }

@@ -15,6 +15,11 @@ final class SavingsGoalStubRepository: SavingsGoalRepository {
     var createResult: Result<Void, SavingsGoalRepositoryError> = .failure(.unknown)
     var lastCreateSavingsGoalInput: SavingsGoalInput?
 
+    var transferResult: Result<Void, SavingsGoalRepositoryError> = .failure(.unknown)
+    var lastTransferAmount: Money?
+    var lastTransferAccountID: Account.ID?
+    var lastTransferSavingsGoalID: SavingsGoal.ID?
+
     init() {}
 
     func savingsGoals(for accountID: Account.ID) async throws -> [SavingsGoal] {
@@ -26,6 +31,14 @@ final class SavingsGoalStubRepository: SavingsGoalRepository {
         lastCreateSavingsGoalInput = savingsGoal
 
         try createResult.get()
+    }
+
+    func transfer(amount: Money, from accountID: Account.ID, to savingsGoalID: SavingsGoal.ID) async throws {
+        lastTransferAmount = amount
+        lastTransferAccountID = accountID
+        lastTransferSavingsGoalID = savingsGoalID
+
+        try transferResult.get()
     }
 
 }
