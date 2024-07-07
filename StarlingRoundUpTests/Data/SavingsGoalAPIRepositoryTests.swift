@@ -156,7 +156,7 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
         )
         let response = TransferToSavingsGoalResponseDataModel(
             success: true,
-            transferUid: transferID.uuidString
+            transferUid: transferID
         )
         apiClient.responseResult = .success(response)
 
