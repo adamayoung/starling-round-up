@@ -52,6 +52,8 @@ final class RoundUpSummaryAmountView: UIView {
 
 extension RoundUpSummaryAmountView {
 
+    private static let amountAnimationDuration: TimeInterval = 0.2
+
     private func animateAmount(from fromAmount: Money?, to toAmount: Money) {
         guard let fromAmount else {
             roundUpAmountLabel.text = toAmount.formatted()
@@ -62,12 +64,11 @@ extension RoundUpSummaryAmountView {
             return
         }
 
-        let duration: TimeInterval = 0.2
         let start = fromAmount.minorUnits
         let end = toAmount.minorUnits
         let steps = abs(end - start)
         let isIncrementing = fromAmount.minorUnits < toAmount.minorUnits
-        let rate = duration / Double(steps)
+        let rate = Self.amountAnimationDuration / Double(steps)
 
         DispatchQueue.global().async { [weak self] in
             for step in 0 ... steps {
@@ -82,7 +83,6 @@ extension RoundUpSummaryAmountView {
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + rate * Double(step)) {
                     self?.roundUpAmountLabel.text = amount.formatted()
-                    self?.roundUpAmountLabel.setNeedsDisplay()
                 }
             }
         }

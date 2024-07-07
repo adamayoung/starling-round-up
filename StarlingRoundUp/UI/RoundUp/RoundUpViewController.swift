@@ -28,11 +28,11 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
     }()
 
     private lazy var cancelButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
-            target: self,
-            action: #selector(dismiss)
-        )
+        let action = UIAction { [weak self] _ in
+            self?.dismiss()
+        }
+
+        let button = UIBarButtonItem(systemItem: .cancel, primaryAction: action)
         button.tintColor = .white
         return button
     }()

@@ -30,6 +30,14 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
         return view
     }()
 
+    private lazy var addSavingsGoalButton: UIBarButtonItem = {
+        let action = UIAction { [weak self] _ in
+            self?.addSavingsGoal()
+        }
+
+        return UIBarButtonItem(systemItem: .add, primaryAction: action)
+    }()
+
     private lazy var savingsGoalsUnavailableView: SavingsGoalsUnavailableView = {
         let view = SavingsGoalsUnavailableView()
         view.onAction = { [weak self] in
@@ -55,12 +63,6 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
     override func viewDidLoad() {
         super.viewDidLoad()
         title = String(localized: "SAVINGS_GOALS", comment: "Savings Goals")
-
-        let addSavingsGoalButton = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(addSavingsGoal)
-        )
         navigationItem.rightBarButtonItem = addSavingsGoalButton
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.savingsGoal)
@@ -139,7 +141,6 @@ extension SavingsGoalListViewController {
 
 extension SavingsGoalListViewController {
 
-    @objc
     private func addSavingsGoal(_: AnyObject? = nil) {
         delegate?.viewController(self, wantsToCreateSavingsGoalForAccount: viewModel.accountID)
     }

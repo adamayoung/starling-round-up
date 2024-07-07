@@ -21,18 +21,21 @@ final class AddSavingsGoalViewController: UITableViewController, AddSavingsGoalV
 
     private let viewModel: any AddSavingsGoalViewModeling
 
-    private lazy var addButton = UIBarButtonItem(
-        title: String(localized: "ADD", comment: "Add"),
-        image: nil,
-        target: self,
-        action: #selector(save)
-    )
+    private lazy var addButton: UIBarButtonItem = {
+        let action = UIAction { [weak self] _ in
+            self?.save()
+        }
 
-    private lazy var cancelButton = UIBarButtonItem(
-        barButtonSystemItem: .cancel,
-        target: self,
-        action: #selector(dismiss)
-    )
+        return UIBarButtonItem(title: String(localized: "ADD", comment: "Add"), primaryAction: action)
+    }()
+
+    private lazy var cancelButton: UIBarButtonItem = {
+        let action = UIAction { [weak self] _ in
+            self?.dismiss()
+        }
+
+        return UIBarButtonItem(systemItem: .cancel, primaryAction: action)
+    }()
 
     private enum CellIdentifier {
         static let name = "nameCellIdentifer"
@@ -73,7 +76,6 @@ extension AddSavingsGoalViewController {
         addButton.isEnabled = viewModel.isFormValid
     }
 
-    @objc
     private func save(_: AnyObject? = nil) {
         Task { [weak self] in
             guard let self else {
@@ -91,7 +93,6 @@ extension AddSavingsGoalViewController {
         }
     }
 
-    @objc
     private func dismiss(_: AnyObject? = nil) {
         delegate?.viewControllerDidCancelCreatingsSavingsGoal(self)
     }
