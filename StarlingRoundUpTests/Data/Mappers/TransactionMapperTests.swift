@@ -12,24 +12,30 @@ import XCTest
 
 final class TransactionMapperTests: XCTestCase {
 
-    func testMapID() {
-        let dataModel = Self.createTransactionDataModel(feedItemUid: "1")
+    func testMapID() throws {
+        let transactionID = try XCTUnwrap(UUID(uuidString: "429E13F3-0767-4ECE-A6AA-6DD2D0E416DC"))
+        let dataModel = Self.createTransactionDataModel(feedItemUid: transactionID)
 
         let transaction = TransactionMapper.map(dataModel)
 
-        XCTAssertEqual(transaction.id, "1")
+        XCTAssertEqual(transaction.id, transactionID)
     }
 
-    func testMapAmount() {
-        let dataModel = Self.createTransactionDataModel(amount: MoneyDataModel(minorUnits: 1234, currency: "GBP"))
+    func testMapAmount() throws {
+        let transactionID = try XCTUnwrap(UUID(uuidString: "429E13F3-0767-4ECE-A6AA-6DD2D0E416DC"))
+        let dataModel = Self.createTransactionDataModel(
+            feedItemUid: transactionID,
+            amount: MoneyDataModel(minorUnits: 1234, currency: "GBP")
+        )
 
         let transaction = TransactionMapper.map(dataModel)
 
         XCTAssertEqual(transaction.amount, Money(minorUnits: 1234, currency: "GBP"))
     }
 
-    func testMapDirection() {
-        let dataModel = Self.createTransactionDataModel(direction: .in)
+    func testMapDirection() throws {
+        let transactionID = try XCTUnwrap(UUID(uuidString: "429E13F3-0767-4ECE-A6AA-6DD2D0E416DC"))
+        let dataModel = Self.createTransactionDataModel(feedItemUid: transactionID, direction: .in)
 
         let transaction = TransactionMapper.map(dataModel)
 
@@ -41,7 +47,7 @@ final class TransactionMapperTests: XCTestCase {
 extension TransactionMapperTests {
 
     private static func createTransactionDataModel(
-        feedItemUid: String = "1",
+        feedItemUid: UUID,
         categoryUid: String = "a",
         amount: MoneyDataModel = MoneyDataModel(minorUnits: 0, currency: "GBP"),
         direction: TransactionDirectionDataModel = .in,

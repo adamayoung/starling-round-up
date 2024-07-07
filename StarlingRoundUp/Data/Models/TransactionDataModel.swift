@@ -9,7 +9,7 @@ import Foundation
 
 struct TransactionDataModel: Decodable {
 
-    let feedItemUid: String
+    let feedItemUid: UUID
     let categoryUid: String
     let amount: MoneyDataModel
     let direction: TransactionDirectionDataModel
