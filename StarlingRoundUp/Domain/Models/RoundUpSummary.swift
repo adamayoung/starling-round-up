@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RoundUpSummary: Identifiable, Sendable {
+struct RoundUpSummary: Identifiable, Sendable, Equatable {
 
     var id: String {
         "\(accountID)-\(dateRange.lowerBound.timeIntervalSince1970)-\(dateRange.upperBound.timeIntervalSince1970)"

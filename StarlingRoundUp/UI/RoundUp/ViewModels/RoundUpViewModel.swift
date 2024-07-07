@@ -14,11 +14,11 @@ final class RoundUpViewModel: RoundUpViewModeling {
     let accountID: Account.ID
     private(set) var roundUpSummary: RoundUpSummary?
     private(set) var availableSavingsGoals: [SavingsGoal] = []
-    var selectedSavingsGoal: SavingsGoal?
+    private(set) var selectedSavingsGoal: SavingsGoal?
 
     private let fetchRoundUpSummaryUseCase: any FetchRoundUpSummaryUseCase
     private let fetchSavingsGoalsUseCase: any FetchSavingsGoalsUseCase
-    private var currentFromDate = RoundUpViewModel.timeWindow.dateRange(containing: Date()).lowerBound
+    private var currentFromDate: Date
     private var isFetchingRoundUpSummary = false
 
     init(
@@ -29,6 +29,7 @@ final class RoundUpViewModel: RoundUpViewModeling {
         self.accountID = accountID
         self.fetchRoundUpSummaryUseCase = fetchRoundUpSummaryUseCase
         self.fetchSavingsGoalsUseCase = fetchSavingsGoalsUseCase
+        self.currentFromDate = RoundUpViewModel.timeWindow.dateRange(containing: Date()).lowerBound
     }
 
     func fetchRoundUpSummary() async throws {
@@ -66,7 +67,11 @@ final class RoundUpViewModel: RoundUpViewModeling {
     }
 
     func setSelectedSavingsGoal(id: SavingsGoal.ID) {
-        selectedSavingsGoal = availableSavingsGoals.first { $0.id == id }
+        guard let savingsGoal = (availableSavingsGoals.first { $0.id == id }) else {
+            return
+        }
+
+        selectedSavingsGoal = savingsGoal
     }
 
     func performTransfer() async throws {
