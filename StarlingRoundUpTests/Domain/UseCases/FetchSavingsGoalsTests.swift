@@ -107,7 +107,7 @@ extension FetchSavingsGoalsTests {
         target: Money = Money(minorUnits: 0, currency: "GBP"),
         totalSaved: Money = Money(minorUnits: 0, currency: "GBP"),
         savedPercentage: Int = 0,
-        state: SavingsGoalState = .active
+        state: SavingsGoal.State = .active
     ) -> SavingsGoal {
         SavingsGoal(
             id: id,

@@ -11,7 +11,7 @@ struct SavingsGoalStateMapper {
 
     private init() {}
 
-    static func map(_ dataModel: SavingsGoalStateDataModel) -> SavingsGoalState {
+    static func map(_ dataModel: SavingsGoalStateDataModel) -> SavingsGoal.State {
         switch dataModel {
         case .creating:
             .creating

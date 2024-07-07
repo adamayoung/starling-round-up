@@ -14,6 +14,22 @@ struct SavingsGoal: Identifiable, Sendable, Hashable {
     let target: Money
     let totalSaved: Money
     let savedPercentage: Int
-    let state: SavingsGoalState
+    let state: SavingsGoal.State
+
+}
+
+extension SavingsGoal {
+
+    enum State {
+
+        case creating
+        case active
+        case archiving
+        case archived
+        case restoring
+        case pending
+        case unknown
+
+    }
 
 }

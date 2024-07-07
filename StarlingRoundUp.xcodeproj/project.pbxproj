@@ -113,7 +113,6 @@
 		66EA3AB62C356FEF00649A13 /* FetchAccountSummaryStubUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AB52C356FEF00649A13 /* FetchAccountSummaryStubUseCase.swift */; };
 		66EA3AB82C3580D600649A13 /* FetchSavingsGoalsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AB72C3580D600649A13 /* FetchSavingsGoalsUseCase.swift */; };
 		66EA3ABA2C3580FC00649A13 /* SavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AB92C3580FC00649A13 /* SavingsGoal.swift */; };
-		66EA3ABC2C35817F00649A13 /* SavingsGoalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3ABB2C35817F00649A13 /* SavingsGoalState.swift */; };
 		66EA3ABE2C3581E500649A13 /* FetchSavingsGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3ABD2C3581E500649A13 /* FetchSavingsGoals.swift */; };
 		66EA3AC02C35820C00649A13 /* SavingsGoalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3ABF2C35820C00649A13 /* SavingsGoalRepository.swift */; };
 		66EA3AC22C3582AC00649A13 /* FetchSavingsGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA3AC12C3582AC00649A13 /* FetchSavingsGoalsTests.swift */; };
@@ -286,7 +285,6 @@
 		66EA3AB52C356FEF00649A13 /* FetchAccountSummaryStubUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAccountSummaryStubUseCase.swift; sourceTree = "<group>"; };
 		66EA3AB72C3580D600649A13 /* FetchSavingsGoalsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSavingsGoalsUseCase.swift; sourceTree = "<group>"; };
 		66EA3AB92C3580FC00649A13 /* SavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoal.swift; sourceTree = "<group>"; };
-		66EA3ABB2C35817F00649A13 /* SavingsGoalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalState.swift; sourceTree = "<group>"; };
 		66EA3ABD2C3581E500649A13 /* FetchSavingsGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSavingsGoals.swift; sourceTree = "<group>"; };
 		66EA3ABF2C35820C00649A13 /* SavingsGoalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalRepository.swift; sourceTree = "<group>"; };
 		66EA3AC12C3582AC00649A13 /* FetchSavingsGoalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSavingsGoalsTests.swift; sourceTree = "<group>"; };
@@ -518,7 +516,6 @@
 				66A6348F2C369D9600AB3060 /* RoundUpSummary.swift */,
 				66A634912C369EC700AB3060 /* RoundUpTimeWindow.swift */,
 				66EA3AB92C3580FC00649A13 /* SavingsGoal.swift */,
-				66EA3ABB2C35817F00649A13 /* SavingsGoalState.swift */,
 				66A6349D2C36B61700AB3060 /* Transaction.swift */,
 			);
 			path = Models;
@@ -1104,7 +1101,6 @@
 				66A634BD2C36F03700AB3060 /* RoundUpViewController.swift in Sources */,
 				66EA3B002C35E52500649A13 /* CodableAPIRequest.swift in Sources */,
 				66EA3A7F2C34831400649A13 /* BalanceRequest.swift in Sources */,
-				66EA3ABC2C35817F00649A13 /* SavingsGoalState.swift in Sources */,
 				66A634DD2C3ADBE900AB3060 /* TransferToSavingsGoal.swift in Sources */,
 				66A634E32C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift in Sources */,
 				66EA3A5C2C347A5500649A13 /* AccountsResponseDataModel.swift in Sources */,
