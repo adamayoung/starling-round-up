@@ -13,7 +13,7 @@ protocol SavingsGoalRepository {
 
     func create(savingsGoal: SavingsGoalInput) async throws
 
-    func transfer(amount: Money, from accountID: Account.ID, to savingsGoal: SavingsGoal.ID) async throws
+    func transfer(transferID: UUID, input: TransferToSavingsGoalInput) async throws
 
 }
 

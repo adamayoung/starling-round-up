@@ -16,11 +16,11 @@ final class TransferToSavingsGoal: TransferToSavingsGoalUseCase {
     }
 
     func execute(input: TransferToSavingsGoalInput) async throws {
+        let transferID = UUID()
         do {
             try await savingsGoalRepository.transfer(
-                amount: input.amount,
-                from: input.accountID,
-                to: input.savingsGoalID
+                transferID: transferID,
+                input: input
             )
         } catch let error {
             throw Self.mapToTransferToSavingsGoalError(error)

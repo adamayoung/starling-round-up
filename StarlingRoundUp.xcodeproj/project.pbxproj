@@ -44,6 +44,9 @@
 		66A634DB2C3ADA9E00AB3060 /* TransferToSavingsGoalUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634DA2C3ADA9E00AB3060 /* TransferToSavingsGoalUseCase.swift */; };
 		66A634DD2C3ADBE900AB3060 /* TransferToSavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634DC2C3ADBE900AB3060 /* TransferToSavingsGoal.swift */; };
 		66A634DF2C3ADCA700AB3060 /* TransferToSavingsGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634DE2C3ADCA700AB3060 /* TransferToSavingsGoalTests.swift */; };
+		66A634E12C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634E02C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift */; };
+		66A634E32C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634E22C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift */; };
+		66A634E52C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634E42C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift */; };
 		66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992D2C3414310056F308 /* AppDelegate.swift */; };
 		66B899302C3414310056F308 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992F2C3414310056F308 /* SceneDelegate.swift */; };
 		66B899322C3414310056F308 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899312C3414310056F308 /* AccountListViewController.swift */; };
@@ -207,6 +210,9 @@
 		66A634DA2C3ADA9E00AB3060 /* TransferToSavingsGoalUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalUseCase.swift; sourceTree = "<group>"; };
 		66A634DC2C3ADBE900AB3060 /* TransferToSavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoal.swift; sourceTree = "<group>"; };
 		66A634DE2C3ADCA700AB3060 /* TransferToSavingsGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalTests.swift; sourceTree = "<group>"; };
+		66A634E02C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalRequest.swift; sourceTree = "<group>"; };
+		66A634E22C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalResponseDataModel.swift; sourceTree = "<group>"; };
+		66A634E42C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalRequestTests.swift; sourceTree = "<group>"; };
 		66B8992A2C3414310056F308 /* StarlingRoundUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarlingRoundUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8992D2C3414310056F308 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66B8992F2C3414310056F308 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -661,6 +667,7 @@
 				66A634A72C36E44100AB3060 /* TransactionDataModel.swift */,
 				66A634A92C36E48100AB3060 /* TransactionDirectionDataModel.swift */,
 				66A634AD2C36E59600AB3060 /* TransactionsResponseDataModel.swift */,
+				66A634E22C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -726,6 +733,7 @@
 				66EA3B032C35E80800649A13 /* CreateSavingsGoalRequest.swift */,
 				66EA3AD12C3587D400649A13 /* SavingsGoalsRequest.swift */,
 				66A634A52C36E41D00AB3060 /* SettledTransactionsRequest.swift */,
+				66A634E02C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -749,6 +757,7 @@
 				66EA3B072C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift */,
 				66EA3AD32C35882B00649A13 /* SavingsGoalsRequestTests.swift */,
 				66A634AF2C36E5E300AB3060 /* SettledTransactionsRequestTests.swift */,
+				66A634E42C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1094,6 +1103,7 @@
 				66EA3A7F2C34831400649A13 /* BalanceRequest.swift in Sources */,
 				66EA3ABC2C35817F00649A13 /* SavingsGoalState.swift in Sources */,
 				66A634DD2C3ADBE900AB3060 /* TransferToSavingsGoal.swift in Sources */,
+				66A634E32C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift in Sources */,
 				66EA3A5C2C347A5500649A13 /* AccountsResponseDataModel.swift in Sources */,
 				66A634B82C36EA5200AB3060 /* TransactionMapper.swift in Sources */,
 				66EA3A972C34A98C00649A13 /* MainNavigationController.swift in Sources */,
@@ -1130,6 +1140,7 @@
 				66A634AE2C36E59600AB3060 /* TransactionsResponseDataModel.swift in Sources */,
 				66EA3A7D2C3482A000649A13 /* AccountsRequest.swift in Sources */,
 				66EA3AD02C3587B500649A13 /* SavingsGoalsResponseDataModel.swift in Sources */,
+				66A634E12C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift in Sources */,
 				66A634CF2C3802DA00AB3060 /* RoundUpSummaryAccountBalanceView.swift in Sources */,
 				66EA3B0F2C35F27D00649A13 /* AddSavingsGoalViewController.swift in Sources */,
 				66D876D32C3466F30012CA55 /* Account.swift in Sources */,
@@ -1152,6 +1163,7 @@
 				66A634BA2C36EAB000AB3060 /* TransactionMapperTests.swift in Sources */,
 				66EA3A6F2C347CEC00649A13 /* AccountMapperTests.swift in Sources */,
 				66EA3A6D2C347C6C00649A13 /* MoneyMapperTests.swift in Sources */,
+				66A634E52C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift in Sources */,
 				66EA3A8D2C34924400649A13 /* BalanceRequestTests.swift in Sources */,
 				66A634B02C36E5E300AB3060 /* SettledTransactionsRequestTests.swift in Sources */,
 				66EA3A6B2C347BD200649A13 /* AccountTypeMapperTests.swift in Sources */,

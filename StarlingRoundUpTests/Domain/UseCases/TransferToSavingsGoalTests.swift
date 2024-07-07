@@ -35,9 +35,7 @@ final class TransferToSavingsGoalTests: XCTestCase {
 
         try await useCase.execute(input: input)
 
-        XCTAssertEqual(savingsGoalRepository.lastTransferAmount, Money(minorUnits: 1000, currency: "GBP"))
-        XCTAssertEqual(savingsGoalRepository.lastTransferAccountID, "1")
-        XCTAssertEqual(savingsGoalRepository.lastTransferSavingsGoalID, "sg1")
+        XCTAssertEqual(savingsGoalRepository.lastTransferInput, input)
     }
 
     func testExecuteWhenErrorsThrowsError() async throws {

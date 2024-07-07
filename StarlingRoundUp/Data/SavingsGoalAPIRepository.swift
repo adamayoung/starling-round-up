@@ -36,6 +36,19 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
         }
     }
 
-    func transfer(amount _: Money, from _: Account.ID, to _: SavingsGoal.ID) async throws {}
+    func transfer(transferID: UUID, input: TransferToSavingsGoalInput) async throws {
+        let request = TransferToSavingsGoalRequest(
+            transferID: transferID,
+            accountID: input.accountID,
+            savingsGoalID: input.savingsGoalID,
+            minorUnits: input.amount.minorUnits,
+            currency: input.amount.currency
+        )
+
+        let result = try await apiClient.perform(request)
+        guard result.success else {
+            throw SavingsGoalRepositoryError.unknown
+        }
+    }
 
 }
