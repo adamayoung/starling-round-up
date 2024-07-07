@@ -16,7 +16,7 @@ final class AccountStubRepository: AccountRepository {
     var accountResult: Result<Account?, AccountRepositoryError> = .failure(.unknown)
 
     private(set) var lastBalanceAccountID: Account.ID?
-    var balanceResult: Result<[String: Money], AccountRepositoryError> = .failure(.unknown)
+    var balanceResult: Result<[Account.ID: Money], AccountRepositoryError> = .failure(.unknown)
 
     init() {}
 

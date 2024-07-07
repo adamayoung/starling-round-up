@@ -10,8 +10,8 @@ import XCTest
 
 final class RoundUpSummaryTests: XCTestCase {
 
-    func testIDHasCorrectValue() {
-        let accountID = "1"
+    func testIDHasCorrectValue() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697"))
         let startDate = Date(timeIntervalSince1970: 0)
         let endDate = Date(timeIntervalSince1970: 1000)
         let dateRange = startDate ..< endDate
@@ -24,8 +24,10 @@ final class RoundUpSummaryTests: XCTestCase {
         XCTAssertEqual(summary.id, expectedID)
     }
 
-    func testHasAvailableAccountBalanceWhenAccountBalanceIsLessThanAmountReturnsFalse() {
+    func testHasAvailableAccountBalanceWhenAccountBalanceIsLessThanAmountReturnsFalse() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697"))
         let summary = Self.createRoundUpSummary(
+            accountID: accountID,
             amount: Money(minorUnits: 10, currency: "GBP"),
             accountBalance: Money(minorUnits: 0, currency: "GBP")
         )
@@ -33,8 +35,10 @@ final class RoundUpSummaryTests: XCTestCase {
         XCTAssertFalse(summary.hasSufficentFundsForTransfer)
     }
 
-    func testHasSufficentFundsForTransferWhenAccountBalanceIsEqualToAmountReturnsTrue() {
+    func testHasSufficentFundsForTransferWhenAccountBalanceIsEqualToAmountReturnsTrue() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697"))
         let summary = Self.createRoundUpSummary(
+            accountID: accountID,
             amount: Money(minorUnits: 10, currency: "GBP"),
             accountBalance: Money(minorUnits: 10, currency: "GBP")
         )
@@ -42,8 +46,10 @@ final class RoundUpSummaryTests: XCTestCase {
         XCTAssertTrue(summary.hasSufficentFundsForTransfer)
     }
 
-    func testHasSufficentFundsForTransferWhenAccountBalanceIsGreaterThanAmountReturnsTrue() {
+    func testHasSufficentFundsForTransferWhenAccountBalanceIsGreaterThanAmountReturnsTrue() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697"))
         let summary = Self.createRoundUpSummary(
+            accountID: accountID,
             amount: Money(minorUnits: 10, currency: "GBP"),
             accountBalance: Money(minorUnits: 100, currency: "GBP")
         )
@@ -51,33 +57,37 @@ final class RoundUpSummaryTests: XCTestCase {
         XCTAssertTrue(summary.hasSufficentFundsForTransfer)
     }
 
-    func testIsRoundUpAvailableWhenAmountIsZeroReturnsFalse() {
-        let summary = Self.createRoundUpSummary(amount: Money(minorUnits: 0, currency: "GBP"))
+    func testIsRoundUpAvailableWhenAmountIsZeroReturnsFalse() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697"))
+        let summary = Self.createRoundUpSummary(accountID: accountID, amount: Money(minorUnits: 0, currency: "GBP"))
 
         XCTAssertFalse(summary.isRoundUpAvailable)
     }
 
-    func testIsRoundUpAvailableWhenAmountIsGreaterThanZeroReturnsTrue() {
-        let summary = Self.createRoundUpSummary(amount: Money(minorUnits: 1, currency: "GBP"))
+    func testIsRoundUpAvailableWhenAmountIsGreaterThanZeroReturnsTrue() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697"))
+        let summary = Self.createRoundUpSummary(accountID: accountID, amount: Money(minorUnits: 1, currency: "GBP"))
 
         XCTAssertTrue(summary.isRoundUpAvailable)
     }
 
-    func testIsDateRangeEndInFutureWhenInPastReturnsFalse() {
+    func testIsDateRangeEndInFutureWhenInPastReturnsFalse() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697"))
         let fromDate = Date(timeIntervalSince1970: 0)
         let toDate = Date(timeIntervalSince1970: 1000)
         let dateRange = fromDate ..< toDate
-        let summary = Self.createRoundUpSummary(dateRange: dateRange)
+        let summary = Self.createRoundUpSummary(accountID: accountID, dateRange: dateRange)
 
         XCTAssertFalse(summary.isDateRangeEndInFuture)
     }
 
-    func testIsDateRangeEndInFutureWhenInFutureReturnsTrue() {
+    func testIsDateRangeEndInFutureWhenInFutureReturnsTrue() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697"))
         let toDate = Date.distantFuture
         let fromDate = toDate.addingTimeInterval(-1000)
 
         let dateRange = fromDate ..< toDate
-        let summary = Self.createRoundUpSummary(dateRange: dateRange)
+        let summary = Self.createRoundUpSummary(accountID: accountID, dateRange: dateRange)
 
         XCTAssertTrue(summary.isDateRangeEndInFuture)
     }
@@ -87,7 +97,7 @@ final class RoundUpSummaryTests: XCTestCase {
 extension RoundUpSummaryTests {
 
     private static func createRoundUpSummary(
-        accountID: String = "1",
+        accountID: UUID,
         amount: Money = Money(minorUnits: 0, currency: "GBP"),
         dateRange: Range<Date> = Date(timeIntervalSince1970: 0) ..< Date(timeIntervalSince1970: 1000),
         timeWindow: RoundUpTimeWindow = .week,

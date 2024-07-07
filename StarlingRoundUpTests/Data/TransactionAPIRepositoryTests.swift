@@ -12,21 +12,23 @@ final class TransactionAPIRepositoryTests: XCTestCase {
 
     var repository: TransactionAPIRepository!
     var apiClient: APIStubClient!
+    var accountID: UUID!
 
-    override func setUp() {
+    override func setUpWithError() throws {
         super.setUp()
         apiClient = APIStubClient()
         repository = TransactionAPIRepository(apiClient: apiClient)
+        accountID = try XCTUnwrap(UUID(uuidString: "706B0769-ABAD-42BF-8045-70DAAAB5ACB9"))
     }
 
     override func tearDown() {
+        accountID = nil
         repository = nil
         apiClient = nil
         super.tearDown()
     }
 
     func testSettledTransactionsMakesCorrectAPIRequest() async throws {
-        let accountID = "1"
         let fromDate = Date(timeIntervalSince1970: 100_000)
         let toDate = Date(timeIntervalSince1970: 200_000)
         let dateRange = fromDate ..< toDate
@@ -38,14 +40,16 @@ final class TransactionAPIRepositoryTests: XCTestCase {
     }
 
     func testSettledTransactionsReturnsTransactions() async throws {
-        let accountID = "1"
+        let transaction1ID = try XCTUnwrap(UUID(uuidString: "DDFE6E41-7B74-435B-969D-40C2CE39FF61"))
+        let transaction2ID = try XCTUnwrap(UUID(uuidString: "847BCE1B-EFDD-4972-914D-9C7DD2A49341"))
+        let transaction3ID = try XCTUnwrap(UUID(uuidString: "ABCF0099-2E82-45C3-9CC6-67F32D26FAB8"))
         let fromDate = Date(timeIntervalSince1970: 100_000)
         let toDate = Date(timeIntervalSince1970: 200_000)
         let dateRange = fromDate ..< toDate
         let transactionDataModels = [
-            Self.createTransactionDataModel(feedItemUid: "1"),
-            Self.createTransactionDataModel(feedItemUid: "2"),
-            Self.createTransactionDataModel(feedItemUid: "3")
+            Self.createTransactionDataModel(feedItemUid: transaction1ID),
+            Self.createTransactionDataModel(feedItemUid: transaction2ID),
+            Self.createTransactionDataModel(feedItemUid: transaction3ID)
         ]
         let responseDataModel = TransactionsResponseDataModel(feedItems: transactionDataModels)
         apiClient.responseResult = .success(responseDataModel)
@@ -53,13 +57,10 @@ final class TransactionAPIRepositoryTests: XCTestCase {
         let transactions = try await repository.settledTransactions(forAccount: accountID, in: dateRange)
 
         XCTAssertEqual(transactions.count, 3)
-        XCTAssertEqual(transactions[0].id, "1")
-        XCTAssertEqual(transactions[1].id, "2")
-        XCTAssertEqual(transactions[2].id, "3")
+        XCTAssertEqual(transactions.map(\.id), [transaction1ID, transaction2ID, transaction3ID])
     }
 
     func testSettledTransactionsWhenAPIClientRequestErrorsThrowsError() async throws {
-        let accountID = "1"
         let fromDate = Date(timeIntervalSince1970: 100_000)
         let toDate = Date(timeIntervalSince1970: 200_000)
         let dateRange = fromDate ..< toDate
@@ -80,7 +81,7 @@ final class TransactionAPIRepositoryTests: XCTestCase {
 extension TransactionAPIRepositoryTests {
 
     private static func createTransactionDataModel(
-        feedItemUid: String = "1",
+        feedItemUid: UUID,
         categoryUid: String = "a",
         amount: MoneyDataModel = MoneyDataModel(minorUnits: 0, currency: "GBP"),
         direction: TransactionDirectionDataModel = .in,

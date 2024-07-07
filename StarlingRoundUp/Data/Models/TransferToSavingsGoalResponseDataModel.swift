@@ -10,6 +10,6 @@ import Foundation
 struct TransferToSavingsGoalResponseDataModel: Decodable {
 
     let success: Bool
-    let transferUid: String?
+    let transferUid: UUID?
 
 }

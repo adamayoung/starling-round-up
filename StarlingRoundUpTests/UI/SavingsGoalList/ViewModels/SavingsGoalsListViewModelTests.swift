@@ -11,12 +11,12 @@ import XCTest
 final class SavingsGoalsListViewModelTests: XCTestCase {
 
     var viewModel: SavingsGoalsListViewModel!
-    var accountID: Account.ID!
+    var accountID: UUID!
     var fetchSavingsGoalsUseCase: FetchSavingsGoalsStubUseCase!
 
-    override func setUp() {
-        super.setUp()
-        accountID = "1"
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        accountID = try XCTUnwrap(UUID(uuidString: "F06AD44E-04E0-4D4E-9BB3-3266F2917114"))
         fetchSavingsGoalsUseCase = FetchSavingsGoalsStubUseCase()
         viewModel = SavingsGoalsListViewModel(accountID: accountID, fetchSavingsGoalsUseCase: fetchSavingsGoalsUseCase)
     }
@@ -33,10 +33,9 @@ final class SavingsGoalsListViewModelTests: XCTestCase {
     }
 
     func testFetchSavingsGoalsSetsSavingsGoals() async throws {
-        let accountID = "1"
-        let savingsGoals = [
+        let savingsGoals = try [
             SavingsGoal(
-                id: "sg1",
+                id: XCTUnwrap(UUID(uuidString: "23BAEC13-86C5-40EE-ABA1-F77EEA243791")),
                 name: "SG 1",
                 target: Money(minorUnits: 1, currency: "GBP"),
                 totalSaved: Money(minorUnits: 0, currency: "GBP"),
@@ -44,7 +43,7 @@ final class SavingsGoalsListViewModelTests: XCTestCase {
                 state: .active
             ),
             SavingsGoal(
-                id: "sg2",
+                id: XCTUnwrap(UUID(uuidString: "D1C0BAE1-53C2-4670-A5A5-2FCC919D9B4B")),
                 name: "SG 2",
                 target: Money(minorUnits: 100, currency: "GBP"),
                 totalSaved: Money(minorUnits: 50, currency: "GBP"),

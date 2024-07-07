@@ -9,8 +9,8 @@ import Foundation
 
 final class SavingsGoalsRequest: DecodableAPIRequest<SavingsGoalsResponseDataModel> {
 
-    init(accountID: String) {
-        let path = "/account/\(accountID)/savings-goals"
+    init(accountID: UUID) {
+        let path = "/account/\(accountID.uuidString)/savings-goals"
 
         super.init(path: path)
     }

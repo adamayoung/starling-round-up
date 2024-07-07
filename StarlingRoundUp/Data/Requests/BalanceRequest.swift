@@ -9,8 +9,8 @@ import Foundation
 
 final class BalanceRequest: DecodableAPIRequest<BalanceResponseDataModel> {
 
-    init(accountID: String) {
-        let path = "/accounts/\(accountID)/balance"
+    init(accountID: UUID) {
+        let path = "/accounts/\(accountID.uuidString)/balance"
 
         super.init(path: path)
     }

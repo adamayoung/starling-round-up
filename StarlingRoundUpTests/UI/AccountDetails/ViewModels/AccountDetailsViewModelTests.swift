@@ -11,19 +11,21 @@ import XCTest
 final class AccountDetailsViewModelTests: XCTestCase {
 
     var fetchAccountSummaryUseCase: FetchAccountSummaryStubUseCase!
+    var accountID: UUID!
 
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
         fetchAccountSummaryUseCase = FetchAccountSummaryStubUseCase()
+        accountID = try XCTUnwrap(UUID(uuidString: "53271A33-E314-47F9-8493-F0911FF3DDA3"))
     }
 
     override func tearDown() {
+        accountID = nil
         fetchAccountSummaryUseCase = nil
         super.tearDown()
     }
 
-    func testInitWithAccountIDSetsAccountID() {
-        let accountID = "1"
+    func testInitWithAccountIDSetsAccountID() throws {
         let viewModel = AccountDetailsViewModel(
             accountID: accountID,
             fetchAccountSummaryUseCase: fetchAccountSummaryUseCase
@@ -32,8 +34,12 @@ final class AccountDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.accountID, accountID)
     }
 
-    func testInitWithAccountSummarySetsAccountID() {
-        let accountSummary = AccountSummary(id: "1", name: "Test 1", balance: Money(minorUnits: 0, currency: "GBP"))
+    func testInitWithAccountSummarySetsAccountID() throws {
+        let accountSummary = AccountSummary(
+            id: accountID,
+            name: "Test 1",
+            balance: Money(minorUnits: 0, currency: "GBP")
+        )
 
         let viewModel = AccountDetailsViewModel(
             accountSummary: accountSummary,
@@ -44,7 +50,6 @@ final class AccountDetailsViewModelTests: XCTestCase {
     }
 
     func testFetchAccountSummarySetsAccountSummary() async throws {
-        let accountID = "1"
         let accountSummary = AccountSummary(
             id: accountID,
             name: "Test 1",
@@ -64,7 +69,7 @@ final class AccountDetailsViewModelTests: XCTestCase {
     func testFetchAccountSummaryWhenErrorsThrowsError() async throws {
         fetchAccountSummaryUseCase.result = .failure(.unknown)
         let viewModel = AccountDetailsViewModel(
-            accountID: "1",
+            accountID: accountID,
             fetchAccountSummaryUseCase: fetchAccountSummaryUseCase
         )
 

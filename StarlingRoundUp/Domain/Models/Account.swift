@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Account: Identifiable, Sendable {
+struct Account: Identifiable, Sendable, Equatable {
 
-    let id: String
+    let id: UUID
     let name: String
     let type: AccountType
     let currency: String

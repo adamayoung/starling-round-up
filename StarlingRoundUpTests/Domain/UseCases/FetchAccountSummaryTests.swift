@@ -12,14 +12,17 @@ final class FetchAccountSummaryTests: XCTestCase {
 
     var useCase: FetchAccountSummary!
     var accountRepository: AccountStubRepository!
+    var accountID: UUID!
 
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
         accountRepository = AccountStubRepository()
         useCase = FetchAccountSummary(accountRepository: accountRepository)
+        accountID = try XCTUnwrap(UUID(uuidString: "C74A112D-4997-4F67-B958-8A80E1A0F8BB"))
     }
 
     override func tearDown() {
+        accountID = nil
         useCase = nil
         accountRepository = nil
         super.tearDown()
@@ -28,18 +31,18 @@ final class FetchAccountSummaryTests: XCTestCase {
     func testExecuteWhenAccountDoesNotExistReturnsNil() async throws {
         accountRepository.accountResult = .success(nil)
 
-        let accountSummary = try await useCase.execute(accountID: "1")
+        let accountSummary = try await useCase.execute(accountID: accountID)
 
         XCTAssertNil(accountSummary)
     }
 
     func testExecuteWhenAccountExistsAndBalanceIsNilReturnsAccountSummaryWithZeroBalance() async throws {
-        let account = Account(id: "1", name: "Test 1", type: .primary, currency: "GBP")
+        let account = Account(id: accountID, name: "Test 1", type: .primary, currency: "GBP")
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         let expectedBalance = Money(minorUnits: 0, currency: "GBP")
 
-        let accountSummary = try await useCase.execute(accountID: "1")
+        let accountSummary = try await useCase.execute(accountID: accountID)
 
         XCTAssertEqual(accountSummary?.id, account.id)
         XCTAssertEqual(accountSummary?.name, account.name)
@@ -47,12 +50,12 @@ final class FetchAccountSummaryTests: XCTestCase {
     }
 
     func testExecuteWhenAccountExistsAndHasABalanceReturnsAccountSummaryWithBalance() async throws {
-        let account = Account(id: "1", name: "Test 1", type: .primary, currency: "GBP")
+        let account = Account(id: accountID, name: "Test 1", type: .primary, currency: "GBP")
         let balance = Money(minorUnits: 1234, currency: "GBP")
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([account.id: balance])
 
-        let accountSummary = try await useCase.execute(accountID: "1")
+        let accountSummary = try await useCase.execute(accountID: accountID)
 
         XCTAssertEqual(accountSummary?.id, account.id)
         XCTAssertEqual(accountSummary?.name, account.name)
@@ -64,7 +67,7 @@ final class FetchAccountSummaryTests: XCTestCase {
 
         var useCaseError: FetchAccountSummaryError?
         do {
-            _ = try await useCase.execute(accountID: "1")
+            _ = try await useCase.execute(accountID: accountID)
         } catch let error {
             useCaseError = error as? FetchAccountSummaryError
         }
@@ -73,13 +76,13 @@ final class FetchAccountSummaryTests: XCTestCase {
     }
 
     func testExecuteWhenFetchBalanceErrorsThrowsError() async {
-        let account = Account(id: "1", name: "Test 1", type: .primary, currency: "GBP")
+        let account = Account(id: accountID, name: "Test 1", type: .primary, currency: "GBP")
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .failure(.unknown)
 
         var useCaseError: FetchAccountSummaryError?
         do {
-            _ = try await useCase.execute(accountID: "1")
+            _ = try await useCase.execute(accountID: accountID)
         } catch let error {
             useCaseError = error as? FetchAccountSummaryError
         }

@@ -10,24 +10,27 @@ import XCTest
 
 final class CreateSavingsGoalInputTests: XCTestCase {
 
-    func testValidateWithInvalidNameThrowsInvalidNameError() {
-        let input = Self.createSavingsGoalInput(name: "")
+    func testValidateWithInvalidNameThrowsInvalidNameError() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "F6F321B7-BE76-435F-957B-52F7E61E41BE"))
+        let input = Self.createSavingsGoalInput(accountID: accountID, name: "")
 
         XCTAssertThrowsError(try input.validate()) { error in
             XCTAssertEqual(error as? CreateSavingsGoalError, .invalidName)
         }
     }
 
-    func testValidateWithInvalidCurrencyThrowsInvalidCurrenyError() {
-        let input = Self.createSavingsGoalInput(currency: "")
+    func testValidateWithInvalidCurrencyThrowsInvalidCurrenyError() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "F6F321B7-BE76-435F-957B-52F7E61E41BE"))
+        let input = Self.createSavingsGoalInput(accountID: accountID, currency: "")
 
         XCTAssertThrowsError(try input.validate()) { error in
             XCTAssertEqual(error as? CreateSavingsGoalError, .invalidCurrency)
         }
     }
 
-    func testValidateWithInvalidTargetThrowsInvalidTargetError() {
-        let input = Self.createSavingsGoalInput(targetMinorUnits: -1)
+    func testValidateWithInvalidTargetThrowsInvalidTargetError() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "F6F321B7-BE76-435F-957B-52F7E61E41BE"))
+        let input = Self.createSavingsGoalInput(accountID: accountID, targetMinorUnits: -1)
 
         XCTAssertThrowsError(try input.validate()) { error in
             XCTAssertEqual(error as? CreateSavingsGoalError, .invalidTarget)
@@ -39,13 +42,13 @@ final class CreateSavingsGoalInputTests: XCTestCase {
 extension CreateSavingsGoalInputTests {
 
     private static func createSavingsGoalInput(
-        accountID: String = "1",
+        accountID: UUID,
         name: String = "Test 1",
         currency: String = "GBP",
         targetMinorUnits: Int = 100
     ) -> SavingsGoalInput {
         SavingsGoalInput(
-            accountID: "1",
+            accountID: accountID,
             name: name,
             currency: currency,
             targetMinorUnits: targetMinorUnits

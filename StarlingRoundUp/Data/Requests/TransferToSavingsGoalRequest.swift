@@ -14,12 +14,13 @@ final class TransferToSavingsGoalRequest: CodableAPIRequest<
 
     init(
         transferID: UUID,
-        accountID: String,
-        savingsGoalID: String,
+        accountID: UUID,
+        savingsGoalID: UUID,
         minorUnits: Int,
         currency: String
     ) {
-        let path = "/account/\(accountID)/savings-goals/\(savingsGoalID)/add-money/\(transferID.uuidString)"
+        let path = "/account/\(accountID.uuidString)/savings-goals/\(savingsGoalID.uuidString)"
+            + "/add-money/\(transferID.uuidString)"
         let body = Body(
             amount: MoneyDataModel(
                 minorUnits: minorUnits,

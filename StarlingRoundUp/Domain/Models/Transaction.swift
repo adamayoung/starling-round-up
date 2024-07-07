@@ -9,7 +9,7 @@ import Foundation
 
 struct Transaction: Identifiable, Sendable, Equatable {
 
-    let id: String
+    let id: UUID
     let amount: Money
     let direction: Transaction.Direction
 

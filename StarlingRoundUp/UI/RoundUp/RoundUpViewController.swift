@@ -249,7 +249,7 @@ extension RoundUpViewController {
         let actions = availableSavingsGoals.map { savingsGoal in
             let action = UIAction(
                 title: savingsGoal.name,
-                identifier: UIAction.Identifier(savingsGoal.id),
+                identifier: UIAction.Identifier(savingsGoal.id.uuidString),
                 handler: didSelectSavingsGoal
             )
 
@@ -264,7 +264,10 @@ extension RoundUpViewController {
     }
 
     private func didSelectSavingsGoal(_ action: UIAction) {
-        let savingsGoalID = action.identifier.rawValue
+        guard let savingsGoalID = UUID(uuidString: action.identifier.rawValue) else {
+            return
+        }
+
         viewModel.setSelectedSavingsGoal(id: savingsGoalID)
         refreshSavingsGoalsMenu()
         refreshView()

@@ -26,9 +26,9 @@ final class TransferToSavingsGoalTests: XCTestCase {
     }
 
     func testExecuteTransferAmount() async throws {
-        let input = TransferToSavingsGoalInput(
-            accountID: "1",
-            savingsGoalID: "sg1",
+        let input = try TransferToSavingsGoalInput(
+            accountID: XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697")),
+            savingsGoalID: XCTUnwrap(UUID(uuidString: "8A5D4678-A377-4E22-9002-D3A5CB2AE15E")),
             amount: Money(minorUnits: 1000, currency: "GBP")
         )
         savingsGoalRepository.transferResult = .success(())
@@ -39,9 +39,9 @@ final class TransferToSavingsGoalTests: XCTestCase {
     }
 
     func testExecuteWhenErrorsThrowsError() async throws {
-        let input = TransferToSavingsGoalInput(
-            accountID: "1",
-            savingsGoalID: "sg1",
+        let input = try TransferToSavingsGoalInput(
+            accountID: XCTUnwrap(UUID(uuidString: "E824387A-B85A-4C26-B00F-FD5E104DF697")),
+            savingsGoalID: XCTUnwrap(UUID(uuidString: "8A5D4678-A377-4E22-9002-D3A5CB2AE15E")),
             amount: Money(minorUnits: 1000, currency: "GBP")
         )
         savingsGoalRepository.transferResult = .failure(.unknown)

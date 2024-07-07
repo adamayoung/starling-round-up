@@ -12,14 +12,17 @@ final class FetchSavingsGoalsTests: XCTestCase {
 
     var useCase: FetchSavingsGoals!
     var savingsGoalRepository: SavingsGoalStubRepository!
+    var accountID: UUID!
 
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
         savingsGoalRepository = SavingsGoalStubRepository()
         useCase = FetchSavingsGoals(savingsGoalRepository: savingsGoalRepository)
+        accountID = try XCTUnwrap(UUID(uuidString: "CE2322FF-D843-4816-AADA-F81EA28FD6DF"))
     }
 
     override func tearDown() {
+        accountID = nil
         useCase = nil
         savingsGoalRepository = nil
         super.tearDown()
@@ -28,14 +31,14 @@ final class FetchSavingsGoalsTests: XCTestCase {
     func testExecuteWhenNoSavingsGoalsForAccountReturnsEmptyArray() async throws {
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let savingsGoals = try await useCase.execute(accountID: "1")
+        let savingsGoals = try await useCase.execute(accountID: accountID)
 
         XCTAssertTrue(savingsGoals.isEmpty)
     }
 
     func testExecuteWhenOneActiveSavingsGoalForAccountReturnsOneSavingsGoal() async throws {
-        let accountID = "1"
-        let savingsGoal = Self.createSavingsGoal(state: .active)
+        let savingsGoalID = try XCTUnwrap(UUID(uuidString: "B9170EEA-0996-4320-B465-CA6A88657632"))
+        let savingsGoal = Self.createSavingsGoal(id: savingsGoalID, state: .active)
         savingsGoalRepository.savingsGoalsResult = .success([accountID: [savingsGoal]])
 
         let savingsGoals = try await useCase.execute(accountID: accountID)
@@ -45,8 +48,8 @@ final class FetchSavingsGoalsTests: XCTestCase {
     }
 
     func testExecuteWhenOneArchivedSavingsGoalForAccountReturnsEmptyArray() async throws {
-        let accountID = "1"
-        let savingsGoal = Self.createSavingsGoal(state: .archived)
+        let savingsGoalID = try XCTUnwrap(UUID(uuidString: "B9170EEA-0996-4320-B465-CA6A88657632"))
+        let savingsGoal = Self.createSavingsGoal(id: savingsGoalID, state: .archived)
         savingsGoalRepository.savingsGoalsResult = .success([accountID: [savingsGoal]])
 
         let savingsGoals = try await useCase.execute(accountID: accountID)
@@ -55,12 +58,23 @@ final class FetchSavingsGoalsTests: XCTestCase {
     }
 
     func testExecuteWhenMultipleSavingsGoalsWithDifferentStatesReturnsActiveSavingsGoals() async throws {
-        let accountID = "1"
-        let savingsGoals = [
-            Self.createSavingsGoal(id: "1", state: .active),
-            Self.createSavingsGoal(id: "2", state: .active),
-            Self.createSavingsGoal(id: "3", state: .archived),
-            Self.createSavingsGoal(id: "4", state: .archived)
+        let savingsGoals = try [
+            Self.createSavingsGoal(
+                id: XCTUnwrap(UUID(uuidString: "B9170EEA-0996-4320-B465-CA6A88657632")),
+                state: .active
+            ),
+            Self.createSavingsGoal(
+                id: XCTUnwrap(UUID(uuidString: "D446C6E5-DD17-48FB-85A5-8F2005166F14")),
+                state: .active
+            ),
+            Self.createSavingsGoal(
+                id: XCTUnwrap(UUID(uuidString: "5DB13E1E-89BB-49D7-A27B-8A8C58487ADA")),
+                state: .archived
+            ),
+            Self.createSavingsGoal(
+                id: XCTUnwrap(UUID(uuidString: "08C03F6B-F147-4782-9296-0E64EEBAB592")),
+                state: .archived
+            )
         ]
         savingsGoalRepository.savingsGoalsResult = .success([accountID: savingsGoals])
 
@@ -75,7 +89,7 @@ final class FetchSavingsGoalsTests: XCTestCase {
 
         var useCaseError: FetchSavingsGoalsError?
         do {
-            _ = try await useCase.execute(accountID: "1")
+            _ = try await useCase.execute(accountID: accountID)
         } catch let error {
             useCaseError = error as? FetchSavingsGoalsError
         }
@@ -88,12 +102,12 @@ final class FetchSavingsGoalsTests: XCTestCase {
 extension FetchSavingsGoalsTests {
 
     private static func createSavingsGoal(
-        id: String = "sg1",
+        id: UUID,
         name: String = "Test 1",
         target: Money = Money(minorUnits: 0, currency: "GBP"),
         totalSaved: Money = Money(minorUnits: 0, currency: "GBP"),
         savedPercentage: Int = 0,
-        state: SavingsGoalState = .active
+        state: SavingsGoal.State = .active
     ) -> SavingsGoal {
         SavingsGoal(
             id: id,

@@ -14,9 +14,9 @@ final class AddSavingsGoalViewModelTests: XCTestCase {
     var accountID: Account.ID!
     var createSavingsGoalUseCase: CreateSavingsGoalStubUseCase!
 
-    override func setUp() {
-        super.setUp()
-        accountID = "1"
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        accountID = try XCTUnwrap(UUID(uuidString: "C74A112D-4997-4F67-B958-8A80E1A0F8BB"))
         createSavingsGoalUseCase = CreateSavingsGoalStubUseCase()
         viewModel = AddSavingsGoalViewModel(accountID: accountID, createSavingsGoalUseCase: createSavingsGoalUseCase)
     }

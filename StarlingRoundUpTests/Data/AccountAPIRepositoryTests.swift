@@ -34,9 +34,11 @@ final class AccountAPIRepositoryTests: XCTestCase {
     }
 
     func testAccountsReturnsAccounts() async throws {
+        let account1ID = try XCTUnwrap(UUID(uuidString: "0F3AD922-5BDD-4930-A10D-EB9AFB0C036D"))
+        let account2ID = try XCTUnwrap(UUID(uuidString: "448D0193-5446-4AF4-809A-3C20FB63EF04"))
         let accountDataModels = [
             AccountDataModel(
-                accountUid: "1",
+                accountUid: account1ID,
                 name: "Test 1",
                 accountType: .primary,
                 defaultCategory: "a",
@@ -44,7 +46,7 @@ final class AccountAPIRepositoryTests: XCTestCase {
                 createdAt: Date(timeIntervalSince1970: 0)
             ),
             AccountDataModel(
-                accountUid: "2",
+                accountUid: account2ID,
                 name: "Test 2",
                 accountType: .primary,
                 defaultCategory: "b",
@@ -58,12 +60,11 @@ final class AccountAPIRepositoryTests: XCTestCase {
         let accounts = try await repository.accounts()
 
         XCTAssertEqual(accounts.count, 2)
-        XCTAssertEqual(accounts[0].id, "1")
-        XCTAssertEqual(accounts[1].id, "2")
+        XCTAssertEqual(accounts.map(\.id), [account1ID, account2ID])
     }
 
     func testBalanceMakesCorrectAPIRequest() async throws {
-        let accountID = "1"
+        let accountID = try XCTUnwrap(UUID(uuidString: "58EDCA32-0050-43B6-82DD-588E0A0D707B"))
         let expectedAPIRequest = BalanceRequest(accountID: accountID)
 
         _ = try? await repository.balance(for: accountID)
@@ -72,11 +73,12 @@ final class AccountAPIRepositoryTests: XCTestCase {
     }
 
     func testBalanceReturnsBalance() async throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "58EDCA32-0050-43B6-82DD-588E0A0D707B"))
         let balanceDataModel = MoneyDataModel(minorUnits: 1234, currency: "GBP")
         let responseDataModel = BalanceResponseDataModel(amount: balanceDataModel)
         apiClient.responseResult = .success(responseDataModel)
 
-        let balance = try await repository.balance(for: "1")
+        let balance = try await repository.balance(for: accountID)
 
         XCTAssertEqual(balance?.minorUnits, 1234)
         XCTAssertEqual(balance?.currency, "GBP")

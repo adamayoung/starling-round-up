@@ -9,8 +9,8 @@ import Foundation
 
 final class SettledTransactionsRequest: DecodableAPIRequest<TransactionsResponseDataModel> {
 
-    init(accountID: String, dateRange: Range<Date>) {
-        let path = "/feed/account/\(accountID)/settled-transactions-between"
+    init(accountID: UUID, dateRange: Range<Date>) {
+        let path = "/feed/account/\(accountID.uuidString)/settled-transactions-between"
         let queryItems = Self.buildQueryItems(fromDate: dateRange.lowerBound, toDate: dateRange.upperBound)
 
         super.init(path: path, queryItems: queryItems)

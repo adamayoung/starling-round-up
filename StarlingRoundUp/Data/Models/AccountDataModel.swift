@@ -9,7 +9,7 @@ import Foundation
 
 struct AccountDataModel: Decodable {
 
-    let accountUid: String
+    let accountUid: UUID
     let name: String
     let accountType: AccountTypeDataModel
     let defaultCategory: String

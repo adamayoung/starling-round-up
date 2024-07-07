@@ -36,12 +36,12 @@ final class FetchRoundUpSummary: FetchRoundUpSummaryUseCase {
 
         let dateRange = timeWindow.dateRange(containing: date, in: timeZone)
         async let transactions = settledOutgoingTransactions(
-            forAccount: accountID,
+            forAccount: account.id,
             in: dateRange,
             withCurrency: account.currency
         )
 
-        async let savingsGoals = savingsGoals(forAccount: accountID)
+        async let savingsGoals = savingsGoals(forAccount: account.id)
 
         let roundUpAmount = try await Self.roundUpAmount(for: transactions, inCurrency: account.currency)
 

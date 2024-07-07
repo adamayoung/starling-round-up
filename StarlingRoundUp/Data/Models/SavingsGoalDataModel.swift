@@ -9,7 +9,7 @@ import Foundation
 
 struct SavingsGoalDataModel: Decodable {
 
-    let savingsGoalUid: String
+    let savingsGoalUid: UUID
     let name: String
     let target: MoneyDataModel
     let totalSaved: MoneyDataModel
