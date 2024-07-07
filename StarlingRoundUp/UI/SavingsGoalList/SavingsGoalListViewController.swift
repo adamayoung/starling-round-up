@@ -30,6 +30,14 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
         return view
     }()
 
+    private lazy var addSavingsGoalButton: UIBarButtonItem = {
+        let action = UIAction { [weak self] _ in
+            self?.addSavingsGoal()
+        }
+
+        return UIBarButtonItem(systemItem: .add, primaryAction: action)
+    }()
+
     private lazy var savingsGoalsUnavailableView: SavingsGoalsUnavailableView = {
         let view = SavingsGoalsUnavailableView()
         view.onAction = { [weak self] in
@@ -37,6 +45,10 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
         }
         return view
     }()
+
+    private enum CellIdentifier {
+        static let savingsGoal = "savingsGoalCellIdentifier"
+    }
 
     init(viewModel: some SavingsGoalsListViewModeling) {
         self.viewModel = viewModel
@@ -50,16 +62,10 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("SAVINGS_GOALS", comment: "Savings Goals")
-
-        let addSavingsGoalButton = UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(addSavingsGoal)
-        )
+        title = String(localized: "SAVINGS_GOALS", comment: "Savings Goals")
         navigationItem.rightBarButtonItem = addSavingsGoalButton
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "savingsGoalCellIdentifier")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.savingsGoal)
         tableView.dataSource = dataSource
 
         let refreshControl = UIRefreshControl()
@@ -113,9 +119,9 @@ extension SavingsGoalListViewController {
 
     private func handleError(_: Error) {
         let alertViewController = UIAlertController(
-            title: NSLocalizedString("CANNOT_LOAD_SAVINGS_GOALS", comment: "Cannot Load Savings Goals"),
-            message: NSLocalizedString(
-                "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS",
+            title: String(localized: "CANNOT_LOAD_SAVINGS_GOALS", comment: "Cannot Load Savings Goals"),
+            message: String(
+                localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS",
                 comment: "There was an error loading your savings goals."
             ),
             preferredStyle: .alert
@@ -123,7 +129,7 @@ extension SavingsGoalListViewController {
         alertViewController.view.tintColor = view.tintColor
 
         let dismissAction = UIAlertAction(
-            title: NSLocalizedString("OK", comment: "OK"),
+            title: String(localized: "OK", comment: "OK"),
             style: .default
         )
         alertViewController.addAction(dismissAction)
@@ -135,7 +141,6 @@ extension SavingsGoalListViewController {
 
 extension SavingsGoalListViewController {
 
-    @objc
     private func addSavingsGoal(_: AnyObject? = nil) {
         delegate?.viewController(self, wantsToCreateSavingsGoalForAccount: viewModel.accountID)
     }
@@ -149,7 +154,7 @@ extension SavingsGoalListViewController {
             tableView: tableView,
             cellProvider: { [weak self] tableView, indexPath, accountSummary in
                 let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "savingsGoalCellIdentifier",
+                    withIdentifier: CellIdentifier.savingsGoal,
                     for: indexPath
                 )
 

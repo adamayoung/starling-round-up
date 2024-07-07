@@ -30,14 +30,19 @@ final class SavingsGoalsUnavailableView: UIView {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
-        label.text = NSLocalizedString("NO_SAVINGS_GOALS", comment: "No Savings Goals")
+        label.text = String(localized: "NO_SAVINGS_GOALS", comment: "No Savings Goals")
         return label
     }()
 
     private lazy var actionButton: UIButton = {
-        let button = UIButton(configuration: .borderless())
-        button.setTitle(NSLocalizedString("CREATE_A_SAVINGS_GOAL", comment: "Create a Savings Goal"), for: .normal)
-        button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        var configuration = UIButton.Configuration.borderless()
+        configuration.title = String(localized: "CREATE_A_SAVINGS_GOAL", comment: "Create a Savings Goal")
+        let action = UIAction { [weak self] _ in
+            self?.actionButtonTapped()
+        }
+
+        let button = UIButton(primaryAction: action)
+        button.configuration = configuration
         return button
     }()
 
@@ -70,8 +75,7 @@ final class SavingsGoalsUnavailableView: UIView {
 
 extension SavingsGoalsUnavailableView {
 
-    @objc
-    private func actionButtonTapped(_: AnyObject? = nil) {
+    private func actionButtonTapped() {
         onAction?()
     }
 

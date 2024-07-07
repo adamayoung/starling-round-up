@@ -52,6 +52,13 @@ extension AppCoordinator: AccountDetailsViewControllerDelegate {
         navigationController.pushViewController(savingsGoalListViewController, animated: true)
     }
 
+    func viewController(_: some AccountDetailsViewControlling, wantsToRoundUpForAccount accountID: Account.ID) {
+        let roundUpViewController = factory.roundUpViewController(accountID: accountID)
+        roundUpViewController.delegate = self
+        let roundUpNavigationController = UINavigationController(rootViewController: roundUpViewController)
+        navigationController.present(roundUpNavigationController, animated: true)
+    }
+
 }
 
 extension AppCoordinator: SavingsGoalListViewControllerDelegate {
@@ -70,23 +77,31 @@ extension AppCoordinator: SavingsGoalListViewControllerDelegate {
 
 extension AppCoordinator: AddSavingsGoalViewControllerDelegate {
 
-    func viewControllerDidCreateSavingsGoal(_: some AddSavingsGoalViewControlling) {
-        guard let savingsGoalListViewController =
-            navigationController.topViewController as? SavingsGoalListViewControlling
-        else {
-            return
+    func viewControllerDidCreateSavingsGoal(_ viewController: some AddSavingsGoalViewControlling) {
+        if let presentingViewController = viewController.presentingViewController {
+            presentingViewController.dismiss(animated: true)
         }
 
-        navigationController.dismiss(animated: true)
-        savingsGoalListViewController.refreshData()
+        if let savingsGoalListViewController
+            = navigationController.topViewController as? SavingsGoalListViewControlling {
+            savingsGoalListViewController.refreshData()
+        }
     }
 
-    func viewControllerDidCancelCreatingsSavingsGoal(_: some AddSavingsGoalViewControlling) {
-        guard navigationController.topViewController is SavingsGoalListViewControlling else {
-            return
+    func viewControllerDidCancelCreatingsSavingsGoal(_ viewController: some AddSavingsGoalViewControlling) {
+        if let presentingViewController = viewController.presentingViewController {
+            presentingViewController.dismiss(animated: true)
         }
+    }
 
-        navigationController.dismiss(animated: true)
+}
+
+extension AppCoordinator: RoundUpViewControllerDelegate {
+
+    func viewControllerDidCancel(_ viewController: some RoundUpViewControlling) {
+        if let presentingViewController = viewController.presentingViewController {
+            presentingViewController.dismiss(animated: true)
+        }
     }
 
 }

@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "ACCOUNT_BALANCE" : {
+      "comment" : "Account Balance",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Balance"
+          }
+        }
+      }
+    },
     "ACCOUNTS" : {
       "comment" : "Accounts",
       "localizations" : {
@@ -41,6 +52,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Balance"
+          }
+        }
+      }
+    },
+    "CANNOT_CALCULATE_ROUND_UP" : {
+      "comment" : "Cannot Calculate Round-Up",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot Calculate Round-Up"
           }
         }
       }
@@ -89,6 +111,28 @@
         }
       }
     },
+    "FOR_%@_BEGINNING" : {
+      "comment" : "for %@ beginning",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "for %@ beginning"
+          }
+        }
+      }
+    },
+    "INSUFFICIENT_FUNDS_FOR_TRANSFER" : {
+      "comment" : "Insufficient funds for transfer",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insufficient funds for transfer"
+          }
+        }
+      }
+    },
     "NO_SAVINGS_GOALS" : {
       "comment" : "No Savings Goals",
       "localizations" : {
@@ -107,6 +151,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        }
+      }
+    },
+    "ROUND_UP" : {
+      "comment" : "Round-Up",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round-Up"
+          }
+        }
+      }
+    },
+    "SAVINGS_GOAL" : {
+      "comment" : "Savings Goal",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Savings Goal"
           }
         }
       }
@@ -144,6 +210,17 @@
         }
       }
     },
+    "THERE_WAS_AN_ERROR_CALCULATE_THIS_ROUND_UP" : {
+      "comment" : "There was an error calculating this Round-Up.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error calculating this Round-Up."
+          }
+        }
+      }
+    },
     "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNT_DETAILS" : {
       "comment" : "There was an error loading your account details.",
       "localizations" : {
@@ -173,6 +250,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "There was an error loading your savings goals."
+          }
+        }
+      }
+    },
+    "TO" : {
+      "comment" : "to",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "to"
+          }
+        }
+      }
+    },
+    "TRANSFER_%@" : {
+      "comment" : "Transfer <Money>",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transfer %@"
+          }
+        }
+      }
+    },
+    "WEEK" : {
+      "comment" : "week",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "week"
           }
         }
       }

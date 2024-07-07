@@ -11,14 +11,14 @@ class DecodableAPIRequest<Response: Decodable>: CodableAPIRequest<EmptyBody, Res
 
     init(
         path: String,
-        method: APIRequestMethod = .get,
-        headers: [String: String] = [:]
+        queryItems: [String: String] = [:],
+        method: APIRequestMethod = .get
     ) {
         super.init(
             path: path,
+            queryItems: queryItems,
             method: method,
-            body: nil,
-            headers: headers
+            body: nil
         )
     }
 

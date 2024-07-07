@@ -28,6 +28,11 @@ Round-Up amount.
 larger screen sizes on iPad
 * App Localisation - this app will only be available in English
 
+## Further Assumptions Made During Implementation
+
+* If a transaction is an amount of exactly a whole major unit e.g. £1.00, then
+the Round-Up amount will be zero.
+
 ## iOS Version Support
 
 iOS Version: iOS 16+

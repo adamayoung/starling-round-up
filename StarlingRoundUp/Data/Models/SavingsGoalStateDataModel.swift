@@ -18,7 +18,7 @@ enum SavingsGoalStateDataModel: String, Decodable {
     case unknown = "UNKNOWN"
 
     init(from decoder: Decoder) throws {
-        self = try SavingsGoalStateDataModel(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
+        self = try Self(rawValue: decoder.singleValueContainer().decode(RawValue.self)) ?? .unknown
     }
 
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Money: Sendable, Equatable, Hashable {
+struct Money: Sendable, Equatable, Hashable, Comparable {
 
     let minorUnits: Int
     let currency: String
@@ -15,6 +15,22 @@ struct Money: Sendable, Equatable, Hashable {
     func formatted() -> String {
         let balanceAmount = Double(minorUnits) / 100
         return balanceAmount.formatted(.currency(code: currency))
+    }
+
+    static func < (lhs: Money, rhs: Money) -> Bool {
+        guard lhs.currency == rhs.currency else {
+            return false
+        }
+
+        return lhs.minorUnits < rhs.minorUnits
+    }
+
+    static func > (lhs: Money, rhs: Money) -> Bool {
+        guard lhs.currency == rhs.currency else {
+            return false
+        }
+
+        return lhs.minorUnits > rhs.minorUnits
     }
 
 }

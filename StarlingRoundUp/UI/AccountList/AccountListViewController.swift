@@ -28,6 +28,10 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
         return view
     }()
 
+    private enum CellIdentifier {
+        static let account = "accountCellIdentifier"
+    }
+
     init(viewModel: some AccountListViewModeling) {
         self.viewModel = viewModel
         super.init(style: .insetGrouped)
@@ -40,9 +44,9 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("ACCOUNTS", comment: "Accounts")
+        title = String(localized: "ACCOUNTS", comment: "Accounts")
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "accountCellIdentifier")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.account)
         tableView.dataSource = dataSource
 
         let refreshControl = UIRefreshControl()
@@ -97,9 +101,9 @@ extension AccountListViewController {
 
     private func handleError(_: Error) {
         let alertViewController = UIAlertController(
-            title: NSLocalizedString("CANNOT_LOAD_ACCOUNTS", comment: "Cannot Load Accounts"),
-            message: NSLocalizedString(
-                "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNTS",
+            title: String(localized: "CANNOT_LOAD_ACCOUNTS", comment: "Cannot Load Accounts"),
+            message: String(
+                localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNTS",
                 comment: "There was an error loading your accounts."
             ),
             preferredStyle: .alert
@@ -107,7 +111,7 @@ extension AccountListViewController {
         alertViewController.view.tintColor = view.tintColor
 
         let dismissAction = UIAlertAction(
-            title: NSLocalizedString("OK", comment: "OK"),
+            title: String(localized: "OK", comment: "OK"),
             style: .default
         )
         alertViewController.addAction(dismissAction)
@@ -124,7 +128,7 @@ extension AccountListViewController {
             tableView: tableView,
             cellProvider: { [weak self] tableView, indexPath, accountSummary in
                 let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "accountCellIdentifier",
+                    withIdentifier: CellIdentifier.account,
                     for: indexPath
                 )
 

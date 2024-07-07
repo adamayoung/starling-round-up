@@ -13,6 +13,8 @@ final class CreateSavingsGoalStubUseCase: CreateSavingsGoalUseCase {
     var result: Result<Void, CreateSavingsGoalError> = .failure(.unknown)
     private(set) var lastInput: SavingsGoalInput?
 
+    init() {}
+
     func execute(input: SavingsGoalInput) async throws {
         lastInput = input
         try result.get()

@@ -13,8 +13,8 @@ protocol APIRequest: Identifiable, Equatable {
     associatedtype Response: Decodable
 
     var path: String { get }
+    var queryItems: [String: String] { get }
     var method: APIRequestMethod { get }
-    var headers: [String: String] { get }
     var body: Body? { get }
 
 }

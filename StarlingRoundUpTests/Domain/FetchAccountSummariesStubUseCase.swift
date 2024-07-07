@@ -12,6 +12,8 @@ final class FetchAccountSummariesStubUseCase: FetchAccountSummariesUseCase {
 
     var result: Result<[AccountSummary], FetchAccountSummariesError> = .failure(.unknown)
 
+    init() {}
+
     func execute() async throws -> [AccountSummary] {
         try result.get()
     }

@@ -15,6 +15,7 @@ protocol APIClient {
 
 enum APIClientError: Error {
 
+    case badURL
     case encode(Error)
     case decode(Error)
     case network(Error)

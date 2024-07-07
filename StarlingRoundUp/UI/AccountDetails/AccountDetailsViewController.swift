@@ -27,7 +27,15 @@ final class AccountDetailsViewController: UITableViewController, AccountDetailsV
         return view
     }()
 
-    private lazy var accountSummaryView = AccountDetailsSummaryView()
+    private lazy var accountSummaryView: AccountDetailsSummaryView = {
+        let view = AccountDetailsSummaryView()
+        view.delegate = self
+        return view
+    }()
+
+    private enum CellIdentifier {
+        static let savingsGoals = "savingsGoalsCellIdentifier"
+    }
 
     init(viewModel: some AccountDetailsViewModeling) {
         self.viewModel = viewModel
@@ -43,7 +51,7 @@ final class AccountDetailsViewController: UITableViewController, AccountDetailsV
         super.viewDidLoad()
         title = viewModel.accountSummary?.name
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "savingsGoalCellIdentifier")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.savingsGoals)
 
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
@@ -86,10 +94,10 @@ extension AccountDetailsViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "savingsGoalCellIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.savingsGoals, for: indexPath)
 
         var content = cell.defaultContentConfiguration()
-        content.text = NSLocalizedString("SAVINGS_GOALS", comment: "Savings Goals")
+        content.text = String(localized: "SAVINGS_GOALS", comment: "Savings Goals")
         content.image = UIImage(systemName: ImageName.savingsGoal)
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
@@ -98,22 +106,13 @@ extension AccountDetailsViewController {
     }
 
     override func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 0 else {
-            return nil
+        switch section {
+        case 0:
+            accountSummaryView
+
+        default:
+            nil
         }
-
-        let tableHeaderView = UIView()
-        tableHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        tableHeaderView.addSubview(accountSummaryView)
-        accountSummaryView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            accountSummaryView.topAnchor.constraint(equalTo: tableHeaderView.layoutMarginsGuide.topAnchor),
-            accountSummaryView.leadingAnchor.constraint(equalTo: tableHeaderView.layoutMarginsGuide.leadingAnchor),
-            accountSummaryView.trailingAnchor.constraint(equalTo: tableHeaderView.layoutMarginsGuide.trailingAnchor),
-            accountSummaryView.bottomAnchor.constraint(equalTo: tableHeaderView.layoutMarginsGuide.bottomAnchor)
-        ])
-
-        return tableHeaderView
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -153,9 +152,9 @@ extension AccountDetailsViewController {
 
     private func handleError(_: Error) {
         let alertViewController = UIAlertController(
-            title: NSLocalizedString("CANNOT_LOAD_ACCOUNT_DETAILS", comment: "Cannot Load Account Details"),
-            message: NSLocalizedString(
-                "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNT_DETAILS",
+            title: String(localized: "CANNOT_LOAD_ACCOUNT_DETAILS", comment: "Cannot Load Account Details"),
+            message: String(
+                localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNT_DETAILS",
                 comment: "There was an error loading your account details."
             ),
             preferredStyle: .alert
@@ -163,12 +162,20 @@ extension AccountDetailsViewController {
         alertViewController.view.tintColor = view.tintColor
 
         let dismissAction = UIAlertAction(
-            title: NSLocalizedString("OK", comment: "OK"),
+            title: String(localized: "OK", comment: "OK"),
             style: .default
         )
         alertViewController.addAction(dismissAction)
 
         present(alertViewController, animated: true)
+    }
+
+}
+
+extension AccountDetailsViewController: AccountDetailsSummaryViewDelegate {
+
+    func viewWantsToShowRoundUp(_: AccountDetailsSummaryView) {
+        delegate?.viewController(self, wantsToRoundUpForAccount: viewModel.accountID)
     }
 
 }
