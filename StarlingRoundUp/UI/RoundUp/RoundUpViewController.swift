@@ -22,7 +22,7 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
     private let viewModel: any RoundUpViewModeling
 
     private lazy var chooseSavingsGoalButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "Savings Goal")
+        let button = UIBarButtonItem(title: String(localized: "SAVINGS_GOALS", comment: "Savings Goals"))
         button.tintColor = .white
         return button
     }()
@@ -179,12 +179,51 @@ extension RoundUpViewController {
         delegate?.viewControllerDidCancel(self)
     }
 
-    private func performTransfer() {
-        Task {
+    private func startTransfer() {
+        guard
+            let roundUpSummary = viewModel.roundUpSummary,
+            let savingsGoalName = viewModel.selectedSavingsGoal?.name
+        else {
+            return
+        }
+
+        let alertTitle = String(localized: "TRANSFER_TO_SAVINGS_GOAL", comment: "Transfer to Savings Goal?")
+        let formattedAmount = roundUpSummary.amount.formatted()
+        let alertMessage = String(
+            localized: "ARE_YOU_SURE_YOU_WANT_TO_TRANSFER_\(formattedAmount)_TO_\(savingsGoalName)_SAVINGS_GOAL",
+            comment: "Are you sure you want to transfer <amount> to <savings goal name> savings goal?"
+        )
+
+        let alertViewController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+
+        let transferActionTitle = String(localized: "TRANSFER", comment: "Transfer")
+        let cancelActionTitle = String(localized: "CANCEL", comment: "Cancel")
+
+        let transferAction = UIAlertAction(title: transferActionTitle, style: .default) { [weak self] _ in
+            self?.performTransfer(of: roundUpSummary)
+        }
+        let cancelAction = UIAlertAction(title: cancelActionTitle, style: .cancel)
+        alertViewController.addAction(transferAction)
+        alertViewController.addAction(cancelAction)
+        alertViewController.view.tintColor = view.tintColor
+
+        present(alertViewController, animated: true)
+    }
+
+    private func performTransfer(of roundUpSummary: RoundUpSummary) {
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
+            summaryView.isTransferring(true)
             do {
                 try await viewModel.performTransfer()
-            } catch {
-//                handleError(error)
+                delegate?.viewController(self, didPerformTransferOfRoundUp: roundUpSummary)
+            } catch let error {
+                self.handleTransferError(error) {
+                    self.summaryView.isTransferring(false)
+                }
             }
         }
     }
@@ -204,6 +243,16 @@ extension RoundUpViewController {
         let message = String(
             localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS",
             comment: "There was an error loading your savings goals."
+        )
+
+        showErrorAlert(title: title, message: message, completion: completion)
+    }
+
+    private func handleTransferError(_: Error, completion: (() -> Void)? = nil) {
+        let title = String(localized: "CANNOT_MAKE_TRANSFER", comment: "Cannot Make Transfer")
+        let message = String(
+            localized: "THERE_WAS_AN_ERROR_MAKING_THE_TRANSFER",
+            comment: "There was an error making the transfer."
         )
 
         showErrorAlert(title: title, message: message, completion: completion)
@@ -276,7 +325,7 @@ extension RoundUpViewController: RoundUpSummaryViewDelegate {
     }
 
     func viewWantsToPerformTransfer(_: RoundUpSummaryView) {
-        performTransfer()
+        startTransfer()
     }
 
 }

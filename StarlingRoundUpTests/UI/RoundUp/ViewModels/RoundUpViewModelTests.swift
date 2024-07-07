@@ -14,21 +14,25 @@ final class RoundUpViewModelTests: XCTestCase {
     var accountID: Account.ID!
     var fetchRoundUpSummaryUseCase: FetchRoundUpSummaryStubUseCase!
     var fetchSavingsGoalsUseCase: FetchSavingsGoalsStubUseCase!
+    var transferToSavingsGoalUseCase: TransferToSavingsGoalStubUseCase!
 
     override func setUp() {
         super.setUp()
         accountID = "1"
         fetchRoundUpSummaryUseCase = FetchRoundUpSummaryStubUseCase()
         fetchSavingsGoalsUseCase = FetchSavingsGoalsStubUseCase()
+        transferToSavingsGoalUseCase = TransferToSavingsGoalStubUseCase()
         viewModel = RoundUpViewModel(
             accountID: accountID,
             fetchRoundUpSummaryUseCase: fetchRoundUpSummaryUseCase,
-            fetchSavingsGoalsUseCase: fetchSavingsGoalsUseCase
+            fetchSavingsGoalsUseCase: fetchSavingsGoalsUseCase,
+            transferToSavingsGoalUseCase: transferToSavingsGoalUseCase
         )
     }
 
     override func tearDown() {
         viewModel = nil
+        transferToSavingsGoalUseCase = nil
         fetchSavingsGoalsUseCase = nil
         fetchRoundUpSummaryUseCase = nil
         accountID = nil
@@ -169,6 +173,44 @@ final class RoundUpViewModelTests: XCTestCase {
         try await viewModel.fetchRoundUpSummary()
 
         XCTAssertEqual(fetchRoundUpSummaryUseCase.lastDate, expectedDate)
+    }
+
+    func testPerformTransferWhenNoRoundUpSummaryDoesNotMakeTransfer() async throws {
+        try await viewModel.performTransfer()
+
+        XCTAssertNil(transferToSavingsGoalUseCase.lastInput)
+    }
+
+    func testPerformTransferWhenNoSelectedSavingsGoalDoesNotMakeTransfer() async throws {
+        let roundUpSummary = Self.createRoundUpSummary()
+        fetchRoundUpSummaryUseCase.result = .success(roundUpSummary)
+
+        try await viewModel.fetchRoundUpSummary()
+
+        try await viewModel.performTransfer()
+
+        XCTAssertNil(transferToSavingsGoalUseCase.lastInput)
+    }
+
+    func testPerformTransferMakesTransfer() async throws {
+        let roundUpSummary = Self.createRoundUpSummary()
+        let savingsGoals = [Self.createSavingsGoal(id: "sg1")]
+        fetchRoundUpSummaryUseCase.result = .success(roundUpSummary)
+        fetchSavingsGoalsUseCase.result = .success([accountID: savingsGoals])
+        transferToSavingsGoalUseCase.result = .success(())
+
+        try await viewModel.fetchRoundUpSummary()
+        try await viewModel.refreshAvailableSavingsGoals()
+
+        let expectedInput = TransferToSavingsGoalInput(
+            accountID: roundUpSummary.accountID,
+            savingsGoalID: "sg1",
+            amount: roundUpSummary.amount
+        )
+
+        try await viewModel.performTransfer()
+
+        XCTAssertEqual(transferToSavingsGoalUseCase.lastInput, expectedInput)
     }
 
 }

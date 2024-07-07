@@ -38,6 +38,13 @@ final class RoundUpSummaryTransferView: UIView {
         return label
     }()
 
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.color = .white
+        view.hidesWhenStopped = true
+        return view
+    }()
+
     init() {
         super.init(frame: .zero)
 
@@ -60,6 +67,16 @@ final class RoundUpSummaryTransferView: UIView {
 
         transferButton.alpha = 0
         insufficentFundsForTransferLabel.alpha = 0
+
+        addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate(
+            [
+                activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+                activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+            ]
+        )
+        activityIndicator.stopAnimating()
     }
 
     @available(*, unavailable)
@@ -80,6 +97,18 @@ final class RoundUpSummaryTransferView: UIView {
         let canTransfer = hasSufficentFundsForTransfer && roundUpSummary.isRoundUpAvailable
         showTransferButton(canTransfer)
         showInsufficentFundsLabel(!hasSufficentFundsForTransfer)
+    }
+
+    func isTransferring(_ transferring: Bool) {
+        if !transferring {
+            activityIndicator.stopAnimating()
+        }
+
+        showTransferButton(!transferring) { [weak self] in
+            if transferring {
+                self?.activityIndicator.startAnimating()
+            }
+        }
     }
 
 }
@@ -105,9 +134,11 @@ extension RoundUpSummaryTransferView {
         transferButton.setAttributedTitle(titleAttributedString, for: .normal)
     }
 
-    private func showTransferButton(_ show: Bool) {
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
+    private func showTransferButton(_ show: Bool, completion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: 0.2) { [weak self] in
             self?.transferButton.alpha = show ? 1 : 0
+        } completion: { _ in
+            completion?()
         }
     }
 

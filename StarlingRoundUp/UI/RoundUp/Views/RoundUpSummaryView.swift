@@ -84,6 +84,11 @@ final class RoundUpSummaryView: UIView {
         accountBalanceView.configure(accountBalance: roundUpSummary.accountBalance)
     }
 
+    func isTransferring(_ transferring: Bool) {
+        transferView.isTransferring(transferring)
+        dateView.isEnabled(!transferring)
+    }
+
 }
 
 extension RoundUpSummaryView: RoundUpSummaryDateViewDelegate {

@@ -9,6 +9,11 @@ import Foundation
 
 protocol RoundUpViewControllerDelegate: AnyObject {
 
+    func viewController(
+        _ viewController: some RoundUpViewControlling,
+        didPerformTransferOfRoundUp roundUpSummary: RoundUpSummary
+    )
+
     func viewControllerDidCancel(_ viewController: some RoundUpViewControlling)
 
 }
