@@ -66,11 +66,11 @@ final class TransactionAPIRepositoryTests: XCTestCase {
         let dateRange = fromDate ..< toDate
         apiClient.responseResult = .failure(.unknown)
 
-        var apiClientError: APIClientError?
+        var apiClientError: TransactionRepositoryError?
         do {
             _ = try await repository.settledTransactions(forAccount: accountID, in: dateRange)
         } catch let error {
-            apiClientError = error as? APIClientError
+            apiClientError = error as? TransactionRepositoryError
         }
 
         XCTAssertNotNil(apiClientError)

@@ -89,7 +89,7 @@ final class FetchAccountSummariesTests: XCTestCase {
             useCaseError = error as? FetchAccountSummariesError
         }
 
-        XCTAssertEqual(useCaseError, .unknown)
+        XCTAssertEqual(useCaseError, .accounts)
     }
 
     func testExecuteWhenFetchingBalanceErrorsThrowsError() async {
@@ -104,7 +104,7 @@ final class FetchAccountSummariesTests: XCTestCase {
             useCaseError = error as? FetchAccountSummariesError
         }
 
-        XCTAssertEqual(useCaseError, .unknown)
+        XCTAssertEqual(useCaseError, .accountBalance)
     }
 
 }

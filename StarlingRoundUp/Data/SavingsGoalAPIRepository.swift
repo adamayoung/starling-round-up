@@ -30,7 +30,13 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
             targetMinorUnits: savingsGoal.targetMinorUnits
         )
 
-        let result = try await apiClient.perform(request)
+        let result: CreateSavingsGoalResponseDataModel
+        do {
+            result = try await apiClient.perform(request)
+        } catch let error {
+            throw Self.mapToSavingsGoalRepositoryError(error)
+        }
+
         guard result.success else {
             throw SavingsGoalRepositoryError.unknown
         }
@@ -45,9 +51,30 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
             currency: input.amount.currency
         )
 
-        let result = try await apiClient.perform(request)
+        let result: TransferToSavingsGoalResponseDataModel
+        do {
+            result = try await apiClient.perform(request)
+        } catch let error {
+            throw Self.mapToSavingsGoalRepositoryError(error)
+        }
+
         guard result.success else {
             throw SavingsGoalRepositoryError.unknown
+        }
+    }
+
+}
+
+extension SavingsGoalAPIRepository {
+
+    private static func mapToSavingsGoalRepositoryError(_ error: Error) -> SavingsGoalRepositoryError {
+        guard let error = error as? APIClientError else {
+            return .unknown
+        }
+
+        switch error {
+        default:
+            return .unknown
         }
     }
 

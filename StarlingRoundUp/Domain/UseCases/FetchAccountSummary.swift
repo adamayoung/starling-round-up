@@ -16,29 +16,13 @@ final class FetchAccountSummary: FetchAccountSummaryUseCase {
     }
 
     func execute(accountID: Account.ID) async throws -> AccountSummary? {
-        let account: Account?
-        do {
-            account = try await accountRepository.account(withID: accountID)
-        } catch let error {
-            throw Self.mapToFetchAccountSummaryError(error)
-        }
-
-        guard let matchingAccount = account else {
+        guard let account = try await account(withID: accountID) else {
             return nil
         }
 
-        let balance: Money?
-        do {
-            balance = try await accountRepository.balance(for: matchingAccount.id)
-        } catch let error {
-            throw Self.mapToFetchAccountSummaryError(error)
-        }
+        let balance = try await balance(for: account)
 
-        let accountSummary = AccountSummary(
-            account: matchingAccount,
-            balance: balance ?? Money(minorUnits: 0, currency: matchingAccount.currency)
-        )
-
+        let accountSummary = AccountSummary(account: account, balance: balance)
         return accountSummary
     }
 
@@ -46,12 +30,26 @@ final class FetchAccountSummary: FetchAccountSummaryUseCase {
 
 extension FetchAccountSummary {
 
-    private static func mapToFetchAccountSummaryError(_ error: Error) -> FetchAccountSummaryError {
-        guard error as? AccountRepositoryError != nil else {
-            return .unknown
+    private func account(withID id: Account.ID) async throws -> Account? {
+        let account: Account?
+        do {
+            account = try await accountRepository.account(withID: id)
+        } catch {
+            throw FetchAccountSummaryError.account
         }
 
-        return .unknown
+        return account
+    }
+
+    private func balance(for account: Account) async throws -> Money {
+        let balance: Money?
+        do {
+            balance = try await accountRepository.balance(for: account.id)
+        } catch {
+            throw FetchAccountSummaryError.accountBalance
+        }
+
+        return balance ?? Money(minorUnits: 0, currency: account.currency)
     }
 
 }

@@ -15,6 +15,8 @@ protocol FetchAccountSummaryUseCase {
 
 enum FetchAccountSummaryError: Error {
 
+    case account
+    case accountBalance
     case unknown
 
 }

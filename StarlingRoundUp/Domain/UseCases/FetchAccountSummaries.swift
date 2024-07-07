@@ -16,24 +16,12 @@ final class FetchAccountSummaries: FetchAccountSummariesUseCase {
     }
 
     func execute() async throws -> [AccountSummary] {
-        let accounts: [Account]
-        do {
-            accounts = try await accountRepository.accounts()
-        } catch let error {
-            throw Self.mapToFetchAccountSummariesError(error)
-        }
-
+        let accounts = try await accounts()
         guard !accounts.isEmpty else {
             return []
         }
 
-        let accountSummaries: [AccountSummary]
-        do {
-            accountSummaries = try await self.accountSummaries(for: accounts)
-        } catch let error {
-            throw Self.mapToFetchAccountSummariesError(error)
-        }
-
+        let accountSummaries = try await accountSummaries(for: accounts)
         return accountSummaries
     }
 
@@ -41,11 +29,26 @@ final class FetchAccountSummaries: FetchAccountSummariesUseCase {
 
 extension FetchAccountSummaries {
 
+    private func accounts() async throws -> [Account] {
+        let accounts: [Account]
+        do {
+            accounts = try await accountRepository.accounts()
+        } catch {
+            throw FetchAccountSummariesError.accounts
+        }
+
+        return accounts
+    }
+
     private func accountSummaries(for accounts: [Account]) async throws -> [AccountSummary] {
         try await withThrowingTaskGroup(of: (Account, Money?).self, returning: [AccountSummary].self) { taskGroup in
             for account in accounts {
                 taskGroup.addTask {
-                    try await (account, self.accountRepository.balance(for: account.id))
+                    do {
+                        return try await (account, self.accountRepository.balance(for: account.id))
+                    } catch {
+                        throw FetchAccountSummariesError.accountBalance
+                    }
                 }
             }
 
@@ -57,14 +60,6 @@ extension FetchAccountSummaries {
 
             return accountSummaries
         }
-    }
-
-    private static func mapToFetchAccountSummariesError(_ error: Error) -> FetchAccountSummariesError {
-        guard error as? AccountRepositoryError != nil else {
-            return .unknown
-        }
-
-        return .unknown
     }
 
 }

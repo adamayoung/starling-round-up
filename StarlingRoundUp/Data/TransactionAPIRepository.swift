@@ -20,9 +20,31 @@ final class TransactionAPIRepository: TransactionRepository {
         in dateRange: Range<Date>
     ) async throws -> [Transaction] {
         let request = SettledTransactionsRequest(accountID: accountID, dateRange: dateRange)
-        let transactionsResponse = try await apiClient.perform(request)
+
+        let transactionsResponse: TransactionsResponseDataModel
+        do {
+            transactionsResponse = try await apiClient.perform(request)
+        } catch let error {
+            throw Self.mapToFetchTransactionRepositoryError(error)
+        }
+
         let transactions = transactionsResponse.feedItems.map { TransactionMapper.map($0) }
         return transactions
+    }
+
+}
+
+extension TransactionAPIRepository {
+
+    private static func mapToFetchTransactionRepositoryError(_ error: Error) -> TransactionRepositoryError {
+        guard let error = error as? APIClientError else {
+            return .unknown
+        }
+
+        switch error {
+        default:
+            return .unknown
+        }
     }
 
 }

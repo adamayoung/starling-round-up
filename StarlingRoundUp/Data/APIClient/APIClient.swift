@@ -12,15 +12,3 @@ protocol APIClient {
     func perform<Request: APIRequest>(_ request: Request) async throws -> Request.Response
 
 }
-
-enum APIClientError: Error {
-
-    case badURL
-    case encode(Error)
-    case decode(Error)
-    case network(Error)
-    case client
-    case server
-    case unknown
-
-}
