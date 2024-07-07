@@ -12,8 +12,8 @@ final class CreateSavingsGoalsRequest: CodableAPIRequest<
     CreateSavingsGoalResponseDataModel
 > {
 
-    init(accountID: String, name: String, currency: String, targetMinorUnits: Int) {
-        let path = "/account/\(accountID)/savings-goals"
+    init(accountID: UUID, name: String, currency: String, targetMinorUnits: Int) {
+        let path = "/account/\(accountID.uuidString)/savings-goals"
         let body = Body(
             name: name,
             currency: currency,

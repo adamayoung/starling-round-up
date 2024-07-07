@@ -10,32 +10,36 @@ import XCTest
 
 final class AccountMapperTests: XCTestCase {
 
-    func testMapID() {
-        let dataModel = Self.createAccountDataModel(accountUid: "1")
+    func testMapID() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "78677CA0-E4F0-4F70-8807-D1B38C849FD1"))
+        let dataModel = Self.createAccountDataModel(accountUid: accountID)
 
         let account = AccountMapper.map(dataModel)
 
-        XCTAssertEqual(account.id, "1")
+        XCTAssertEqual(account.id, accountID)
     }
 
-    func testMapName() {
-        let dataModel = Self.createAccountDataModel(name: "Test 123")
+    func testMapName() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "78677CA0-E4F0-4F70-8807-D1B38C849FD1"))
+        let dataModel = Self.createAccountDataModel(accountUid: accountID, name: "Test 123")
 
         let account = AccountMapper.map(dataModel)
 
         XCTAssertEqual(account.name, "Test 123")
     }
 
-    func testMapType() {
-        let dataModel = Self.createAccountDataModel(accountType: .primary)
+    func testMapType() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "78677CA0-E4F0-4F70-8807-D1B38C849FD1"))
+        let dataModel = Self.createAccountDataModel(accountUid: accountID, accountType: .primary)
 
         let account = AccountMapper.map(dataModel)
 
         XCTAssertEqual(account.type, .primary)
     }
 
-    func testMapCurrency() {
-        let dataModel = Self.createAccountDataModel(currency: "GBP")
+    func testMapCurrency() throws {
+        let accountID = try XCTUnwrap(UUID(uuidString: "78677CA0-E4F0-4F70-8807-D1B38C849FD1"))
+        let dataModel = Self.createAccountDataModel(accountUid: accountID, currency: "GBP")
 
         let account = AccountMapper.map(dataModel)
 
@@ -47,7 +51,7 @@ final class AccountMapperTests: XCTestCase {
 extension AccountMapperTests {
 
     private static func createAccountDataModel(
-        accountUid: String = "1",
+        accountUid: UUID,
         name: String = "Test 1",
         accountType: AccountTypeDataModel = .primary,
         defaultCategory: String = "a",

@@ -9,7 +9,7 @@ import Foundation
 
 struct Account: Identifiable, Sendable {
 
-    let id: String
+    let id: UUID
     let name: String
     let type: AccountType
     let currency: String

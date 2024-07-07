@@ -11,12 +11,12 @@ import XCTest
 final class SavingsGoalsListViewModelTests: XCTestCase {
 
     var viewModel: SavingsGoalsListViewModel!
-    var accountID: Account.ID!
+    var accountID: UUID!
     var fetchSavingsGoalsUseCase: FetchSavingsGoalsStubUseCase!
 
-    override func setUp() {
-        super.setUp()
-        accountID = "1"
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        accountID = try XCTUnwrap(UUID(uuidString: "F06AD44E-04E0-4D4E-9BB3-3266F2917114"))
         fetchSavingsGoalsUseCase = FetchSavingsGoalsStubUseCase()
         viewModel = SavingsGoalsListViewModel(accountID: accountID, fetchSavingsGoalsUseCase: fetchSavingsGoalsUseCase)
     }
@@ -33,7 +33,6 @@ final class SavingsGoalsListViewModelTests: XCTestCase {
     }
 
     func testFetchSavingsGoalsSetsSavingsGoals() async throws {
-        let accountID = "1"
         let savingsGoals = [
             SavingsGoal(
                 id: "sg1",

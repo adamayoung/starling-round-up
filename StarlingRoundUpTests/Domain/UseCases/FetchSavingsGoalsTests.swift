@@ -12,14 +12,17 @@ final class FetchSavingsGoalsTests: XCTestCase {
 
     var useCase: FetchSavingsGoals!
     var savingsGoalRepository: SavingsGoalStubRepository!
+    var accountID: UUID!
 
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
         savingsGoalRepository = SavingsGoalStubRepository()
         useCase = FetchSavingsGoals(savingsGoalRepository: savingsGoalRepository)
+        accountID = try XCTUnwrap(UUID(uuidString: "CE2322FF-D843-4816-AADA-F81EA28FD6DF"))
     }
 
     override func tearDown() {
+        accountID = nil
         useCase = nil
         savingsGoalRepository = nil
         super.tearDown()
@@ -28,13 +31,12 @@ final class FetchSavingsGoalsTests: XCTestCase {
     func testExecuteWhenNoSavingsGoalsForAccountReturnsEmptyArray() async throws {
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let savingsGoals = try await useCase.execute(accountID: "1")
+        let savingsGoals = try await useCase.execute(accountID: accountID)
 
         XCTAssertTrue(savingsGoals.isEmpty)
     }
 
     func testExecuteWhenOneActiveSavingsGoalForAccountReturnsOneSavingsGoal() async throws {
-        let accountID = "1"
         let savingsGoal = Self.createSavingsGoal(state: .active)
         savingsGoalRepository.savingsGoalsResult = .success([accountID: [savingsGoal]])
 
@@ -45,7 +47,6 @@ final class FetchSavingsGoalsTests: XCTestCase {
     }
 
     func testExecuteWhenOneArchivedSavingsGoalForAccountReturnsEmptyArray() async throws {
-        let accountID = "1"
         let savingsGoal = Self.createSavingsGoal(state: .archived)
         savingsGoalRepository.savingsGoalsResult = .success([accountID: [savingsGoal]])
 
@@ -55,7 +56,6 @@ final class FetchSavingsGoalsTests: XCTestCase {
     }
 
     func testExecuteWhenMultipleSavingsGoalsWithDifferentStatesReturnsActiveSavingsGoals() async throws {
-        let accountID = "1"
         let savingsGoals = [
             Self.createSavingsGoal(id: "1", state: .active),
             Self.createSavingsGoal(id: "2", state: .active),
@@ -75,7 +75,7 @@ final class FetchSavingsGoalsTests: XCTestCase {
 
         var useCaseError: FetchSavingsGoalsError?
         do {
-            _ = try await useCase.execute(accountID: "1")
+            _ = try await useCase.execute(accountID: accountID)
         } catch let error {
             useCaseError = error as? FetchSavingsGoalsError
         }

@@ -11,11 +11,13 @@ import XCTest
 final class CreateSavingsGoalsRequestTests: XCTestCase {
 
     var request: CreateSavingsGoalsRequest!
+    var accountID: UUID!
 
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        accountID = try XCTUnwrap(UUID(uuidString: "7AEA4E58-6137-4F92-B2A2-37A2C631F731"))
         request = CreateSavingsGoalsRequest(
-            accountID: "1",
+            accountID: accountID,
             name: "SG 1",
             currency: "GBP",
             targetMinorUnits: 100
@@ -28,7 +30,7 @@ final class CreateSavingsGoalsRequestTests: XCTestCase {
     }
 
     func testPath() {
-        XCTAssertEqual(request.path, "/account/1/savings-goals")
+        XCTAssertEqual(request.path, "/account/\(accountID.uuidString)/savings-goals")
     }
 
     func testMethod() {

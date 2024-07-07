@@ -11,14 +11,16 @@ import XCTest
 final class TransferToSavingsGoalRequestTests: XCTestCase {
 
     var request: TransferToSavingsGoalRequest!
+    var accountID: UUID!
     var transferID: UUID!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
+        accountID = try XCTUnwrap(UUID(uuidString: "8E73BAD3-0898-4149-A639-3EC5BEA6B559"))
         transferID = try XCTUnwrap(UUID(uuidString: "9118EB76-83E4-4171-A374-2FAAF738579F"))
         request = TransferToSavingsGoalRequest(
             transferID: transferID,
-            accountID: "1",
+            accountID: accountID,
             savingsGoalID: "sg1",
             minorUnits: 1000,
             currency: "GBP"
@@ -26,6 +28,8 @@ final class TransferToSavingsGoalRequestTests: XCTestCase {
     }
 
     override func tearDown() {
+        accountID = nil
+        transferID = nil
         request = nil
         super.tearDown()
     }
@@ -33,7 +37,7 @@ final class TransferToSavingsGoalRequestTests: XCTestCase {
     func testPath() {
         XCTAssertEqual(
             request.path,
-            "/account/1/savings-goals/sg1/add-money/\(transferID.uuidString)"
+            "/account/\(accountID.uuidString)/savings-goals/sg1/add-money/\(transferID.uuidString)"
         )
     }
 

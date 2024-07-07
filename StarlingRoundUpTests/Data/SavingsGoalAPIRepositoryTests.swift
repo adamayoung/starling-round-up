@@ -12,21 +12,23 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
 
     var repository: SavingsGoalAPIRepository!
     var apiClient: APIStubClient!
+    var accountID: UUID!
 
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
         apiClient = APIStubClient()
         repository = SavingsGoalAPIRepository(apiClient: apiClient)
+        accountID = try XCTUnwrap(UUID(uuidString: "9B26167E-73CD-4347-B69A-1C53B3BE3DD2"))
     }
 
     override func tearDown() {
+        accountID = nil
         repository = nil
         apiClient = nil
         super.tearDown()
     }
 
     func testSavingsGoalsMakesCorrectAPIRequest() async throws {
-        let accountID = "1"
         let expectedAPIRequest = SavingsGoalsRequest(accountID: accountID)
 
         _ = try? await repository.savingsGoals(for: accountID)
@@ -56,22 +58,21 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
         let responseDataModel = SavingsGoalsResponseDataModel(savingsGoalList: savingsGoalDataModels)
         apiClient.responseResult = .success(responseDataModel)
 
-        let savingsGoals = try await repository.savingsGoals(for: "1")
+        let savingsGoals = try await repository.savingsGoals(for: accountID)
 
         XCTAssertEqual(savingsGoals.count, 2)
-        XCTAssertEqual(savingsGoals[0].id, "1")
-        XCTAssertEqual(savingsGoals[1].id, "2")
+        XCTAssertEqual(savingsGoals.map(\.id), ["1", "2"])
     }
 
     func testCreateSavingsGoalMakesCorrectAPIRequest() async throws {
         let input = SavingsGoalInput(
-            accountID: "1",
+            accountID: accountID,
             name: "SG 1",
             currency: "GBP",
             targetMinorUnits: 123
         )
         let expectedAPIRequest = CreateSavingsGoalsRequest(
-            accountID: "1",
+            accountID: accountID,
             name: "SG 1",
             currency: "GBP",
             targetMinorUnits: 123
@@ -84,7 +85,7 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
 
     func testCreateSavingsGoalWhenSuccessfulDoesNotThrowError() async throws {
         let input = SavingsGoalInput(
-            accountID: "1",
+            accountID: accountID,
             name: "SG 1",
             currency: "GBP",
             targetMinorUnits: 123
@@ -104,7 +105,7 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
 
     func testCreateSavingsGoalWhenNotSuccessfulThrowsError() async throws {
         let input = SavingsGoalInput(
-            accountID: "1",
+            accountID: accountID,
             name: "SG 1",
             currency: "GBP",
             targetMinorUnits: 123
@@ -125,7 +126,7 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
     func testTransferMakesCorrectAPIRequest() async throws {
         let transferID = try XCTUnwrap(UUID(uuidString: "48F855EC-FAEE-4470-B75E-A591F95E353B"))
         let input = TransferToSavingsGoalInput(
-            accountID: "1",
+            accountID: accountID,
             savingsGoalID: "sg1",
             amount: Money(minorUnits: 1000, currency: "GBP")
         )
@@ -145,7 +146,7 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
     func testTransferWhenSuccessfulDoesNotThrowError() async throws {
         let transferID = try XCTUnwrap(UUID(uuidString: "48F855EC-FAEE-4470-B75E-A591F95E353B"))
         let input = TransferToSavingsGoalInput(
-            accountID: "1",
+            accountID: accountID,
             savingsGoalID: "sg1",
             amount: Money(minorUnits: 1000, currency: "GBP")
         )

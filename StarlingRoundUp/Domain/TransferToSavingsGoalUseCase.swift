@@ -15,8 +15,8 @@ protocol TransferToSavingsGoalUseCase {
 
 struct TransferToSavingsGoalInput: Equatable {
 
-    let accountID: String
-    let savingsGoalID: String
+    let accountID: Account.ID
+    let savingsGoalID: SavingsGoal.ID
     let amount: Money
 
 }

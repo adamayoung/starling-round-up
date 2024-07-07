@@ -15,6 +15,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     var transactionRepository: TransactionStubRepository!
     var savingsGoalRepository: SavingsGoalStubRepository!
     var timeZone: TimeZone!
+    var accountID: UUID!
     var roundUpDate: Date!
 
     override func setUpWithError() throws {
@@ -23,6 +24,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         transactionRepository = TransactionStubRepository()
         savingsGoalRepository = SavingsGoalStubRepository()
         timeZone = TimeZone.gmt
+        accountID = try XCTUnwrap(UUID(uuidString: "0524257F-DD30-4AB9-AB98-B29F8F8010C8"))
         let dateFormatter = ISO8601DateFormatter()
         roundUpDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-03T10:00:00Z"))
         useCase = FetchRoundUpSummary(
@@ -36,6 +38,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     override func tearDown() {
         useCase = nil
         roundUpDate = nil
+        accountID = nil
         timeZone = nil
         transactionRepository = nil
         accountRepository = nil
@@ -47,7 +50,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
 
         var useCaseError: FetchRoundUpSummaryError?
         do {
-            _ = try await useCase.execute(accountID: "1", inTimeWindow: .week, withDate: roundUpDate)
+            _ = try await useCase.execute(accountID: accountID, inTimeWindow: .week, withDate: roundUpDate)
         } catch let error {
             useCaseError = error as? FetchRoundUpSummaryError
         }
@@ -60,7 +63,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
 
         var useCaseError: FetchRoundUpSummaryError?
         do {
-            _ = try await useCase.execute(accountID: "1", inTimeWindow: .week, withDate: roundUpDate)
+            _ = try await useCase.execute(accountID: accountID, inTimeWindow: .week, withDate: roundUpDate)
         } catch let error {
             useCaseError = error as? FetchRoundUpSummaryError
         }
@@ -69,13 +72,13 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     }
 
     func testExecuteWhenFetchingBalanceErrorsThrowsTransactionsError() async {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .failure(.unknown)
 
         var useCaseError: FetchRoundUpSummaryError?
         do {
-            _ = try await useCase.execute(accountID: "1", inTimeWindow: .week, withDate: roundUpDate)
+            _ = try await useCase.execute(accountID: accountID, inTimeWindow: .week, withDate: roundUpDate)
         } catch let error {
             useCaseError = error as? FetchRoundUpSummaryError
         }
@@ -84,7 +87,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     }
 
     func testExecuteWhenAccountBalanceNotFoundReturnsSummaryWithZeroAccountBalance() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([:])
@@ -97,7 +100,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     }
 
     func testExecuteReturnsSummaryWithAccountBalance() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let accountBalance = Money(minorUnits: 1000, currency: "GBP")
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([account.id: accountBalance])
@@ -110,7 +113,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     }
 
     func testExecuteFetchesTransactionsForAccountInDateRange() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let timeWindow = RoundUpTimeWindow.week
         let dateRange = timeWindow.dateRange(containing: roundUpDate, in: TimeZone.gmt)
         accountRepository.accountResult = .success(account)
@@ -126,7 +129,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     }
 
     func testExecuteReturnsRoundUpSummaryWithAccountID() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([:])
@@ -138,7 +141,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     }
 
     func testExecuteReturnsRoundUpSummaryWithDateRange() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let timeWindow = RoundUpTimeWindow.week
         let expectedDateRange = timeWindow.dateRange(containing: roundUpDate, in: TimeZone.gmt)
         accountRepository.accountResult = .success(account)
@@ -156,7 +159,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
 extension FetchRoundUpSummaryTests {
 
     func testExecuteWhenFetchingTransactionsErrorsThrowsError() async {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .failure(.unknown)
@@ -164,7 +167,7 @@ extension FetchRoundUpSummaryTests {
 
         var useCaseError: FetchRoundUpSummaryError?
         do {
-            _ = try await useCase.execute(accountID: "1", inTimeWindow: .week, withDate: roundUpDate)
+            _ = try await useCase.execute(accountID: accountID, inTimeWindow: .week, withDate: roundUpDate)
         } catch let error {
             useCaseError = error as? FetchRoundUpSummaryError
         }
@@ -173,7 +176,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteWhenZeroTransactionsReturnsAccountSummaryWithZeroAmount() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let expectedRoundUpAmount = Money(minorUnits: 0, currency: account.currency)
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
@@ -186,7 +189,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteWhenMultipleIncomingTransactionsReturnsAccountSummaryWithZeroAmount() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let transactions = [
             Self.createTransaction(id: "1", direction: .incoming),
             Self.createTransaction(id: "2", direction: .incoming),
@@ -204,7 +207,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteWhenOneOutgoingTransactionWhichRoundsUpToZeroReturnsAccountSummaryWithZeroAmount() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let transactions = [
             Self.createTransaction(id: "1", amount: Money(minorUnits: 1000, currency: "GBP"), direction: .outgoing)
         ]
@@ -220,7 +223,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteWhenOneOutgoingTransactionLessThanMajorUnitReturnsAccountSummaryWithAmount() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let transactions = [
             Self.createTransaction(id: "1", amount: Money(minorUnits: 87, currency: "GBP"), direction: .outgoing)
         ]
@@ -236,7 +239,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteWhenOneOutgoingTransactionGreatherThanMajorUnitReturnsAccountSummaryWithAmount() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let transactions = [
             Self.createTransaction(id: "1", amount: Money(minorUnits: 1049, currency: "GBP"), direction: .outgoing)
         ]
@@ -252,7 +255,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteWhenMultipleOutgoingTransactionWithRoundsUpsReturnsAccountSummaryWithAmount() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let transactions = [
             Self.createTransaction(id: "1", amount: Money(minorUnits: 435, currency: "GBP"), direction: .outgoing),
             Self.createTransaction(id: "2", amount: Money(minorUnits: 520, currency: "GBP"), direction: .outgoing),
@@ -270,7 +273,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteWhenMultipleIncomingOutgoingTransactionsReturnsAccountSummaryWithAmount() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let transactions = [
             Self.createTransaction(id: "1", amount: Money(minorUnits: 435, currency: "GBP"), direction: .outgoing),
             Self.createTransaction(id: "2", amount: Money(minorUnits: 123, currency: "GBP"), direction: .incoming),
@@ -291,7 +294,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteReturnsRoundUpSummaryWithAvailableSavingsGoals() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         let savingsGoals = [Self.createSavingsGoal(id: "sg1"), Self.createSavingsGoal(id: "sg2")]
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
@@ -304,7 +307,7 @@ extension FetchRoundUpSummaryTests {
     }
 
     func testExecuteWhenSavingsGoalsErrorsThrowsSavingsGoalError() async throws {
-        let account = Self.createAccount()
+        let account = Self.createAccount(id: accountID)
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([:])
@@ -325,7 +328,7 @@ extension FetchRoundUpSummaryTests {
 extension FetchRoundUpSummaryTests {
 
     private static func createAccount(
-        id: String = "1",
+        id: Account.ID,
         name: String = "Test 1",
         type: AccountType = .primary,
         currency: String = "GBP"
