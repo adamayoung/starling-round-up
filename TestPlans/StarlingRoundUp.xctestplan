@@ -9,6 +9,12 @@
     }
   ],
   "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "TZ",
+        "value" : "UTC"
+      }
+    ],
     "targetForVariableExpansion" : {
       "containerPath" : "container:StarlingRoundUp.xcodeproj",
       "identifier" : "66B899292C3414310056F308",
