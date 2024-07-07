@@ -98,6 +98,20 @@ extension AppCoordinator: AddSavingsGoalViewControllerDelegate {
 
 extension AppCoordinator: RoundUpViewControllerDelegate {
 
+    func viewController(
+        _ viewController: some RoundUpViewControlling,
+        didPerformTransferOfRoundUp _: RoundUpSummary
+    ) {
+        if let presentingViewController = viewController.presentingViewController {
+            presentingViewController.dismiss(animated: true)
+        }
+
+        if let accountDetailsViewController
+            = navigationController.topViewController as? AccountDetailsViewControlling {
+            accountDetailsViewController.refreshData()
+        }
+    }
+
     func viewControllerDidCancel(_ viewController: some RoundUpViewControlling) {
         if let presentingViewController = viewController.presentingViewController {
             presentingViewController.dismiss(animated: true)

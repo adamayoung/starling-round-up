@@ -117,6 +117,11 @@ final class RoundUpSummaryDateView: UIView {
         }
     }
 
+    func isEnabled(_ enabled: Bool) {
+        nextRoundUpButton.isEnabled = enabled
+        previousRoundUpButton.isEnabled = enabled
+    }
+
 }
 
 extension RoundUpSummaryDateView {

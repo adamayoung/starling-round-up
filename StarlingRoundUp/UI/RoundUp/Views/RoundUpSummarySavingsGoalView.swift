@@ -67,7 +67,13 @@ final class RoundUpSummarySavingsGoalView: UIView {
     }
 
     func configure(selectedSavingsGoal: SavingsGoal?) {
-        savingsGoalNameLabel.text = selectedSavingsGoal?.name
+        UIView.transition(
+            with: savingsGoalNameLabel,
+            duration: 0.25,
+            options: .transitionCrossDissolve
+        ) { [weak self] in
+            self?.savingsGoalNameLabel.text = selectedSavingsGoal?.name
+        }
     }
 
 }

@@ -17,8 +17,8 @@ struct RoundUpSummary: Identifiable, Sendable, Equatable {
     let amount: Money
     let dateRange: Range<Date>
     let timeWindow: RoundUpTimeWindow
-    let transactionsCount: Int
     let accountBalance: Money
+    let availableSavingsGoals: [SavingsGoal]
 
     var isRoundUpAvailable: Bool {
         amount.minorUnits > 0

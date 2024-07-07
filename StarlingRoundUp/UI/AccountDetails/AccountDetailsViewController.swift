@@ -11,6 +11,8 @@ protocol AccountDetailsView: AnyObject {
 
     var delegate: (any AccountDetailsViewControllerDelegate)? { get set }
 
+    func refreshData()
+
 }
 
 protocol AccountDetailsViewControlling: AccountDetailsView, UIViewController {}
@@ -130,7 +132,7 @@ extension AccountDetailsViewController {
 extension AccountDetailsViewController {
 
     @objc
-    private func refreshData() {
+    func refreshData() {
         if viewModel.accountSummary == nil {
             tableBackgroundLoadingIndicator.startAnimating()
         }

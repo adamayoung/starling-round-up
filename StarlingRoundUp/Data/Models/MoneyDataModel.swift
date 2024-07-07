@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoneyDataModel: Decodable {
+struct MoneyDataModel: Codable, Equatable {
 
     let minorUnits: Int
     let currency: String

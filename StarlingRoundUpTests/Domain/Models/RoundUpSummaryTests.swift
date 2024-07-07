@@ -91,16 +91,16 @@ extension RoundUpSummaryTests {
         amount: Money = Money(minorUnits: 0, currency: "GBP"),
         dateRange: Range<Date> = Date(timeIntervalSince1970: 0) ..< Date(timeIntervalSince1970: 1000),
         timeWindow: RoundUpTimeWindow = .week,
-        transactionsCount: Int = 10,
-        accountBalance: Money = Money(minorUnits: 0, currency: "GBP")
+        accountBalance: Money = Money(minorUnits: 0, currency: "GBP"),
+        availableSavingsGoals: [SavingsGoal] = []
     ) -> RoundUpSummary {
         RoundUpSummary(
             accountID: accountID,
             amount: amount,
             dateRange: dateRange,
             timeWindow: timeWindow,
-            transactionsCount: transactionsCount,
-            accountBalance: accountBalance
+            accountBalance: accountBalance,
+            availableSavingsGoals: availableSavingsGoals
         )
     }
 

@@ -11,12 +11,9 @@ protocol RoundUpViewModeling: AnyObject {
 
     var accountID: Account.ID { get }
     var roundUpSummary: RoundUpSummary? { get }
-    var availableSavingsGoals: [SavingsGoal] { get }
     var selectedSavingsGoal: SavingsGoal? { get }
 
     func fetchRoundUpSummary() async throws
-
-    func refreshAvailableSavingsGoals() async throws
 
     func decrementRoundUpTimeWindowDate()
 

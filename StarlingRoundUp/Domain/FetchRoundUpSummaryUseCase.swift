@@ -20,6 +20,9 @@ protocol FetchRoundUpSummaryUseCase {
 enum FetchRoundUpSummaryError: Error {
 
     case accountNotFound
+    case account
+    case savingsGoals
+    case transactions
     case unknown
 
 }

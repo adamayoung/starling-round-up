@@ -41,6 +41,13 @@
 		66A634D32C38055400AB3060 /* RoundUpSummaryAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634D22C38055400AB3060 /* RoundUpSummaryAmountView.swift */; };
 		66A634D72C381C2500AB3060 /* RoundUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634D62C381C2500AB3060 /* RoundUpViewModelTests.swift */; };
 		66A634D92C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634D82C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift */; };
+		66A634DB2C3ADA9E00AB3060 /* TransferToSavingsGoalUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634DA2C3ADA9E00AB3060 /* TransferToSavingsGoalUseCase.swift */; };
+		66A634DD2C3ADBE900AB3060 /* TransferToSavingsGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634DC2C3ADBE900AB3060 /* TransferToSavingsGoal.swift */; };
+		66A634DF2C3ADCA700AB3060 /* TransferToSavingsGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634DE2C3ADCA700AB3060 /* TransferToSavingsGoalTests.swift */; };
+		66A634E12C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634E02C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift */; };
+		66A634E32C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634E22C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift */; };
+		66A634E52C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634E42C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift */; };
+		66A634E72C3AEB6300AB3060 /* TransferToSavingsGoalStubUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A634E62C3AEB6300AB3060 /* TransferToSavingsGoalStubUseCase.swift */; };
 		66B8992E2C3414310056F308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992D2C3414310056F308 /* AppDelegate.swift */; };
 		66B899302C3414310056F308 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8992F2C3414310056F308 /* SceneDelegate.swift */; };
 		66B899322C3414310056F308 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899312C3414310056F308 /* AccountListViewController.swift */; };
@@ -201,6 +208,13 @@
 		66A634D22C38055400AB3060 /* RoundUpSummaryAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpSummaryAmountView.swift; sourceTree = "<group>"; };
 		66A634D62C381C2500AB3060 /* RoundUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpViewModelTests.swift; sourceTree = "<group>"; };
 		66A634D82C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRoundUpSummaryStubUseCase.swift; sourceTree = "<group>"; };
+		66A634DA2C3ADA9E00AB3060 /* TransferToSavingsGoalUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalUseCase.swift; sourceTree = "<group>"; };
+		66A634DC2C3ADBE900AB3060 /* TransferToSavingsGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoal.swift; sourceTree = "<group>"; };
+		66A634DE2C3ADCA700AB3060 /* TransferToSavingsGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalTests.swift; sourceTree = "<group>"; };
+		66A634E02C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalRequest.swift; sourceTree = "<group>"; };
+		66A634E22C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalResponseDataModel.swift; sourceTree = "<group>"; };
+		66A634E42C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalRequestTests.swift; sourceTree = "<group>"; };
+		66A634E62C3AEB6300AB3060 /* TransferToSavingsGoalStubUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferToSavingsGoalStubUseCase.swift; sourceTree = "<group>"; };
 		66B8992A2C3414310056F308 /* StarlingRoundUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarlingRoundUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8992D2C3414310056F308 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66B8992F2C3414310056F308 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -486,6 +500,7 @@
 				66EA3AB72C3580D600649A13 /* FetchSavingsGoalsUseCase.swift */,
 				66EA3AF52C35DB5000649A13 /* CreateSavingsGoalUseCase.swift */,
 				66A6348D2C369CB700AB3060 /* FetchRoundUpSummaryUseCase.swift */,
+				66A634DA2C3ADA9E00AB3060 /* TransferToSavingsGoalUseCase.swift */,
 				66EA3A312C34689F00649A13 /* UseCases */,
 				66D876CB2C3466100012CA55 /* Models */,
 				66EA3A352C34690200649A13 /* Repositories */,
@@ -517,6 +532,7 @@
 				66EA3AF02C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift */,
 				66EA3B222C361A3900649A13 /* CreateSavingsGoalStubUseCase.swift */,
 				66A634D82C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift */,
+				66A634E62C3AEB6300AB3060 /* TransferToSavingsGoalStubUseCase.swift */,
 				66EA3A342C3468F100649A13 /* UseCases */,
 				66D876D52C3467420012CA55 /* Models */,
 				66EA3A3A2C346A9000649A13 /* Repositories */,
@@ -550,6 +566,7 @@
 				66EA3ABD2C3581E500649A13 /* FetchSavingsGoals.swift */,
 				66EA3AF92C35DCFB00649A13 /* CreateSavingsGoal.swift */,
 				66A634972C36B2F500AB3060 /* FetchRoundUpSummary.swift */,
+				66A634DC2C3ADBE900AB3060 /* TransferToSavingsGoal.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -563,6 +580,7 @@
 				66EA3AFB2C35DFAC00649A13 /* CreateSavingsGoalTests.swift */,
 				66EA3AFD2C35DFBC00649A13 /* CreateSavingsGoalInputTests.swift */,
 				66A634992C36B50F00AB3060 /* FetchRoundUpSummaryTests.swift */,
+				66A634DE2C3ADCA700AB3060 /* TransferToSavingsGoalTests.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -652,6 +670,7 @@
 				66A634A72C36E44100AB3060 /* TransactionDataModel.swift */,
 				66A634A92C36E48100AB3060 /* TransactionDirectionDataModel.swift */,
 				66A634AD2C36E59600AB3060 /* TransactionsResponseDataModel.swift */,
+				66A634E22C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -717,6 +736,7 @@
 				66EA3B032C35E80800649A13 /* CreateSavingsGoalRequest.swift */,
 				66EA3AD12C3587D400649A13 /* SavingsGoalsRequest.swift */,
 				66A634A52C36E41D00AB3060 /* SettledTransactionsRequest.swift */,
+				66A634E02C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -740,6 +760,7 @@
 				66EA3B072C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift */,
 				66EA3AD32C35882B00649A13 /* SavingsGoalsRequestTests.swift */,
 				66A634AF2C36E5E300AB3060 /* SettledTransactionsRequestTests.swift */,
+				66A634E42C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1076,6 +1097,7 @@
 				66EA3A842C348EE200649A13 /* AuthorizationProviding.swift in Sources */,
 				66EA3A3E2C34759500649A13 /* AccountListViewModeling.swift in Sources */,
 				66A6349E2C36B61700AB3060 /* Transaction.swift in Sources */,
+				66A634DB2C3ADA9E00AB3060 /* TransferToSavingsGoalUseCase.swift in Sources */,
 				66EA3ADE2C358BB400649A13 /* SavingsGoalAPIRepository.swift in Sources */,
 				66EA3A452C3476F000649A13 /* AppFactory.swift in Sources */,
 				66EA3ADA2C35890D00649A13 /* SavingsGoalStateMapper.swift in Sources */,
@@ -1083,6 +1105,8 @@
 				66EA3B002C35E52500649A13 /* CodableAPIRequest.swift in Sources */,
 				66EA3A7F2C34831400649A13 /* BalanceRequest.swift in Sources */,
 				66EA3ABC2C35817F00649A13 /* SavingsGoalState.swift in Sources */,
+				66A634DD2C3ADBE900AB3060 /* TransferToSavingsGoal.swift in Sources */,
+				66A634E32C3AE20800AB3060 /* TransferToSavingsGoalResponseDataModel.swift in Sources */,
 				66EA3A5C2C347A5500649A13 /* AccountsResponseDataModel.swift in Sources */,
 				66A634B82C36EA5200AB3060 /* TransactionMapper.swift in Sources */,
 				66EA3A972C34A98C00649A13 /* MainNavigationController.swift in Sources */,
@@ -1119,6 +1143,7 @@
 				66A634AE2C36E59600AB3060 /* TransactionsResponseDataModel.swift in Sources */,
 				66EA3A7D2C3482A000649A13 /* AccountsRequest.swift in Sources */,
 				66EA3AD02C3587B500649A13 /* SavingsGoalsResponseDataModel.swift in Sources */,
+				66A634E12C3AE17400AB3060 /* TransferToSavingsGoalRequest.swift in Sources */,
 				66A634CF2C3802DA00AB3060 /* RoundUpSummaryAccountBalanceView.swift in Sources */,
 				66EA3B0F2C35F27D00649A13 /* AddSavingsGoalViewController.swift in Sources */,
 				66D876D32C3466F30012CA55 /* Account.swift in Sources */,
@@ -1141,6 +1166,7 @@
 				66A634BA2C36EAB000AB3060 /* TransactionMapperTests.swift in Sources */,
 				66EA3A6F2C347CEC00649A13 /* AccountMapperTests.swift in Sources */,
 				66EA3A6D2C347C6C00649A13 /* MoneyMapperTests.swift in Sources */,
+				66A634E52C3AE36F00AB3060 /* TransferToSavingsGoalRequestTests.swift in Sources */,
 				66EA3A8D2C34924400649A13 /* BalanceRequestTests.swift in Sources */,
 				66A634B02C36E5E300AB3060 /* SettledTransactionsRequestTests.swift in Sources */,
 				66EA3A6B2C347BD200649A13 /* AccountTypeMapperTests.swift in Sources */,
@@ -1148,6 +1174,7 @@
 				66EA3AB62C356FEF00649A13 /* FetchAccountSummaryStubUseCase.swift in Sources */,
 				66EA3AC22C3582AC00649A13 /* FetchSavingsGoalsTests.swift in Sources */,
 				66A634B62C36E9FB00AB3060 /* TransactionDirectionMapperTests.swift in Sources */,
+				66A634DF2C3ADCA700AB3060 /* TransferToSavingsGoalTests.swift in Sources */,
 				66EA3A732C347E8100649A13 /* APIStubClient.swift in Sources */,
 				66EA3B212C361A0A00649A13 /* AddSavingsGoalViewModelTests.swift in Sources */,
 				66EA3A392C346A5D00649A13 /* FetchAccountSummariesTests.swift in Sources */,
@@ -1157,6 +1184,7 @@
 				66EA3A712C347E5100649A13 /* AccountAPIRepositoryTests.swift in Sources */,
 				66EA3AF12C35C8CA00649A13 /* FetchSavingsGoalsStubUseCase.swift in Sources */,
 				66D876D72C34675F0012CA55 /* MoneyTests.swift in Sources */,
+				66A634E72C3AEB6300AB3060 /* TransferToSavingsGoalStubUseCase.swift in Sources */,
 				66A634D72C381C2500AB3060 /* RoundUpViewModelTests.swift in Sources */,
 				66A634D92C381C6C00AB3060 /* FetchRoundUpSummaryStubUseCase.swift in Sources */,
 				66EA3B082C35EA1900649A13 /* CreateSavingsGoalsRequestTests.swift in Sources */,

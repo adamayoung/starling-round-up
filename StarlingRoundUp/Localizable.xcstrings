@@ -45,6 +45,17 @@
         }
       }
     },
+    "ARE_YOU_SURE_YOU_WANT_TO_TRANSFER_%@_TO_%@_SAVINGS_GOAL" : {
+      "comment" : "Are you sure you want to transfer <amount> to <savings goal name> savings goal?",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to transfer %1$@ to %2$@ savings goal?"
+          }
+        }
+      }
+    },
     "BALANCE" : {
       "comment" : "Balance",
       "localizations" : {
@@ -52,6 +63,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Balance"
+          }
+        }
+      }
+    },
+    "CANCEL" : {
+      "comment" : "Cancel",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
           }
         }
       }
@@ -96,6 +118,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cannot Load Savings Goals"
+          }
+        }
+      }
+    },
+    "CANNOT_MAKE_TRANSFER" : {
+      "comment" : "Cannot Make Transfer",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot make Transfer"
           }
         }
       }
@@ -254,6 +287,17 @@
         }
       }
     },
+    "THERE_WAS_AN_ERROR_MAKING_THE_TRANSFER" : {
+      "comment" : "There was an error making the transfer.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was an error making the transfer."
+          }
+        }
+      }
+    },
     "TO" : {
       "comment" : "to",
       "localizations" : {
@@ -265,6 +309,17 @@
         }
       }
     },
+    "TRANSFER" : {
+      "comment" : "Transfer",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transfer"
+          }
+        }
+      }
+    },
     "TRANSFER_%@" : {
       "comment" : "Transfer <Money>",
       "localizations" : {
@@ -272,6 +327,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Transfer %@"
+          }
+        }
+      }
+    },
+    "TRANSFER_TO_SAVINGS_GOAL" : {
+      "comment" : "Transfer to Savings Goal?",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transfer to Savings Goal?"
           }
         }
       }

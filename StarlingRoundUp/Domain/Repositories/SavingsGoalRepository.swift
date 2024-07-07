@@ -13,6 +13,8 @@ protocol SavingsGoalRepository {
 
     func create(savingsGoal: SavingsGoalInput) async throws
 
+    func transfer(transferID: UUID, input: TransferToSavingsGoalInput) async throws
+
 }
 
 enum SavingsGoalRepositoryError: Error {

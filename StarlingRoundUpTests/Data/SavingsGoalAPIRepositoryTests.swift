@@ -122,4 +122,47 @@ final class SavingsGoalAPIRepositoryTests: XCTestCase {
         XCTAssertEqual(createError, .unknown)
     }
 
+    func testTransferMakesCorrectAPIRequest() async throws {
+        let transferID = try XCTUnwrap(UUID(uuidString: "48F855EC-FAEE-4470-B75E-A591F95E353B"))
+        let input = TransferToSavingsGoalInput(
+            accountID: "1",
+            savingsGoalID: "sg1",
+            amount: Money(minorUnits: 1000, currency: "GBP")
+        )
+        let expectedAPIRequest = TransferToSavingsGoalRequest(
+            transferID: transferID,
+            accountID: input.accountID,
+            savingsGoalID: input.savingsGoalID,
+            minorUnits: input.amount.minorUnits,
+            currency: input.amount.currency
+        )
+
+        try? await repository.transfer(transferID: transferID, input: input)
+
+        XCTAssertEqual(apiClient.lastRequest as? TransferToSavingsGoalRequest, expectedAPIRequest)
+    }
+
+    func testTransferWhenSuccessfulDoesNotThrowError() async throws {
+        let transferID = try XCTUnwrap(UUID(uuidString: "48F855EC-FAEE-4470-B75E-A591F95E353B"))
+        let input = TransferToSavingsGoalInput(
+            accountID: "1",
+            savingsGoalID: "sg1",
+            amount: Money(minorUnits: 1000, currency: "GBP")
+        )
+        let response = TransferToSavingsGoalResponseDataModel(
+            success: true,
+            transferUid: transferID.uuidString
+        )
+        apiClient.responseResult = .success(response)
+
+        var transferError: Error?
+        do {
+            try await repository.transfer(transferID: transferID, input: input)
+        } catch let error {
+            transferError = error
+        }
+
+        XCTAssertNil(transferError)
+    }
+
 }
