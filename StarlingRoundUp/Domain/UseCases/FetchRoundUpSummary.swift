@@ -11,15 +11,18 @@ final class FetchRoundUpSummary: FetchRoundUpSummaryUseCase {
 
     private let accountRepository: any AccountRepository
     private let transactionRepository: any TransactionRepository
+    private let savingsGoalRepository: any SavingsGoalRepository
     private let timeZone: TimeZone
 
     init(
         accountRepository: some AccountRepository,
         transactionRepository: some TransactionRepository,
+        savingsGoalRepository: some SavingsGoalRepository,
         timeZone: TimeZone = .autoupdatingCurrent
     ) {
         self.accountRepository = accountRepository
         self.transactionRepository = transactionRepository
+        self.savingsGoalRepository = savingsGoalRepository
         self.timeZone = timeZone
     }
 
@@ -29,24 +32,26 @@ final class FetchRoundUpSummary: FetchRoundUpSummaryUseCase {
         withDate date: Date
     ) async throws -> RoundUpSummary {
         let account = try await account(withID: accountID)
-        let accountBalance = try await accountBalance(for: account)
+        async let accountBalance = accountBalance(for: account)
 
         let dateRange = timeWindow.dateRange(containing: date, in: timeZone)
-        let transactions = try await settledOutgoingTransactions(
+        async let transactions = settledOutgoingTransactions(
             forAccount: accountID,
             in: dateRange,
             withCurrency: account.currency
         )
 
-        let roundUpAmount = await Self.roundUpAmount(for: transactions, inCurrency: account.currency)
+        async let savingsGoals = savingsGoals(forAccount: accountID)
 
-        return RoundUpSummary(
+        let roundUpAmount = try await Self.roundUpAmount(for: transactions, inCurrency: account.currency)
+
+        return try await RoundUpSummary(
             accountID: account.id,
             amount: roundUpAmount,
             dateRange: dateRange,
             timeWindow: timeWindow,
-            transactionsCount: transactions.count,
-            accountBalance: accountBalance
+            accountBalance: accountBalance,
+            availableSavingsGoals: savingsGoals
         )
     }
 
@@ -100,6 +105,17 @@ extension FetchRoundUpSummary {
         return outgoingTransactions
     }
 
+    private func savingsGoals(forAccount accountID: Account.ID) async throws -> [SavingsGoal] {
+        let savingsGoals: [SavingsGoal]
+        do {
+            savingsGoals = try await savingsGoalRepository.savingsGoals(for: accountID)
+        } catch let error {
+            throw Self.mapToFetchRoundUpSummaryError(error)
+        }
+
+        return savingsGoals
+    }
+
 }
 
 extension FetchRoundUpSummary {
@@ -140,15 +156,23 @@ extension FetchRoundUpSummary {
             return Self.mapToFetchRoundUpSummaryError(transactionRepositoryError)
         }
 
+        if let savingsGoalRepositoryError = error as? SavingsGoalRepositoryError {
+            return Self.mapToFetchRoundUpSummaryError(savingsGoalRepositoryError)
+        }
+
         return .unknown
     }
 
     private static func mapToFetchRoundUpSummaryError(_: AccountRepositoryError) -> FetchRoundUpSummaryError {
-        .unknown
+        .account
     }
 
     private static func mapToFetchRoundUpSummaryError(_: TransactionRepositoryError) -> FetchRoundUpSummaryError {
-        .unknown
+        .transactions
+    }
+
+    private static func mapToFetchRoundUpSummaryError(_: SavingsGoalRepositoryError) -> FetchRoundUpSummaryError {
+        .savingsGoals
     }
 
 }

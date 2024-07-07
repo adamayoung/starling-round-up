@@ -96,12 +96,10 @@ extension AppFactory {
 
     private func roundUpViewModel(accountID: Account.ID) -> some RoundUpViewModeling {
         let fetchRoundUpSummaryUseCase = fetchRoundUpSummaryUseCase()
-        let fetchSavingsGoalsUseCase = fetchSavingsGoalsUseCase()
         let transferToSavingsGoalUseCase = transferToSavingsGoalUseCase()
         return RoundUpViewModel(
             accountID: accountID,
             fetchRoundUpSummaryUseCase: fetchRoundUpSummaryUseCase,
-            fetchSavingsGoalsUseCase: fetchSavingsGoalsUseCase,
             transferToSavingsGoalUseCase: transferToSavingsGoalUseCase
         )
     }
@@ -133,7 +131,12 @@ extension AppFactory {
     private func fetchRoundUpSummaryUseCase() -> some FetchRoundUpSummaryUseCase {
         let accountRepository = accountRepository()
         let transactionRepository = transactionRepository()
-        return FetchRoundUpSummary(accountRepository: accountRepository, transactionRepository: transactionRepository)
+        let savingsGoalRepository = savingsGoalRepository()
+        return FetchRoundUpSummary(
+            accountRepository: accountRepository,
+            transactionRepository: transactionRepository,
+            savingsGoalRepository: savingsGoalRepository
+        )
     }
 
     private func transferToSavingsGoalUseCase() -> some TransferToSavingsGoalUseCase {

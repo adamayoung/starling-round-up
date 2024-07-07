@@ -13,11 +13,9 @@ final class RoundUpViewModel: RoundUpViewModeling {
 
     let accountID: Account.ID
     private(set) var roundUpSummary: RoundUpSummary?
-    private(set) var availableSavingsGoals: [SavingsGoal] = []
     private(set) var selectedSavingsGoal: SavingsGoal?
 
     private let fetchRoundUpSummaryUseCase: any FetchRoundUpSummaryUseCase
-    private let fetchSavingsGoalsUseCase: any FetchSavingsGoalsUseCase
     private let transferToSavingsGoalUseCase: any TransferToSavingsGoalUseCase
     private var currentFromDate: Date
     private var isFetchingRoundUpSummary = false
@@ -25,12 +23,10 @@ final class RoundUpViewModel: RoundUpViewModeling {
     init(
         accountID: Account.ID,
         fetchRoundUpSummaryUseCase: some FetchRoundUpSummaryUseCase,
-        fetchSavingsGoalsUseCase: some FetchSavingsGoalsUseCase,
         transferToSavingsGoalUseCase: some TransferToSavingsGoalUseCase
     ) {
         self.accountID = accountID
         self.fetchRoundUpSummaryUseCase = fetchRoundUpSummaryUseCase
-        self.fetchSavingsGoalsUseCase = fetchSavingsGoalsUseCase
         self.transferToSavingsGoalUseCase = transferToSavingsGoalUseCase
         self.currentFromDate = RoundUpViewModel.timeWindow.dateRange(containing: Date()).lowerBound
     }
@@ -41,19 +37,18 @@ final class RoundUpViewModel: RoundUpViewModeling {
         }
 
         isFetchingRoundUpSummary = true
-        roundUpSummary = try await fetchRoundUpSummaryUseCase.execute(
+        let roundUpSummary = try await fetchRoundUpSummaryUseCase.execute(
             accountID: accountID,
             inTimeWindow: Self.timeWindow,
             withDate: currentFromDate
         )
-        isFetchingRoundUpSummary = false
-    }
 
-    func refreshAvailableSavingsGoals() async throws {
-        availableSavingsGoals = try await fetchSavingsGoalsUseCase.execute(accountID: accountID)
         if selectedSavingsGoal == nil {
-            selectedSavingsGoal = availableSavingsGoals.first
+            selectedSavingsGoal = roundUpSummary.availableSavingsGoals.first
         }
+
+        self.roundUpSummary = roundUpSummary
+        isFetchingRoundUpSummary = false
     }
 
     func decrementRoundUpTimeWindowDate() {
@@ -70,6 +65,7 @@ final class RoundUpViewModel: RoundUpViewModeling {
     }
 
     func setSelectedSavingsGoal(id: SavingsGoal.ID) {
+        let availableSavingsGoals = roundUpSummary?.availableSavingsGoals ?? []
         guard let savingsGoal = (availableSavingsGoals.first { $0.id == id }) else {
             return
         }

@@ -13,6 +13,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     var useCase: FetchRoundUpSummary!
     var accountRepository: AccountStubRepository!
     var transactionRepository: TransactionStubRepository!
+    var savingsGoalRepository: SavingsGoalStubRepository!
     var timeZone: TimeZone!
     var roundUpDate: Date!
 
@@ -20,13 +21,14 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         try super.setUpWithError()
         accountRepository = AccountStubRepository()
         transactionRepository = TransactionStubRepository()
+        savingsGoalRepository = SavingsGoalStubRepository()
         timeZone = TimeZone.gmt
         let dateFormatter = ISO8601DateFormatter()
-        // Wednesday, 3rd July 2024 10:00:00 UTC
         roundUpDate = try XCTUnwrap(dateFormatter.date(from: "2024-07-03T10:00:00Z"))
         useCase = FetchRoundUpSummary(
             accountRepository: accountRepository,
             transactionRepository: transactionRepository,
+            savingsGoalRepository: savingsGoalRepository,
             timeZone: timeZone
         )
     }
@@ -40,7 +42,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testExecuteWhenFetchAccountErrorsThrowsError() async {
+    func testExecuteWhenFetchAccountErrorsThrowsAccountError() async {
         accountRepository.accountResult = .failure(.unknown)
 
         var useCaseError: FetchRoundUpSummaryError?
@@ -50,7 +52,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
             useCaseError = error as? FetchRoundUpSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .unknown)
+        XCTAssertEqual(useCaseError, .account)
     }
 
     func testExecuteWhenAccountNotFoundThrowsError() async {
@@ -66,7 +68,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         XCTAssertEqual(useCaseError, .accountNotFound)
     }
 
-    func testExecuteWhenFetchingBalanceErrorsThrowsError() async {
+    func testExecuteWhenFetchingBalanceErrorsThrowsTransactionsError() async {
         let account = Self.createAccount()
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .failure(.unknown)
@@ -78,7 +80,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
             useCaseError = error as? FetchRoundUpSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .unknown)
+        XCTAssertEqual(useCaseError, .transactions)
     }
 
     func testExecuteWhenAccountBalanceNotFoundReturnsSummaryWithZeroAccountBalance() async throws {
@@ -86,13 +88,10 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([:])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
-        let accountBalance = roundUpSummary.accountBalance
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
+        let accountBalance = summary.accountBalance
 
         XCTAssertEqual(accountBalance, Money(minorUnits: 0, currency: account.currency))
     }
@@ -103,14 +102,11 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([account.id: accountBalance])
         transactionRepository.transactionsResult = .success([:])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.accountBalance, accountBalance)
+        XCTAssertEqual(summary.accountBalance, accountBalance)
     }
 
     func testExecuteFetchesTransactionsForAccountInDateRange() async throws {
@@ -120,6 +116,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([:])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
         _ = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
@@ -133,14 +130,11 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([:])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.accountID, account.id)
+        XCTAssertEqual(summary.accountID, account.id)
     }
 
     func testExecuteReturnsRoundUpSummaryWithDateRange() async throws {
@@ -150,14 +144,11 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([:])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.dateRange, expectedDateRange)
+        XCTAssertEqual(summary.dateRange, expectedDateRange)
     }
 
 }
@@ -169,6 +160,7 @@ extension FetchRoundUpSummaryTests {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .failure(.unknown)
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
         var useCaseError: FetchRoundUpSummaryError?
         do {
@@ -177,7 +169,7 @@ extension FetchRoundUpSummaryTests {
             useCaseError = error as? FetchRoundUpSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .unknown)
+        XCTAssertEqual(useCaseError, .transactions)
     }
 
     func testExecuteWhenZeroTransactionsReturnsAccountSummaryWithZeroAmount() async throws {
@@ -186,15 +178,11 @@ extension FetchRoundUpSummaryTests {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([account.id: []])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.amount, expectedRoundUpAmount)
-        XCTAssertEqual(roundUpSummary.transactionsCount, 0)
+        XCTAssertEqual(summary.amount, expectedRoundUpAmount)
     }
 
     func testExecuteWhenMultipleIncomingTransactionsReturnsAccountSummaryWithZeroAmount() async throws {
@@ -208,15 +196,11 @@ extension FetchRoundUpSummaryTests {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([account.id: transactions])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.amount, expectedRoundUpAmount)
-        XCTAssertEqual(roundUpSummary.transactionsCount, 0)
+        XCTAssertEqual(summary.amount, expectedRoundUpAmount)
     }
 
     func testExecuteWhenOneOutgoingTransactionWhichRoundsUpToZeroReturnsAccountSummaryWithZeroAmount() async throws {
@@ -228,15 +212,11 @@ extension FetchRoundUpSummaryTests {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([account.id: transactions])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.amount, expectedRoundUpAmount)
-        XCTAssertEqual(roundUpSummary.transactionsCount, 1)
+        XCTAssertEqual(summary.amount, expectedRoundUpAmount)
     }
 
     func testExecuteWhenOneOutgoingTransactionLessThanMajorUnitReturnsAccountSummaryWithAmount() async throws {
@@ -248,15 +228,11 @@ extension FetchRoundUpSummaryTests {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([account.id: transactions])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.amount, expectedRoundUpAmount)
-        XCTAssertEqual(roundUpSummary.transactionsCount, 1)
+        XCTAssertEqual(summary.amount, expectedRoundUpAmount)
     }
 
     func testExecuteWhenOneOutgoingTransactionGreatherThanMajorUnitReturnsAccountSummaryWithAmount() async throws {
@@ -268,15 +244,11 @@ extension FetchRoundUpSummaryTests {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([account.id: transactions])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.amount, expectedRoundUpAmount)
-        XCTAssertEqual(roundUpSummary.transactionsCount, 1)
+        XCTAssertEqual(summary.amount, expectedRoundUpAmount)
     }
 
     func testExecuteWhenMultipleOutgoingTransactionWithRoundsUpsReturnsAccountSummaryWithAmount() async throws {
@@ -290,15 +262,11 @@ extension FetchRoundUpSummaryTests {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([account.id: transactions])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.amount, expectedRoundUpAmount)
-        XCTAssertEqual(roundUpSummary.transactionsCount, 3)
+        XCTAssertEqual(summary.amount, expectedRoundUpAmount)
     }
 
     func testExecuteWhenMultipleIncomingOutgoingTransactionsReturnsAccountSummaryWithAmount() async throws {
@@ -315,15 +283,41 @@ extension FetchRoundUpSummaryTests {
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .success([:])
         transactionRepository.transactionsResult = .success([account.id: transactions])
+        savingsGoalRepository.savingsGoalsResult = .success([:])
 
-        let roundUpSummary = try await useCase.execute(
-            accountID: account.id,
-            inTimeWindow: .week,
-            withDate: roundUpDate
-        )
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
 
-        XCTAssertEqual(roundUpSummary.amount, expectedRoundUpAmount)
-        XCTAssertEqual(roundUpSummary.transactionsCount, 3)
+        XCTAssertEqual(summary.amount, expectedRoundUpAmount)
+    }
+
+    func testExecuteReturnsRoundUpSummaryWithAvailableSavingsGoals() async throws {
+        let account = Self.createAccount()
+        let savingsGoals = [Self.createSavingsGoal(id: "sg1"), Self.createSavingsGoal(id: "sg2")]
+        accountRepository.accountResult = .success(account)
+        accountRepository.balanceResult = .success([:])
+        transactionRepository.transactionsResult = .success([:])
+        savingsGoalRepository.savingsGoalsResult = .success([account.id: savingsGoals])
+
+        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
+
+        XCTAssertEqual(summary.availableSavingsGoals, savingsGoals)
+    }
+
+    func testExecuteWhenSavingsGoalsErrorsThrowsSavingsGoalError() async throws {
+        let account = Self.createAccount()
+        accountRepository.accountResult = .success(account)
+        accountRepository.balanceResult = .success([:])
+        transactionRepository.transactionsResult = .success([:])
+        savingsGoalRepository.savingsGoalsResult = .failure(.unknown)
+
+        var useCaseError: FetchRoundUpSummaryError?
+        do {
+            _ = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
+        } catch let error {
+            useCaseError = error as? FetchRoundUpSummaryError
+        }
+
+        XCTAssertEqual(useCaseError, .savingsGoals)
     }
 
 }
@@ -336,12 +330,7 @@ extension FetchRoundUpSummaryTests {
         type: AccountType = .primary,
         currency: String = "GBP"
     ) -> Account {
-        Account(
-            id: id,
-            name: name,
-            type: type,
-            currency: currency
-        )
+        Account(id: id, name: name, type: type, currency: currency)
     }
 
     private static func createTransaction(
@@ -349,10 +338,24 @@ extension FetchRoundUpSummaryTests {
         amount: Money = Money(minorUnits: 0, currency: "GBP"),
         direction: Transaction.Direction
     ) -> Transaction {
-        Transaction(
+        Transaction(id: id, amount: amount, direction: direction)
+    }
+
+    private static func createSavingsGoal(
+        id: String = "sg1",
+        name: String = "Test 1",
+        target: Money = Money(minorUnits: 0, currency: "GBP"),
+        totalSaved: Money = Money(minorUnits: 0, currency: "GBP"),
+        savedPercentage: Int = 0,
+        state: SavingsGoalState = .active
+    ) -> SavingsGoal {
+        SavingsGoal(
             id: id,
-            amount: amount,
-            direction: direction
+            name: name,
+            target: target,
+            totalSaved: totalSaved,
+            savedPercentage: savedPercentage,
+            state: state
         )
     }
 

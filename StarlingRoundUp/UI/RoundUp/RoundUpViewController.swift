@@ -115,16 +115,6 @@ extension RoundUpViewController {
                 return
             }
 
-            do {
-                try await viewModel.refreshAvailableSavingsGoals()
-            } catch let error {
-                self.handleFetchRoundUpError(error) {
-                    self.dismiss()
-                }
-
-                return
-            }
-
             refreshView()
             refreshSavingsGoalsMenu()
             activityIndicator.stopAnimating()
@@ -137,40 +127,6 @@ extension RoundUpViewController {
                     self.summaryView.alpha = 1
                 }
             }
-        }
-    }
-
-    private func refreshRoundUpSummary() {
-        Task { [weak self] in
-            guard let self else {
-                return
-            }
-
-            do {
-                try await viewModel.fetchRoundUpSummary()
-            } catch let error {
-                self.handleFetchRoundUpError(error)
-            }
-
-            refreshView()
-        }
-    }
-
-    private func refreshSavingsGoals() {
-        Task { [weak self] in
-            guard let self else {
-                return
-            }
-
-            do {
-                try await viewModel.refreshAvailableSavingsGoals()
-            } catch let error {
-                self.handleFetchSavingsGoalsError(error)
-                return
-            }
-
-            refreshView()
-            refreshSavingsGoalsMenu()
         }
     }
 
@@ -286,7 +242,11 @@ extension RoundUpViewController {
     }
 
     private func buildSavingsGoalsMenu() -> UIMenu {
-        let actions = viewModel.availableSavingsGoals.map { savingsGoal in
+        guard let availableSavingsGoals = viewModel.roundUpSummary?.availableSavingsGoals else {
+            return UIMenu(children: [])
+        }
+
+        let actions = availableSavingsGoals.map { savingsGoal in
             let action = UIAction(
                 title: savingsGoal.name,
                 identifier: UIAction.Identifier(savingsGoal.id),
@@ -300,7 +260,7 @@ extension RoundUpViewController {
             return action
         }
 
-        return UIMenu(title: "", children: actions)
+        return UIMenu(children: actions)
     }
 
     private func didSelectSavingsGoal(_ action: UIAction) {
@@ -316,12 +276,12 @@ extension RoundUpViewController: RoundUpSummaryViewDelegate {
 
     func viewWantsPreviousRoundUp(_: RoundUpSummaryView) {
         viewModel.decrementRoundUpTimeWindowDate()
-        refreshRoundUpSummary()
+        refreshData()
     }
 
     func viewWantsNextRoundUp(_: RoundUpSummaryView) {
         viewModel.incrementRoundUpTimeWindowDate()
-        refreshRoundUpSummary()
+        refreshData()
     }
 
     func viewWantsToPerformTransfer(_: RoundUpSummaryView) {
