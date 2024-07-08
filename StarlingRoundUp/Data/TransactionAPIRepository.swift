@@ -24,27 +24,14 @@ final class TransactionAPIRepository: TransactionRepository {
         let transactionsResponse: TransactionsResponseDataModel
         do {
             transactionsResponse = try await apiClient.perform(request)
-        } catch let error {
-            throw Self.mapToFetchTransactionRepositoryError(error)
+        } catch let error as APIClientError {
+            throw TransactionRepositoryErrorMapper.mapSettledTransactionsError(error)
+        } catch {
+            throw SavingsGoalRepositoryError.unknown
         }
 
         let transactions = transactionsResponse.feedItems.map { TransactionMapper.map($0) }
         return transactions
-    }
-
-}
-
-extension TransactionAPIRepository {
-
-    private static func mapToFetchTransactionRepositoryError(_ error: Error) -> TransactionRepositoryError {
-        guard let error = error as? APIClientError else {
-            return .unknown
-        }
-
-        switch error {
-        default:
-            return .unknown
-        }
     }
 
 }

@@ -39,7 +39,7 @@ final class FetchAccountSummariesTests: XCTestCase {
     func testExecuteWhenOneAccountReturnsAccountSummaryWithIDAndName() async throws {
         let account = Account(id: accountID, name: "Test", type: .primary, currency: "GBP")
         accountRepository.accountsResult = .success([account])
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
 
         let accountSummaries = try await useCase.execute()
 
@@ -48,20 +48,6 @@ final class FetchAccountSummariesTests: XCTestCase {
 
         XCTAssertEqual(accountSummary.id, accountID)
         XCTAssertEqual(accountSummary.name, "Test")
-    }
-
-    func testExecuteWhenOneAccountAndNilBalanceReturnsAccountSummaryZeroBalance() async throws {
-        let account = Account(id: accountID, name: "Test", type: .primary, currency: "GBP")
-        accountRepository.accountsResult = .success([account])
-        accountRepository.balanceResult = .success([:])
-
-        let accountSummaries = try await useCase.execute()
-
-        XCTAssertEqual(accountSummaries.count, 1)
-        let accountSummary = try XCTUnwrap(accountSummaries.first)
-
-        XCTAssertEqual(accountSummary.balance.minorUnits, 0)
-        XCTAssertEqual(accountSummary.balance.currency, "GBP")
     }
 
     func testExecuteWhenOneAccountAndBalanceReturnsAccountSummaryWithBalance() async throws {
@@ -89,7 +75,7 @@ final class FetchAccountSummariesTests: XCTestCase {
             useCaseError = error as? FetchAccountSummariesError
         }
 
-        XCTAssertEqual(useCaseError, .accounts)
+        XCTAssertEqual(useCaseError, .unknown)
     }
 
     func testExecuteWhenFetchingBalanceErrorsThrowsError() async {
@@ -104,7 +90,7 @@ final class FetchAccountSummariesTests: XCTestCase {
             useCaseError = error as? FetchAccountSummariesError
         }
 
-        XCTAssertEqual(useCaseError, .accountBalance)
+        XCTAssertEqual(useCaseError, .unknown)
     }
 
 }

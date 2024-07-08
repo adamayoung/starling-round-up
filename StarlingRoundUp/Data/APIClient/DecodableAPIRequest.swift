@@ -7,7 +7,10 @@
 
 import Foundation
 
-class DecodableAPIRequest<Response: Decodable>: CodableAPIRequest<EmptyBody, Response> {
+class DecodableAPIRequest<
+    Response: Decodable,
+    ErrorResponse: Decodable & Error
+>: CodableAPIRequest<EmptyBody, Response, ErrorResponse> {
 
     init(
         path: String,

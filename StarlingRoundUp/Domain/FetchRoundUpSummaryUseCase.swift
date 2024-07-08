@@ -17,12 +17,27 @@ protocol FetchRoundUpSummaryUseCase {
 
 }
 
-enum FetchRoundUpSummaryError: Error {
+enum FetchRoundUpSummaryError: LocalizedError {
 
+    case unauthorized
+    case forbidden
     case accountNotFound
-    case account
-    case savingsGoals
-    case transactions
     case unknown
+
+    var errorDescription: String? {
+        switch self {
+        case .unauthorized:
+            String(localized: "UNAUTHORISED_ERROR", comment: "You are not authorised to make this request.")
+
+        case .forbidden:
+            String(localized: "FORBIDDEN_ERROR", comment: "You are forbidden from making this request.")
+
+        case .accountNotFound:
+            String(localized: "ACCOUNT_NOT_FOUND", comment: "This account cannot be found.")
+
+        case .unknown:
+            String(localized: "UNKNOWN_ERROR", comment: "An unknown error occurred.")
+        }
+    }
 
 }

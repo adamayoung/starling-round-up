@@ -19,8 +19,10 @@ final class FetchSavingsGoals: FetchSavingsGoalsUseCase {
         let savingsGoals: [SavingsGoal]
         do {
             savingsGoals = try await savingsGoalRepository.savingsGoals(for: accountID)
-        } catch let error {
+        } catch let error as SavingsGoalRepositoryError {
             throw Self.mapToFetchSavingsGoalsError(error)
+        } catch {
+            throw FetchSavingsGoalsError.unknown
         }
 
         let activeSavingsGoals = savingsGoals.filter { $0.state == .active }
@@ -31,12 +33,20 @@ final class FetchSavingsGoals: FetchSavingsGoalsUseCase {
 
 extension FetchSavingsGoals {
 
-    private static func mapToFetchSavingsGoalsError(_ error: Error) -> FetchSavingsGoalsError {
-        guard error as? SavingsGoalRepositoryError != nil else {
-            return .unknown
-        }
+    private static func mapToFetchSavingsGoalsError(_ error: SavingsGoalRepositoryError) -> FetchSavingsGoalsError {
+        switch error {
+        case .unauthorized:
+            .unauthorized
 
-        return .unknown
+        case .forbidden:
+            .forbidden
+
+        case .notFound:
+            .accountNotFound
+
+        default:
+            .unknown
+        }
     }
 
 }

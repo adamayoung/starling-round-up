@@ -103,13 +103,17 @@ extension SavingsGoalListViewController {
 
     @objc
     func refreshData() {
-        Task {
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
             do {
                 let shouldAnimateUpdate = !viewModel.savingsGoals.isEmpty
                 try await viewModel.fetchSavingsGoals()
                 update(with: viewModel.savingsGoals, animate: shouldAnimateUpdate)
             } catch let error {
-                handleError(error)
+                self.handleError(error)
             }
 
             tableBackgroundLoadingIndicator.stopAnimating()
@@ -117,22 +121,12 @@ extension SavingsGoalListViewController {
         }
     }
 
-    private func handleError(_: Error) {
+    private func handleError(_ error: Error) {
         let alertViewController = UIAlertController(
             title: String(localized: "CANNOT_LOAD_SAVINGS_GOALS", comment: "Cannot Load Savings Goals"),
-            message: String(
-                localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS",
-                comment: "There was an error loading your savings goals."
-            ),
-            preferredStyle: .alert
+            error: error
         )
         alertViewController.view.tintColor = view.tintColor
-
-        let dismissAction = UIAlertAction(
-            title: String(localized: "OK", comment: "OK"),
-            style: .default
-        )
-        alertViewController.addAction(dismissAction)
 
         present(alertViewController, animated: true)
     }

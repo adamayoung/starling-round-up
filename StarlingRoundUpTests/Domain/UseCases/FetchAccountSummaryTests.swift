@@ -28,25 +28,17 @@ final class FetchAccountSummaryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testExecuteWhenAccountDoesNotExistReturnsNil() async throws {
-        accountRepository.accountResult = .success(nil)
+    func testExecuteWhenAccountDoesNotExistThrowsNotFoundError() async {
+        accountRepository.accountResult = .failure(.notFound)
 
-        let accountSummary = try await useCase.execute(accountID: accountID)
+        var useCaseError: FetchAccountSummaryError?
+        do {
+            _ = try await useCase.execute(accountID: accountID)
+        } catch let error {
+            useCaseError = error as? FetchAccountSummaryError
+        }
 
-        XCTAssertNil(accountSummary)
-    }
-
-    func testExecuteWhenAccountExistsAndBalanceIsNilReturnsAccountSummaryWithZeroBalance() async throws {
-        let account = Account(id: accountID, name: "Test 1", type: .primary, currency: "GBP")
-        accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
-        let expectedBalance = Money(minorUnits: 0, currency: "GBP")
-
-        let accountSummary = try await useCase.execute(accountID: accountID)
-
-        XCTAssertEqual(accountSummary?.id, account.id)
-        XCTAssertEqual(accountSummary?.name, account.name)
-        XCTAssertEqual(accountSummary?.balance, expectedBalance)
+        XCTAssertEqual(useCaseError, .notFound)
     }
 
     func testExecuteWhenAccountExistsAndHasABalanceReturnsAccountSummaryWithBalance() async throws {
@@ -57,9 +49,9 @@ final class FetchAccountSummaryTests: XCTestCase {
 
         let accountSummary = try await useCase.execute(accountID: accountID)
 
-        XCTAssertEqual(accountSummary?.id, account.id)
-        XCTAssertEqual(accountSummary?.name, account.name)
-        XCTAssertEqual(accountSummary?.balance, balance)
+        XCTAssertEqual(accountSummary.id, account.id)
+        XCTAssertEqual(accountSummary.name, account.name)
+        XCTAssertEqual(accountSummary.balance, balance)
     }
 
     func testExecuteWhenFetchAccountErrorsThrowsError() async {
@@ -72,7 +64,7 @@ final class FetchAccountSummaryTests: XCTestCase {
             useCaseError = error as? FetchAccountSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .account)
+        XCTAssertEqual(useCaseError, .unknown)
     }
 
     func testExecuteWhenFetchBalanceErrorsThrowsError() async {
@@ -87,7 +79,7 @@ final class FetchAccountSummaryTests: XCTestCase {
             useCaseError = error as? FetchAccountSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .accountBalance)
+        XCTAssertEqual(useCaseError, .unknown)
     }
 
 }

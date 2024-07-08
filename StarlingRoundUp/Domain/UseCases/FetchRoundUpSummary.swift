@@ -63,8 +63,10 @@ extension FetchRoundUpSummary {
         let account: Account?
         do {
             account = try await accountRepository.account(withID: accountID)
-        } catch let error {
+        } catch let error as AccountRepositoryError {
             throw Self.mapToFetchRoundUpSummaryError(error)
+        } catch {
+            throw FetchRoundUpSummaryError.unknown
         }
 
         guard let foundAccount = account else {
@@ -75,15 +77,16 @@ extension FetchRoundUpSummary {
     }
 
     private func accountBalance(for account: Account) async throws -> Money {
+        let balance: Money
         do {
-            guard let acountBalance = try await accountRepository.balance(for: account.id) else {
-                return Money(minorUnits: 0, currency: account.currency)
-            }
-
-            return acountBalance
-        } catch let error {
+            balance = try await accountRepository.balance(for: account.id)
+        } catch let error as AccountRepositoryError {
             throw Self.mapToFetchRoundUpSummaryError(error)
+        } catch {
+            throw FetchRoundUpSummaryError.unknown
         }
+
+        return balance
     }
 
     private func settledOutgoingTransactions(
@@ -94,8 +97,10 @@ extension FetchRoundUpSummary {
         let transactions: [Transaction]
         do {
             transactions = try await transactionRepository.settledTransactions(forAccount: accountID, in: dateRange)
-        } catch let error {
+        } catch let error as TransactionRepositoryError {
             throw Self.mapToFetchRoundUpSummaryError(error)
+        } catch {
+            throw FetchRoundUpSummaryError.unknown
         }
 
         let outgoingTransactions = transactions.filter {
@@ -109,8 +114,10 @@ extension FetchRoundUpSummary {
         let savingsGoals: [SavingsGoal]
         do {
             savingsGoals = try await savingsGoalRepository.savingsGoals(for: accountID)
-        } catch let error {
+        } catch let error as SavingsGoalRepositoryError {
             throw Self.mapToFetchRoundUpSummaryError(error)
+        } catch {
+            throw FetchRoundUpSummaryError.unknown
         }
 
         return savingsGoals
@@ -147,32 +154,58 @@ extension FetchRoundUpSummary {
 
 extension FetchRoundUpSummary {
 
-    private static func mapToFetchRoundUpSummaryError(_ error: Error) -> FetchRoundUpSummaryError {
-        if let accountRepositoryError = error as? AccountRepositoryError {
-            return mapToFetchRoundUpSummaryError(accountRepositoryError)
-        }
+    private static func mapToFetchRoundUpSummaryError(
+        _ error: AccountRepositoryError
+    ) -> FetchRoundUpSummaryError {
+        switch error {
+        case .unauthorized:
+            .unauthorized
 
-        if let transactionRepositoryError = error as? TransactionRepositoryError {
-            return Self.mapToFetchRoundUpSummaryError(transactionRepositoryError)
-        }
+        case .forbidden:
+            .forbidden
 
-        if let savingsGoalRepositoryError = error as? SavingsGoalRepositoryError {
-            return Self.mapToFetchRoundUpSummaryError(savingsGoalRepositoryError)
-        }
+        case .notFound:
+            .accountNotFound
 
-        return .unknown
+        default:
+            .unknown
+        }
     }
 
-    private static func mapToFetchRoundUpSummaryError(_: AccountRepositoryError) -> FetchRoundUpSummaryError {
-        .account
+    private static func mapToFetchRoundUpSummaryError(
+        _ error: TransactionRepositoryError
+    ) -> FetchRoundUpSummaryError {
+        switch error {
+        case .unauthorized:
+            .unauthorized
+
+        case .forbidden:
+            .forbidden
+
+        case .notFound:
+            .accountNotFound
+
+        default:
+            .unknown
+        }
     }
 
-    private static func mapToFetchRoundUpSummaryError(_: TransactionRepositoryError) -> FetchRoundUpSummaryError {
-        .transactions
-    }
+    private static func mapToFetchRoundUpSummaryError(
+        _ error: SavingsGoalRepositoryError
+    ) -> FetchRoundUpSummaryError {
+        switch error {
+        case .unauthorized:
+            .unauthorized
 
-    private static func mapToFetchRoundUpSummaryError(_: SavingsGoalRepositoryError) -> FetchRoundUpSummaryError {
-        .savingsGoals
+        case .forbidden:
+            .forbidden
+
+        case .notFound:
+            .accountNotFound
+
+        default:
+            .unknown
+        }
     }
 
 }

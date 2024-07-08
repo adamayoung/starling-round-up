@@ -9,7 +9,8 @@ import Foundation
 
 final class CreateSavingsGoalsRequest: CodableAPIRequest<
     CreateSavingsGoalsRequest.Body,
-    CreateSavingsGoalResponseDataModel
+    CreateSavingsGoalResponseDataModel,
+    ErrorResponseDataModel<ErrorDetailDataModel>
 > {
 
     init(accountID: UUID, name: String, currency: String, targetMinorUnits: Int) {

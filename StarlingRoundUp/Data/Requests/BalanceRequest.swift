@@ -7,7 +7,10 @@
 
 import Foundation
 
-final class BalanceRequest: DecodableAPIRequest<BalanceResponseDataModel> {
+final class BalanceRequest: DecodableAPIRequest<
+    BalanceResponseDataModel,
+    ErrorResponseDataModel<ErrorDetailDataModel>
+> {
 
     init(accountID: UUID) {
         let path = "/accounts/\(accountID.uuidString)/balance"

@@ -85,7 +85,7 @@ extension AddSavingsGoalViewController {
             do {
                 try await viewModel.save()
             } catch let error {
-                print(error)
+                self.handleError(error)
                 return
             }
 
@@ -93,7 +93,17 @@ extension AddSavingsGoalViewController {
         }
     }
 
-    private func dismiss(_: AnyObject? = nil) {
+    private func handleError(_ error: Error) {
+        let alertViewController = UIAlertController(
+            title: String(localized: "CANNOT_ADD_SAVINGS_GOAL", comment: "Cannot Add Savings Goal"),
+            error: error
+        )
+        alertViewController.view.tintColor = view.tintColor
+
+        present(alertViewController, animated: true)
+    }
+
+    private func dismiss() {
         delegate?.viewControllerDidCancelCreatingsSavingsGoal(self)
     }
 

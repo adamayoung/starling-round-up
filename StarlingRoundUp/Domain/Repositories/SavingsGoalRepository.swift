@@ -16,13 +16,3 @@ protocol SavingsGoalRepository {
     func transfer(transferID: UUID, input: TransferToSavingsGoalInput) async throws
 
 }
-
-enum SavingsGoalRepositoryError: Error {
-
-    case unauthorized
-    case forbidden
-    case insufficentFunds
-    case amountMustBePositive
-    case unknown
-
-}

@@ -85,13 +85,17 @@ extension AccountListViewController {
 
     @objc
     private func refreshData() {
-        Task {
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
             do {
                 let shouldAnimateUpdate = !viewModel.accountSummaries.isEmpty
                 try await viewModel.fetchAccountSummaries()
                 update(with: viewModel.accountSummaries, animate: shouldAnimateUpdate)
             } catch let error {
-                handleError(error)
+                self.handleError(error)
             }
 
             tableBackgroundLoadingIndicator.stopAnimating()
@@ -99,22 +103,12 @@ extension AccountListViewController {
         }
     }
 
-    private func handleError(_: Error) {
+    private func handleError(_ error: Error) {
         let alertViewController = UIAlertController(
             title: String(localized: "CANNOT_LOAD_ACCOUNTS", comment: "Cannot Load Accounts"),
-            message: String(
-                localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNTS",
-                comment: "There was an error loading your accounts."
-            ),
-            preferredStyle: .alert
+            error: error
         )
         alertViewController.view.tintColor = view.tintColor
-
-        let dismissAction = UIAlertAction(
-            title: String(localized: "OK", comment: "OK"),
-            style: .default
-        )
-        alertViewController.addAction(dismissAction)
 
         present(alertViewController, animated: true)
     }

@@ -17,7 +17,15 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
 
     func savingsGoals(for accountID: Account.ID) async throws -> [SavingsGoal] {
         let request = SavingsGoalsRequest(accountID: accountID)
-        let savingsGoalsResponse = try await apiClient.perform(request)
+        let savingsGoalsResponse: SavingsGoalsResponseDataModel
+        do {
+            savingsGoalsResponse = try await apiClient.perform(request)
+        } catch let error as APIClientError {
+            throw SavingsGoalRepositoryErrorMapper.mapSavingsGoalsError(error)
+        } catch {
+            throw SavingsGoalRepositoryError.unknown
+        }
+
         let savingsGoals = savingsGoalsResponse.savingsGoalList.map { SavingsGoalMapper.map($0) }
         return savingsGoals
     }
@@ -33,8 +41,10 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
         let result: CreateSavingsGoalResponseDataModel
         do {
             result = try await apiClient.perform(request)
-        } catch let error {
-            throw Self.mapToSavingsGoalRepositoryError(error)
+        } catch let error as APIClientError {
+            throw SavingsGoalRepositoryErrorMapper.mapCreateError(error)
+        } catch {
+            throw SavingsGoalRepositoryError.unknown
         }
 
         guard result.success else {
@@ -54,27 +64,14 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
         let result: TransferToSavingsGoalResponseDataModel
         do {
             result = try await apiClient.perform(request)
-        } catch let error {
-            throw Self.mapToSavingsGoalRepositoryError(error)
+        } catch let error as APIClientError {
+            throw SavingsGoalRepositoryErrorMapper.mapTransferError(error)
+        } catch {
+            throw SavingsGoalRepositoryError.unknown
         }
 
         guard result.success else {
             throw SavingsGoalRepositoryError.unknown
-        }
-    }
-
-}
-
-extension SavingsGoalAPIRepository {
-
-    private static func mapToSavingsGoalRepositoryError(_ error: Error) -> SavingsGoalRepositoryError {
-        guard let error = error as? APIClientError else {
-            return .unknown
-        }
-
-        switch error {
-        default:
-            return .unknown
         }
     }
 

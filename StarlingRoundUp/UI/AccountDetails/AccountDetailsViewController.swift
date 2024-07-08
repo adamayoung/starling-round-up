@@ -137,14 +137,18 @@ extension AccountDetailsViewController {
             tableBackgroundLoadingIndicator.startAnimating()
         }
 
-        Task {
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
             do {
                 try await viewModel.fetchAccountSummary()
                 accountSummaryView.configure(with: viewModel.accountSummary)
                 tableView.reloadData()
             } catch let error {
-                tableView.reloadData()
-                handleError(error)
+                self.tableView.reloadData()
+                self.handleError(error)
             }
 
             tableBackgroundLoadingIndicator.stopAnimating()
@@ -152,22 +156,12 @@ extension AccountDetailsViewController {
         }
     }
 
-    private func handleError(_: Error) {
+    private func handleError(_ error: Error) {
         let alertViewController = UIAlertController(
             title: String(localized: "CANNOT_LOAD_ACCOUNT_DETAILS", comment: "Cannot Load Account Details"),
-            message: String(
-                localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNT_DETAILS",
-                comment: "There was an error loading your account details."
-            ),
-            preferredStyle: .alert
+            error: error
         )
         alertViewController.view.tintColor = view.tintColor
-
-        let dismissAction = UIAlertAction(
-            title: String(localized: "OK", comment: "OK"),
-            style: .default
-        )
-        alertViewController.addAction(dismissAction)
 
         present(alertViewController, animated: true)
     }

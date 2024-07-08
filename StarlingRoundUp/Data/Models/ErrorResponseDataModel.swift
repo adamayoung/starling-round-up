@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ErrorResponseDataModel: Decodable, Error {
+struct ErrorResponseDataModel<ErrorDetail: Decodable>: Decodable, Error {
 
-    let errors: [ErrorDetailDataModel]
+    let errors: [ErrorDetail]
     let success: Bool
 
 }

@@ -130,8 +130,7 @@ extension RoundUpViewController {
         }
     }
 
-    @objc
-    private func dismiss(_: AnyObject? = nil) {
+    private func dismiss() {
         delegate?.viewControllerDidCancel(self)
     }
 
@@ -177,54 +176,29 @@ extension RoundUpViewController {
                 try await viewModel.performTransfer()
                 delegate?.viewController(self, didPerformTransferOfRoundUp: roundUpSummary)
             } catch let error {
-                self.handleTransferError(error) {
-                    self.summaryView.isTransferring(false)
-                }
+                self.summaryView.isTransferring(false)
+                self.handleTransferError(error)
             }
         }
     }
 
-    private func handleFetchRoundUpError(_: Error, completion: (() -> Void)? = nil) {
-        let title = String(localized: "CANNOT_CALCULATE_ROUND_UP", comment: "Cannot Calculate Round-Up")
-        let message = String(
-            localized: "THERE_WAS_AN_ERROR_CALCULATE_THIS_ROUND_UP",
-            comment: "There was an error calculating this Round-Up."
+    private func handleFetchRoundUpError(_ error: Error, completion: (() -> Void)? = nil) {
+        let alertViewController = UIAlertController(
+            title: String(localized: "CANNOT_CALCULATE_ROUND_UP", comment: "Cannot Calculate Round-Up"),
+            error: error,
+            completion: completion
         )
-
-        showErrorAlert(title: title, message: message, completion: completion)
-    }
-
-    private func handleFetchSavingsGoalsError(_: Error, completion: (() -> Void)? = nil) {
-        let title = String(localized: "CANNOT_LOAD_SAVINGS_GOALS", comment: "Cannot Load Savings Goals")
-        let message = String(
-            localized: "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS",
-            comment: "There was an error loading your savings goals."
-        )
-
-        showErrorAlert(title: title, message: message, completion: completion)
-    }
-
-    private func handleTransferError(_: Error, completion: (() -> Void)? = nil) {
-        let title = String(localized: "CANNOT_MAKE_TRANSFER", comment: "Cannot Make Transfer")
-        let message = String(
-            localized: "THERE_WAS_AN_ERROR_MAKING_THE_TRANSFER",
-            comment: "There was an error making the transfer."
-        )
-
-        showErrorAlert(title: title, message: message, completion: completion)
-    }
-
-    private func showErrorAlert(title: String, message: String, completion: (() -> Void)? = nil) {
-        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertViewController.view.tintColor = view.tintColor
 
-        let dismissAction = UIAlertAction(
-            title: String(localized: "OK", comment: "OK"),
-            style: .default
-        ) { _ in
-            completion?()
-        }
-        alertViewController.addAction(dismissAction)
+        present(alertViewController, animated: true)
+    }
+
+    private func handleTransferError(_ error: Error) {
+        let alertViewController = UIAlertController(
+            title: String(localized: "CANNOT_MAKE_TRANSFER", comment: "Cannot Make Transfer"),
+            error: error
+        )
+        alertViewController.view.tintColor = view.tintColor
 
         present(alertViewController, animated: true)
     }

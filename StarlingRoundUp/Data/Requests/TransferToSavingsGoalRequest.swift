@@ -9,7 +9,8 @@ import Foundation
 
 final class TransferToSavingsGoalRequest: CodableAPIRequest<
     TransferToSavingsGoalRequest.Body,
-    TransferToSavingsGoalResponseDataModel
+    TransferToSavingsGoalResponseDataModel,
+    ErrorResponseDataModel<TransferToSavingsErrorDetailDataModel>
 > {
 
     init(
