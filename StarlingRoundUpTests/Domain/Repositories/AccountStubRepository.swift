@@ -13,7 +13,7 @@ final class AccountStubRepository: AccountRepository {
     var accountsResult: Result<[Account], AccountRepositoryError> = .failure(.unknown)
 
     private(set) var lastAccountID: Account.ID?
-    var accountResult: Result<Account?, AccountRepositoryError> = .failure(.unknown)
+    var accountResult: Result<Account, AccountRepositoryError> = .failure(.unknown)
 
     private(set) var lastBalanceAccountID: Account.ID?
     var balanceResult: Result<[Account.ID: Money], AccountRepositoryError> = .failure(.unknown)
@@ -24,17 +24,21 @@ final class AccountStubRepository: AccountRepository {
         try accountsResult.get()
     }
 
-    func account(withID id: Account.ID) async throws -> Account? {
+    func account(withID id: Account.ID) async throws -> Account {
         lastAccountID = id
 
         return try accountResult.get()
     }
 
-    func balance(for accountID: Account.ID) async throws -> Money? {
+    func balance(for accountID: Account.ID) async throws -> Money {
         lastBalanceAccountID = accountID
 
-        let balanceResults = try balanceResult.get()
-        return balanceResults[accountID]
+        let balances = try balanceResult.get()
+        guard let balance = balances[accountID] else {
+            throw AccountRepositoryError.notFound
+        }
+
+        return balance
     }
 
 }

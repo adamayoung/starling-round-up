@@ -21,47 +21,39 @@ final class AccountAPIRepository: AccountRepository {
         let accountsResponse: AccountsResponseDataModel
         do {
             accountsResponse = try await apiClient.perform(request)
-        } catch let error {
-            throw Self.mapToFetchAccountRepositoryError(error)
+        } catch let error as APIClientError {
+            throw AccountRepositoryErrorMapper.mapAccountsError(error)
+        } catch {
+            throw AccountRepositoryError.unknown
         }
 
         let accounts = accountsResponse.accounts.map { AccountMapper.map($0) }
         return accounts
     }
 
-    func account(withID id: Account.ID) async throws -> Account? {
+    func account(withID id: Account.ID) async throws -> Account {
         let accounts = try await accounts()
-        let matchingAccount = accounts.first(where: { $0.id == id })
+        guard let matchingAccount = (accounts.first(where: { $0.id == id })) else {
+            throw AccountRepositoryError.notFound
+        }
+
         return matchingAccount
     }
 
-    func balance(for accountID: Account.ID) async throws -> Money? {
+    func balance(for accountID: Account.ID) async throws -> Money {
         let request = BalanceRequest(accountID: accountID)
 
         let balanceResponse: BalanceResponseDataModel
         do {
             balanceResponse = try await apiClient.perform(request)
-        } catch let error {
-            throw Self.mapToFetchAccountRepositoryError(error)
+        } catch let error as APIClientError {
+            throw AccountRepositoryErrorMapper.mapBalanceError(error)
+        } catch {
+            throw SavingsGoalRepositoryError.unknown
         }
 
         let balance = MoneyMapper.map(balanceResponse.amount)
         return balance
-    }
-
-}
-
-extension AccountAPIRepository {
-
-    private static func mapToFetchAccountRepositoryError(_ error: Error) -> AccountRepositoryError {
-        guard let error = error as? APIClientError else {
-            return .unknown
-        }
-
-        switch error {
-        default:
-            return .unknown
-        }
     }
 
 }

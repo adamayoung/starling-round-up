@@ -11,6 +11,7 @@ protocol APIRequest: Identifiable, Equatable {
 
     associatedtype Body: Encodable & Equatable
     associatedtype Response: Decodable
+    associatedtype ErrorResponse: Decodable & Error
 
     var path: String { get }
     var queryItems: [String: String] { get }

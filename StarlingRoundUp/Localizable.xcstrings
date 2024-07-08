@@ -12,6 +12,17 @@
         }
       }
     },
+    "ACCOUNT_NOT_FOUND" : {
+      "comment" : "This account cannot be found.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This account cannot be found."
+          }
+        }
+      }
+    },
     "ACCOUNTS" : {
       "comment" : "Accounts",
       "localizations" : {
@@ -19,6 +30,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accounts"
+          }
+        }
+      }
+    },
+    "ACCOUNTS_NOT_FOUND" : {
+      "comment" : "Your accounts cannot be found.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your accounts cannot be found."
           }
         }
       }
@@ -74,6 +96,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "CANNOT_ADD_SAVINGS_GOAL" : {
+      "comment" : "Cannot Add Savings Goal",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot Add Savings Goal"
           }
         }
       }
@@ -144,6 +177,39 @@
         }
       }
     },
+    "CREATE_SAVINGS_GOAL_INVALID_CURRENCY" : {
+      "comment" : "The Savings Goal currency is not valid.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Savings Goal currency is not valid."
+          }
+        }
+      }
+    },
+    "CREATE_SAVINGS_GOAL_INVALID_NAME" : {
+      "comment" : "The Savings Goal name is not valid.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Savings Goal name is not valid."
+          }
+        }
+      }
+    },
+    "CREATE_SAVINGS_GOAL_INVALID_TARGET" : {
+      "comment" : "The Savings Goal target amount is not valid.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Savings Goal target amount is not valid."
+          }
+        }
+      }
+    },
     "FOR_%@_BEGINNING" : {
       "comment" : "for %@ beginning",
       "localizations" : {
@@ -151,6 +217,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "for %@ beginning"
+          }
+        }
+      }
+    },
+    "FORBIDDEN_ERROR" : {
+      "comment" : "You are forbidden from making this request.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are forbidden from making this request."
           }
         }
       }
@@ -245,6 +322,7 @@
     },
     "THERE_WAS_AN_ERROR_CALCULATE_THIS_ROUND_UP" : {
       "comment" : "There was an error calculating this Round-Up.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -256,6 +334,7 @@
     },
     "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNT_DETAILS" : {
       "comment" : "There was an error loading your account details.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -267,6 +346,7 @@
     },
     "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNTS" : {
       "comment" : "There was an error loading your accounts.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -278,6 +358,7 @@
     },
     "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS" : {
       "comment" : "There was an error loading your savings goals.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -289,6 +370,7 @@
     },
     "THERE_WAS_AN_ERROR_MAKING_THE_TRANSFER" : {
       "comment" : "There was an error making the transfer.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -338,6 +420,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Transfer to Savings Goal?"
+          }
+        }
+      }
+    },
+    "TRANSFER_TO_SAVINGS_GOAL_INSUFFICIENT_FUNDS" : {
+      "comment" : "There are insufficent funds in your account to transfer to this Savings Goal.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are insufficent funds in your account to transfer to this Savings Goal."
+          }
+        }
+      }
+    },
+    "TRANSFER_TO_SAVINGS_GOAL_TRANSFER_AMOUNT_INVALID" : {
+      "comment" : "The transfer amount is invalid.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The transfer amount is invalid."
+          }
+        }
+      }
+    },
+    "UNAUTHORISED_ERROR" : {
+      "comment" : "You are not authorised to make this request.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are not authorised to make this request."
+          }
+        }
+      }
+    },
+    "UNKNOWN_ERROR" : {
+      "comment" : "An unknown error occurred.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unknown error occurred."
           }
         }
       }

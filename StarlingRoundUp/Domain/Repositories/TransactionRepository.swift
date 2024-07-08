@@ -12,9 +12,3 @@ protocol TransactionRepository {
     func settledTransactions(forAccount accountID: Account.ID, in dateRange: Range<Date>) async throws -> [Transaction]
 
 }
-
-enum TransactionRepositoryError: Error {
-
-    case unknown
-
-}

@@ -7,7 +7,10 @@
 
 import Foundation
 
-final class SettledTransactionsRequest: DecodableAPIRequest<TransactionsResponseDataModel> {
+final class SettledTransactionsRequest: DecodableAPIRequest<
+    TransactionsResponseDataModel,
+    ErrorResponseDataModel<ErrorDetailDataModel>
+> {
 
     init(accountID: UUID, dateRange: Range<Date>) {
         let path = "/feed/account/\(accountID.uuidString)/settled-transactions-between"

@@ -7,7 +7,10 @@
 
 import Foundation
 
-final class AccountsRequest: DecodableAPIRequest<AccountsResponseDataModel> {
+final class AccountsRequest: DecodableAPIRequest<
+    AccountsResponseDataModel,
+    ErrorResponseDataModel<ErrorDetailDataModel>
+> {
 
     init() {
         let path = "/accounts"

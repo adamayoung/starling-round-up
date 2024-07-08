@@ -16,14 +16,16 @@ final class TransferToSavingsGoal: TransferToSavingsGoalUseCase {
     }
 
     func execute(input: TransferToSavingsGoalInput) async throws {
-        let transferID = UUID()
+        let transferID = Self.generateNewTransactionID()
         do {
             try await savingsGoalRepository.transfer(
                 transferID: transferID,
                 input: input
             )
-        } catch let error {
+        } catch let error as SavingsGoalRepositoryError {
             throw Self.mapToTransferToSavingsGoalError(error)
+        } catch {
+            throw TransferToSavingsGoalError.unknown
         }
     }
 
@@ -31,12 +33,36 @@ final class TransferToSavingsGoal: TransferToSavingsGoalUseCase {
 
 extension TransferToSavingsGoal {
 
-    private static func mapToTransferToSavingsGoalError(_ error: Error) -> TransferToSavingsGoalError {
-        guard error is SavingsGoalRepositoryError else {
-            return .unknown
-        }
+    private static func generateNewTransactionID() -> UUID {
+        UUID()
+    }
 
-        return .unknown
+}
+
+extension TransferToSavingsGoal {
+
+    private static func mapToTransferToSavingsGoalError(
+        _ error: SavingsGoalRepositoryError
+    ) -> TransferToSavingsGoalError {
+        switch error {
+        case .unauthorized:
+            .unauthorized
+
+        case .forbidden:
+            .forbidden
+
+        case .notFound:
+            .accountNotFound
+
+        case .insufficientFunds:
+            .insufficientFunds
+
+        case .amountMustBePositive:
+            .amountMustBePositive
+
+        default:
+            .unknown
+        }
     }
 
 }

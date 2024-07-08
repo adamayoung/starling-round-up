@@ -119,18 +119,25 @@ extension APIHTTPClient {
 
 extension APIHTTPClient {
 
-    private static func verifyResponse(
+    private static func verifyResponse<Request: APIRequest>(
         _ result: (Data, URLResponse),
-        from _: some APIRequest
+        from _: Request
     ) throws {
         guard let response = result.1 as? HTTPURLResponse else {
             throw APIClientError.unknown
         }
 
         let statusCode = response.statusCode
-        if let error = HTTPStatusCodeErrorMapper.map(statusCode) {
-            throw error
+        guard let error = HTTPStatusCodeErrorMapper.map(statusCode) else {
+            return
         }
+
+        if error == .badRequest(nil) {
+            let responseError = try? decodeResponseObject(Request.ErrorResponse.self, from: result.0)
+            throw APIClientError.badRequest(responseError)
+        }
+
+        throw error
     }
 
     private static func decodeResponseObject<ResponseObject: Decodable>(

@@ -7,7 +7,11 @@
 
 import Foundation
 
-class CodableAPIRequest<Body: Encodable & Equatable, Response: Decodable>: APIRequest {
+class CodableAPIRequest<
+    Body: Encodable & Equatable,
+    Response: Decodable,
+    ErrorResponse: Decodable & Error
+>: APIRequest {
 
     let path: String
     let queryItems: [String: String]
@@ -26,7 +30,10 @@ class CodableAPIRequest<Body: Encodable & Equatable, Response: Decodable>: APIRe
         self.body = body
     }
 
-    static func == (lhs: CodableAPIRequest<Body, Response>, rhs: CodableAPIRequest<Body, Response>) -> Bool {
+    static func == (
+        lhs: CodableAPIRequest<Body, Response, ErrorResponse>,
+        rhs: CodableAPIRequest<Body, Response, ErrorResponse>
+    ) -> Bool {
         lhs.path == rhs.path
             && lhs.queryItems == rhs.queryItems
             && lhs.method == rhs.method

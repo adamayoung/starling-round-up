@@ -11,14 +11,8 @@ protocol AccountRepository {
 
     func accounts() async throws -> [Account]
 
-    func account(withID id: Account.ID) async throws -> Account?
+    func account(withID id: Account.ID) async throws -> Account
 
-    func balance(for accountID: Account.ID) async throws -> Money?
-
-}
-
-enum AccountRepositoryError: Error {
-
-    case unknown
+    func balance(for accountID: Account.ID) async throws -> Money
 
 }

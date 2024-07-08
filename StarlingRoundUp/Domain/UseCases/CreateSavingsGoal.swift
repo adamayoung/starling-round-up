@@ -20,8 +20,10 @@ final class CreateSavingsGoal: CreateSavingsGoalUseCase {
 
         do {
             try await savingsGoalRepository.create(savingsGoal: input)
-        } catch let error {
+        } catch let error as SavingsGoalRepositoryError {
             throw Self.mapToCreateSavingsGoalError(error)
+        } catch {
+            throw FetchRoundUpSummaryError.unknown
         }
     }
 
@@ -29,12 +31,20 @@ final class CreateSavingsGoal: CreateSavingsGoalUseCase {
 
 extension CreateSavingsGoal {
 
-    private static func mapToCreateSavingsGoalError(_ error: Error) -> CreateSavingsGoalError {
-        guard error as? SavingsGoalRepositoryError != nil else {
-            return .unknown
-        }
+    private static func mapToCreateSavingsGoalError(_ error: SavingsGoalRepositoryError) -> CreateSavingsGoalError {
+        switch error {
+        case .unauthorized:
+            .unauthorized
 
-        return .unknown
+        case .forbidden:
+            .forbidden
+
+        case .notFound:
+            .accountNotFound
+
+        default:
+            .unknown
+        }
     }
 
 }

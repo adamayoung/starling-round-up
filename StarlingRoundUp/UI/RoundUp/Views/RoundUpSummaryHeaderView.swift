@@ -16,8 +16,7 @@ final class RoundUpSummaryHeaderView: UIView {
     }()
 
     private lazy var roundUpImageView: UIImageView = {
-        let image = UIImage(systemName: ImageName.roundUp)
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView(image: .roundUp)
         imageView.tintColor = .white
         imageView.contentMode = .scaleAspectFit
         return imageView

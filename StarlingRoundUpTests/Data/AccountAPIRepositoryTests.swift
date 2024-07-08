@@ -80,8 +80,8 @@ final class AccountAPIRepositoryTests: XCTestCase {
 
         let balance = try await repository.balance(for: accountID)
 
-        XCTAssertEqual(balance?.minorUnits, 1234)
-        XCTAssertEqual(balance?.currency, "GBP")
+        XCTAssertEqual(balance.minorUnits, 1234)
+        XCTAssertEqual(balance.currency, "GBP")
     }
 
 }

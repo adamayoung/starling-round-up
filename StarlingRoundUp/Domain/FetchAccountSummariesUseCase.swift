@@ -13,10 +13,27 @@ protocol FetchAccountSummariesUseCase {
 
 }
 
-enum FetchAccountSummariesError: Error {
+enum FetchAccountSummariesError: LocalizedError {
 
-    case accounts
-    case accountBalance
+    case unauthorized
+    case forbidden
+    case notFound
     case unknown
+
+    var errorDescription: String? {
+        switch self {
+        case .unauthorized:
+            String(localized: "UNAUTHORISED_ERROR", comment: "You are not authorised to make this request.")
+
+        case .forbidden:
+            String(localized: "FORBIDDEN_ERROR", comment: "You are forbidden from making this request.")
+
+        case .notFound:
+            String(localized: "ACCOUNTS_NOT_FOUND", comment: "Your accounts cannot be found.")
+
+        case .unknown:
+            String(localized: "UNKNOWN_ERROR", comment: "An unknown error occurred.")
+        }
+    }
 
 }

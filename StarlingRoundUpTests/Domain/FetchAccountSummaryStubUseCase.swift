@@ -14,9 +14,13 @@ final class FetchAccountSummaryStubUseCase: FetchAccountSummaryUseCase {
 
     init() {}
 
-    func execute(accountID: Account.ID) async throws -> AccountSummary? {
+    func execute(accountID: Account.ID) async throws -> AccountSummary {
         let accountSummaries = try result.get()
-        return accountSummaries[accountID]
+        guard let accountSummary = accountSummaries[accountID] else {
+            throw FetchAccountSummaryError.notFound
+        }
+
+        return accountSummary
     }
 
 }

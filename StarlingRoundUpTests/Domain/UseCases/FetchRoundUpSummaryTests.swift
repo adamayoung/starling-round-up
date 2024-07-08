@@ -56,11 +56,11 @@ final class FetchRoundUpSummaryTests: XCTestCase {
             useCaseError = error as? FetchRoundUpSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .account)
+        XCTAssertEqual(useCaseError, .unknown)
     }
 
     func testExecuteWhenAccountNotFoundThrowsError() async {
-        accountRepository.accountResult = .success(nil)
+        accountRepository.accountResult = .failure(.notFound)
 
         var useCaseError: FetchRoundUpSummaryError?
         do {
@@ -72,7 +72,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         XCTAssertEqual(useCaseError, .accountNotFound)
     }
 
-    func testExecuteWhenFetchingBalanceErrorsThrowsTransactionsError() async {
+    func testExecuteWhenFetchingBalanceErrorsThrowsNotFoundError() async {
         let account = Self.createAccount(id: accountID)
         accountRepository.accountResult = .success(account)
         accountRepository.balanceResult = .failure(.unknown)
@@ -84,20 +84,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
             useCaseError = error as? FetchRoundUpSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .transactions)
-    }
-
-    func testExecuteWhenAccountBalanceNotFoundReturnsSummaryWithZeroAccountBalance() async throws {
-        let account = Self.createAccount(id: accountID)
-        accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
-        transactionRepository.transactionsResult = .success([:])
-        savingsGoalRepository.savingsGoalsResult = .success([:])
-
-        let summary = try await useCase.execute(accountID: account.id, inTimeWindow: .week, withDate: roundUpDate)
-        let accountBalance = summary.accountBalance
-
-        XCTAssertEqual(accountBalance, Money(minorUnits: 0, currency: account.currency))
+        XCTAssertEqual(useCaseError, .unknown)
     }
 
     func testExecuteReturnsSummaryWithAccountBalance() async throws {
@@ -118,7 +105,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         let timeWindow = RoundUpTimeWindow.week
         let dateRange = timeWindow.dateRange(containing: roundUpDate, in: TimeZone.gmt)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([:])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -132,7 +119,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
     func testExecuteReturnsRoundUpSummaryWithAccountID() async throws {
         let account = Self.createAccount(id: accountID)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([:])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -146,7 +133,7 @@ final class FetchRoundUpSummaryTests: XCTestCase {
         let timeWindow = RoundUpTimeWindow.week
         let expectedDateRange = timeWindow.dateRange(containing: roundUpDate, in: TimeZone.gmt)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([:])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -173,14 +160,14 @@ extension FetchRoundUpSummaryTests {
             useCaseError = error as? FetchRoundUpSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .transactions)
+        XCTAssertEqual(useCaseError, .unknown)
     }
 
     func testExecuteWhenZeroTransactionsReturnsAccountSummaryWithZeroAmount() async throws {
         let account = Self.createAccount(id: accountID)
         let expectedRoundUpAmount = Money(minorUnits: 0, currency: account.currency)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([account.id: []])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -201,7 +188,7 @@ extension FetchRoundUpSummaryTests {
         ]
         let expectedRoundUpAmount = Money(minorUnits: 0, currency: account.currency)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([account.id: transactions])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -222,7 +209,7 @@ extension FetchRoundUpSummaryTests {
         ]
         let expectedRoundUpAmount = Money(minorUnits: 0, currency: account.currency)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([account.id: transactions])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -243,7 +230,7 @@ extension FetchRoundUpSummaryTests {
         ]
         let expectedRoundUpAmount = Money(minorUnits: 13, currency: account.currency)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([account.id: transactions])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -264,7 +251,7 @@ extension FetchRoundUpSummaryTests {
         ]
         let expectedRoundUpAmount = Money(minorUnits: 51, currency: account.currency)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([account.id: transactions])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -297,7 +284,7 @@ extension FetchRoundUpSummaryTests {
         ]
         let expectedRoundUpAmount = Money(minorUnits: 158, currency: account.currency)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([account.id: transactions])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -348,7 +335,7 @@ extension FetchRoundUpSummaryTests {
         ]
         let expectedRoundUpAmount = Money(minorUnits: 158, currency: account.currency)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([account.id: transactions])
         savingsGoalRepository.savingsGoalsResult = .success([:])
 
@@ -363,7 +350,7 @@ extension FetchRoundUpSummaryTests {
         let savingsGoal2ID = try XCTUnwrap(UUID(uuidString: "A18696A2-2436-468A-A791-432ECEDCC69B"))
         let savingsGoals = [Self.createSavingsGoal(id: savingsGoal1ID), Self.createSavingsGoal(id: savingsGoal2ID)]
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([:])
         savingsGoalRepository.savingsGoalsResult = .success([account.id: savingsGoals])
 
@@ -372,10 +359,10 @@ extension FetchRoundUpSummaryTests {
         XCTAssertEqual(summary.availableSavingsGoals, savingsGoals)
     }
 
-    func testExecuteWhenSavingsGoalsErrorsThrowsSavingsGoalError() async throws {
+    func testExecuteWhenSavingsGoalsErrorsThrowsError() async throws {
         let account = Self.createAccount(id: accountID)
         accountRepository.accountResult = .success(account)
-        accountRepository.balanceResult = .success([:])
+        accountRepository.balanceResult = .success([account.id: Money(minorUnits: 0, currency: "GBP")])
         transactionRepository.transactionsResult = .success([:])
         savingsGoalRepository.savingsGoalsResult = .failure(.unknown)
 
@@ -386,7 +373,7 @@ extension FetchRoundUpSummaryTests {
             useCaseError = error as? FetchRoundUpSummaryError
         }
 
-        XCTAssertEqual(useCaseError, .savingsGoals)
+        XCTAssertEqual(useCaseError, .unknown)
     }
 
 }
