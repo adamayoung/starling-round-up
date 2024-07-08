@@ -30,5 +30,5 @@ transfer into a saving goal.
 6. Setup CI
 7. Build, Test, Iterate
 8. Add UI Tests to cover common user flows
-9. Project Summary
+9. [Project Summary](docs/PROJECT-SUMMARY.md)
 10. Prepare for submission
