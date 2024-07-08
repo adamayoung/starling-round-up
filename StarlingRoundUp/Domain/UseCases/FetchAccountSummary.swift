@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import os
 
 final class FetchAccountSummary: FetchAccountSummaryUseCase {
+
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: String(describing: FetchAccountSummary.self)
+    )
 
     private let accountRepository: any AccountRepository
 
@@ -30,11 +36,16 @@ extension FetchAccountSummary {
     private func account(withID id: Account.ID) async throws -> Account {
         let account: Account
         do {
+            Self.logger.trace("Fetching account \(id)")
             account = try await accountRepository.account(withID: id)
         } catch let error as AccountRepositoryError {
-            throw Self.mapToFetchAccountSummaryError(error)
+            let error = Self.mapToFetchAccountSummaryError(error)
+            Self.logger.error("Failed fetching account: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchAccountSummaryError.unknown
+            let error = FetchAccountSummaryError.unknown
+            Self.logger.error("Failed fetching account: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         return account
@@ -43,11 +54,16 @@ extension FetchAccountSummary {
     private func balance(for account: Account) async throws -> Money {
         let balance: Money
         do {
+            Self.logger.trace("Fetching balance for account \(account.id)")
             balance = try await accountRepository.balance(for: account.id)
         } catch let error as AccountRepositoryError {
-            throw Self.mapToFetchAccountSummaryError(error)
+            let error = Self.mapToFetchAccountSummaryError(error)
+            Self.logger.error("Failed fetching balance: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchAccountSummaryError.unknown
+            let error = FetchAccountSummaryError.unknown
+            Self.logger.error("Failed fetching balance: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         return balance

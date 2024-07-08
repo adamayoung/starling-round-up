@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import os
 
 final class FetchAccountSummaries: FetchAccountSummariesUseCase {
+
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: String(describing: FetchAccountSummaries.self)
+    )
 
     private let accountRepository: any AccountRepository
 
@@ -32,11 +38,16 @@ extension FetchAccountSummaries {
     private func accounts() async throws -> [Account] {
         let accounts: [Account]
         do {
+            Self.logger.trace("Fetching accounts")
             accounts = try await accountRepository.accounts()
         } catch let error as AccountRepositoryError {
-            throw Self.mapToFetchAccountSummariesError(error)
+            let error = Self.mapToFetchAccountSummariesError(error)
+            Self.logger.error("Failed fetching accounts: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchAccountSummaryError.unknown
+            let error = FetchAccountSummaryError.unknown
+            Self.logger.error("Failed fetching accounts: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         return accounts
@@ -47,11 +58,20 @@ extension FetchAccountSummaries {
             for account in accounts {
                 taskGroup.addTask {
                     do {
+                        Self.logger.trace("Fetching balance for account \(account.id)")
                         return try await (account, self.accountRepository.balance(for: account.id))
                     } catch let error as AccountRepositoryError {
-                        throw Self.mapToFetchAccountSummariesError(error)
+                        let error = Self.mapToFetchAccountSummariesError(error)
+                        Self.logger.error(
+                            "Failed fetching balance: \(error.localizedDescription, privacy: .public)"
+                        )
+                        throw error
                     } catch {
-                        throw FetchAccountSummariesError.unknown
+                        let error = FetchAccountSummariesError.unknown
+                        Self.logger.error(
+                            "Failed fetching balance: \(error.localizedDescription, privacy: .public)"
+                        )
+                        throw error
                     }
                 }
             }

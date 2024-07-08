@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import os
 
 final class CreateSavingsGoal: CreateSavingsGoalUseCase {
+
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: String(describing: CreateSavingsGoal.self)
+    )
 
     private let savingsGoalRepository: any SavingsGoalRepository
 
@@ -19,11 +25,16 @@ final class CreateSavingsGoal: CreateSavingsGoalUseCase {
         try input.validate()
 
         do {
+            Self.logger.trace("Creating savings goal '\(input.name)'")
             try await savingsGoalRepository.create(savingsGoal: input)
         } catch let error as SavingsGoalRepositoryError {
-            throw Self.mapToCreateSavingsGoalError(error)
+            let error = Self.mapToCreateSavingsGoalError(error)
+            Self.logger.error("Failed creating savings goal: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchRoundUpSummaryError.unknown
+            let error = FetchRoundUpSummaryError.unknown
+            Self.logger.error("Failed creating savings goal: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
     }
 
