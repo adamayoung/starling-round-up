@@ -63,7 +63,12 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
         ])
 
         tableView.backgroundView = tableBackgroundView
-        tableBackgroundLoadingIndicator.startAnimating()
+
+        update(with: viewModel.accountSummaries, animate: false)
+
+        if viewModel.accountSummaries.isEmpty {
+            tableBackgroundLoadingIndicator.startAnimating()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

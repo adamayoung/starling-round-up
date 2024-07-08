@@ -92,7 +92,11 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
         savingsGoalsUnavailableView.isHidden = true
 
         tableView.backgroundView = tableBackgroundView
-        tableBackgroundLoadingIndicator.startAnimating()
+        update(with: viewModel.savingsGoals, animate: false)
+
+        if viewModel.savingsGoals.isEmpty {
+            tableBackgroundLoadingIndicator.startAnimating()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

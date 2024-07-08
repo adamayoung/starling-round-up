@@ -2,9 +2,10 @@
   "configurations" : [
     {
       "id" : "014959CF-2DB0-473B-8730-302F188E1999",
-      "name" : "Test Scheme Action",
+      "name" : "en-GB",
       "options" : {
-
+        "language" : "en-GB",
+        "region" : "GB"
       }
     }
   ],
@@ -15,8 +16,6 @@
         "value" : "UTC"
       }
     ],
-    "language" : "en-GB",
-    "region" : "GB",
     "targetForVariableExpansion" : {
       "containerPath" : "container:StarlingRoundUp.xcodeproj",
       "identifier" : "66B899292C3414310056F308",
