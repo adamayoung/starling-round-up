@@ -95,9 +95,13 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
             summaryView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
 
-        summaryView.isHidden = true
-        activityIndicator.startAnimating()
-        chooseSavingsGoalButton.isEnabled = false
+        if viewModel.roundUpSummary == nil {
+            summaryView.isHidden = true
+            activityIndicator.startAnimating()
+            chooseSavingsGoalButton.isEnabled = false
+        }
+
+        refreshView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -125,18 +129,9 @@ extension RoundUpViewController {
                 return
             }
 
-            refreshView()
-            refreshSavingsGoalsMenu()
             activityIndicator.stopAnimating()
             chooseSavingsGoalButton.isEnabled = true
-
-            if summaryView.isHidden {
-                summaryView.alpha = 0
-                summaryView.isHidden = false
-                UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut) {
-                    self.summaryView.alpha = 1
-                }
-            }
+            refreshView()
         }
     }
 
@@ -221,6 +216,15 @@ extension RoundUpViewController {
 
     private func refreshView() {
         summaryView.configure(with: viewModel.roundUpSummary, selectedSavingsGoal: viewModel.selectedSavingsGoal)
+        refreshSavingsGoalsMenu()
+
+        if summaryView.isHidden {
+            summaryView.alpha = 0
+            summaryView.isHidden = false
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut) {
+                self.summaryView.alpha = 1
+            }
+        }
     }
 
     private func refreshSavingsGoalsMenu() {
