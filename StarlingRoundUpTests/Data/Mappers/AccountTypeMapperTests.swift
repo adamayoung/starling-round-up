@@ -34,12 +34,12 @@ final class AccountTypeMapperTests: XCTestCase {
         XCTAssertEqual(accountType, .loan)
     }
 
-    func testMapFixTermDeposit() {
-        let dataModel = AccountTypeDataModel.fixTermDeposit
+    func testMapFixedTermDeposit() {
+        let dataModel = AccountTypeDataModel.fixedTermDeposit
 
         let accountType = AccountTypeMapper.map(dataModel)
 
-        XCTAssertEqual(accountType, .fixTermDeposit)
+        XCTAssertEqual(accountType, .fixedTermDeposit)
     }
 
     func testMapUnknown() {

@@ -12,7 +12,7 @@ enum AccountType: Sendable, Equatable {
     case primary
     case additional
     case loan
-    case fixTermDeposit
+    case fixedTermDeposit
     case unknown
 
 }
