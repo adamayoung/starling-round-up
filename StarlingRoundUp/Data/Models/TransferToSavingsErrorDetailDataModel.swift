@@ -19,6 +19,7 @@ extension TransferToSavingsErrorDetailDataModel {
 
         case amountMustBePositive = "AMOUNT_MUST_BE_POSITIVE"
         case insufficientFunds = "INSUFFICIENT_FUNDS"
+        case unknownSavingsGoal = "UNKNOWN_SAVINGS_GOAL"
         case unknown = "UNKNOWN"
 
         init(from decoder: Decoder) throws {

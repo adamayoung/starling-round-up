@@ -60,6 +60,9 @@ extension TransferToSavingsGoal {
         case .amountMustBePositive:
             .amountMustBePositive
 
+        case .unknownSavingsGoal:
+            .unknownSavingsGoal
+
         default:
             .unknown
         }

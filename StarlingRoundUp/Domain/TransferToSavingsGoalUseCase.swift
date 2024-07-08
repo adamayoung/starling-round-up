@@ -28,6 +28,7 @@ enum TransferToSavingsGoalError: LocalizedError {
     case accountNotFound
     case insufficientFunds
     case amountMustBePositive
+    case unknownSavingsGoal
     case unknown
 
     var errorDescription: String? {
@@ -51,6 +52,12 @@ enum TransferToSavingsGoalError: LocalizedError {
             String(
                 localized: "TRANSFER_TO_SAVINGS_GOAL_TRANSFER_AMOUNT_INVALID",
                 comment: "The transfer amount is invalid."
+            )
+
+        case .unknownSavingsGoal:
+            String(
+                localized: "TRANSFER_TO_SAVINGS_GOAL_SAVINGS_GOAL_NOT_FOUND",
+                comment: "The Savings Goal does not exist."
             )
 
         case .unknown:

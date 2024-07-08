@@ -43,6 +43,10 @@ final class RoundUpViewModel: RoundUpViewModeling {
             withDate: currentFromDate
         )
 
+        if let selectedSavingsGoal, !roundUpSummary.availableSavingsGoals.contains(selectedSavingsGoal) {
+            self.selectedSavingsGoal = nil
+        }
+
         if selectedSavingsGoal == nil {
             selectedSavingsGoal = roundUpSummary.availableSavingsGoals.first
         }

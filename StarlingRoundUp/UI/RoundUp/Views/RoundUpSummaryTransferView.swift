@@ -84,7 +84,7 @@ final class RoundUpSummaryTransferView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with roundUpSummary: RoundUpSummary?) {
+    func configure(with roundUpSummary: RoundUpSummary?, selectedSavingsGoal: SavingsGoal?) {
         guard let roundUpSummary else {
             return
         }
@@ -94,7 +94,11 @@ final class RoundUpSummaryTransferView: UIView {
         }
 
         let hasSufficentFundsForTransfer = roundUpSummary.hasSufficentFundsForTransfer
-        let canTransfer = hasSufficentFundsForTransfer && roundUpSummary.isRoundUpAvailable
+        let canTransfer = hasSufficentFundsForTransfer
+            && roundUpSummary.isRoundUpAvailable
+            && selectedSavingsGoal != nil
+
+        activityIndicator.stopAnimating()
         showTransferButton(canTransfer)
         showInsufficentFundsLabel(!hasSufficentFundsForTransfer)
     }

@@ -52,11 +52,14 @@ extension AppCoordinator: AccountDetailsViewControllerDelegate {
         navigationController.pushViewController(savingsGoalListViewController, animated: true)
     }
 
-    func viewController(_: some AccountDetailsViewControlling, wantsToRoundUpForAccount accountID: Account.ID) {
+    func viewController(
+        _ viewController: some AccountDetailsViewControlling,
+        wantsToRoundUpForAccount accountID: Account.ID
+    ) {
         let roundUpViewController = factory.roundUpViewController(accountID: accountID)
         roundUpViewController.delegate = self
         let roundUpNavigationController = UINavigationController(rootViewController: roundUpViewController)
-        navigationController.present(roundUpNavigationController, animated: true)
+        viewController.present(roundUpNavigationController, animated: true)
     }
 
 }
@@ -64,13 +67,13 @@ extension AppCoordinator: AccountDetailsViewControllerDelegate {
 extension AppCoordinator: SavingsGoalListViewControllerDelegate {
 
     func viewController(
-        _: some SavingsGoalListViewControlling,
+        _ viewController: some SavingsGoalListViewControlling,
         wantsToCreateSavingsGoalForAccount accountID: Account.ID
     ) {
         let addSavingsGoalViewController = factory.addSavingsGoalViewController(accountID: accountID)
         addSavingsGoalViewController.delegate = self
         let addNavigationController = UINavigationController(rootViewController: addSavingsGoalViewController)
-        navigationController.present(addNavigationController, animated: true)
+        viewController.present(addNavigationController, animated: true)
     }
 
 }
@@ -85,6 +88,11 @@ extension AppCoordinator: AddSavingsGoalViewControllerDelegate {
         if let savingsGoalListViewController
             = navigationController.topViewController as? SavingsGoalListViewControlling {
             savingsGoalListViewController.refreshData()
+        }
+
+        if let presentedViewController = navigationController.presentedViewController as? UINavigationController,
+           let roundUpViewController = presentedViewController.topViewController as? RoundUpViewControlling {
+            roundUpViewController.refreshData()
         }
     }
 
@@ -110,6 +118,16 @@ extension AppCoordinator: RoundUpViewControllerDelegate {
             = navigationController.topViewController as? AccountDetailsViewControlling {
             accountDetailsViewController.refreshData()
         }
+    }
+
+    func viewController(
+        _ viewController: some RoundUpViewControlling,
+        wantsToAddSavingsGoalToAccount accountID: Account.ID
+    ) {
+        let addSavingsGoalViewController = factory.addSavingsGoalViewController(accountID: accountID)
+        addSavingsGoalViewController.delegate = self
+        let addNavigationController = UINavigationController(rootViewController: addSavingsGoalViewController)
+        viewController.present(addNavigationController, animated: true)
     }
 
     func viewControllerDidCancel(_ viewController: some RoundUpViewControlling) {
