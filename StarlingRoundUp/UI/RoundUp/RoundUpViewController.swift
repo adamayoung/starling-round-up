@@ -26,6 +26,7 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
     private lazy var chooseSavingsGoalButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: String(localized: "SAVINGS_GOALS", comment: "Savings Goals"))
         button.tintColor = .white
+        button.accessibilityIdentifier = "round-up-choose-savings-goal-button"
         return button
     }()
 
@@ -36,6 +37,7 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
 
         let button = UIBarButtonItem(systemItem: .cancel, primaryAction: action)
         button.tintColor = .white
+        button.accessibilityIdentifier = "round-up-cancel-button"
         return button
     }()
 
@@ -71,6 +73,8 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
         gradient.frame = view.bounds
         gradient.colors = [UIColor.tintColor.cgColor, UIColor.tintColor.withAlphaComponent(0.8).cgColor]
         view.layer.insertSublayer(gradient, at: 0)
+
+        view.accessibilityIdentifier = "round-up-view"
 
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = chooseSavingsGoalButton

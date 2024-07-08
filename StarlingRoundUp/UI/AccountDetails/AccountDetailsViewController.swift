@@ -53,6 +53,7 @@ final class AccountDetailsViewController: UITableViewController, AccountDetailsV
         super.viewDidLoad()
         title = viewModel.accountSummary?.name
 
+        tableView.accessibilityIdentifier = "account-table"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.savingsGoals)
 
         let refreshControl = UIRefreshControl()
@@ -103,6 +104,7 @@ extension AccountDetailsViewController {
         content.image = UIImage(systemName: ImageName.savingsGoal)
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
+        cell.accessibilityIdentifier = "savings-goal-cell"
 
         return cell
     }

@@ -26,7 +26,9 @@ final class AddSavingsGoalViewController: UITableViewController, AddSavingsGoalV
             self?.save()
         }
 
-        return UIBarButtonItem(title: String(localized: "ADD", comment: "Add"), primaryAction: action)
+        let button = UIBarButtonItem(title: String(localized: "ADD", comment: "Add"), primaryAction: action)
+        button.accessibilityIdentifier = "add-savings-goal-add-button"
+        return button
     }()
 
     private lazy var cancelButton: UIBarButtonItem = {
@@ -34,7 +36,9 @@ final class AddSavingsGoalViewController: UITableViewController, AddSavingsGoalV
             self?.dismiss()
         }
 
-        return UIBarButtonItem(systemItem: .cancel, primaryAction: action)
+        let button = UIBarButtonItem(systemItem: .cancel, primaryAction: action)
+        button.accessibilityIdentifier = "add-savings-goal-cancel-button"
+        return button
     }()
 
     private enum CellIdentifier {
@@ -60,6 +64,7 @@ final class AddSavingsGoalViewController: UITableViewController, AddSavingsGoalV
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = addButton
 
+        tableView.accessibilityIdentifier = "add-savings-goal-table"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.name)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.target)
 
@@ -151,6 +156,7 @@ extension AddSavingsGoalViewController {
         }
         cell.contentConfiguration = content
         cell.selectionStyle = .none
+        cell.accessibilityIdentifier = "savings-goal-name-cell"
     }
 
     private func configureCellForTarget(_ cell: UITableViewCell) {
@@ -163,6 +169,7 @@ extension AddSavingsGoalViewController {
         }
         cell.contentConfiguration = content
         cell.selectionStyle = .none
+        cell.accessibilityIdentifier = "savings-goal-target-cell"
     }
 
 }

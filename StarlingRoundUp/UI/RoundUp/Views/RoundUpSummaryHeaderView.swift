@@ -60,6 +60,7 @@ final class RoundUpSummaryHeaderView: UIView {
         )
 
         stackView.addArrangedSubview(roundUpImageViewContainer)
+        stackView.setCustomSpacing(10, after: roundUpImageViewContainer)
         stackView.addArrangedSubview(roundUpLabel)
     }
 

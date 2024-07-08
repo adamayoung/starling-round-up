@@ -68,8 +68,19 @@
 		66B899322C3414310056F308 /* AccountListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B899312C3414310056F308 /* AccountListViewController.swift */; };
 		66B899372C3414320056F308 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66B899362C3414320056F308 /* Assets.xcassets */; };
 		66B8993A2C3414320056F308 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 66B899392C3414320056F308 /* Base */; };
-		66B8994F2C3414320056F308 /* StarlingRoundUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */; };
+		66B8994F2C3414320056F308 /* AccountsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8994E2C3414320056F308 /* AccountsTests.swift */; };
 		66CE588C2C3C21AA00928789 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE588B2C3C21AA00928789 /* UIAlertController+Error.swift */; };
+		66CE58902C3C570900928789 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE588F2C3C570900928789 /* Screen.swift */; };
+		66CE58922C3C571E00928789 /* AccountsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE58912C3C571E00928789 /* AccountsScreen.swift */; };
+		66CE58942C3C574E00928789 /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE58932C3C574E00928789 /* AccountScreen.swift */; };
+		66CE58972C3C57AD00928789 /* UITestCaseBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE58962C3C57AD00928789 /* UITestCaseBase.swift */; };
+		66CE589B2C3C607600928789 /* AccountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE589A2C3C607600928789 /* AccountTest.swift */; };
+		66CE589D2C3C620300928789 /* SavingsGoalsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE589C2C3C620300928789 /* SavingsGoalsScreen.swift */; };
+		66CE589F2C3C646300928789 /* RoundUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE589E2C3C646300928789 /* RoundUpScreen.swift */; };
+		66CE58A12C3C664B00928789 /* SavingsGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE58A02C3C664B00928789 /* SavingsGoalsTests.swift */; };
+		66CE58A32C3C677E00928789 /* AddSavingsGoalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE58A22C3C677E00928789 /* AddSavingsGoalScreen.swift */; };
+		66CE58A52C3C68B100928789 /* AddSavingsGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE58A42C3C68B100928789 /* AddSavingsGoalsTests.swift */; };
+		66CE58A72C3C705B00928789 /* RoundUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CE58A62C3C705B00928789 /* RoundUpTests.swift */; };
 		66D876CA2C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876C92C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift */; };
 		66D876CD2C34661C0012CA55 /* AccountSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876CC2C34661C0012CA55 /* AccountSummary.swift */; };
 		66D876CF2C3466490012CA55 /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D876CE2C3466490012CA55 /* AccountType.swift */; };
@@ -254,8 +265,20 @@
 		66B8993B2C3414320056F308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66B899402C3414320056F308 /* StarlingRoundUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarlingRoundUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B8994A2C3414320056F308 /* StarlingRoundUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarlingRoundUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlingRoundUpUITests.swift; sourceTree = "<group>"; };
+		66B8994E2C3414320056F308 /* AccountsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTests.swift; sourceTree = "<group>"; };
 		66CE588B2C3C21AA00928789 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
+		66CE588D2C3C56B400928789 /* StarlingRoundUpUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = StarlingRoundUpUI.xctestplan; sourceTree = "<group>"; };
+		66CE588F2C3C570900928789 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		66CE58912C3C571E00928789 /* AccountsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsScreen.swift; sourceTree = "<group>"; };
+		66CE58932C3C574E00928789 /* AccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreen.swift; sourceTree = "<group>"; };
+		66CE58962C3C57AD00928789 /* UITestCaseBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestCaseBase.swift; sourceTree = "<group>"; };
+		66CE589A2C3C607600928789 /* AccountTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTest.swift; sourceTree = "<group>"; };
+		66CE589C2C3C620300928789 /* SavingsGoalsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsScreen.swift; sourceTree = "<group>"; };
+		66CE589E2C3C646300928789 /* RoundUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpScreen.swift; sourceTree = "<group>"; };
+		66CE58A02C3C664B00928789 /* SavingsGoalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsTests.swift; sourceTree = "<group>"; };
+		66CE58A22C3C677E00928789 /* AddSavingsGoalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSavingsGoalScreen.swift; sourceTree = "<group>"; };
+		66CE58A42C3C68B100928789 /* AddSavingsGoalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSavingsGoalsTests.swift; sourceTree = "<group>"; };
+		66CE58A62C3C705B00928789 /* RoundUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUpTests.swift; sourceTree = "<group>"; };
 		66D876C92C3465DB0012CA55 /* FetchAccountSummariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAccountSummariesUseCase.swift; sourceTree = "<group>"; };
 		66D876CC2C34661C0012CA55 /* AccountSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummary.swift; sourceTree = "<group>"; };
 		66D876CE2C3466490012CA55 /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
@@ -490,9 +513,36 @@
 		66B8994D2C3414320056F308 /* StarlingRoundUpUITests */ = {
 			isa = PBXGroup;
 			children = (
-				66B8994E2C3414320056F308 /* StarlingRoundUpUITests.swift */,
+				66B8994E2C3414320056F308 /* AccountsTests.swift */,
+				66CE589A2C3C607600928789 /* AccountTest.swift */,
+				66CE58A02C3C664B00928789 /* SavingsGoalsTests.swift */,
+				66CE58A42C3C68B100928789 /* AddSavingsGoalsTests.swift */,
+				66CE58A62C3C705B00928789 /* RoundUpTests.swift */,
+				66CE588E2C3C56FE00928789 /* Screens */,
+				66CE58952C3C579D00928789 /* Utils */,
 			);
 			path = StarlingRoundUpUITests;
+			sourceTree = "<group>";
+		};
+		66CE588E2C3C56FE00928789 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				66CE588F2C3C570900928789 /* Screen.swift */,
+				66CE58912C3C571E00928789 /* AccountsScreen.swift */,
+				66CE58932C3C574E00928789 /* AccountScreen.swift */,
+				66CE589C2C3C620300928789 /* SavingsGoalsScreen.swift */,
+				66CE58A22C3C677E00928789 /* AddSavingsGoalScreen.swift */,
+				66CE589E2C3C646300928789 /* RoundUpScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		66CE58952C3C579D00928789 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				66CE58962C3C57AD00928789 /* UITestCaseBase.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		66D876C62C3465650012CA55 /* UI */ = {
@@ -583,6 +633,7 @@
 			isa = PBXGroup;
 			children = (
 				66D876D92C3467F50012CA55 /* StarlingRoundUp.xctestplan */,
+				66CE588D2C3C56B400928789 /* StarlingRoundUpUI.xctestplan */,
 			);
 			path = TestPlans;
 			sourceTree = "<group>";
@@ -1270,7 +1321,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66B8994F2C3414320056F308 /* StarlingRoundUpUITests.swift in Sources */,
+				66CE58A12C3C664B00928789 /* SavingsGoalsTests.swift in Sources */,
+				66B8994F2C3414320056F308 /* AccountsTests.swift in Sources */,
+				66CE58922C3C571E00928789 /* AccountsScreen.swift in Sources */,
+				66CE589B2C3C607600928789 /* AccountTest.swift in Sources */,
+				66CE589F2C3C646300928789 /* RoundUpScreen.swift in Sources */,
+				66CE58A72C3C705B00928789 /* RoundUpTests.swift in Sources */,
+				66CE58972C3C57AD00928789 /* UITestCaseBase.swift in Sources */,
+				66CE58A52C3C68B100928789 /* AddSavingsGoalsTests.swift in Sources */,
+				66CE589D2C3C620300928789 /* SavingsGoalsScreen.swift in Sources */,
+				66CE58902C3C570900928789 /* Screen.swift in Sources */,
+				66CE58942C3C574E00928789 /* AccountScreen.swift in Sources */,
+				66CE58A32C3C677E00928789 /* AddSavingsGoalScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
