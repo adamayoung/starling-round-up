@@ -36,6 +36,9 @@
          <TestPlanReference
             reference = "container:TestPlans/StarlingRoundUpUI.xctestplan">
          </TestPlanReference>
+         <TestPlanReference
+            reference = "container:TestPlans/StarlingRoundUpSnapshots.xctestplan">
+         </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
@@ -57,6 +60,17 @@
                BlueprintIdentifier = "66B899492C3414320056F308"
                BuildableName = "StarlingRoundUpUITests.xctest"
                BlueprintName = "StarlingRoundUpUITests"
+               ReferencedContainer = "container:StarlingRoundUp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "66CE58AB2C3C7ACB00928789"
+               BuildableName = "StarlingRoundUpSnapshotTests.xctest"
+               BlueprintName = "StarlingRoundUpSnapshotTests"
                ReferencedContainer = "container:StarlingRoundUp.xcodeproj">
             </BuildableReference>
          </TestableReference>

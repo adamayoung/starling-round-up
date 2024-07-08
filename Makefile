@@ -1,5 +1,6 @@
 SCHEME = StarlingRoundUp
 TEST_PLAN = StarlingRoundUp
+SNAPSHOT_TEST_PLAN = StarlingRoundUpSnapshots
 UI_TEST_PLAN = StarlingRoundUpUI
 
 IOS_DESTINATION = 'platform=iOS Simulator,name=iPhone 15,OS=17.5'
@@ -26,6 +27,11 @@ build:
 test:
 	set -o pipefail && NSUnbufferedIO=YES xcodebuild clean build-for-testing -scheme $(SCHEME) -destination $(IOS_DESTINATION) -testPlan $(TEST_PLAN) | xcbeautify
 	set -o pipefail && NSUnbufferedIO=YES xcodebuild test-without-building -scheme $(SCHEME) -destination $(IOS_DESTINATION) -testPlan $(TEST_PLAN) | xcbeautify
+
+.PHONY: snapshottest
+snapshottest:
+	set -o pipefail && NSUnbufferedIO=YES xcodebuild clean build-for-testing -scheme $(SCHEME) -destination $(IOS_DESTINATION) -testPlan $(SNAPSHOT_TEST_PLAN) | xcbeautify
+	set -o pipefail && NSUnbufferedIO=YES xcodebuild test-without-building -scheme $(SCHEME) -destination $(IOS_DESTINATION) -testPlan $(SNAPSHOT_TEST_PLAN) | xcbeautify
 
 .PHONY: uitest
 uitest:

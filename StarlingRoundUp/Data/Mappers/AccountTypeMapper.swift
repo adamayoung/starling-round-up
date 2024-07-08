@@ -22,8 +22,8 @@ struct AccountTypeMapper {
         case .loan:
             .loan
 
-        case .fixTermDeposit:
-            .fixTermDeposit
+        case .fixedTermDeposit:
+            .fixedTermDeposit
 
         case .unknown:
             .unknown

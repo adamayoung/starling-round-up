@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "E0B3655B-78D1-4D30-94D9-E64E2D5B0BAA",
+      "id" : "872F8E96-69DA-4885-BEE2-4FA5B6056557",
       "name" : "en-GB",
       "options" : {
         "language" : "en-GB",
@@ -17,8 +17,8 @@
     {
       "target" : {
         "containerPath" : "container:StarlingRoundUp.xcodeproj",
-        "identifier" : "66B899492C3414320056F308",
-        "name" : "StarlingRoundUpUITests"
+        "identifier" : "66CE58AB2C3C7ACB00928789",
+        "name" : "StarlingRoundUpSnapshotTests"
       }
     }
   ],

@@ -320,66 +320,6 @@
         }
       }
     },
-    "THERE_WAS_AN_ERROR_CALCULATE_THIS_ROUND_UP" : {
-      "comment" : "There was an error calculating this Round-Up.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There was an error calculating this Round-Up."
-          }
-        }
-      }
-    },
-    "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNT_DETAILS" : {
-      "comment" : "There was an error loading your account details.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There was an error loading your account details."
-          }
-        }
-      }
-    },
-    "THERE_WAS_AN_ERROR_LOADING_YOUR_ACCOUNTS" : {
-      "comment" : "There was an error loading your accounts.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There was an error loading your accounts."
-          }
-        }
-      }
-    },
-    "THERE_WAS_AN_ERROR_LOADING_YOUR_SAVINGS_GOALS" : {
-      "comment" : "There was an error loading your savings goals.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There was an error loading your savings goals."
-          }
-        }
-      }
-    },
-    "THERE_WAS_AN_ERROR_MAKING_THE_TRANSFER" : {
-      "comment" : "There was an error making the transfer.",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There was an error making the transfer."
-          }
-        }
-      }
-    },
     "TO" : {
       "comment" : "to",
       "localizations" : {
