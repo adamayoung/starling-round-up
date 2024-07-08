@@ -14,6 +14,7 @@ enum SavingsGoalRepositoryError: Error {
     case notFound
     case insufficientFunds
     case amountMustBePositive
+    case unknownSavingsGoal
     case unknown
 
 }

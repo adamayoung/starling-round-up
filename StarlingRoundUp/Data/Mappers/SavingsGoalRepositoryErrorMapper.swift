@@ -67,6 +67,9 @@ extension SavingsGoalRepositoryErrorMapper {
         case .insufficientFunds:
             return .insufficientFunds
 
+        case .unknownSavingsGoal:
+            return .unknownSavingsGoal
+
         default:
             return .unknown
         }

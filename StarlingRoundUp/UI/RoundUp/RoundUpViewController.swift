@@ -11,6 +11,8 @@ protocol RoundUpView: AnyObject {
 
     var delegate: (any RoundUpViewControllerDelegate)? { get set }
 
+    func refreshData()
+
 }
 
 protocol RoundUpViewControlling: RoundUpView, UIViewController {}
@@ -92,6 +94,10 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
         summaryView.isHidden = true
         activityIndicator.startAnimating()
         chooseSavingsGoalButton.isEnabled = false
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         refreshData()
     }
 
@@ -99,7 +105,7 @@ final class RoundUpViewController: UIViewController, RoundUpViewControlling {
 
 extension RoundUpViewController {
 
-    private func refreshData() {
+    func refreshData() {
         Task { [weak self] in
             guard let self else {
                 return
@@ -197,7 +203,9 @@ extension RoundUpViewController {
         let alertViewController = UIAlertController(
             title: String(localized: "CANNOT_MAKE_TRANSFER", comment: "Cannot Make Transfer"),
             error: error
-        )
+        ) { [weak self] in
+            self?.refreshData()
+        }
         alertViewController.view.tintColor = view.tintColor
 
         present(alertViewController, animated: true)
@@ -220,21 +228,37 @@ extension RoundUpViewController {
             return UIMenu(children: [])
         }
 
-        let actions = availableSavingsGoals.map { savingsGoal in
+        let addSavingsGoalAction = UIAction(
+            title: String(localized: "ADD_SAVINGS_GOAL", comment: "Add Savings Goal"),
+            image: UIImage(systemName: "plus"),
+            handler: didSelectAddSavingsGoal
+        )
+
+        let actionsMenu = UIMenu(options: .displayInline, children: [addSavingsGoalAction])
+
+        let savingsGoalsActions = availableSavingsGoals.map { savingsGoal in
             let action = UIAction(
                 title: savingsGoal.name,
                 identifier: UIAction.Identifier(savingsGoal.id.uuidString),
                 handler: didSelectSavingsGoal
             )
-
-            if viewModel.selectedSavingsGoal == savingsGoal {
-                action.image = UIImage(systemName: "checkmark")
-            }
+            action.state = viewModel.selectedSavingsGoal == savingsGoal ? .on : .off
 
             return action
         }
 
-        return UIMenu(children: actions)
+        let savingsGoalsMenu = UIMenu(options: .displayInline, children: savingsGoalsActions)
+
+        var menus = [actionsMenu]
+        if !savingsGoalsActions.isEmpty {
+            menus.append(savingsGoalsMenu)
+        }
+
+        return UIMenu(children: menus)
+    }
+
+    private func didSelectAddSavingsGoal(_: UIAction) {
+        delegate?.viewController(self, wantsToAddSavingsGoalToAccount: viewModel.accountID)
     }
 
     private func didSelectSavingsGoal(_ action: UIAction) {
@@ -259,6 +283,10 @@ extension RoundUpViewController: RoundUpSummaryViewDelegate {
     func viewWantsNextRoundUp(_: RoundUpSummaryView) {
         viewModel.incrementRoundUpTimeWindowDate()
         refreshData()
+    }
+
+    func viewWantsToAddSavingsGoal(_: RoundUpSummaryView) {
+        delegate?.viewController(self, wantsToAddSavingsGoalToAccount: viewModel.accountID)
     }
 
     func viewWantsToPerformTransfer(_: RoundUpSummaryView) {

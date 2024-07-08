@@ -27,7 +27,9 @@ final class SavingsGoalAPIRepository: SavingsGoalRepository {
         }
 
         let savingsGoals = savingsGoalsResponse.savingsGoalList.map { SavingsGoalMapper.map($0) }
-        return savingsGoals
+        return savingsGoals.sorted(by: {
+            $0.name.localizedStandardCompare($1.name) == .orderedAscending
+        })
     }
 
     func create(savingsGoal: SavingsGoalInput) async throws {

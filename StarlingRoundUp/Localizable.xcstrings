@@ -435,6 +435,17 @@
         }
       }
     },
+    "TRANSFER_TO_SAVINGS_GOAL_SAVINGS_GOAL_NOT_FOUND" : {
+      "comment" : "The Savings Goal does not exist.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Savings Goal does not exist."
+          }
+        }
+      }
+    },
     "TRANSFER_TO_SAVINGS_GOAL_TRANSFER_AMOUNT_INVALID" : {
       "comment" : "The transfer amount is invalid.",
       "localizations" : {

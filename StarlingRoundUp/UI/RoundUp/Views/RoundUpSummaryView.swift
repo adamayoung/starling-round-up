@@ -13,6 +13,8 @@ protocol RoundUpSummaryViewDelegate: AnyObject {
 
     func viewWantsNextRoundUp(_ view: RoundUpSummaryView)
 
+    func viewWantsToAddSavingsGoal(_ view: RoundUpSummaryView)
+
     func viewWantsToPerformTransfer(_ view: RoundUpSummaryView)
 
 }
@@ -60,6 +62,7 @@ final class RoundUpSummaryView: UIView {
         stackView.addArrangedSubview(accountBalanceView)
 
         dateView.delegate = self
+        savingsGoalView.delegate = self
         transferView.delegate = self
     }
 
@@ -80,7 +83,7 @@ final class RoundUpSummaryView: UIView {
             hasNextRoundUp: !roundUpSummary.isDateRangeEndInFuture
         )
         savingsGoalView.configure(selectedSavingsGoal: selectedSavingsGoal)
-        transferView.configure(with: roundUpSummary)
+        transferView.configure(with: roundUpSummary, selectedSavingsGoal: selectedSavingsGoal)
         accountBalanceView.configure(accountBalance: roundUpSummary.accountBalance)
     }
 
@@ -99,6 +102,14 @@ extension RoundUpSummaryView: RoundUpSummaryDateViewDelegate {
 
     func viewWantsNextRoundUp(_: RoundUpSummaryDateView) {
         delegate?.viewWantsNextRoundUp(self)
+    }
+
+}
+
+extension RoundUpSummaryView: RoundUpSummarySavingsGoalViewDelegate {
+
+    func viewWantsToAddSavingsGoal(_: RoundUpSummarySavingsGoalView) {
+        delegate?.viewWantsToAddSavingsGoal(self)
     }
 
 }

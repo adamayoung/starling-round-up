@@ -53,6 +53,7 @@ final class AccountDetailsSummaryView: UIView {
         configuration.buttonSize = .medium
         configuration.title = String(localized: "ROUND_UP", comment: "Round-Up")
         configuration.image = UIImage(systemName: ImageName.roundUp)
+        configuration.imagePadding = 5
         let action = UIAction { [weak self] _ in
             self?.didTapRoundUp()
         }
