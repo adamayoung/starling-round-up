@@ -40,6 +40,8 @@ final class RoundUpSummarySavingsGoalView: UIView {
         }
         label.textColor = .white
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         return label
     }()
 

@@ -46,6 +46,7 @@ final class AccountListViewController: UITableViewController, AccountListViewCon
         super.viewDidLoad()
         title = String(localized: "ACCOUNTS", comment: "Accounts")
 
+        tableView.accessibilityIdentifier = "accounts-table"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.account)
         tableView.dataSource = dataSource
 
@@ -147,6 +148,7 @@ extension AccountListViewController {
 
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
+        cell.accessibilityIdentifier = "account-cell-\(accountSummary.id)"
     }
 
     private func update(with accountSummaries: [AccountSummary], animate: Bool = true) {

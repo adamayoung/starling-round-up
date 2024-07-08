@@ -60,6 +60,7 @@ final class AccountDetailsSummaryView: UIView {
 
         let button = UIButton(primaryAction: action)
         button.configuration = configuration
+        button.accessibilityIdentifier = "round-up-button"
         return button
     }()
 

@@ -21,6 +21,7 @@ env:
   XCODE_SCHEME: "StarlingRoundUp"
   IOS_DESTINATION: "platform=iOS Simulator,name=iPhone 15,OS=17.5"
   TEST_PLAN: "StarlingRoundUp"
+  UI_TEST_PLAN: "StarlingRoundUpUI"
 
 jobs:
   build-and-test:

@@ -27,6 +27,7 @@ final class FormMoneyFieldContentView: UIView, UIContentView {
         textField.textColor = .secondaryLabel
         textField.textAlignment = .right
         textField.keyboardType = .decimalPad
+        textField.accessibilityIdentifier = "form-money-text-field"
         return textField
     }()
 

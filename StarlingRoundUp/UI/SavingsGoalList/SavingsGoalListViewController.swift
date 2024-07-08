@@ -35,7 +35,9 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
             self?.addSavingsGoal()
         }
 
-        return UIBarButtonItem(systemItem: .add, primaryAction: action)
+        let button = UIBarButtonItem(systemItem: .add, primaryAction: action)
+        button.accessibilityIdentifier = "add-savings-goal-button"
+        return button
     }()
 
     private lazy var savingsGoalsUnavailableView: SavingsGoalsUnavailableView = {
@@ -65,6 +67,7 @@ final class SavingsGoalListViewController: UITableViewController, SavingsGoalLis
         title = String(localized: "SAVINGS_GOALS", comment: "Savings Goals")
         navigationItem.rightBarButtonItem = addSavingsGoalButton
 
+        tableView.accessibilityIdentifier = "savings-goals-table"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.savingsGoal)
         tableView.dataSource = dataSource
 

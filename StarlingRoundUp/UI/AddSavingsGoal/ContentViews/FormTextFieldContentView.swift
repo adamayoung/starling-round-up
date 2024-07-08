@@ -15,7 +15,11 @@ final class FormTextFieldContentView: UIView, UIContentView {
         }
     }
 
-    private lazy var textField = UITextField()
+    private lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.accessibilityIdentifier = "form-text-field"
+        return textField
+    }()
 
     init(_ configuration: UIContentConfiguration) {
         self.configuration = configuration
