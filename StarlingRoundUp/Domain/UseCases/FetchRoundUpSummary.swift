@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import os
 
 final class FetchRoundUpSummary: FetchRoundUpSummaryUseCase {
+
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: String(describing: FetchRoundUpSummary.self)
+    )
 
     private let accountRepository: any AccountRepository
     private let transactionRepository: any TransactionRepository
@@ -62,15 +68,22 @@ extension FetchRoundUpSummary {
     private func account(withID accountID: Account.ID) async throws -> Account {
         let account: Account?
         do {
+            Self.logger.trace("Fetching account \(accountID)")
             account = try await accountRepository.account(withID: accountID)
         } catch let error as AccountRepositoryError {
-            throw Self.mapToFetchRoundUpSummaryError(error)
+            let error = Self.mapToFetchRoundUpSummaryError(error)
+            Self.logger.error("Failed fetching account: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchRoundUpSummaryError.unknown
+            let error = FetchRoundUpSummaryError.unknown
+            Self.logger.error("Failed fetching account: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         guard let foundAccount = account else {
-            throw FetchRoundUpSummaryError.accountNotFound
+            let error = FetchRoundUpSummaryError.accountNotFound
+            Self.logger.error("Failed fetching account: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         return foundAccount
@@ -79,11 +92,16 @@ extension FetchRoundUpSummary {
     private func accountBalance(for account: Account) async throws -> Money {
         let balance: Money
         do {
+            Self.logger.trace("Fetching balance for account \(account.id)")
             balance = try await accountRepository.balance(for: account.id)
         } catch let error as AccountRepositoryError {
-            throw Self.mapToFetchRoundUpSummaryError(error)
+            let error = Self.mapToFetchRoundUpSummaryError(error)
+            Self.logger.error("Failed fetching balance: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchRoundUpSummaryError.unknown
+            let error = FetchRoundUpSummaryError.unknown
+            Self.logger.error("Failed fetching balance: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         return balance
@@ -96,11 +114,16 @@ extension FetchRoundUpSummary {
     ) async throws -> [Transaction] {
         let transactions: [Transaction]
         do {
+            Self.logger.trace("Fetching settled transactions for account \(accountID)")
             transactions = try await transactionRepository.settledTransactions(forAccount: accountID, in: dateRange)
         } catch let error as TransactionRepositoryError {
-            throw Self.mapToFetchRoundUpSummaryError(error)
+            let error = Self.mapToFetchRoundUpSummaryError(error)
+            Self.logger.error("Failed fetching settled transactions: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchRoundUpSummaryError.unknown
+            let error = FetchRoundUpSummaryError.unknown
+            Self.logger.error("Failed fetching settled transactions: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         let outgoingTransactions = transactions.filter {
@@ -113,11 +136,16 @@ extension FetchRoundUpSummary {
     private func savingsGoals(forAccount accountID: Account.ID) async throws -> [SavingsGoal] {
         let savingsGoals: [SavingsGoal]
         do {
+            Self.logger.trace("Fetching savings goals for account \(accountID)")
             savingsGoals = try await savingsGoalRepository.savingsGoals(for: accountID)
         } catch let error as SavingsGoalRepositoryError {
-            throw Self.mapToFetchRoundUpSummaryError(error)
+            let error = Self.mapToFetchRoundUpSummaryError(error)
+            Self.logger.error("Failed fetching savings goals: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchRoundUpSummaryError.unknown
+            let error = FetchRoundUpSummaryError.unknown
+            Self.logger.error("Failed fetching settled transactions: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         return savingsGoals

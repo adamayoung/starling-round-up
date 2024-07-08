@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import os
 
 final class FetchSavingsGoals: FetchSavingsGoalsUseCase {
+
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: String(describing: FetchSavingsGoals.self)
+    )
 
     private let savingsGoalRepository: any SavingsGoalRepository
 
@@ -18,11 +24,16 @@ final class FetchSavingsGoals: FetchSavingsGoalsUseCase {
     func execute(accountID: Account.ID) async throws -> [SavingsGoal] {
         let savingsGoals: [SavingsGoal]
         do {
+            Self.logger.trace("Fetching savings goals for account \(accountID)")
             savingsGoals = try await savingsGoalRepository.savingsGoals(for: accountID)
         } catch let error as SavingsGoalRepositoryError {
-            throw Self.mapToFetchSavingsGoalsError(error)
+            let error = Self.mapToFetchSavingsGoalsError(error)
+            Self.logger.error("Failed fetching savings goals: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw FetchSavingsGoalsError.unknown
+            let error = FetchSavingsGoalsError.unknown
+            Self.logger.error("Failed fetching savings goals: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
 
         let activeSavingsGoals = savingsGoals.filter { $0.state == .active }

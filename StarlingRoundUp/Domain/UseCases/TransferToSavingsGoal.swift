@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import os
 
 final class TransferToSavingsGoal: TransferToSavingsGoalUseCase {
+
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: String(describing: TransferToSavingsGoal.self)
+    )
 
     private let savingsGoalRepository: any SavingsGoalRepository
 
@@ -18,14 +24,17 @@ final class TransferToSavingsGoal: TransferToSavingsGoalUseCase {
     func execute(input: TransferToSavingsGoalInput) async throws {
         let transferID = Self.generateNewTransactionID()
         do {
-            try await savingsGoalRepository.transfer(
-                transferID: transferID,
-                input: input
-            )
+            // swiftlint:disable:next line_length
+            Self.logger.trace("Transfering \(input.amount.formatted()) to savings goal \(input.savingsGoalID) in account \(input.accountID)")
+            try await savingsGoalRepository.transfer(transferID: transferID, input: input)
         } catch let error as SavingsGoalRepositoryError {
-            throw Self.mapToTransferToSavingsGoalError(error)
+            let error = Self.mapToTransferToSavingsGoalError(error)
+            Self.logger.error("Failed transfering to savings goal: \(error.localizedDescription, privacy: .public)")
+            throw error
         } catch {
-            throw TransferToSavingsGoalError.unknown
+            let error = TransferToSavingsGoalError.unknown
+            Self.logger.error("Failed transfering to savings goal: \(error.localizedDescription, privacy: .public)")
+            throw error
         }
     }
 
