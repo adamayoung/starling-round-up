@@ -10,7 +10,10 @@ import Foundation
 enum Environment {
 
     static let baseURL: String = {
-        guard let baseURL = infoDictionary[Keys.baseURL] as? String else {
+        guard
+            let baseURL = infoDictionary[Keys.baseURL] as? String,
+            !baseURL.isEmpty
+        else {
             fatalError("Cannot read \(Keys.baseURL) in plist file")
         }
 
@@ -19,7 +22,10 @@ enum Environment {
     }()
 
     static let accessToken: String = {
-        guard let accessToken = infoDictionary[Keys.accessToken] as? String else {
+        guard
+            let accessToken = infoDictionary[Keys.accessToken] as? String,
+            !accessToken.isEmpty
+        else {
             fatalError("Cannot read \(Keys.accessToken) in plist file")
         }
 

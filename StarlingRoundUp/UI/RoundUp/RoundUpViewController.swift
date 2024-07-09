@@ -218,7 +218,7 @@ extension RoundUpViewController {
         summaryView.configure(with: viewModel.roundUpSummary, selectedSavingsGoal: viewModel.selectedSavingsGoal)
         refreshSavingsGoalsMenu()
 
-        if summaryView.isHidden {
+        if viewModel.roundUpSummary != nil, summaryView.isHidden {
             summaryView.alpha = 0
             summaryView.isHidden = false
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut) {
