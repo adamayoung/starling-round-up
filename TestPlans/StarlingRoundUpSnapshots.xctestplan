@@ -10,6 +10,11 @@
     }
   ],
   "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "-snapshottesting"
+      }
+    ],
     "testExecutionOrdering" : "random",
     "testTimeoutsEnabled" : true
   },

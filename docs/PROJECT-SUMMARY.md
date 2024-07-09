@@ -8,6 +8,7 @@
 * `auto-simulate` has been used to generate transaction test data
 * A generated access token for your sandboxed user for the sandboxed
 Application
+* Xcode 15.4
 
 ### Update App Configuration
 
@@ -43,6 +44,8 @@ via homebrew:
 ```bash
 brew install xcbeautify
 ```
+
+And an iPhone 15, iOS 17.5 simulator needs to be available.
 
 ## Architecture
 
