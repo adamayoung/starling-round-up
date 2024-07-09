@@ -154,6 +154,14 @@ by [Point-Free](https://www.pointfree.co) has been used to aid with testing.
 
 ## Future Improvements
 
+### Authentication
+
+As per the scope of this challenge, making authenticated calls to the API has
+been achieved by the use of a hard-coded access token. A provider
+authentication flow using OAuth and JWTs should be set up to allow any user to
+log into the app without having to update configuration settings with an access
+token they have to generate manually.
+
 ### Libraries/Modularisation
 
 The core functionality of the app could be refactored into separate libraries
