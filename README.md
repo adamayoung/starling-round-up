@@ -28,7 +28,7 @@ transfer into a saving goal.
 4. Setup GitHub repo and Xcode Project
 5. Setup Swift styling tools
 6. Setup CI
-7. Build, Test, Iterate
+7. [Build, Test, Iterate](https://github.com/adamayoung/starling-round-up/commits/main/)
 8. Add UI Tests to cover common user flows
 9. [Project Summary](docs/PROJECT-SUMMARY.md)
 10. Prepare for submission

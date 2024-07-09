@@ -13,6 +13,8 @@ transactions into a 'Savings Goal'.
   * this challenge concerns the Round-Up feature only
 * SSL Certificate-Pinning
   * as this challenge/app will not be used in a production environment it is unnecessary
+* Accessibility
+  * as this challenge/app will not be used in a production environment it is unnecessary
 
 ## Assumptions
 

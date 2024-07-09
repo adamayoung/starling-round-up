@@ -5,7 +5,7 @@
 ### Prerequisites
 
 * A Starling sandboxed Account and Application setup
-* Used `auto-simulate` to generate transaction test data
+* `auto-simulate` has been used to generate transaction test data
 * A generated access token for your sandboxed user for the sandboxed
 Application
 
@@ -39,30 +39,31 @@ make uitest
 
 ## Architecture
 
-I chose an MVVM-C architecture for the UI part of the app as it's one I'm most
-familiar with and felt was best suited.
+The following architectures were considered for this app:
 
-Other architectures considered:
+* MVC - Model-View-Controller
+* MVVM - Model-View-ViewModel
+* MVVM-C - Model-View-ViewModel-Coordinator
+* VIP - View, Interactor, Presenter
+* VIPER - View, Interactor, Presenter, Entities, Router
 
-* MVC
-* MVVM
-* VIP
-* VIPER
+MVVM-C architecture was chosen as it was felt to be best suited for this task.
 
 MVC and MVVM don't provide enough separation of concerns for a multi-view app.
 
-Unless the app is being developed by a large number of teams, then VIP and
-VIPER mean too much boilerplate code for a simple app being developed by a
-single person.
+Unless the app is being developed by a large number of teams, VIP and VIPER
+have too much boilerplate code for a simple app being developed by a single
+person, increasing unneeded complexity.
 
-I have also chosen to follow Clean Architecture principles. This gives a clean
-separation of concerns between the domain/business logic layer of the app and
-the data layer. It also aids in the testability of all the components in
+I have also chosen to follow SOLID and Clean Architecture principles. This
+gives a clean separation of concerns between the different layers of the app -
+UI, Domain and Data. It also aids in the testability of all the components in
 isolation.
 
 ## Architecture Diagram
 
-Following the principles of Clean Architecture, the app has three main layers:
+Following the principles of SOLID and Clean Architecture, the app has three
+main layers:
 
 * UI
 * Domain
@@ -92,7 +93,7 @@ have on one another.
 
 ## Testing
 
-The following methods for testing and verifying the requirements of this app
+The following methods for testing and verifying the requirements of the app
 have been used:
 
 * Unit testing
@@ -143,7 +144,7 @@ CI checks include:
 
 The decision was made not to run the UI tests in GitHub Actions due to
 GitHub runner performance and having a valid access token for running
-the app. The UI tests however will run locally with a valid access token.
+the app. However, the UI tests will run locally with a valid access token.
 
 ## Third-Party Dependencies
 
@@ -172,8 +173,22 @@ authentication/access tokens.
 
 ### SwiftUI Components
 
-UIKit does tend to be verbose than SwiftUI. Experimenting with some smaller
-components in SwiftUI may lead to increased productivity and lead time on
-new work items. It would also be possible to reuse these SwiftUI components
-across different platforms too such as macOS, watchOS and even visionOS
-(if there was a business requirment to do so).
+UIKit tends to be more verbose than SwiftUI. Experimenting with some smaller
+components in SwiftUI may lead to increased productivity and reduced lead time
+on new work items. It would also be possible to reuse these SwiftUI components
+across different platforms such as macOS, watchOS, tvOS and even visionOS (if
+there was a business requirement to do so).
+
+### Making the app Accessible
+
+In order to make the app available to the widest audience, accessibility should
+be considered. Accessibility helps people with disabilities (sight, hearing,
+etc..) still use the app. Due the the nature of this app and the challenge it
+is for, making the app accessible was out of scope.
+
+### Localization
+
+Although the app has only been made for one language, UK English, it has been
+set up to use localized strings. This means adding support for other languages
+can easily be done, providing the API supports the same languages and is able
+to return localised messages.
