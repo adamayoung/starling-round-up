@@ -24,6 +24,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let window = UIWindow(windowScene: scene)
+
+        // If app is under test, don't create the view hierarchy
+        if isTesting {
+            window.rootViewController = UIViewController()
+            window.makeKeyAndVisible()
+            return
+        }
+
         let appCoordinator = AppCoordinator(window: window, factory: factory)
         appCoordinator.start()
         window.makeKeyAndVisible()
@@ -41,5 +49,23 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_: UIScene) {}
 
     func sceneDidEnterBackground(_: UIScene) {}
+
+}
+
+extension SceneDelegate {
+
+    private var isTesting: Bool {
+        let arguments = ProcessInfo.processInfo.arguments
+
+        if arguments.contains("-testing") {
+            return true
+        }
+
+        if arguments.contains("-snapshottesting") {
+            return true
+        }
+
+        return false
+    }
 
 }
