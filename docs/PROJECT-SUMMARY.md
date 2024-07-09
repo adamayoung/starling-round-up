@@ -37,6 +37,13 @@ make snapshottest
 make uitest
 ```
 
+Note, in order to run the `make` commands, `xcbeautify` needs to be installed
+via homebrew:
+
+```bash
+brew install xcbeautify
+```
+
 ## Architecture
 
 The following architectures were considered for this app:
